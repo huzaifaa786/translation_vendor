@@ -1,0 +1,115 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:toggle_switch/toggle_switch.dart';
+import 'package:translation_vendor/static/icon_button.dart';
+import 'package:translation_vendor/static/topbar.dart';
+import 'package:translation_vendor/values/colors.dart';
+
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+          child: Padding(
+        padding: const EdgeInsets.only(left: 20,right: 20),
+        child: Column(
+          children: [
+            Topbar(),
+            Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: Row(
+                children: [
+                  Text(
+                    'Good Morning, \n Smith',
+                    style: TextStyle(
+                        fontSize: 30,
+                        color: mainColor,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Poppins'),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: IconsButton(
+                title: 'Profile',
+                onPressed: () {},
+                imgicon: 'assets/images/person.svg',
+              ),
+            ),
+            IconsButton(
+              title: 'Services',
+              onPressed: () {},
+              imgicon: 'assets/images/headphone.svg',
+            ),
+            IconsButton(
+              title: 'Order History',
+              onPressed: () {},
+              imgicon: 'assets/images/page.svg',
+            ),
+            IconsButton(
+              title: 'Sales',
+              onPressed: () {},
+              imgicon: 'assets/images/sale.svg',
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: ToggleSwitch(
+                cornerRadius: 20,
+                inactiveBgColor: Colors.white,
+                borderWidth: 9,
+                radiusStyle: true,
+                fontSize: 15,
+                minWidth: 130,
+                minHeight: 40,
+                changeOnTap: true,
+                activeBgColor: [mainColor],
+                activeBorders: [
+                  Border.all(
+                    color: mainColor,
+                    width: 3.0,
+                  ),
+                  Border.all(
+                    color: mainColor,
+                    width: 3.0,
+                  ),
+                ],
+                initialLabelIndex: 0,
+                totalSwitches: 2,
+                labels: ['Online', 'Offline'],
+                onToggle: (index) {
+                  print('switched to: $index');
+                },
+              ),
+              
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Log Out',style: TextStyle(
+                    color: Colors.red,
+                    fontFamily: 'Poppins',
+                    fontSize: 19,
+                    fontWeight: FontWeight.w500,
+                  ),),
+                   Image(image: AssetImage('assets/images/Arrow 1.png')),
+                ],
+              ),
+            )
+          ],
+        ),
+      )),
+    );
+  }
+}
