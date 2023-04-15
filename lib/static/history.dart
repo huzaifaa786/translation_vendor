@@ -12,7 +12,7 @@ class HistoryCard extends StatelessWidget {
     this.title,
     this.day,
     this.type,
-    this.ontap,
+    this.onPressed,
     this.name,
   });
   final type;
@@ -20,12 +20,12 @@ class HistoryCard extends StatelessWidget {
   final image;
   final title;
   final day;
-  final ontap;
+  final onPressed;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ontap,
+      onTap: onPressed,
       child: Padding(
         padding: const EdgeInsets.all(4),
         child: Column(

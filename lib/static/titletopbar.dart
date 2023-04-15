@@ -16,13 +16,14 @@ class TitleTopbar extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Padding(
-        padding: const EdgeInsets.only(top: 25, right: 2, left: 2 ,bottom: 10),
+        padding: const EdgeInsets.only(top: 12, right: 2, left: 2 ,bottom: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             GestureDetector(
               onTap: ontap,
               child: Container(
+                padding: EdgeInsets.all(5),
                 decoration: BoxDecoration(
                  border: Border.all(
                       color: Colors.grey,
@@ -40,7 +41,7 @@ class TitleTopbar extends StatelessWidget {
               text,
               style: TextStyle(
                 fontFamily: 'Poppins',
-                fontSize: 19,
+                fontSize: 22,
                 fontWeight: FontWeight.w600,
               ),
             ),

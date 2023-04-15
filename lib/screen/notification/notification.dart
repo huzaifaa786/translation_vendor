@@ -17,65 +17,68 @@ class _NotificationScreenState extends State<NotificationScreen> {
      return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-          child: Column(
-        children: [
-          TitleTopbar(
-            text: 'Notifications',
-            ontap: () {
-              Navigator.pop(context);
-            },
-          ),
-          SizedBox(height: 23,),
-          Container(
-            padding: const EdgeInsets.only(left: 14, right: 14,top: 12),
-            height: 100,
-            child: NotificationTile(
-                 title: 'your order recevied form',
-                name: 'Fira Jonce',
-                    ontap: () {
-                    
-                    },
-                  )
-                
-          ),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 12,right: 12),
+            child: Column(
+                  children: [
+            TitleTopbar(
+              text: 'Notifications',
+              ontap: () {
+                Navigator.pop(context);
+              },
+            ),
+            SizedBox(height: 23,),
             Container(
-            padding: const EdgeInsets.only(left: 14, right: 14,top: 12),
-            height: 100,
-            child: NotificationTile(
-                 title: 'your order recevied form',
-                name: 'Fira Jonce',
-                    ontap: () {
-                    
-                    },
-                  )
-                
-          ),
-            Container(
-            padding: const EdgeInsets.only(left: 14, right: 14,top: 12),
-            height: 100,
-            child: NotificationTile(
-                 title: 'your order recevied form',
-                name: 'Fira Jonce',
-                    ontap: () {
-                    
-                    },
-                  )
-                
-          ),
-            Container(
-            padding: const EdgeInsets.only(left: 14, right: 14,top: 12),
-            height: 100,
-            child: NotificationTile(
-                 title: 'your order recevied form',
-                name: 'Fira Jonce',
-                    ontap: () {
-                    
-                    },
-                  )
-                
-          ),
-        ],
-      )),
+              padding: const EdgeInsets.only(left: 1, right: 1,top: 12),
+              height: 100,
+              child: NotificationTile(
+                   title: 'your order recevied form',
+                  name: 'Fira Jonce',
+                      ontap: () {
+                      
+                      },
+                    )
+                  
+            ),
+              Container(
+              padding: const EdgeInsets.only(left: 1, right: 1,top: 12),
+              height: 100,
+              child: NotificationTile(
+                   title: 'your order recevied form',
+                  name: 'Fira Jonce',
+                      ontap: () {
+                      
+                      },
+                    )
+                  
+            ),
+              Container(
+              padding: const EdgeInsets.only(left: 1, right: 1,top: 12),
+              height: 100,
+              child: NotificationTile(
+                   title: 'your order recevied form',
+                  name: 'Fira Jonce',
+                      ontap: () {
+                      
+                      },
+                    )
+                  
+            ),
+              Container(
+              padding: const EdgeInsets.only(left: 1, right: 1,top: 12),
+              height: 100,
+              child: NotificationTile(
+                   title: 'your order recevied form',
+                  name: 'Fira Jonce',
+                      ontap: () {
+                      
+                      },
+                    )
+                  
+            ),
+                  ],
+                ),
+          )),
     );
   }
 }
