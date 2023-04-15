@@ -68,7 +68,7 @@ class IconInputFields extends StatelessWidget {
                     color: Colors.grey,
                   ),
                   borderRadius: BorderRadius.all(
-                    Radius.circular(30),
+                    Radius.circular(45),
                   ),
                 ),
                 child: FittedBox(

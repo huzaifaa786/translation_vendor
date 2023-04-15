@@ -73,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       padding: const EdgeInsets.only(top: 13),
                       child: Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(300),
+                          borderRadius: BorderRadius.circular(300),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.withOpacity(0.1),
@@ -118,7 +118,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 40.0),
                   child: IconInputFields(
-                    
                     imageIcon: 'assets/images/email.svg',
                     hint: 'Username',
                   ),

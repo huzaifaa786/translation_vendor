@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
       // builder: EasyLoading.init(),
       title: "Trans",
       theme: Styles.lightTheme,
-      initialRoute: 'service',
+      initialRoute: 'login',
       routes: {
         'login': (context) => const LoginScreen(),
         'notification': (context) => const NotificationScreen(),
