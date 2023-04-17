@@ -1,7 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+import 'package:translation_vendor/screen/history/history.dart';
+import 'package:translation_vendor/screen/profile/profile.dart';
+import 'package:translation_vendor/screen/sale/sales.dart';
+import 'package:translation_vendor/screen/services/service.dart';
 import 'package:translation_vendor/static/icon_button.dart';
 import 'package:translation_vendor/static/topbar.dart';
 import 'package:translation_vendor/values/colors.dart';
@@ -42,23 +48,39 @@ class _MainScreenState extends State<MainScreen> {
               padding: const EdgeInsets.only(top: 15),
               child: IconsButton(
                 title: 'Profile',
-                onPressed: () {},
+                onPressed: () { Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Profile(),
+                    ));},
                 imgicon: 'assets/images/person.svg',
               ),
             ),
             IconsButton(
               title: 'Services',
-              onPressed: () {},
+              onPressed: () { Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ServiceScreen(),
+                    ));},
               imgicon: 'assets/images/headphone.svg',
             ),
             IconsButton(
               title: 'Order History',
-              onPressed: () {},
+              onPressed: () { Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HistoryScreen(),
+                    ));},
               imgicon: 'assets/images/page.svg',
             ),
             IconsButton(
               title: 'Sales',
-              onPressed: () {},
+              onPressed: () { Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SalesScreen(),
+                    ));},
               imgicon: 'assets/images/sale.svg',
             ),
             Padding(

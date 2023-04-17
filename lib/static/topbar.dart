@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:translation_vendor/screen/notification/notification.dart';
+import 'package:translation_vendor/screen/profile/profile.dart';
 
 class Topbar extends StatelessWidget {
   const Topbar({super.key});
@@ -19,16 +21,25 @@ class Topbar extends StatelessWidget {
             child: SvgPicture.asset('assets/images/logo.svg')),
           Row(
             children: [
-              GestureDetector(
-                onTap: (){
-         
-                },
+              InkWell(
+                onTap: (){ Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>NotificationScreen() ,
+                    ));},
                 child: SvgPicture.asset('assets/images/notifcation.svg'),
                 
               ),
-               Padding(
-                 padding: const EdgeInsets.only(left: 12),
-                 child: Image(image: AssetImage('assets/images/noti.png')),
+               InkWell(
+                onTap:  (){ Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>Profile() ,
+                    ));},
+                 child: Padding(
+                   padding: const EdgeInsets.only(left: 12),
+                   child: Image(image: AssetImage('assets/images/noti.png')),
+                 ),
                ),
             ],
           )

@@ -40,7 +40,7 @@ class PagePrice extends StatelessWidget {
                 '  Pages.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                     fontSize: 19,
                     color: Colors.black),
               ),
@@ -51,7 +51,7 @@ class PagePrice extends StatelessWidget {
               Text(
                 'In ',
                 style: TextStyle(
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                     fontSize: 22,
                     color: Colors.black),
               ),
@@ -66,7 +66,7 @@ class PagePrice extends StatelessWidget {
               Text(
                 '  days',
                 style: TextStyle(
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                     fontSize: 20,
                     color: Colors.black),
               )

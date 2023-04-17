@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -11,6 +14,8 @@ import 'package:translation_vendor/static/page_p_day.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation_vendor/values/colors.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 
 class ServiceScreen extends StatefulWidget {
   const ServiceScreen({super.key});
@@ -20,6 +25,20 @@ class ServiceScreen extends StatefulWidget {
 }
 
 class _ServiceScreenState extends State<ServiceScreen> {
+  final Completer<GoogleMapController> _controller =
+      Completer<GoogleMapController>();
+
+  static const CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );
+
+  static const CameraPosition _kLake = CameraPosition(
+      bearing: 192.8334901395799,
+      target: LatLng(37.43296265331129, -122.08832357078792),
+      tilt: 59.440717697143555,
+      zoom: 19.151926040649414);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -159,10 +178,17 @@ class _ServiceScreenState extends State<ServiceScreen> {
               ),
               Row(
                 children: [
-                  Image.asset(
-                    'assets/images/map.png',
-                    width: 380,
-                  )
+                  Container(
+                    height: 250,
+                    width: MediaQuery.of(context).size.width * 0.91,
+                    child: GoogleMap(
+                      mapType: MapType.hybrid,
+                      initialCameraPosition: _kGooglePlex,
+                      onMapCreated: (GoogleMapController controller) {
+                        _controller.complete(controller);
+                      },
+                    ),
+                  ),
                 ],
               ),
               Row(
@@ -177,29 +203,32 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Scheduleinput(
-                    hint: '9: 00',
-                    fontSize: 20.0,
-                  ),
-                  Text(
-                    "To",
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
+              Padding(
+                padding: const EdgeInsets.only(top: 12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Scheduleinput(
+                      hint: '9: 00',
+                      fontSize: 20.0,
                     ),
-                  ),
-                  Scheduleinput(
-                    hint: '09: 00',
-                    fontSize: 20.0,
-                  ),
-                  StarButton(onPressed: () {
-                    freezeday(context);
-                  })
-                ],
+                    Text(
+                      "To",
+                      style: TextStyle(
+                        fontFamily: 'Mazzard',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Scheduleinput(
+                      hint: '09: 00',
+                      fontSize: 20.0,
+                    ),
+                    StarButton(onPressed: () {
+                      freezeday(context);
+                    })
+                  ],
+                ),
               ),
               Row(
                 children: [
@@ -513,11 +542,10 @@ class _ServiceScreenState extends State<ServiceScreen> {
 
   freezeday(context) {
     Alert(
-       style: AlertStyle(titleStyle: TextStyle(fontSize: 25),),
+      style: AlertStyle(
+        titleStyle: TextStyle(fontSize: 25),
+      ),
       context: context,
-      
-    
-    
       title: "Are you sure to want freeze this page",
       buttons: [
         DialogButton(
