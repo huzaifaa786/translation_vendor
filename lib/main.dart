@@ -8,6 +8,7 @@ import 'package:translation_vendor/screen/profile/profile.dart';
 import 'package:translation_vendor/screen/register/register.dart';
 import 'package:translation_vendor/screen/sale/sales.dart';
 import 'package:translation_vendor/screen/services/service.dart';
+import 'package:translation_vendor/screen/splash/splash.dart';
 import 'package:translation_vendor/values/styles.dart';
 
 void main() {
@@ -32,9 +33,12 @@ class _MyAppState extends State<MyApp> {
       // builder: EasyLoading.init(),
       title: "Trans",
       theme: Styles.lightTheme,
-      initialRoute: 'login',
+
+      initialRoute: 'splash',
       routes: {
         'login': (context) => const LoginScreen(),
+        'splash': (context) => const SplashScreen(),
+
         'notification': (context) => const NotificationScreen(),
         'Sale': (context) => const SalesScreen(),
         'history': (context) => const HistoryScreen(),

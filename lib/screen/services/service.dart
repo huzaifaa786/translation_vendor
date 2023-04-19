@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation_vendor/static/addpage.dart';
+import 'package:translation_vendor/static/button.dart';
 import 'package:translation_vendor/static/schedule.dart';
 import 'package:translation_vendor/static/star.button.dart';
 import 'package:translation_vendor/static/titletopbar.dart';
@@ -526,6 +527,8 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 number: '30 - 40',
                 days: 20,
               ),
+              SizedBox(height: 12,),
+              LargeButton(title: 'Submit', textcolor: White, onPressed: () {})
             ],
           ),
         ),
@@ -539,7 +542,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
         titleStyle: TextStyle(fontSize: 25),
       ),
       context: context,
-      title: "Are you sure to want freeze this page",
+      title: "Are you sure to want freeze this day",
       buttons: [
         DialogButton(
           height: 60,

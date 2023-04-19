@@ -86,6 +86,7 @@ class _MainScreenState extends State<MainScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 30),
               child: ToggleSwitch(
+    
                 cornerRadius: 20,
                 inactiveBgColor: Colors.white,
                 borderWidth: 9,
@@ -108,6 +109,7 @@ class _MainScreenState extends State<MainScreen> {
                 initialLabelIndex: 0,
                 totalSwitches: 2,
                 labels: ['Online', 'Offline'],
+                 icons: [Icons.radio_button_on_outlined, Icons.radio_button_on_outlined],
                 onToggle: (index) {
                   print('switched to: $index');
                 },

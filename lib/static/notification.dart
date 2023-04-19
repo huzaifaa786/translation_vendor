@@ -85,9 +85,9 @@ class NotificationTile extends StatelessWidget {
                             ),
                              Padding(
                                padding: const EdgeInsets.only(top: 4),
-                               child: Text('Monday 12:00 PM 56',style: TextStyle(
+                               child: Text('Mon 12:00 PM ',style: TextStyle(
                                         fontSize: 13,
-                                        color:mainColor,
+                                        color:hintColor,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'Poppins'),),
                              ),

@@ -53,10 +53,9 @@ class LanguageAdd extends StatelessWidget {
     return Column(
       children: [
         Stack(
-          
           children: [
             Positioned(
-              top: -9,
+              top: -2,
               left: 16,
               child: Text(
                 labelText,
@@ -67,33 +66,36 @@ class LanguageAdd extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              height: 60,
-              width: MediaQuery.of(context).size.width * 10,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(6),
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Container(
+                height: 60,
+                width: MediaQuery.of(context).size.width * 10,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(6),
+                  ),
                 ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  InkWell(
-                    onTap: onpressed,
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: SvgPicture.asset(
-                          imageIcon,
-                          height: 29,
-                          width: 29,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      onTap: onpressed,
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: SvgPicture.asset(
+                            imageIcon,
+                            height: 29,
+                            width: 29,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
