@@ -1,21 +1,14 @@
 import 'dart:async';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation_vendor/static/addpage.dart';
 import 'package:translation_vendor/static/schedule.dart';
 import 'package:translation_vendor/static/star.button.dart';
-import 'package:translation_vendor/static/statustitle.dart';
 import 'package:translation_vendor/static/titletopbar.dart';
 import 'package:translation_vendor/static/page_p_day.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation_vendor/values/colors.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 
 class ServiceScreen extends StatefulWidget {
   const ServiceScreen({super.key});
