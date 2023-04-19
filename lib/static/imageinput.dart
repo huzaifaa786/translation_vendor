@@ -58,9 +58,8 @@ class Imageinput extends StatelessWidget {
           children: [
             Stack(
               children: [
-                Container(
-                  child: Positioned(
-                    top: -4,
+                 Positioned(
+                    top: -2,
                     left: 16,
                     child: Text(
                       labelText,
@@ -71,31 +70,33 @@ class Imageinput extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  height: 60,
-                  width: MediaQuery.of(context).size.width * 10,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(6),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Container(
+                    height: 60,
+                    width: MediaQuery.of(context).size.width * 10,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(6),
+                      ),
                     ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: SvgPicture.asset(
-                            imageIcon,
-                            height: 17,
-                            width: 17,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: SvgPicture.asset(
+                              imageIcon,
+                              height: 17,
+                              width: 17,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],

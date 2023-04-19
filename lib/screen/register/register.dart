@@ -124,44 +124,40 @@ class _RegesterScreenState extends State<RegesterScreen> {
             showCreate == true
                 ? InputFields(
                     hint: 'Add language',
-                    
                     showSuffix: true,
                     suffix: 'ADD',
-                    onpressed: (){},
+                    onpressed: () {},
                   )
                 : Container(),
-
-
-                Padding(
-                  padding: const EdgeInsets.only(top: 40.0),
-                  child: IconInputFields(
-                    
-                    imageIcon: 'assets/images/email.svg',
-                    hint: 'Username',
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 12.0),
-                  child: InputFieldPassword(
-                    imageIcon: 'assets/images/password.svg',
-                    hint: 'Password',
-                  ),
-                ),
-                  Padding(
-                  padding: const EdgeInsets.only(top: 12.0),
-                  child: InputFieldPassword(
-                    imageIcon: 'assets/images/password.svg',
-                    hint: 'Confirm Password',
-                  ),
-                ),
-                 Padding(
-                  padding: const EdgeInsets.only(top: 25.0, bottom: 30),
-                  child: LargeButton(
-                    title: 'Submit',
-                    textcolor: White,
-                    onPressed: () {},
-                  ),
-                ),
+            Padding(
+              padding: const EdgeInsets.only(top: 40.0),
+              child: IconInputFields(
+                imageIcon: 'assets/images/email.svg',
+                hint: 'Username',
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 12.0),
+              child: InputFieldPassword(
+                imageIcon: 'assets/images/password.svg',
+                hint: 'Password',
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 12.0),
+              child: InputFieldPassword(
+                imageIcon: 'assets/images/password.svg',
+                hint: 'Confirm Password',
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 25.0, bottom: 30),
+              child: LargeButton(
+                title: 'Submit',
+                textcolor: White,
+                onPressed: () {},
+              ),
+            ),
           ]),
         ),
       ),
