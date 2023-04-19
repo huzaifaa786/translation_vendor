@@ -20,7 +20,7 @@ class IconInputFields extends StatelessWidget {
       this.autovalidateMode,
       this.validate,
       this.icon,
-       this.height,
+      this.height,
       this.type = TextInputType.text,
       this.fontSize = 14.0,
       this.width = 0.98,
@@ -32,7 +32,7 @@ class IconInputFields extends StatelessWidget {
   final bool? validate;
   final hint;
   final width;
-    final height;
+  final height;
   final type;
   final imageIcon;
   final icon;
@@ -49,6 +49,7 @@ class IconInputFields extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(6),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.all(
@@ -60,7 +61,7 @@ class IconInputFields extends StatelessWidget {
         controller: controller,
         decoration: InputDecoration(
             prefixIcon: Padding(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(6),
               child: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
@@ -68,7 +69,7 @@ class IconInputFields extends StatelessWidget {
                     color: Colors.grey,
                   ),
                   borderRadius: BorderRadius.all(
-                    Radius.circular(45),
+                    Radius.circular(30),
                   ),
                 ),
                 child: FittedBox(
@@ -85,11 +86,10 @@ class IconInputFields extends StatelessWidget {
             fillColor: Colors.white,
             hintText: hint,
             hintStyle: TextStyle(color: hintColor),
-            contentPadding: const EdgeInsets.only(left: 3.0),
+            contentPadding: const EdgeInsets.only(left: 3),
             border: OutlineInputBorder(borderSide: BorderSide.none)),
         keyboardType: type,
         cursorColor: Colors.black,
-      
         maxLines: 1,
         validator: validator,
       ),

@@ -23,7 +23,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  int index = 0;
+  int index = 1;
 
   getindex(id) async {
     setState(() {
@@ -49,37 +49,22 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(left: 14, right: 14),
+          padding: const EdgeInsets.only(left: 20, right: 20),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Stack(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 70),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            'assets/images/logo.svg',
-                            height: 110,
-                            width: 110,
-                          )
-                        ],
-                      ),
-                    ),
-                    // Positioned(
-                    //   bottom: 10,
-                    //   left: 55,
-                    //   child: Text(
-                    //     "Sign in to continue",
-                    //     style: TextStyle(
-                    //       fontSize: 26,
-                    //       fontWeight: FontWeight.w600,
-                    //     ),
-                    //   ),
-                    // )
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 40),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/images/logo.svg',
+                        height: MediaQuery.of(context).size.height * 0.14,
+                        width: 110,
+                      )
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
@@ -120,11 +105,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             getindex(index);
                           },
                           borderWidth: 1,
-                            radiusStyle: true,
-                            fontSize: 15,
-                            minWidth: 110,
-                            minHeight: 45,
-                            cornerRadius: 40,
+                          radiusStyle: true,
+                          fontSize: 15,
+                          minWidth: 110,
+                          minHeight: MediaQuery.of(context).size.height * 0.06,
+                          cornerRadius: 40,
                           inactiveFgColor: const Color.fromARGB(255, 9, 9, 9),
                           activeFgColor:
                               const Color.fromARGB(255, 255, 255, 255),
@@ -135,9 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Border.all(
                               color: mainColor,
                               width: 1.0,
-                              
                             ),
-                           
                           ],
                         ),
                       ),
@@ -150,18 +133,18 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Column(children: [
                           Stackinput(
                             labelText: 'Vendor Name',
-                            hint: 'Enter your name',
+                            hint: '',
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 12),
+                            padding: const EdgeInsets.only(
+                                top: 18, left: 4, bottom: 8),
                             child: Row(
                               children: [
                                 Text(
                                   'Date Of Birth',
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 18,
-                                      color: mainColor),
+                                      fontSize: 14),
                                 ),
                               ],
                             ),
@@ -175,8 +158,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                       color: Colors.grey, width: 1.0),
                                 ),
                                 border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.grey[300]!),
                                     borderRadius:
-                                        BorderRadius.circular(10))), // optional
+                                        BorderRadius.circular(10),)), // optional
                             isDropdownHideUnderline: true, // optional
                             isFormValidator: true, // optional
                             startYear: 1970, // optional
@@ -195,9 +179,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             // border: Border.all(color: Colors.grey, width: 1.0)), // optional
                             // showDay: false,// optional
                             dayFlex: 2, // optional
-
+                            // monthFlex: 3,
+                            // yearFlex: 2,
                             // locale: "zh_CN",// optional
-                            // hintDay: 'Day', // optional
+                            hintDay: 'Day', // optional
                             // hintMonth: 'Month', // optional
                             // hintYear: 'Year', // optional
                             // hintTextStyle: TextStyle(color: Colors.grey), // optional
@@ -205,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Padding(
                             padding: const EdgeInsets.only(top: 15),
                             child: Imageinput(
-                              labelText: 'Passport',
+                              labelText: ' Passport ',
                               imageIcon: 'assets/images/image.svg',
                               onpressed: () {
                                 selectimage();
@@ -215,7 +200,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Padding(
                             padding: const EdgeInsets.only(top: 15),
                             child: Imageinput(
-                              labelText: 'Certificate',
+                              labelText: ' Certificate (Optional) ',
                               imageIcon: 'assets/images/image.svg',
                               onpressed: () {
                                 selectimage();
@@ -225,7 +210,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Padding(
                               padding: const EdgeInsets.only(top: 15),
                               child: LanguageAdd(
-                                labelText: 'Certificate',
+                                labelText: ' Language',
                                 imageIcon: 'assets/images/add.svg',
                                 onpressed: () {
                                   print(showCreate);
@@ -244,7 +229,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 )
                               : Container(),
                           Padding(
-                            padding: const EdgeInsets.only(top: 40.0),
+                            padding: const EdgeInsets.only(top: 25.0),
                             child: IconInputFields(
                               imageIcon: 'assets/images/email.svg',
                               hint: 'Username',

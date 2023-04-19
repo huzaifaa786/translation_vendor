@@ -54,27 +54,15 @@ class LanguageAdd extends StatelessWidget {
       children: [
         Stack(
           children: [
-            Positioned(
-              top: -2,
-              left: 16,
-              child: Text(
-                labelText,
-                style: TextStyle(
-                  backgroundColor: Colors.transparent,
-                  fontSize: 16,
-                  color: Colors.black,
-                ),
-              ),
-            ),
             Padding(
-              padding: const EdgeInsets.all(4.0),
+              padding: const EdgeInsets.only(top:4.0),
               child: Container(
                 height: 60,
                 width: MediaQuery.of(context).size.width * 10,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.all(
-                    Radius.circular(6),
+                    Radius.circular(12),
                   ),
                 ),
                 child: Row(
@@ -95,6 +83,18 @@ class LanguageAdd extends StatelessWidget {
                       ),
                     ),
                   ],
+                ),
+              ),
+            ),
+            Positioned(
+              top: -2,
+              left: 16,
+              child: Text(
+                labelText,
+                style: TextStyle(
+                  backgroundColor: White,
+                  fontSize: 16,
+                  color: Colors.black,
                 ),
               ),
             ),

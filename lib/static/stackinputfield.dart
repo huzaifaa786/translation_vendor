@@ -29,11 +29,11 @@ class Stackinput extends StatelessWidget {
   final controller;
   final validator;
   final bool? validate;
-final hint;
+  final hint;
   final width;
   final labelText;
   final type;
-final color;
+  final color;
   final icon;
   final obscure;
   final text;
@@ -49,22 +49,21 @@ final color;
   Widget build(BuildContext context) {
     return Column(
       children: [
-       
         Container(
-          margin: EdgeInsets.only(top: 30),
-          child: TextField(
-          decoration: InputDecoration(
-            fillColor: Colors.grey,
-            border: OutlineInputBorder(),
-            hoverColor: Colors.grey,
-            focusColor: Colors.grey,
-            labelText: labelText,
-            hintText: hint,
-          ),
-        )
-         
-        ),
-     
+            margin: EdgeInsets.only(top: 30),
+            child: TextField(
+              decoration: InputDecoration(
+                fillColor: Colors.grey,
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(12),),
+                contentPadding: EdgeInsets.only(left: 20, top: 20, bottom: 20),
+                hoverColor: Colors.grey,
+                focusColor: Colors.grey,
+                labelText: labelText,
+                hintText: hint,
+              ),
+            )),
       ],
     );
   }

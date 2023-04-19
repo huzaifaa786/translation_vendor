@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:translation_vendor/values/colors.dart';
 
-
 class InputFields extends StatelessWidget {
   const InputFields(
       {Key? key,
@@ -68,16 +67,21 @@ class InputFields extends StatelessWidget {
             filled: true,
             fillColor: Colors.white,
             hintText: hint,
-            suffixIcon: showSuffix == true ?InkWell(
-              onTap: onpressed,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  
-                  Text(suffix),
-                ],
-              ),
-            ):Container(),
+            suffixIcon: showSuffix == true
+                ? InkWell(
+                    onTap: onpressed,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          suffix,
+                          style: TextStyle(
+                              color: mainColor, fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
+                  )
+                : Container(),
             contentPadding: const EdgeInsets.only(left: 12.0, right: 12),
             hintStyle: TextStyle(color: hintColor),
             enabledBorder: OutlineInputBorder(
