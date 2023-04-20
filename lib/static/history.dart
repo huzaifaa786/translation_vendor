@@ -59,7 +59,7 @@ class HistoryCard extends StatelessWidget {
                       name,
                       style: TextStyle(
                           fontSize: 15,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w500,
                           fontFamily: 'Poppins'),
                       maxLines: 2,
                     ),
@@ -71,12 +71,14 @@ class HistoryCard extends StatelessWidget {
                           fontFamily: 'Poppins'),
                       maxLines: 2,
                     ),
+                    SizedBox(height: 3,),
                     Row(
                       children: [
                         Icon(
                           Icons.access_time_outlined,
                           size: 14,
                         ),
+                        SizedBox(width: 3),
                         Text(
                           "08:00-16:00 | 03.12.2022 ",
                           style: TextStyle(fontSize: 11),
@@ -96,9 +98,10 @@ class HistoryCard extends StatelessWidget {
                           fontFamily: 'Poppins'),
                     ),
                     Badgee(
-                      title: 'inprocess',
+                      title: 'in progress',
                       color: mainColor,
                     ),
+                    SizedBox(height: 6),
                     Padding(
                       padding: const EdgeInsets.only(top: 6,bottom: 6),
                       child: Text(
@@ -119,7 +122,7 @@ class HistoryCard extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 4.0),
+              padding: const EdgeInsets.only(top: 12.0),
               child: Divider(
                 color: Colors.grey, //color of divider
                 height: 5, //height spacing of divider

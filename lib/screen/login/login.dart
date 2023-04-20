@@ -230,6 +230,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: IconInputFields(
                               imageIcon: 'assets/images/email.svg',
                               hint: 'Username',
+                              width: 12,
                               borderColor: Colors.black,
                               imageColor: Colors.black,
                             ),
