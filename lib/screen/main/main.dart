@@ -109,7 +109,7 @@ class _MainScreenState extends State<MainScreen> {
                 initialLabelIndex: 0,
                 totalSwitches: 2,
                 labels: ['Online', 'Offline'],
-                 icons: [Icons.radio_button_on_outlined, Icons.radio_button_on_outlined],
+                 icons: [Icons.radio_button_on_outlined, Icons.radio_button_checked_sharp],
                 onToggle: (index) {
                   print('switched to: $index');
                 },

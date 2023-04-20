@@ -87,37 +87,41 @@ class HistoryCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      'AED  50',
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: 'Poppins'),
-                    ),
-                    Badgee(
-                      title: 'in progress',
-                      color: mainColor,
-                    ),
-                    SizedBox(height: 6),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 6,bottom: 6),
-                      child: Text(
-                        "View Document",
+              
+                Padding(
+                  padding: const EdgeInsets.only(top: 12),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        'AED  50',
                         style: TextStyle(
-                            color: Colors.blue,
-                            decoration: TextDecoration.underline,
-                            fontSize: 9),
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Poppins'),
                       ),
-                    ),
-                    SvgPicture.asset(
-                      'assets/images/msg.svg',
-                      height: 17,
-                      width: 17,
-                    ),
-                  ],
+                      Badgee(
+                        title: 'in progress',
+                        color: mainColor,
+                      ),
+                      SizedBox(height: 6),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 6,bottom: 6),
+                        child: Text(
+                          "View Document",
+                          style: TextStyle(
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline,
+                              fontSize: 9),
+                        ),
+                      ),
+                      SvgPicture.asset(
+                        'assets/images/msg.svg',
+                        height: 17,
+                        width: 17,
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),
