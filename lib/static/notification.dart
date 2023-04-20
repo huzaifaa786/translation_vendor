@@ -56,8 +56,7 @@ class NotificationTile extends StatelessWidget {
                               title,
                               style: TextStyle(
                                   fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: 'Poppins'),
+                                  fontWeight: FontWeight.w500),
                               maxLines: 2,
                             ),
                             SizedBox(height: 3),
@@ -70,16 +69,14 @@ class NotificationTile extends StatelessWidget {
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: Color.fromARGB(255, 182, 107, 102),
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: 'Poppins'),
+                                      fontWeight: FontWeight.w500),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 4),
                                   child: Text('AED 56',style: TextStyle(
                                         fontSize: 13,
                                         color:mainColor,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Poppins'),),
+                                        fontWeight: FontWeight.w500),),
                                 ),
                               ],
                             ),
@@ -88,8 +85,7 @@ class NotificationTile extends StatelessWidget {
                                child: Text('Mon 12:00 PM ',style: TextStyle(
                                         fontSize: 13,
                                         color:hintColor,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Poppins'),),
+                                        fontWeight: FontWeight.w500),),
                              ),
                           ],
                         ),

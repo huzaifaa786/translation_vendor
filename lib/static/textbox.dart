@@ -7,13 +7,11 @@ class TextBox extends StatelessWidget {
   const TextBox(
       {Key? key,
       @required this.title,
-     
       this.textcolor,
       this.icon,
-      
       this.screenRatio = 0.9,
       this.rounded = false,
-      this.color })
+      this.color})
       : super(key: key);
 
   final title;
@@ -23,17 +21,17 @@ class TextBox extends StatelessWidget {
   final textcolor;
   final icon;
   final rounded;
- 
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-    width: MediaQuery.of(context).size.width * 0.3,
+      width: MediaQuery.of(context).size.width * 0.28,
       height: 60,
       child: Container(
         decoration: BoxDecoration(
-             border: Border.all(
-                      color: Colors.black,
-                    ),
+            border: Border.all(
+              color: hintColor,
+            ),
             color: color,
             borderRadius: BorderRadius.all(Radius.circular(12))),
         child: Row(

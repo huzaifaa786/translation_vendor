@@ -542,10 +542,12 @@ class _ServiceScreenState extends State<ServiceScreen> {
         titleStyle: TextStyle(fontSize: 25),
       ),
       context: context,
-      title: "Are you sure to want freeze this day",
+      title: "Are you sure to freeze this day",
       buttons: [
         DialogButton(
           height: 60,
+          radius: BorderRadius.circular(12),
+
           child: Text(
             "yes",
             style: TextStyle(color: Colors.white, fontSize: 20),
@@ -555,12 +557,13 @@ class _ServiceScreenState extends State<ServiceScreen> {
         ),
         DialogButton(
           height: 60,
+          radius: BorderRadius.circular(12),
           border: Border.all(
-            color: Colors.black,
+            color: mainColor,
           ),
           child: Text(
             "No",
-            style: TextStyle(color: Colors.black, fontSize: 20),
+            style: TextStyle(color: mainColor, fontSize: 20),
           ),
           onPressed: () => Navigator.pop(context),
           color: White,

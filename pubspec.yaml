@@ -100,6 +100,30 @@ flutter:
         - asset: assets/fonts/MazzardH-Medium.ttf
         - asset: assets/fonts/MazzardH-Regular.ttf
         - asset: assets/fonts/MazzardH-SemiBold.ttf
+
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Black.ttf
+        - asset: assets/fonts/Montserrat-Bold.ttf
+        - asset: assets/fonts/Montserrat-ExtraBold.ttf
+        - asset: assets/fonts/Montserrat-ExtraLight.ttf
+        - asset: assets/fonts/Montserrat-Light.ttf
+        - asset: assets/fonts/Montserrat-Medium.ttf
+        - asset: assets/fonts/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat-SemiBold.ttf
+        - asset: assets/fonts/Montserrat-Thin.ttf
+
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Black.ttf
+        - asset: assets/fonts/Poppins-Bold.ttf
+        - asset: assets/fonts/Poppins-ExtraBold.ttf
+        - asset: assets/fonts/Poppins-ExtraLight.ttf
+        - asset: assets/fonts/Poppins-Light.ttf
+        - asset: assets/fonts/Poppins-Medium.ttf
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+        - asset: assets/fonts/Poppins-Thin.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

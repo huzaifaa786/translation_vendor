@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:translation_vendor/values/colors.dart';
 
 class TitleTopbar extends StatelessWidget {
   const TitleTopbar({
@@ -23,17 +24,18 @@ class TitleTopbar extends StatelessWidget {
             GestureDetector(
               onTap: ontap,
               child: Container(
-                padding: EdgeInsets.all(5),
                 decoration: BoxDecoration(
                  border: Border.all(
                       color: Colors.grey,
                     ),
                     borderRadius: BorderRadius.all(
-                      Radius.circular(45),
+                      Radius.circular(60),
                     ),
                 ),
                 child: Icon(
+                   size: 28,
                   Icons.keyboard_arrow_left_outlined,
+                  
                 ),
               ),
             ),
@@ -41,11 +43,11 @@ class TitleTopbar extends StatelessWidget {
               text,
               style: TextStyle(
                 fontFamily: 'Poppins',
-                fontSize: 22,
-                fontWeight: FontWeight.w600,
+                fontSize: 21,
+                fontWeight: FontWeight.w500,
               ),
             ),
-            Text('')
+            Text('..........',style: TextStyle(color: White),)
           ],
         ),
       ),

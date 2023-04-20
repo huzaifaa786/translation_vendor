@@ -14,6 +14,8 @@ class IconInputFields extends StatelessWidget {
       this.enabled = true,
       this.readOnly = false,
       this.rounded = false,
+      this.borderColor = mainColor,
+      this.imageColor = mainColor,
       this.onChange,
       this.imageIcon,
       this.validator,
@@ -31,6 +33,8 @@ class IconInputFields extends StatelessWidget {
   final validator;
   final bool? validate;
   final hint;
+  final borderColor;
+  final imageColor;
   final width;
   final height;
   final type;
@@ -66,7 +70,7 @@ class IconInputFields extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: Colors.grey,
+                    color: borderColor,
                   ),
                   borderRadius: BorderRadius.all(
                     Radius.circular(30),
@@ -78,6 +82,7 @@ class IconInputFields extends StatelessWidget {
                     imageIcon,
                     height: 17,
                     width: 17,
+                    color: imageColor,
                   ),
                 ),
               ),

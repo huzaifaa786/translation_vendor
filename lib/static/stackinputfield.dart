@@ -61,6 +61,7 @@ class Stackinput extends StatelessWidget {
                 hoverColor: Colors.grey,
                 focusColor: Colors.grey,
                 labelText: labelText,
+                labelStyle: TextStyle(fontFamily: 'Montserrat',fontWeight: FontWeight.w600,fontSize: 14,color: Colors.black),
                 hintText: hint,
               ),
             )),

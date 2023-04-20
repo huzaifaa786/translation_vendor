@@ -8,6 +8,8 @@ class InputFieldPassword extends StatelessWidget {
   const InputFieldPassword(
       {Key? key,
       this.controller,
+      this.borderColor = mainColor,
+      this.imageColor = mainColor,
       this.hint,
       this.text,
       this.icon,
@@ -35,6 +37,8 @@ class InputFieldPassword extends StatelessWidget {
   final toggle;
   final onChange;
   final onpressed;
+  final borderColor;
+  final imageColor;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +59,7 @@ class InputFieldPassword extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: Colors.grey,
+                    color: borderColor,
                   ),
                   borderRadius: BorderRadius.all(
                     Radius.circular(30),
@@ -67,6 +71,7 @@ class InputFieldPassword extends StatelessWidget {
                     imageIcon,
                     height: 17,
                     width: 17,
+                    color: imageColor,
                   ),
                 ),
               ),

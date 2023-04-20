@@ -118,8 +118,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           activeBgColor: const [mainColor],
                           activeBorders: [
                             Border.all(
-                              color: mainColor,
-                              width: 1.0,
+                              color: White,
+                              width: 3.5,
+                            ),
+                            Border.all(
+                              color: White,
+                              width: 3.5,
                             ),
                           ],
                         ),
@@ -143,49 +147,42 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Text(
                                   'Date Of Birth',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 14),
+                                      fontFamily: 'Montserrat',
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 13,
+                                      color: Colors.black),
                                 ),
                               ],
                             ),
                           ),
                           DropdownDatePicker(
                             inputDecoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left:2,right: 2,top: 16,bottom: 16),
                                 enabledBorder: const OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(15)),
                                   borderSide: BorderSide(
                                       color: Colors.grey, width: 1.0),
                                 ),
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey[300]!),
-                                    borderRadius:
-                                        BorderRadius.circular(10),)), // optional
-                            isDropdownHideUnderline: true, // optional
-                            isFormValidator: true, // optional
-                            startYear: 1970, // optional
-                            endYear: 2030, // optional
-                            width: 10, // optional
-                            // selectedDay: 14, // optional
-                            // selectedMonth: 10, // optional
-                            // selectedYear: 1993, // optional
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(10),
+                                )),
+                            isDropdownHideUnderline: true,
+                            isFormValidator: true,
+                            startYear: 1970,
+                            endYear: 2030,
+                            width: 10,
                             onChangedDay: (value) =>
                                 print('onChangedDay: $value'),
                             onChangedMonth: (value) =>
                                 print('onChangedMonth: $value'),
                             onChangedYear: (value) =>
                                 print('onChangedYear: $value'),
-                            //boxDecoration: BoxDecoration(
-                            // border: Border.all(color: Colors.grey, width: 1.0)), // optional
-                            // showDay: false,// optional
-                            dayFlex: 2, // optional
-                            // monthFlex: 3,
-                            // yearFlex: 2,
-                            // locale: "zh_CN",// optional
-                            hintDay: 'Day', // optional
-                            // hintMonth: 'Month', // optional
-                            // hintYear: 'Year', // optional
-                            // hintTextStyle: TextStyle(color: Colors.grey), // optional
+                            dayFlex: 2,
+                            textStyle: TextStyle(fontSize: 12),
+                            hintTextStyle: TextStyle(color: Colors.grey,fontSize: 12),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 15),
@@ -233,6 +230,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: IconInputFields(
                               imageIcon: 'assets/images/email.svg',
                               hint: 'Username',
+                              borderColor: Colors.black,
+                              imageColor: Colors.black,
                             ),
                           ),
                           Padding(
@@ -240,6 +239,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: InputFieldPassword(
                               imageIcon: 'assets/images/password.svg',
                               hint: 'Password',
+                              borderColor: Colors.black,
+                              imageColor: Colors.black,
                             ),
                           ),
                           Padding(
@@ -247,6 +248,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: InputFieldPassword(
                               imageIcon: 'assets/images/password.svg',
                               hint: 'Confirm Password',
+                              borderColor: Colors.black,
+                              imageColor: Colors.black,
                             ),
                           ),
                           Padding(

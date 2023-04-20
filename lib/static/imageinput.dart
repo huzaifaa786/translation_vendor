@@ -23,6 +23,7 @@ class Imageinput extends StatelessWidget {
       this.icon,
       this.height,
       this.type = TextInputType.text,
+      this.optionalText = '',
       this.fontSize = 14.0,
       this.width = 0.98,
       this.onpressed})
@@ -30,6 +31,7 @@ class Imageinput extends StatelessWidget {
 
   final controller;
   final validator;
+  final optionalText;
   final bool? validate;
   final labelText;
   final width;
@@ -91,14 +93,19 @@ class Imageinput extends StatelessWidget {
                   top: -2,
                   left: 16,
                   child: Container(
-                    margin: const EdgeInsets.only(left: 4,right: 4),
-                    child: Text(
-                      labelText,
-                      style: TextStyle(
-                        backgroundColor: White,
-                        fontSize: 16,
-                        color: Colors.black,
-                      ),
+                    margin: const EdgeInsets.only(left: 2, right: 4),
+                    child: Row(
+                      children: [
+                        Text(
+                          labelText + optionalText,
+                          style: TextStyle(
+                              backgroundColor: White,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w600,
+                              fontSize: 12,
+                              color: Colors.black),
+                        ),
+                      ],
                     ),
                   ),
                 ),

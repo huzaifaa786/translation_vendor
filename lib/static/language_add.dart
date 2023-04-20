@@ -92,10 +92,11 @@ class LanguageAdd extends StatelessWidget {
               child: Text(
                 labelText,
                 style: TextStyle(
-                  backgroundColor: White,
-                  fontSize: 16,
-                  color: Colors.black,
-                ),
+                              backgroundColor: White,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w600,
+                              fontSize: 12,
+                              color: Colors.black),
               ),
             ),
           ],
