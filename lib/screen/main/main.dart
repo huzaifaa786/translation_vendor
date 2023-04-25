@@ -20,12 +20,13 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  int i = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
           child: Padding(
-        padding: const EdgeInsets.only(left: 20,right: 20),
+        padding: const EdgeInsets.only(left: 20, right: 20),
         child: Column(
           children: [
             Topbar(),
@@ -48,45 +49,52 @@ class _MainScreenState extends State<MainScreen> {
               padding: const EdgeInsets.only(top: 15),
               child: IconsButton(
                 title: 'Profile',
-                onPressed: () { Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Profile(),
-                    ));},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Profile(),
+                      ));
+                },
                 imgicon: 'assets/images/person.svg',
               ),
             ),
             IconsButton(
               title: 'Services',
-              onPressed: () { Navigator.push(
+              onPressed: () {
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => ServiceScreen(),
-                    ));},
+                    ));
+              },
               imgicon: 'assets/images/headphone.svg',
             ),
             IconsButton(
               title: 'Order History',
-              onPressed: () { Navigator.push(
+              onPressed: () {
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => HistoryScreen(),
-                    ));},
+                    ));
+              },
               imgicon: 'assets/images/page.svg',
             ),
             IconsButton(
               title: 'Sales',
-              onPressed: () { Navigator.push(
+              onPressed: () {
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => SalesScreen(),
-                    ));},
+                    ));
+              },
               imgicon: 'assets/images/sale.svg',
             ),
             Padding(
               padding: const EdgeInsets.only(top: 30),
               child: ToggleSwitch(
-    
                 cornerRadius: 20,
                 inactiveBgColor: Colors.white,
                 borderWidth: 9,
@@ -109,25 +117,34 @@ class _MainScreenState extends State<MainScreen> {
                 initialLabelIndex: 0,
                 totalSwitches: 2,
                 labels: ['Online', 'Offline'],
-                 icons: [Icons.radio_button_on_outlined, Icons.radio_button_on_outlined],
+                customIcons: [
+                  Icon(Icons.radio_button_on_outlined,
+                      color: Colors.green, size: 12),
+                  Icon(
+                    Icons.radio_button_on_outlined,
+                    size: 12
+                  ),
+                ],
                 onToggle: (index) {
                   print('switched to: $index');
                 },
               ),
-              
             ),
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Log Out',style: TextStyle(
-                    color: Colors.red,
-                    fontFamily: 'Poppins',
-                    fontSize: 19,
-                    fontWeight: FontWeight.w500,
-                  ),),
-                   Image(image: AssetImage('assets/images/Arrow 1.png')),
+                  Text(
+                    'Log Out',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontFamily: 'Poppins',
+                      fontSize: 19,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Image(image: AssetImage('assets/images/Arrow 1.png')),
                 ],
               ),
             )
