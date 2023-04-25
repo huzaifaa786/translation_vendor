@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation_vendor/values/colors.dart';
 
 class IconInputFields extends StatelessWidget {
-  const IconInputFields(
+   IconInputFields(
       {Key? key,
       this.controller,
       this.hint,

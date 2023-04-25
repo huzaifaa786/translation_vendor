@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation_vendor/screen/main/main.dart';
 import 'package:translation_vendor/static/button.dart';
 import 'package:translation_vendor/static/icon_inputfield.dart';
@@ -157,7 +158,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           DropdownDatePicker(
                             inputDecoration: InputDecoration(
-                              contentPadding: EdgeInsets.only(left:2,right: 2,top: 16,bottom: 16),
+                                contentPadding: EdgeInsets.only(
+                                    left: 2, right: 2, top: 16, bottom: 16),
                                 enabledBorder: const OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(15)),
@@ -165,8 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       color: Colors.grey, width: 1.0),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.grey),
+                                  borderSide: BorderSide(color: Colors.grey),
                                   borderRadius: BorderRadius.circular(10),
                                 )),
                             isDropdownHideUnderline: true,
@@ -182,7 +183,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 print('onChangedYear: $value'),
                             dayFlex: 2,
                             textStyle: TextStyle(fontSize: 12),
-                            hintTextStyle: TextStyle(color: Colors.grey,fontSize: 12),
+                            hintTextStyle:
+                                TextStyle(color: Colors.grey, fontSize: 12),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 15),
@@ -230,6 +232,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: IconInputFields(
                               imageIcon: 'assets/images/email.svg',
                               hint: 'Username',
+                              width: 12,
                               borderColor: Colors.black,
                               imageColor: Colors.black,
                             ),
@@ -259,11 +262,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               title: 'Submit',
                               textcolor: White,
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => MainScreen(),
-                                    ));
+                                vendorrequest(context);
                               },
                             ),
                           ),
@@ -308,5 +307,33 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  vendorrequest(context) {
+    Alert(
+      style: AlertStyle(
+        titleStyle: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),
+      ),
+      context: context,
+      image: SvgPicture.asset(
+        'assets/images/tick.svg',
+      ),
+      title:
+          "You have Successfully Submitted  your application and you will notified within24 hours.",
+      buttons: [
+        DialogButton(
+          color: mainColor,
+          height: 60,
+          radius: BorderRadius.all(
+            Radius.circular(15),
+          ),
+          child: Text(
+            "ok",
+            style: TextStyle(color: White, fontSize: 25),
+          ),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ],
+    ).show();
   }
 }

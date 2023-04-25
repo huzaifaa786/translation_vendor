@@ -47,7 +47,7 @@ class Scheduleinput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 15,bottom: 20),
+      padding: const EdgeInsets.only(top: 15,bottom: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

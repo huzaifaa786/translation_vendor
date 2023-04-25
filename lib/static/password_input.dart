@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation_vendor/values/colors.dart';
 
 class InputFieldPassword extends StatelessWidget {
-  const InputFieldPassword(
+   InputFieldPassword(
       {Key? key,
       this.controller,
       this.borderColor = mainColor,

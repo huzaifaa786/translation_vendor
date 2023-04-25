@@ -18,7 +18,7 @@ class Badgee extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 35,
-      width: MediaQuery.of(context).size.width * 0.3,
+      width: MediaQuery.of(context).size.width * 0.23,
       decoration:
           BoxDecoration(color: color, borderRadius: BorderRadius.circular(30)),
       child: Center(

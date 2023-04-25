@@ -41,7 +41,7 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       body: SafeArea(
           child: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.only(left: 15,right: 15),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -51,6 +51,7 @@ class _ProfileState extends State<Profile> {
                   Navigator.pop(context);
                 },
               ),
+              SizedBox(height: 12,),
               Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(

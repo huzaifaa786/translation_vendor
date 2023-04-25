@@ -38,7 +38,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
     return Scaffold(
       body: SafeArea(
           child: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.only(left: 15,right: 15,bottom: 15),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -170,11 +170,12 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   )
                 ],
               ),
+               SizedBox(height: 12),
               Row(
                 children: [
                   Container(
                     height: 250,
-                    width: MediaQuery.of(context).size.width * 0.91,
+                    width: MediaQuery.of(context).size.width * 0.922,
                     child: GoogleMap(
                       mapType: MapType.hybrid,
                       initialCameraPosition: _kGooglePlex,
@@ -185,6 +186,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   ),
                 ],
               ),
+              SizedBox(height: 8,),
               Row(
                 children: [
                   Text(
@@ -197,32 +199,29 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 12),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Scheduleinput(
-                      hint: '9: 00',
-                      fontSize: 20.0,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Scheduleinput(
+                    hint: '9: 00',
+                    fontSize: 20.0,
+                  ),
+                  Text(
+                    "To",
+                    style: TextStyle(
+                      fontFamily: 'Mazzard',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
                     ),
-                    Text(
-                      "To",
-                      style: TextStyle(
-                        fontFamily: 'Mazzard',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    Scheduleinput(
-                      hint: '09: 00',
-                      fontSize: 20.0,
-                    ),
-                    StarButton(onPressed: () {
-                      freezeday(context);
-                    })
-                  ],
-                ),
+                  ),
+                  Scheduleinput(
+                    hint: '09: 00',
+                    fontSize: 20.0,
+                  ),
+                  StarButton(onPressed: () {
+                    freezeday(context);
+                  })
+                ],
               ),
               Row(
                 children: [
