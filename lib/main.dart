@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:translation_vendor/controllers/authContoller.dart';
+
 import 'package:translation_vendor/screen/history/history.dart';
+import 'package:translation_vendor/screen/login/authcontroller.dart';
 import 'package:translation_vendor/screen/login/login.dart';
 import 'package:translation_vendor/screen/main/main.dart';
 import 'package:translation_vendor/screen/notification/notification.dart';
