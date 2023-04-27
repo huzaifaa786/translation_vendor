@@ -40,9 +40,11 @@ dependencies:
   table_calendar: ^3.0.9
   datepicker_dropdown: ^0.0.7+4
   flutter_launcher_icons: ^0.13.0
-  image_picker: ^0.8.7+1
+  image_picker: ^0.8.7+4
   rflutter_alert: ^2.0.4
   google_maps_flutter: ^2.2.5
+  get: ^4.6.5
+  dio: ^5.1.1
  
 
 dev_dependencies:

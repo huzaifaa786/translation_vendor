@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:translation_vendor/controllers/authContoller.dart';
 import 'package:translation_vendor/screen/history/history.dart';
 import 'package:translation_vendor/screen/login/login.dart';
 import 'package:translation_vendor/screen/main/main.dart';
@@ -12,6 +14,7 @@ import 'package:translation_vendor/screen/splash/splash.dart';
 import 'package:translation_vendor/values/styles.dart';
 
 void main() {
+  Get.put(AuthController());
   runApp(const MyApp());
 }
 
@@ -38,7 +41,6 @@ class _MyAppState extends State<MyApp> {
       routes: {
         'login': (context) => const LoginScreen(),
         'splash': (context) => const SplashScreen(),
-
         'notification': (context) => const NotificationScreen(),
         'Sale': (context) => const SalesScreen(),
         'history': (context) => const HistoryScreen(),
