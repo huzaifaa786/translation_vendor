@@ -268,7 +268,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               textcolor: White,
                               onPressed: () {
                                  setState(() {});
-                        authController.register();
+                        // authController.register();
                                 vendorrequest(context);
                               },
                             ),
