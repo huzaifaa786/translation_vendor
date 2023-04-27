@@ -15,6 +15,7 @@ import 'package:translation_vendor/static/password_input.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:translation_vendor/static/stackinputfield.dart';
 import 'package:translation_vendor/values/colors.dart';
+import 'package:translation_vendor/values/controllers.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -137,6 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         padding: const EdgeInsets.only(top: 13.0, bottom: 13),
                         child: Column(children: [
                           Stackinput(
+                             controller: authController.vendorName,
                             labelText: 'Vendor Name',
                             hint: '',
                           ),
@@ -231,6 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             padding: const EdgeInsets.only(top: 25.0),
                             child: IconInputFields(
                               imageIcon: 'assets/images/email.svg',
+                                controller: authController.vendorName,
                               hint: 'Username',
                               width: 12,
                               borderColor: Colors.black,
@@ -240,6 +243,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Padding(
                             padding: const EdgeInsets.only(top: 12.0),
                             child: InputFieldPassword(
+                                  controller: authController.password,
                               imageIcon: 'assets/images/password.svg',
                               hint: 'Password',
                               borderColor: Colors.black,
@@ -249,6 +253,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Padding(
                             padding: const EdgeInsets.only(top: 12.0),
                             child: InputFieldPassword(
+                                  controller: authController.confirmPassword,
                               imageIcon: 'assets/images/password.svg',
                               hint: 'Confirm Password',
                               borderColor: Colors.black,
@@ -262,6 +267,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               title: 'Submit',
                               textcolor: White,
                               onPressed: () {
+                                 setState(() {});
+                        authController.register();
                                 vendorrequest(context);
                               },
                             ),
