@@ -55,10 +55,10 @@ class LanguageAdd extends StatelessWidget {
         Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top:4.0),
+              padding: const EdgeInsets.only(top: 4.0),
               child: Container(
                 height: 60,
-                width: MediaQuery.of(context).size.width * 10,
+                // width: MediaQuery.of(context).size.width * 10,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.all(
@@ -66,8 +66,21 @@ class LanguageAdd extends StatelessWidget {
                   ),
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    Container(
+                        padding: const EdgeInsets.all(8),
+                        width: MediaQuery.of(context).size.width * .7,
+                        child: Text(
+                          text,
+                          maxLines: 2,
+                          style: TextStyle(
+                              backgroundColor: White,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w600,
+                              fontSize: 12,
+                              color: Colors.black),
+                        )),
                     InkWell(
                       onTap: onpressed,
                       child: Container(
@@ -92,11 +105,11 @@ class LanguageAdd extends StatelessWidget {
               child: Text(
                 labelText,
                 style: TextStyle(
-                              backgroundColor: White,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 12,
-                              color: Colors.black),
+                    backgroundColor: White,
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                    color: Colors.black),
               ),
             ),
           ],

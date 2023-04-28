@@ -9,7 +9,7 @@ class Imageinput extends StatelessWidget {
       {Key? key,
       this.controller,
       this.labelText,
-      this.text,
+      this.text = '',
       this.maxlines = false,
       this.enabled = true,
       this.readOnly = false,
@@ -72,8 +72,12 @@ class Imageinput extends StatelessWidget {
                       ),
                     ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          child: Text(text.toString())
+                        ),
                         Container(
                           padding: const EdgeInsets.all(8),
                           child: FittedBox(

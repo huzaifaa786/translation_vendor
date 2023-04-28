@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:translation_vendor/values/colors.dart';
 
 class InputFieldPassword extends StatelessWidget {
@@ -26,7 +27,7 @@ class InputFieldPassword extends StatelessWidget {
 
   final controller;
   final validator;
-  final bool? validate;
+  final RxBool? validate;
   final autovalidateMode;
   final obscure;
   final hint;
@@ -87,6 +88,10 @@ class InputFieldPassword extends StatelessWidget {
         obscureText: obscure,
         maxLines: 1,
         validator: validator,
+        autovalidateMode: autovalidateMode ??
+            (validate == true.obs
+                ? AutovalidateMode.always
+                : AutovalidateMode.onUserInteraction),
       ),
     );
   }

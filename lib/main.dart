@@ -8,7 +8,6 @@ import 'package:translation_vendor/screen/main/main.dart';
 import 'package:translation_vendor/screen/notification/notification.dart';
 import 'package:translation_vendor/screen/order_status/order_status.dart';
 import 'package:translation_vendor/screen/profile/profile.dart';
-import 'package:translation_vendor/screen/register/register.dart';
 import 'package:translation_vendor/screen/sale/sales.dart';
 import 'package:translation_vendor/screen/services/service.dart';
 import 'package:translation_vendor/screen/splash/splash.dart';
@@ -31,7 +30,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       // builder: EasyLoading.init(),
@@ -47,7 +46,6 @@ class _MyAppState extends State<MyApp> {
         'history': (context) => const HistoryScreen(),
         'main': (context) => const MainScreen(),
         'orderstatus': (context) => const OrderStatus(),
-        'register': (context) => const RegesterScreen(),
         'service': (context) => const ServiceScreen(),
         'profile': (context) => const Profile()
       },

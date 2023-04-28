@@ -2,10 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:translation_vendor/values/colors.dart';
 
 class IconInputFields extends StatelessWidget {
-   IconInputFields(
+  IconInputFields(
       {Key? key,
       this.controller,
       this.hint,
@@ -31,7 +32,7 @@ class IconInputFields extends StatelessWidget {
 
   final controller;
   final validator;
-  final bool? validate;
+  final RxBool? validate;
   final hint;
   final borderColor;
   final imageColor;
@@ -63,6 +64,11 @@ class IconInputFields extends StatelessWidget {
       child: TextFormField(
         style: const TextStyle(fontSize: 14),
         controller: controller,
+        validator: validator,
+        autovalidateMode: autovalidateMode ??
+            (validate == true.obs
+                ? AutovalidateMode.always
+                : AutovalidateMode.onUserInteraction),
         decoration: InputDecoration(
             prefixIcon: Padding(
               padding: const EdgeInsets.all(6),
@@ -96,7 +102,6 @@ class IconInputFields extends StatelessWidget {
         keyboardType: type,
         cursorColor: Colors.black,
         maxLines: 1,
-        validator: validator,
       ),
     );
   }

@@ -1,10 +1,9 @@
 import 'package:datepicker_dropdown/datepicker_dropdown.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:translation_vendor/screen/login/authcontroller.dart';
 import 'package:translation_vendor/screen/main/main.dart';
 import 'package:translation_vendor/static/button.dart';
 import 'package:translation_vendor/static/icon_inputfield.dart';
@@ -14,6 +13,7 @@ import 'package:translation_vendor/static/language_add.dart';
 import 'package:translation_vendor/static/password_input.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:translation_vendor/static/stackinputfield.dart';
+import 'package:translation_vendor/values/Validator.dart';
 import 'package:translation_vendor/values/colors.dart';
 import 'package:translation_vendor/values/controllers.dart';
 
@@ -31,26 +31,20 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       index = id;
     });
+    authController.ClearSignupVariables();
+    authController.validateSignUpForm = false.obs;
   }
 
   bool showCreate = false;
   bool show = false;
-  XFile? image = XFile('');
-  selectimage() async {
-    print('dsff');
-    final ImagePicker _picker = ImagePicker();
-    var image1 = await _picker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      image = image1;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
+          child: GetBuilder<AuthController>(
+        builder: (controller) => Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: SingleChildScrollView(
             child: Column(
@@ -138,9 +132,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         padding: const EdgeInsets.only(top: 13.0, bottom: 13),
                         child: Column(children: [
                           Stackinput(
-                             controller: authController.vendorName,
+                            controller: authController.vendorName,
                             labelText: 'Vendor Name',
                             hint: '',
+                            validate: authController.validateSignUpForm,
+                            validator: (field) =>
+                                Validators.emptyStringValidator(
+                                    field, '*Vendor name '),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
@@ -178,11 +176,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             endYear: 2030,
                             width: 10,
                             onChangedDay: (value) =>
-                                print('onChangedDay: $value'),
+                                authController.day = value!,
                             onChangedMonth: (value) =>
-                                print('onChangedMonth: $value'),
+                                authController.month = value!,
                             onChangedYear: (value) =>
-                                print('onChangedYear: $value'),
+                                authController.year = value!,
                             dayFlex: 2,
                             textStyle: TextStyle(fontSize: 12),
                             hintTextStyle:
@@ -193,8 +191,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Imageinput(
                               labelText: ' Passport ',
                               imageIcon: 'assets/images/image.svg',
+                              text: authController.passportImage!.name,
                               onpressed: () {
-                                selectimage();
+                                authController.selectPassportImage();
                               },
                             ),
                           ),
@@ -203,8 +202,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Imageinput(
                               labelText: ' Certificate (Optional) ',
                               imageIcon: 'assets/images/image.svg',
+                              text: authController.certificateImage!.name,
                               onpressed: () {
-                                selectimage();
+                                authController.selectCertificateImage();
                               },
                             ),
                           ),
@@ -212,9 +212,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               padding: const EdgeInsets.only(top: 15),
                               child: LanguageAdd(
                                 labelText: ' Language',
+                                text: authController.languege!.join(','),
                                 imageIcon: 'assets/images/add.svg',
                                 onpressed: () {
-                                  print(showCreate);
                                   setState(() {
                                     showCreate = !showCreate;
                                     print(showCreate);
@@ -224,40 +224,60 @@ class _LoginScreenState extends State<LoginScreen> {
                           showCreate == true
                               ? InputFields(
                                   hint: 'Add language',
+                                  controller: authController.languageController,
                                   showSuffix: true,
                                   suffix: 'ADD',
-                                  onpressed: () {},
+                                  onpressed: () {
+                                    if (authController
+                                        .languageController.text.isNotEmpty) {
+                                      authController.storeLanguageList();
+                                    }
+                                  },
                                 )
                               : Container(),
                           Padding(
                             padding: const EdgeInsets.only(top: 25.0),
                             child: IconInputFields(
                               imageIcon: 'assets/images/email.svg',
-                                controller: authController.vendorName,
+                              controller: authController.userName,
                               hint: 'Username',
                               width: 12,
                               borderColor: Colors.black,
                               imageColor: Colors.black,
+                              validate: authController.validateSignUpForm,
+                              validator: (field) =>
+                                  Validators.emptyStringValidator(
+                                      field, '*userame'),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 12.0),
                             child: InputFieldPassword(
-                                  controller: authController.password,
+                              controller: authController.password,
                               imageIcon: 'assets/images/password.svg',
                               hint: 'Password',
                               borderColor: Colors.black,
                               imageColor: Colors.black,
+                              obscure: true,
+                              validate: authController.validateSignUpForm,
+                              validator: (field) =>
+                                  Validators.emptyStringValidator(
+                                      field, '*password'),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 12.0),
                             child: InputFieldPassword(
-                                  controller: authController.confirmPassword,
+                              controller: authController.confirmPassword,
                               imageIcon: 'assets/images/password.svg',
                               hint: 'Confirm Password',
                               borderColor: Colors.black,
                               imageColor: Colors.black,
+                              obscure: true,
+                              validate: authController.validateSignUpForm,
+                              validator: (field) =>
+                                  Validators.emptyStringValidator(
+                                      field, '*Confirm password'),
                             ),
                           ),
                           Padding(
@@ -267,9 +287,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               title: 'Submit',
                               textcolor: White,
                               onPressed: () {
-                                 setState(() {});
-                        // authController.register();
-                                vendorrequest(context);
+                                setState(() {});
+                                authController.SignUp((success) {
+                                  if (success) {
+                                    // handle success
+                                    authController.alerts();
+                                  }
+                                });
+                                // vendorrequest(context);
                               },
                             ),
                           ),
@@ -312,14 +337,14 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
-      ),
+      )),
     );
   }
 
   vendorrequest(context) {
     Alert(
       style: AlertStyle(
-        titleStyle: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),
+        titleStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
       ),
       context: context,
       image: SvgPicture.asset(

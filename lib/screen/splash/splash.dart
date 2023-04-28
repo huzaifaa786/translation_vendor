@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:translation_vendor/screen/login/login.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -29,11 +30,12 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   route() {
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const LoginScreen(),
-        ));
+    Get.off(() => LoginScreen());
+    // Navigator.pushReplacement(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => const LoginScreen(),
+    //     ));
   }
 }
 

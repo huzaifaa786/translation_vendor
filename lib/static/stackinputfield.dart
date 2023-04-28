@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables, sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:translation_vendor/values/colors.dart';
 
 class Stackinput extends StatelessWidget {
@@ -28,7 +29,7 @@ class Stackinput extends StatelessWidget {
 
   final controller;
   final validator;
-  final bool? validate;
+  final RxBool? validate;
   final hint;
   final width;
   final labelText;
@@ -51,7 +52,13 @@ class Stackinput extends StatelessWidget {
       children: [
         Container(
             margin: EdgeInsets.only(top: 30),
-            child: TextField(
+            child: TextFormField(
+              controller: controller,
+              validator: validator,
+      autovalidateMode: autovalidateMode ??
+          (validate == true.obs
+              ? AutovalidateMode.always
+              : AutovalidateMode.onUserInteraction),
               decoration: InputDecoration(
                 fillColor: Colors.grey,
                 floatingLabelBehavior: FloatingLabelBehavior.always,
