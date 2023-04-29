@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:translation_vendor/helper/loading.dart';
 
 import 'package:translation_vendor/screen/history/history.dart';
 import 'package:translation_vendor/screen/login/authcontroller.dart';
@@ -13,8 +16,9 @@ import 'package:translation_vendor/screen/services/service.dart';
 import 'package:translation_vendor/screen/splash/splash.dart';
 import 'package:translation_vendor/values/styles.dart';
 
-void main() {
+void main() async {
   Get.put(AuthController());
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -28,27 +32,39 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  update() {
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    LoadingHelper.onChangeAbsorbClick = update;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      navigatorKey: navigatorKey,
-      // builder: EasyLoading.init(),
-      title: "Trans",
-      theme: Styles.lightTheme,
-
-      initialRoute: 'splash',
-      routes: {
-        'login': (context) => const LoginScreen(),
-        'splash': (context) => const SplashScreen(),
-        'notification': (context) => const NotificationScreen(),
-        'Sale': (context) => const SalesScreen(),
-        'history': (context) => const HistoryScreen(),
-        'main': (context) => const MainScreen(),
-        'orderstatus': (context) => const OrderStatus(),
-        'service': (context) => const ServiceScreen(),
-        'profile': (context) => const Profile()
-      },
+    return AbsorbPointer(
+      absorbing: LoadingHelper.absorbClick,
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        navigatorKey: navigatorKey,
+        builder: EasyLoading.init(),
+        title: "Trans",
+        theme: Styles.lightTheme,
+        initialRoute: 'splash',
+        routes: {
+          'login': (context) => const LoginScreen(),
+          'splash': (context) => const SplashScreen(),
+          'notification': (context) => const NotificationScreen(),
+          'Sale': (context) => const SalesScreen(),
+          'history': (context) => const HistoryScreen(),
+          'main': (context) => const MainScreen(),
+          'orderstatus': (context) => const OrderStatus(),
+          'service': (context) => const ServiceScreen(),
+          'profile': (context) => const Profile()
+        },
+      ),
     );
   }
 }

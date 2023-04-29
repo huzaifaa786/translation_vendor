@@ -3,20 +3,22 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:translation_vendor/api/api.dart';
+import 'package:translation_vendor/helper/loading.dart';
 import 'package:translation_vendor/models/vendor.dart';
-import 'package:translation_vendor/static/button.dart';
 import 'package:translation_vendor/values/Validator.dart';
 import 'package:translation_vendor/values/string.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
+
+//////////////////////////  Auth Variable   ///////////////////////////////////
+
   RxBool validateSignUpForm = false.obs;
+  RxBool validateSignInForm = false.obs;
   RxBool success = new RxBool(true);
-
-//////////////////////////  Register screen Variables & functions   ///////////////////////////////////
-
   TextEditingController vendorName = TextEditingController();
   TextEditingController userName = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -29,9 +31,17 @@ class AuthController extends GetxController {
   XFile? passportImage = XFile('');
   XFile? certificateImage = XFile('');
 
+//////////////////////////  Error Show Functions   ///////////////////////////////////
+
   void showErrors() {
     validateSignUpForm = true.obs;
   }
+
+  void showSignInErrors() {
+    validateSignInForm = true.obs;
+  }
+
+//////////////////////////  Clear Variable Functions   ///////////////////////////////////
 
   ClearSignupVariables() {
     vendorName.clear();
@@ -47,6 +57,8 @@ class AuthController extends GetxController {
     certificateImage = XFile('');
   }
 
+//////////////////////////  select Passport Image Functions   ///////////////////////////////////
+
   Future<void> selectPassportImage() async {
     final ImagePicker _picker = ImagePicker();
     var image = await _picker.pickImage(source: ImageSource.gallery);
@@ -55,6 +67,8 @@ class AuthController extends GetxController {
       update();
     }
   }
+
+//////////////////////////  select Certificate Image Functions   ///////////////////////////////////
 
   Future<void> selectCertificateImage() async {
     final ImagePicker _picker = ImagePicker();
@@ -65,28 +79,26 @@ class AuthController extends GetxController {
     }
   }
 
+//////////////////////////  Language store In list Functions   ///////////////////////////////////
+
   Future<void> storeLanguageList() async {
-    print('object');
     languege!.add(languageController.text);
-    print(languege);
     update();
     languageController.clear();
   }
 
+//////////////////////////  Register Functions   ///////////////////////////////////
+
   void SignUp(void Function(bool) callback) async {
+    LoadingHelper.show();
     final bool isFormValid =
         Validators.emptyStringValidator(vendorName.text, '') == null &&
             Validators.emptyStringValidator(userName.text, '') == null &&
             Validators.emptyStringValidator(password.text, '') == null &&
             Validators.emptyStringValidator(confirmPassword.text, '') == null;
     if (isFormValid) {
-      print(vendorName.text);
-      print(userName.text);
-      print(password.text);
-      print(confirmPassword.text);
-      print(passportImage!.name);
-      print(certificateImage!.name);
       if (year == '') {
+        LoadingHelper.dismiss();
         Get.snackbar('Invalid Date Format.', 'Select complete Date of Birth.',
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.red,
@@ -104,77 +116,105 @@ class AuthController extends GetxController {
 
               if (languege!.length >= 1) {
                 if (certificateImage!.path == '') {
-                  var url = BASE_URL + 'register';
-                  var data;
-                  data = {
-                    'name': vendorName.text.toString(),
-                    'username': userName.text.toString(),
-                    'DOB': date.toString(),
-                    'password': password.text.toString(),
-                    'passport': passport,
-                    'language': jsonEncode(languege)
-                  };
+                  if (password.text == confirmPassword.text) {
+                    var a = jsonEncode(languege);
+                    var url = BASE_URL + 'vendor/register';
+                    var data;
+                    data = {
+                      'name': vendorName.text.toString(),
+                      'username': userName.text.toString(),
+                      'DOB': date.toString(),
+                      'password': password.text.toString(),
+                      'passport': passport,
+                      'language': a
+                    };
 
-                  var response = await Api.execute(
-                    url: url,
-                    data: data,
-                  );
-                  print(response);
+                    var response = await Api.execute(
+                      url: url,
+                      data: data,
+                    );
 
-                  if (!response['error']) {
-                    Vendor vendor = Vendor(response['vendor']);
-                    print(vendor);
-                    return callback(true);
+                    if (!response['error']) {
+                      LoadingHelper.dismiss();
+                      Vendor vendor = Vendor(response['Vendor']);
+                      print(vendor);
+                      return callback(true);
+                    } else {
+                      LoadingHelper.dismiss();
+                      Get.snackbar("Error!", response['error_data'],
+                          snackPosition: SnackPosition.BOTTOM,
+                          backgroundColor: Colors.red,
+                          colorText: Colors.white);
+                      return callback(false);
+                    }
                   } else {
-                    print('error');
-                    // Fluttertoast.showToast(msg: response['error_data']);
-                    return callback(false);
+                    LoadingHelper.dismiss();
+                    Get.snackbar("Invalid Password.",
+                        'Passowrd And Confirm passsword must be same.',
+                        snackPosition: SnackPosition.BOTTOM,
+                        backgroundColor: Colors.red,
+                        colorText: Colors.white);
                   }
                 } else {
                   final certificate = base64Encode(
                       File(certificateImage!.path).readAsBytesSync());
-                  var url = BASE_URL + 'register';
-                  var data;
-                  data = {
-                    'name': vendorName.text.toString(),
-                    'username': userName.text.toString(),
-                    'DOB': date,
-                    'password': password.text.toString(),
-                    'passport': passport,
-                    'certificate': certificate,
-                    'language': jsonEncode(languege)
-                  };
+                  if (password.text == confirmPassword.text) {
+                    var lang = jsonEncode(languege);
+                    var url = BASE_URL + 'vendor/register';
 
-                  var response = await Api.execute(
-                    url: url,
-                    data: data,
-                  );
-                  print(response);
-
-                  if (!response['error']) {
-                    Vendor vendor = Vendor(response['vendor']);
-                    print(vendor);
-                    return callback(true);
+                    var data;
+                    data = {
+                      'name': vendorName.text.toString(),
+                      'username': userName.text.toString(),
+                      'DOB': date.toString(),
+                      'password': password.text.toString(),
+                      'passport': passport,
+                      'certificate': certificate,
+                      'language': lang
+                    };
+                    var response = await Api.execute(
+                      url: url,
+                      data: data,
+                    );
+                    if (!response['error']) {
+                      Vendor vendor = Vendor(response['Vendor']);
+                      print(vendor);
+                      LoadingHelper.dismiss();
+                      return callback(true);
+                    } else {
+                      LoadingHelper.dismiss();
+                      Get.snackbar("Error!", response['error_data'],
+                          snackPosition: SnackPosition.BOTTOM,
+                          backgroundColor: Colors.red,
+                          colorText: Colors.white);
+                      return callback(false);
+                    }
                   } else {
-                    print('error');
-                    // Fluttertoast.showToast(msg: response['error_data']);
-                    return callback(false);
+                    LoadingHelper.dismiss();
+                    Get.snackbar("Invalid Password.",
+                        'Passowrd And Confirm passsword must be same.',
+                        snackPosition: SnackPosition.BOTTOM,
+                        backgroundColor: Colors.red,
+                        colorText: Colors.white);
                   }
                 }
               } else {
-                Get.snackbar("Language Field Invalid.",
-                    'Select more then 2 language atleast.',
+                LoadingHelper.dismiss();
+                Get.snackbar(
+                    "Language Field Invalid.", 'Select atleast one Language.',
                     snackPosition: SnackPosition.BOTTOM,
                     backgroundColor: Colors.red,
                     colorText: Colors.white);
               }
             } else {
+              LoadingHelper.dismiss();
               Get.snackbar("Passport Image can't be empty.", '',
                   snackPosition: SnackPosition.BOTTOM,
                   backgroundColor: Colors.red,
                   colorText: Colors.white);
             }
           } else {
+            LoadingHelper.dismiss();
             Get.snackbar(
                 'Invalid Date Format.', 'Select complete Date of Birth.',
                 snackPosition: SnackPosition.BOTTOM,
@@ -182,6 +222,7 @@ class AuthController extends GetxController {
                 colorText: Colors.white);
           }
         } else {
+          LoadingHelper.dismiss();
           Get.snackbar('Invalid Date Format.', 'Select complete Date of Birth.',
               snackPosition: SnackPosition.BOTTOM,
               backgroundColor: Colors.red,
@@ -189,51 +230,46 @@ class AuthController extends GetxController {
         }
       }
     } else {
+      LoadingHelper.dismiss();
       showErrors();
     }
   }
 
-  alerts() async {
-    await Get.defaultDialog(
-        title:
-            "You have Successfully Submitted  your application and you will notified within24 hours.",
-        titlePadding: EdgeInsets.only(top: 16),
-        contentPadding: EdgeInsets.all(16),
-        titleStyle: TextStyle(color: Colors.red),
-        content: Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'You want to remove ',
-                style: TextStyle(),
-              ),
-              SizedBox(
-                height: 25,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  LargeButton(
-                    title: 'Remove',
-                    onPressed: () {
-                      Get.back();
-                    },
-                    color: Colors.red,
-                    buttonWidth: 0.25,
-                  ),
-                  LargeButton(
-                    title: 'Cancel',
-                    onPressed: () {
-                      Get.back();
-                    },
-                    color: Colors.green,
-                    buttonWidth: 0.25,
-                  ),
-                ],
-              )
-            ],
-          ),
-        ));
+/////////////////////////////// Login Function ///////////////////////////////////////////
+
+  void login(void Function(bool) callback) async {
+    LoadingHelper.show();
+    print('object');
+    final bool isFormValid =
+        Validators.emptyStringValidator(userName.text, '') == null &&
+            Validators.emptyStringValidator(password.text, '') == null;
+    if (isFormValid) {
+      var url = BASE_URL + 'vendor/login';
+      // var token = await FirebaseMessaging.instance.getToken();
+      var data = {
+        'username': userName.text,
+        'password': password.text,
+        // 'firebase_token': token,
+      };
+
+      var response = await Api.execute(url: url, data: data);
+      if (!response['error']) {
+        Vendor vendor = Vendor(response['vendor']);
+        GetStorage box = GetStorage();
+        box.write('api_token', vendor.apiToken);
+        LoadingHelper.dismiss();
+        return callback(true);
+      } else {
+        LoadingHelper.dismiss();
+        Get.snackbar('ERROR!5436436547647457', response['error_data'],
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red,
+            colorText: Colors.white);
+        return callback(false);
+      }
+    } else {
+      LoadingHelper.dismiss();
+      showSignInErrors();
+    }
   }
 }

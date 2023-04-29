@@ -35,20 +35,25 @@ class Validators {
   /// Validates the Password for User Authentication
   static String? passwordValidator(String? password) {
     // ignore: unnecessary_raw_strings
-    final digitRegExp =
-        RegExp(r'^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{1,}$');
-
-    if (password == null) {
-      return null;
-    } else if (password.isEmpty) {
-      return "Password can't be empty";
-    } else if (!digitRegExp.hasMatch(password)) {
-      return "Password must contain numbers and special character";
-    } else if (password.length < 8) {
-      return "Password must be 8 characters long";
+    // final digitRegExp =
+    //     RegExp(r'^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{1,}$');
+    if (password!.length < 6) {
+      return "*Password must be 6 characters long";
     } else {
       return null;
     }
+
+    // if (password == null) {
+    //   return null;
+    // } else if (password.isEmpty) {
+    //   return "Password can't be empty";
+    // } else if (!digitRegExp.hasMatch(password)) {
+    //   return "Password must contain numbers and special character";
+    // } else if (password.length < 8) {
+    //   return "Password must be 8 characters long";
+    // } else {
+    //   return null;
+    // }
   }
 
   /// Validates the Date Of Birth for Account Creation

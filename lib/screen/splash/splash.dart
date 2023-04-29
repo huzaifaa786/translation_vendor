@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:translation_vendor/helper/loading.dart';
 import 'package:translation_vendor/screen/login/login.dart';
+import 'package:translation_vendor/screen/main/main.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -13,6 +16,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
+    LoadingHelper.init();
     super.initState();
     startTime();
   }
@@ -29,13 +33,15 @@ class _SplashScreenState extends State<SplashScreen> {
     return Timer(duration, route);
   }
 
-  route() {
-    Get.off(() => LoginScreen());
-    // Navigator.pushReplacement(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => const LoginScreen(),
-    //     ));
+  Future route() async {
+    GetStorage box = GetStorage();
+    final String? authCheck = box.read('api_token');
+    print(authCheck);
+    if (authCheck == null) {
+      Get.off(() => LoginScreen());
+    } else {
+      Get.off(() => MainScreen());
+    }
   }
 }
 

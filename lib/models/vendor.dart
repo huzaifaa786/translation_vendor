@@ -3,15 +3,25 @@ class Vendor {
   String? name;
   String? username;
   String? apiToken;
-  String? birth;
-  String? type;
+  String? dob;
+  String? passport;
+  String? number;
+  String? profilepic;
+  String? certificate;
+  String? status;
+  String? online;
 
   Vendor(vendor) {
     id = vendor['id'];
     name = vendor['name'];
     username = vendor['username'];
     apiToken = vendor['api_token'] ?? '';
-    birth = vendor['birth'];
-    type = vendor['user_type'];
+    dob = vendor['DOB'];
+    passport = vendor['passport'];
+    number = vendor['number'] ?? '';
+    profilepic = vendor['profilepic'] ?? '';
+    certificate = vendor['certificate'] ?? '';
+    status = vendor['status'];
+    online = vendor['online'];
   }
 }

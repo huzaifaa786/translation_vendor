@@ -33,6 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
     authController.ClearSignupVariables();
     authController.validateSignUpForm = false.obs;
+    authController.validateSignInForm = false.obs;
   }
 
   bool showCreate = false;
@@ -260,9 +261,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               imageColor: Colors.black,
                               obscure: true,
                               validate: authController.validateSignUpForm,
-                              validator: (field) =>
-                                  Validators.emptyStringValidator(
-                                      field, '*password'),
+                              validator: (password) =>
+                                  Validators.passwordValidator(password),
                             ),
                           ),
                           Padding(
@@ -275,9 +275,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               imageColor: Colors.black,
                               obscure: true,
                               validate: authController.validateSignUpForm,
-                              validator: (field) =>
-                                  Validators.emptyStringValidator(
-                                      field, '*Confirm password'),
+                              validator: (password) =>
+                                  Validators.passwordValidator(password),
                             ),
                           ),
                           Padding(
@@ -290,11 +289,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                 setState(() {});
                                 authController.SignUp((success) {
                                   if (success) {
-                                    // handle success
-                                    authController.alerts();
+                                    vendorrequest(context);
+                                    authController.ClearSignupVariables();
+                                    authController.validateSignUpForm =
+                                        false.obs;
                                   }
                                 });
-                                // vendorrequest(context);
                               },
                             ),
                           ),
@@ -307,6 +307,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: IconInputFields(
                               imageIcon: 'assets/images/email.svg',
                               hint: 'Username',
+                              controller: authController.userName,
+                              validate: authController.validateSignInForm,
+                              validator: (field) =>
+                                  Validators.emptyStringValidator(
+                                      field, '*username'),
                             ),
                           ),
                           Padding(
@@ -314,6 +319,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: InputFieldPassword(
                               imageIcon: 'assets/images/password.svg',
                               hint: 'Password',
+                              obscure: true,
+                              controller: authController.password,
+                              validate: authController.validateSignInForm,
+                              validator: (password) =>
+                                  Validators.passwordValidator(password),
                             ),
                           ),
                           Padding(
@@ -323,11 +333,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               title: 'Login',
                               textcolor: White,
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => MainScreen(),
-                                    ));
+                                setState(() {});
+                                authController.login((success) {
+                                  if (success) {
+                                    authController.ClearSignupVariables();
+                                    Get.offAll(MainScreen());
+                                  }
+                                });
                               },
                             ),
                           ),
