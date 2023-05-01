@@ -13,6 +13,7 @@ class StarButton extends StatelessWidget {
       this.buttonWidth = 0.8,
       this.screenRatio = 0.9,
       this.rounded = false,
+      this.isFrozen = false,
       this.color = mainColor})
       : super(key: key);
 
@@ -23,6 +24,7 @@ class StarButton extends StatelessWidget {
   final textcolor;
   final icon;
   final rounded;
+  final isFrozen;
   final buttonWidth;
   @override
   Widget build(BuildContext context) {

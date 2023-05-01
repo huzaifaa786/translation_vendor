@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:translation_vendor/models/workinghour.dart';
 import 'package:translation_vendor/static/addpage.dart';
 import 'package:translation_vendor/static/button.dart';
 import 'package:translation_vendor/static/schedule.dart';
@@ -10,6 +11,7 @@ import 'package:translation_vendor/static/page_p_day.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation_vendor/values/colors.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:intl/intl.dart';
 
 class ServiceScreen extends StatefulWidget {
   const ServiceScreen({super.key});
@@ -33,12 +35,14 @@ class _ServiceScreenState extends State<ServiceScreen> {
       tilt: 59.440717697143555,
       zoom: 19.151926040649414);
 
+  List<WorkingHour> workingHours = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
           child: Padding(
-        padding: const EdgeInsets.only(left: 15,right: 15,bottom: 15),
+        padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -170,7 +174,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   )
                 ],
               ),
-               SizedBox(height: 12),
+              SizedBox(height: 12),
               Row(
                 children: [
                   Container(
@@ -186,259 +190,268 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 8,),
-              Row(
-                children: [
-                  Text(
-                    'Saturday Working hour',
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
+              SizedBox(
+                height: 8,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Scheduleinput(
-                    hint: '9: 00',
-                    fontSize: 20.0,
-                  ),
-                  Text(
-                    "To",
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Scheduleinput(
-                    hint: '09: 00',
-                    fontSize: 20.0,
-                  ),
-                  StarButton(onPressed: () {
-                    freezeday(context);
-                  })
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Saturday Working hour',
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Scheduleinput(
-                    hint: '9: 00',
-                    fontSize: 20.0,
-                  ),
-                  Text(
-                    "To",
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Scheduleinput(
-                    hint: '09: 00',
-                    fontSize: 20.0,
-                  ),
-                  StarButton(onPressed: () {
-                    freezeday(context);
-                  })
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Saturday Working hour',
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Scheduleinput(
-                    hint: '9: 00',
-                    fontSize: 20.0,
-                  ),
-                  Text(
-                    "To",
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Scheduleinput(
-                    hint: '09: 00',
-                    fontSize: 20.0,
-                  ),
-                  StarButton(onPressed: () {
-                    freezeday(context);
-                  })
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Saturday Working hour',
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Scheduleinput(
-                    hint: '9: 00',
-                    fontSize: 20.0,
-                  ),
-                  Text(
-                    "To",
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Scheduleinput(
-                    hint: '09: 00',
-                    fontSize: 20.0,
-                  ),
-                  StarButton(onPressed: () {
-                    freezeday(context);
-                  })
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Saturday Working hour',
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Scheduleinput(
-                    hint: '9: 00',
-                    fontSize: 20.0,
-                  ),
-                  Text(
-                    "To",
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Scheduleinput(
-                    hint: '09: 00',
-                    fontSize: 20.0,
-                  ),
-                  StarButton(onPressed: () {
-                    freezeday(context);
-                  })
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Saturday Working hour',
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Scheduleinput(
-                    hint: '9: 00',
-                    fontSize: 20.0,
-                  ),
-                  Text(
-                    "To",
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Scheduleinput(
-                    hint: '09: 00',
-                    fontSize: 20.0,
-                  ),
-                  StarButton(onPressed: () {
-                    freezeday(context);
-                  })
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Saturday Working hour',
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Scheduleinput(
-                    hint: '9: 00',
-                    fontSize: 20.0,
-                  ),
-                  Text(
-                    "To",
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Scheduleinput(
-                    hint: '09: 00',
-                    fontSize: 20.0,
-                  ),
-                  StarButton(onPressed: () {
-                    freezeday(context);
-                  })
-                ],
-              ),
+              buildWorkingHourRow('Monday'),
+              buildWorkingHourRow('Tuesday'),
+              buildWorkingHourRow('Wednesday'),
+              buildWorkingHourRow('Thursday'),
+              buildWorkingHourRow('Friday'),
+              buildWorkingHourRow('Saturday'),
+              buildWorkingHourRow('Sunday'),
+              // Row(
+              //   children: [
+              //     Text(
+              //       'Saturday Working hour',
+              //       style: TextStyle(
+              //         fontFamily: 'Mazzard',
+              //         fontSize: 16,
+              //         fontWeight: FontWeight.w500,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Scheduleinput(
+              //       hint: '9: 00',
+              //       fontSize: 20.0,
+              //     ),
+              //     Text(
+              //       "To",
+              //       style: TextStyle(
+              //         fontFamily: 'Mazzard',
+              //         fontSize: 20,
+              //         fontWeight: FontWeight.w500,
+              //       ),
+              //     ),
+              //     Scheduleinput(
+              //       hint: '09: 00',
+              //       fontSize: 20.0,
+              //     ),
+              //     StarButton(onPressed: () {
+              //       freezeday(context);
+              //     })
+              //   ],
+              // ),
+              // Row(
+              //   children: [
+              //     Text(
+              //       'Saturday Working hour',
+              //       style: TextStyle(
+              //         fontFamily: 'Mazzard',
+              //         fontSize: 16,
+              //         fontWeight: FontWeight.w500,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Scheduleinput(
+              //       hint: '9: 00',
+              //       fontSize: 20.0,
+              //     ),
+              //     Text(
+              //       "To",
+              //       style: TextStyle(
+              //         fontFamily: 'Mazzard',
+              //         fontSize: 20,
+              //         fontWeight: FontWeight.w500,
+              //       ),
+              //     ),
+              //     Scheduleinput(
+              //       hint: '09: 00',
+              //       fontSize: 20.0,
+              //     ),
+              //     StarButton(onPressed: () {
+              //       freezeday(context);
+              //     })
+              //   ],
+              // ),
+              // Row(
+              //   children: [
+              //     Text(
+              //       'Saturday Working hour',
+              //       style: TextStyle(
+              //         fontFamily: 'Mazzard',
+              //         fontSize: 16,
+              //         fontWeight: FontWeight.w500,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Scheduleinput(
+              //       hint: '9: 00',
+              //       fontSize: 20.0,
+              //     ),
+              //     Text(
+              //       "To",
+              //       style: TextStyle(
+              //         fontFamily: 'Mazzard',
+              //         fontSize: 20,
+              //         fontWeight: FontWeight.w500,
+              //       ),
+              //     ),
+              //     Scheduleinput(
+              //       hint: '09: 00',
+              //       fontSize: 20.0,
+              //     ),
+              //     StarButton(onPressed: () {
+              //       freezeday(context);
+              //     })
+              //   ],
+              // ),
+              // Row(
+              //   children: [
+              //     Text(
+              //       'Saturday Working hour',
+              //       style: TextStyle(
+              //         fontFamily: 'Mazzard',
+              //         fontSize: 16,
+              //         fontWeight: FontWeight.w500,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Scheduleinput(
+              //       hint: '9: 00',
+              //       fontSize: 20.0,
+              //     ),
+              //     Text(
+              //       "To",
+              //       style: TextStyle(
+              //         fontFamily: 'Mazzard',
+              //         fontSize: 16,
+              //         fontWeight: FontWeight.w500,
+              //       ),
+              //     ),
+              //     Scheduleinput(
+              //       hint: '09: 00',
+              //       fontSize: 20.0,
+              //     ),
+              //     StarButton(onPressed: () {
+              //       freezeday(context);
+              //     })
+              //   ],
+              // ),
+              // Row(
+              //   children: [
+              //     Text(
+              //       'Saturday Working hour',
+              //       style: TextStyle(
+              //         fontFamily: 'Mazzard',
+              //         fontSize: 16,
+              //         fontWeight: FontWeight.w500,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Scheduleinput(
+              //       hint: '9: 00',
+              //       fontSize: 20.0,
+              //     ),
+              //     Text(
+              //       "To",
+              //       style: TextStyle(
+              //         fontFamily: 'Mazzard',
+              //         fontSize: 20,
+              //         fontWeight: FontWeight.w500,
+              //       ),
+              //     ),
+              //     Scheduleinput(
+              //       hint: '09: 00',
+              //       fontSize: 20.0,
+              //     ),
+              //     StarButton(onPressed: () {
+              //       freezeday(context);
+              //     })
+              //   ],
+              // ),
+              // Row(
+              //   children: [
+              //     Text(
+              //       'Saturday Working hour',
+              //       style: TextStyle(
+              //         fontFamily: 'Mazzard',
+              //         fontSize: 16,
+              //         fontWeight: FontWeight.w500,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Scheduleinput(
+              //       hint: '9: 00',
+              //       fontSize: 20.0,
+              //     ),
+              //     Text(
+              //       "To",
+              //       style: TextStyle(
+              //         fontFamily: 'Mazzard',
+              //         fontSize: 20,
+              //         fontWeight: FontWeight.w500,
+              //       ),
+              //     ),
+              //     Scheduleinput(
+              //       hint: '09: 00',
+              //       fontSize: 20.0,
+              //     ),
+              //     StarButton(onPressed: () {
+              //       freezeday(context);
+              //     })
+              //   ],
+              // ),
+              // Row(
+              //   children: [
+              //     Text(
+              //       'Saturday Working hour',
+              //       style: TextStyle(
+              //         fontFamily: 'Mazzard',
+              //         fontSize: 16,
+              //         fontWeight: FontWeight.w500,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Scheduleinput(
+              //       hint: '9: 00',
+              //       fontSize: 20.0,
+              //     ),
+              //     Text(
+              //       "To",
+              //       style: TextStyle(
+              //         fontFamily: 'Mazzard',
+              //         fontSize: 20,
+              //         fontWeight: FontWeight.w500,
+              //       ),
+              //     ),
+              //     Scheduleinput(
+              //       hint: '09: 00',
+              //       fontSize: 20.0,
+              //     ),
+              //     StarButton(onPressed: () {
+              //       freezeday(context);
+              //     })
+              //   ],
+              // ),
               Row(
                 children: [
                   SvgPicture.asset('assets/images/document.svg'),
@@ -526,12 +539,99 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 number: '30 - 40',
                 days: 20,
               ),
-              SizedBox(height: 12,),
+              SizedBox(
+                height: 12,
+              ),
               LargeButton(title: 'Submit', textcolor: White, onPressed: () {})
             ],
           ),
         ),
       )),
+    );
+  }
+
+  Widget buildWorkingHourRow(String day) {
+    TimeOfDay startTime = TimeOfDay(hour: 9, minute: 0);
+    TimeOfDay endTime = TimeOfDay(hour: 17, minute: 0);
+    bool isFrozen = false;
+
+    return Column(
+      children: [
+        Row(
+          children: [
+            Text(
+              '$day Working Hours',
+              style: TextStyle(
+                fontFamily: 'Mazzard',
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Scheduleinput(
+              hint: '9:00',
+              fontSize: 20.0,
+              onChange: (value) {
+                print(value);
+                setState(() {
+                  startTime =
+                      TimeOfDay.fromDateTime(DateFormat('hh:mm').parse(value.toString()));
+                });
+              },
+            ),
+            Text(
+              'To',
+              style: TextStyle(
+                fontFamily: 'Mazzard',
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            Scheduleinput(
+              hint: '17:00',
+              fontSize: 20.0,
+              onChange: (value) {
+                setState(() {
+                  endTime =
+                      TimeOfDay.fromDateTime(DateFormat('hh:mm').parse(value.toString()));
+                });
+              },
+            ),
+            StarButton(
+              isFrozen: isFrozen,
+              onPressed: () {
+                setState(() {
+                  // Toggle the frozen state for the current day
+                  int index =
+                      workingHours.indexWhere((hour) => hour.day == day);
+                  if (index >= 0) {
+                    workingHours[index].startTime = startTime;
+                    workingHours[index].endTime = endTime;
+                    workingHours[index].isFrozen =
+                        !workingHours[index].isFrozen;
+                  } else {
+                    workingHours.add(WorkingHour(
+                      day: day,
+                      startTime: startTime,
+                      endTime: endTime,
+                      isFrozen: true,
+                    ));
+                  }
+                  isFrozen = !isFrozen;
+                });
+              },
+            )
+          ],
+        ),
+        // Display a message indicating whether the day is frozen or unfrozen
+        workingHours.any((hour) => hour.day == day && hour.isFrozen)
+            ? Text('This day is frozen')
+            : Text('This day is unfrozen'),
+      ],
     );
   }
 
@@ -546,7 +646,6 @@ class _ServiceScreenState extends State<ServiceScreen> {
         DialogButton(
           height: 60,
           radius: BorderRadius.circular(12),
-
           child: Text(
             "yes",
             style: TextStyle(color: Colors.white, fontSize: 20),
