@@ -8,6 +8,7 @@ import 'package:translation_vendor/screen/history/history.dart';
 import 'package:translation_vendor/screen/login/authcontroller.dart';
 import 'package:translation_vendor/screen/login/login.dart';
 import 'package:translation_vendor/screen/main/main.dart';
+import 'package:translation_vendor/screen/main/maincontroller.dart';
 import 'package:translation_vendor/screen/notification/notification.dart';
 import 'package:translation_vendor/screen/order_status/order_status.dart';
 import 'package:translation_vendor/screen/profile/profile.dart';
@@ -18,6 +19,7 @@ import 'package:translation_vendor/values/styles.dart';
 
 void main() async {
   Get.put(AuthController());
+    Get.put(MainController());
   await GetStorage.init();
   runApp(const MyApp());
 }
