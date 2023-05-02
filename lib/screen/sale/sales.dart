@@ -66,7 +66,7 @@ class _SalesScreenState extends State<SalesScreen> {
                               onDaySelected: _onDaySelected,
                               calendarStyle: CalendarStyle(
                                 todayDecoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 144, 205, 255),
+                                    color: mainColor.withOpacity(0.6),
                                     shape: BoxShape.circle),
                                 selectedDecoration: BoxDecoration(
                                     color: mainColor, shape: BoxShape.circle),
