@@ -18,8 +18,9 @@ import 'package:translation_vendor/screen/splash/splash.dart';
 import 'package:translation_vendor/values/styles.dart';
 
 void main() async {
+  await LoadingHelper.init();
   Get.put(AuthController());
-    Get.put(MainController());
+  Get.put(MainController());
   await GetStorage.init();
   runApp(const MyApp());
 }
@@ -34,39 +35,26 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  update() {
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    LoadingHelper.onChangeAbsorbClick = update;
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return AbsorbPointer(
-      absorbing: LoadingHelper.absorbClick,
-      child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        navigatorKey: navigatorKey,
-        builder: EasyLoading.init(),
-        title: "Trans",
-        theme: Styles.lightTheme,
-        initialRoute: 'splash',
-        routes: {
-          'login': (context) => const LoginScreen(),
-          'splash': (context) => const SplashScreen(),
-          'notification': (context) => const NotificationScreen(),
-          'Sale': (context) => const SalesScreen(),
-          'history': (context) => const HistoryScreen(),
-          'main': (context) => const MainScreen(),
-          'orderstatus': (context) => const OrderStatus(),
-          'service': (context) => const ServiceScreen(),
-          'profile': (context) => const Profile()
-        },
-      ),
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      navigatorKey: navigatorKey,
+      builder: EasyLoading.init(),
+      title: "Trans",
+      theme: Styles.lightTheme,
+      initialRoute: 'splash',
+      routes: {
+        'login': (context) => const LoginScreen(),
+        'splash': (context) => const SplashScreen(),
+        'notification': (context) => const NotificationScreen(),
+        'Sale': (context) => const SalesScreen(),
+        'history': (context) => const HistoryScreen(),
+        'main': (context) => const MainScreen(),
+        'orderstatus': (context) => const OrderStatus(),
+        'service': (context) => const ServiceScreen(),
+        'profile': (context) => const Profile()
+      },
     );
   }
 }

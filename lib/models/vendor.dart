@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Vendor {
   int? id;
   String? name;
@@ -9,7 +11,7 @@ class Vendor {
   String? profilepic;
   String? certificate;
   String? status;
-  String? online;
+  int? online;
 
   Vendor(vendor) {
     id = vendor['id'];

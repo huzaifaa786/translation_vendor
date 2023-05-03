@@ -8,13 +8,11 @@ class LoadingHelper {
 
   static show() {
     absorbClick = true;
-    onChangeAbsorbClick();
     EasyLoading.show();
   }
 
   static dismiss() {
     absorbClick = false;
-    onChangeAbsorbClick();
     EasyLoading.dismiss();
   }
 

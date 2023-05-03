@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:translation_vendor/screen/history/history.dart';
 import 'package:translation_vendor/screen/main/maincontroller.dart';
@@ -30,6 +31,14 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      mainController.getVendor();
+      
+    });
+  }
+
   int i = 0;
   @override
   Widget build(BuildContext context) {
@@ -41,21 +50,37 @@ class _MainScreenState extends State<MainScreen> {
           child: Column(
             children: [
               Topbar(),
-              Padding(
-                padding: const EdgeInsets.only(top: 30),
-                child: Row(
-                  children: [
-                    Text(
-                      'Good Morning, \n Smith',
-                      style: TextStyle(
-                          fontSize: 30,
-                          color: mainColor,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: 'Poppins'),
+              mainController.vendor != null
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 30),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Good Morning, \n' + mainController.vendor!.name!,
+                            style: TextStyle(
+                                fontSize: 30,
+                                color: mainColor,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'Poppins'),
+                          ),
+                        ],
+                      ),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.only(top: 30),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Good Morning, \n',
+                            style: TextStyle(
+                                fontSize: 30,
+                                color: mainColor,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'Poppins'),
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: IconsButton(
@@ -125,10 +150,11 @@ class _MainScreenState extends State<MainScreen> {
                       width: 3.0,
                     ),
                   ],
-                  initialLabelIndex: 0,
+                  initialLabelIndex: mainController.i,
                   totalSwitches: 2,
                   labels: ['Online', 'Offline'],
                   onToggle: (index) {
+                    setState(() {});
                     mainController.toggleonline(index);
                   },
                   customIcons: [
@@ -140,20 +166,25 @@ class _MainScreenState extends State<MainScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Log Out',
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontFamily: 'Poppins',
-                        fontSize: 19,
-                        fontWeight: FontWeight.w500,
+                child: InkWell(
+                  onTap: () async {
+                    authController.logout();
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Log Out',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontFamily: 'Poppins',
+                          fontSize: 19,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                    ),
-                    Image(image: AssetImage('assets/images/Arrow 1.png')),
-                  ],
+                      Image(image: AssetImage('assets/images/Arrow 1.png')),
+                    ],
+                  ),
                 ),
               )
             ],

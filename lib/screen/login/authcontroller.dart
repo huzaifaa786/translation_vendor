@@ -8,7 +8,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:translation_vendor/api/api.dart';
 import 'package:translation_vendor/helper/loading.dart';
 import 'package:translation_vendor/models/vendor.dart';
+import 'package:translation_vendor/screen/login/login.dart';
 import 'package:translation_vendor/values/Validator.dart';
+import 'package:translation_vendor/values/colors.dart';
 import 'package:translation_vendor/values/string.dart';
 
 class AuthController extends GetxController {
@@ -83,6 +85,7 @@ class AuthController extends GetxController {
 
   Future<void> storeLanguageList() async {
     languege!.add(languageController.text);
+    print(languege);
     update();
     languageController.clear();
   }
@@ -117,7 +120,7 @@ class AuthController extends GetxController {
               if (languege!.length >= 1) {
                 if (certificateImage!.path == '') {
                   if (password.text == confirmPassword.text) {
-                    var a = jsonEncode(languege);
+                    var lang = jsonEncode(languege);
                     var url = BASE_URL + 'vendor/register';
                     var data;
                     data = {
@@ -126,7 +129,7 @@ class AuthController extends GetxController {
                       'DOB': date.toString(),
                       'password': password.text.toString(),
                       'passport': passport,
-                      'language': a
+                      'language': lang
                     };
 
                     var response = await Api.execute(
@@ -261,7 +264,7 @@ class AuthController extends GetxController {
         return callback(true);
       } else {
         LoadingHelper.dismiss();
-        Get.snackbar('ERROR!5436436547647457', response['error_data'],
+        Get.snackbar('ERROR!', response['error_data'],
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.red,
             colorText: Colors.white);
@@ -271,5 +274,18 @@ class AuthController extends GetxController {
       LoadingHelper.dismiss();
       showSignInErrors();
     }
+  }
+
+  /////////////////////////////// Logout Function ///////////////////////////////////////////
+
+  void logout() {
+    LoadingHelper.show();
+    print('object');
+    GetStorage box = GetStorage();
+    box.remove('api_token');
+    Get.snackbar('Logout Successfully', '',
+        colorText: Colors.white, backgroundColor: mainColor);
+    Get.offAll(() => LoginScreen());
+    LoadingHelper.dismiss();
   }
 }

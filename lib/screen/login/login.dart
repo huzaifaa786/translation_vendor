@@ -213,7 +213,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               padding: const EdgeInsets.only(top: 15),
                               child: LanguageAdd(
                                 labelText: ' Language',
-                                text: authController.languege!.join(','),
+                                text: authController.languege!.join(',  '),
                                 imageIcon: 'assets/images/add.svg',
                                 onpressed: () {
                                   setState(() {
