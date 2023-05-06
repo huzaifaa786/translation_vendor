@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation_vendor/models/workinghour.dart';
+import 'package:translation_vendor/screen/services/servicecontroller.dart';
 import 'package:translation_vendor/static/addpage.dart';
 import 'package:translation_vendor/static/button.dart';
 import 'package:translation_vendor/static/schedule.dart';
@@ -12,6 +14,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation_vendor/values/colors.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:translation_vendor/values/controllers.dart';
 
 class ServiceScreen extends StatefulWidget {
   const ServiceScreen({super.key});
@@ -36,514 +39,531 @@ class _ServiceScreenState extends State<ServiceScreen> {
       zoom: 19.151926040649414);
 
   List<WorkingHour> workingHours = [];
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {});
+  }
+
+  save() {
+    print(workingHours);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              TitleTopbar(
-                text: 'Service',
-                ontap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset('assets/images/dart.svg'),
-                  Text(
-                    ' Online Auid/Viedo',
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
+          child: GetBuilder<ServiceController>(
+        builder: (controller) => Padding(
+          padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                TitleTopbar(
+                  text: 'Service',
+                  ontap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset('assets/images/dart.svg'),
+                    Text(
+                      ' Online Auid/Viedo',
+                      style: TextStyle(
+                        fontFamily: 'Mazzard',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Rate Per 30 mintus:',
+                      style: TextStyle(
+                        color: hintColor,
+                        fontFamily: 'Mazzard',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Rate Per 30 mintus:',
-                    style: TextStyle(
-                      color: hintColor,
-                      fontFamily: 'Mazzard',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
+                    Text(
+                      ' 20AED',
+                      style: TextStyle(
+                        color: mainColor,
+                        fontFamily: 'Mazzard',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  Text(
-                    ' 20AED',
-                    style: TextStyle(
-                      color: mainColor,
-                      fontFamily: 'Mazzard',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
+                  ],
+                ),
+                SizedBox(
+                  height: 23,
+                ),
+                Row(
+                  children: [
+                    SvgPicture.asset('assets/images/shedule.svg'),
+                    Text(
+                      ' Schedule',
+                      style: TextStyle(
+                        fontFamily: 'Mazzard',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 23,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      ' Auid/Viedo',
+                      style: TextStyle(
+                        color: hintColor,
+                        fontFamily: 'Mazzard',
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 23,
-              ),
-              Row(
-                children: [
-                  SvgPicture.asset('assets/images/shedule.svg'),
-                  Text(
-                    ' Schedule',
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
+                    Text(
+                      ' 20AED',
+                      style: TextStyle(
+                        color: mainColor,
+                        fontFamily: 'Mazzard',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 23,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    ' Auid/Viedo',
-                    style: TextStyle(
-                      color: hintColor,
-                      fontFamily: 'Mazzard',
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
+                  ],
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      ' In Persion',
+                      style: TextStyle(
+                        color: hintColor,
+                        fontFamily: 'Mazzard',
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  Text(
-                    ' 20AED',
-                    style: TextStyle(
-                      color: mainColor,
-                      fontFamily: 'Mazzard',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
+                    Text(
+                      ' 20AED',
+                      style: TextStyle(
+                        color: mainColor,
+                        fontFamily: 'Mazzard',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    ' In Persion',
-                    style: TextStyle(
-                      color: hintColor,
-                      fontFamily: 'Mazzard',
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
+                  ],
+                ),
+                SizedBox(height: 12),
+                Row(
+                  children: [
+                    SvgPicture.asset('assets/images/location.svg'),
+                    Text(
+                      ' Determine range of service',
+                      style: TextStyle(
+                        fontFamily: 'Mazzard',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(height: 12),
+                Row(
+                  children: [
+                    Container(
+                      height: 250,
+                      width: MediaQuery.of(context).size.width * 0.922,
+                      child: GoogleMap(
+                        mapType: MapType.hybrid,
+                        initialCameraPosition: _kGooglePlex,
+                        onMapCreated: (GoogleMapController controller) {
+                          _controller.complete(controller);
+                        },
+                      ),
                     ),
-                  ),
-                  Text(
-                    ' 20AED',
-                    style: TextStyle(
-                      color: mainColor,
-                      fontFamily: 'Mazzard',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
+                  ],
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                buildWorkingHourRow('Monday'),
+                buildWorkingHourRow('Tuesday'),
+                buildWorkingHourRow('Wednesday'),
+                buildWorkingHourRow('Thursday'),
+                buildWorkingHourRow('Friday'),
+                buildWorkingHourRow('Saturday'),
+                buildWorkingHourRow('Sunday'),
+                // Row(
+                //   children: [
+                //     Text(
+                //       'Saturday Working hour',
+                //       style: TextStyle(
+                //         fontFamily: 'Mazzard',
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.w500,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Scheduleinput(
+                //       hint: '9: 00',
+                //       fontSize: 20.0,
+                //     ),
+                //     Text(
+                //       "To",
+                //       style: TextStyle(
+                //         fontFamily: 'Mazzard',
+                //         fontSize: 20,
+                //         fontWeight: FontWeight.w500,
+                //       ),
+                //     ),
+                //     Scheduleinput(
+                //       hint: '09: 00',
+                //       fontSize: 20.0,
+                //     ),
+                //     StarButton(onPressed: () {
+                //       freezeday(context);
+                //     })
+                //   ],
+                // ),
+                // Row(
+                //   children: [
+                //     Text(
+                //       'Saturday Working hour',
+                //       style: TextStyle(
+                //         fontFamily: 'Mazzard',
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.w500,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Scheduleinput(
+                //       hint: '9: 00',
+                //       fontSize: 20.0,
+                //     ),
+                //     Text(
+                //       "To",
+                //       style: TextStyle(
+                //         fontFamily: 'Mazzard',
+                //         fontSize: 20,
+                //         fontWeight: FontWeight.w500,
+                //       ),
+                //     ),
+                //     Scheduleinput(
+                //       hint: '09: 00',
+                //       fontSize: 20.0,
+                //     ),
+                //     StarButton(onPressed: () {
+                //       freezeday(context);
+                //     })
+                //   ],
+                // ),
+                // Row(
+                //   children: [
+                //     Text(
+                //       'Saturday Working hour',
+                //       style: TextStyle(
+                //         fontFamily: 'Mazzard',
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.w500,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Scheduleinput(
+                //       hint: '9: 00',
+                //       fontSize: 20.0,
+                //     ),
+                //     Text(
+                //       "To",
+                //       style: TextStyle(
+                //         fontFamily: 'Mazzard',
+                //         fontSize: 20,
+                //         fontWeight: FontWeight.w500,
+                //       ),
+                //     ),
+                //     Scheduleinput(
+                //       hint: '09: 00',
+                //       fontSize: 20.0,
+                //     ),
+                //     StarButton(onPressed: () {
+                //       freezeday(context);
+                //     })
+                //   ],
+                // ),
+                // Row(
+                //   children: [
+                //     Text(
+                //       'Saturday Working hour',
+                //       style: TextStyle(
+                //         fontFamily: 'Mazzard',
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.w500,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Scheduleinput(
+                //       hint: '9: 00',
+                //       fontSize: 20.0,
+                //     ),
+                //     Text(
+                //       "To",
+                //       style: TextStyle(
+                //         fontFamily: 'Mazzard',
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.w500,
+                //       ),
+                //     ),
+                //     Scheduleinput(
+                //       hint: '09: 00',
+                //       fontSize: 20.0,
+                //     ),
+                //     StarButton(onPressed: () {
+                //       freezeday(context);
+                //     })
+                //   ],
+                // ),
+                // Row(
+                //   children: [
+                //     Text(
+                //       'Saturday Working hour',
+                //       style: TextStyle(
+                //         fontFamily: 'Mazzard',
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.w500,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Scheduleinput(
+                //       hint: '9: 00',
+                //       fontSize: 20.0,
+                //     ),
+                //     Text(
+                //       "To",
+                //       style: TextStyle(
+                //         fontFamily: 'Mazzard',
+                //         fontSize: 20,
+                //         fontWeight: FontWeight.w500,
+                //       ),
+                //     ),
+                //     Scheduleinput(
+                //       hint: '09: 00',
+                //       fontSize: 20.0,
+                //     ),
+                //     StarButton(onPressed: () {
+                //       freezeday(context);
+                //     })
+                //   ],
+                // ),
+                // Row(
+                //   children: [
+                //     Text(
+                //       'Saturday Working hour',
+                //       style: TextStyle(
+                //         fontFamily: 'Mazzard',
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.w500,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Scheduleinput(
+                //       hint: '9: 00',
+                //       fontSize: 20.0,
+                //     ),
+                //     Text(
+                //       "To",
+                //       style: TextStyle(
+                //         fontFamily: 'Mazzard',
+                //         fontSize: 20,
+                //         fontWeight: FontWeight.w500,
+                //       ),
+                //     ),
+                //     Scheduleinput(
+                //       hint: '09: 00',
+                //       fontSize: 20.0,
+                //     ),
+                //     StarButton(onPressed: () {
+                //       freezeday(context);
+                //     })
+                //   ],
+                // ),
+                // Row(
+                //   children: [
+                //     Text(
+                //       'Saturday Working hour',
+                //       style: TextStyle(
+                //         fontFamily: 'Mazzard',
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.w500,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Scheduleinput(
+                //       hint: '9: 00',
+                //       fontSize: 20.0,
+                //     ),
+                //     Text(
+                //       "To",
+                //       style: TextStyle(
+                //         fontFamily: 'Mazzard',
+                //         fontSize: 20,
+                //         fontWeight: FontWeight.w500,
+                //       ),
+                //     ),
+                //     Scheduleinput(
+                //       hint: '09: 00',
+                //       fontSize: 20.0,
+                //     ),
+                //     StarButton(onPressed: () {
+                //       freezeday(context);
+                //     })
+                //   ],
+                // ),
+                Row(
+                  children: [
+                    SvgPicture.asset('assets/images/document.svg'),
+                    Text(
+                      'Document',
+                      style: TextStyle(
+                        fontFamily: 'Mazzard',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 12),
-              Row(
-                children: [
-                  SvgPicture.asset('assets/images/location.svg'),
-                  Text(
-                    ' Determine range of service',
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
+                  ],
+                ),
+                AddPage(
+                  title: 'Urgent Doucment :',
+                  onPressed: () {},
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Rate Per Page:',
+                      style: TextStyle(
+                        fontFamily: 'Mazzard',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  )
-                ],
-              ),
-              SizedBox(height: 12),
-              Row(
-                children: [
-                  Container(
-                    height: 250,
-                    width: MediaQuery.of(context).size.width * 0.922,
-                    child: GoogleMap(
-                      mapType: MapType.hybrid,
-                      initialCameraPosition: _kGooglePlex,
-                      onMapCreated: (GoogleMapController controller) {
-                        _controller.complete(controller);
-                      },
+                    Text(
+                      '  5 AED',
+                      style: TextStyle(
+                        color: mainColor,
+                        fontFamily: 'Mazzard',
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              buildWorkingHourRow('Monday'),
-              buildWorkingHourRow('Tuesday'),
-              buildWorkingHourRow('Wednesday'),
-              buildWorkingHourRow('Thursday'),
-              buildWorkingHourRow('Friday'),
-              buildWorkingHourRow('Saturday'),
-              buildWorkingHourRow('Sunday'),
-              // Row(
-              //   children: [
-              //     Text(
-              //       'Saturday Working hour',
-              //       style: TextStyle(
-              //         fontFamily: 'Mazzard',
-              //         fontSize: 16,
-              //         fontWeight: FontWeight.w500,
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     Scheduleinput(
-              //       hint: '9: 00',
-              //       fontSize: 20.0,
-              //     ),
-              //     Text(
-              //       "To",
-              //       style: TextStyle(
-              //         fontFamily: 'Mazzard',
-              //         fontSize: 20,
-              //         fontWeight: FontWeight.w500,
-              //       ),
-              //     ),
-              //     Scheduleinput(
-              //       hint: '09: 00',
-              //       fontSize: 20.0,
-              //     ),
-              //     StarButton(onPressed: () {
-              //       freezeday(context);
-              //     })
-              //   ],
-              // ),
-              // Row(
-              //   children: [
-              //     Text(
-              //       'Saturday Working hour',
-              //       style: TextStyle(
-              //         fontFamily: 'Mazzard',
-              //         fontSize: 16,
-              //         fontWeight: FontWeight.w500,
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     Scheduleinput(
-              //       hint: '9: 00',
-              //       fontSize: 20.0,
-              //     ),
-              //     Text(
-              //       "To",
-              //       style: TextStyle(
-              //         fontFamily: 'Mazzard',
-              //         fontSize: 20,
-              //         fontWeight: FontWeight.w500,
-              //       ),
-              //     ),
-              //     Scheduleinput(
-              //       hint: '09: 00',
-              //       fontSize: 20.0,
-              //     ),
-              //     StarButton(onPressed: () {
-              //       freezeday(context);
-              //     })
-              //   ],
-              // ),
-              // Row(
-              //   children: [
-              //     Text(
-              //       'Saturday Working hour',
-              //       style: TextStyle(
-              //         fontFamily: 'Mazzard',
-              //         fontSize: 16,
-              //         fontWeight: FontWeight.w500,
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     Scheduleinput(
-              //       hint: '9: 00',
-              //       fontSize: 20.0,
-              //     ),
-              //     Text(
-              //       "To",
-              //       style: TextStyle(
-              //         fontFamily: 'Mazzard',
-              //         fontSize: 20,
-              //         fontWeight: FontWeight.w500,
-              //       ),
-              //     ),
-              //     Scheduleinput(
-              //       hint: '09: 00',
-              //       fontSize: 20.0,
-              //     ),
-              //     StarButton(onPressed: () {
-              //       freezeday(context);
-              //     })
-              //   ],
-              // ),
-              // Row(
-              //   children: [
-              //     Text(
-              //       'Saturday Working hour',
-              //       style: TextStyle(
-              //         fontFamily: 'Mazzard',
-              //         fontSize: 16,
-              //         fontWeight: FontWeight.w500,
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     Scheduleinput(
-              //       hint: '9: 00',
-              //       fontSize: 20.0,
-              //     ),
-              //     Text(
-              //       "To",
-              //       style: TextStyle(
-              //         fontFamily: 'Mazzard',
-              //         fontSize: 16,
-              //         fontWeight: FontWeight.w500,
-              //       ),
-              //     ),
-              //     Scheduleinput(
-              //       hint: '09: 00',
-              //       fontSize: 20.0,
-              //     ),
-              //     StarButton(onPressed: () {
-              //       freezeday(context);
-              //     })
-              //   ],
-              // ),
-              // Row(
-              //   children: [
-              //     Text(
-              //       'Saturday Working hour',
-              //       style: TextStyle(
-              //         fontFamily: 'Mazzard',
-              //         fontSize: 16,
-              //         fontWeight: FontWeight.w500,
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     Scheduleinput(
-              //       hint: '9: 00',
-              //       fontSize: 20.0,
-              //     ),
-              //     Text(
-              //       "To",
-              //       style: TextStyle(
-              //         fontFamily: 'Mazzard',
-              //         fontSize: 20,
-              //         fontWeight: FontWeight.w500,
-              //       ),
-              //     ),
-              //     Scheduleinput(
-              //       hint: '09: 00',
-              //       fontSize: 20.0,
-              //     ),
-              //     StarButton(onPressed: () {
-              //       freezeday(context);
-              //     })
-              //   ],
-              // ),
-              // Row(
-              //   children: [
-              //     Text(
-              //       'Saturday Working hour',
-              //       style: TextStyle(
-              //         fontFamily: 'Mazzard',
-              //         fontSize: 16,
-              //         fontWeight: FontWeight.w500,
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     Scheduleinput(
-              //       hint: '9: 00',
-              //       fontSize: 20.0,
-              //     ),
-              //     Text(
-              //       "To",
-              //       style: TextStyle(
-              //         fontFamily: 'Mazzard',
-              //         fontSize: 20,
-              //         fontWeight: FontWeight.w500,
-              //       ),
-              //     ),
-              //     Scheduleinput(
-              //       hint: '09: 00',
-              //       fontSize: 20.0,
-              //     ),
-              //     StarButton(onPressed: () {
-              //       freezeday(context);
-              //     })
-              //   ],
-              // ),
-              // Row(
-              //   children: [
-              //     Text(
-              //       'Saturday Working hour',
-              //       style: TextStyle(
-              //         fontFamily: 'Mazzard',
-              //         fontSize: 16,
-              //         fontWeight: FontWeight.w500,
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     Scheduleinput(
-              //       hint: '9: 00',
-              //       fontSize: 20.0,
-              //     ),
-              //     Text(
-              //       "To",
-              //       style: TextStyle(
-              //         fontFamily: 'Mazzard',
-              //         fontSize: 20,
-              //         fontWeight: FontWeight.w500,
-              //       ),
-              //     ),
-              //     Scheduleinput(
-              //       hint: '09: 00',
-              //       fontSize: 20.0,
-              //     ),
-              //     StarButton(onPressed: () {
-              //       freezeday(context);
-              //     })
-              //   ],
-              // ),
-              Row(
-                children: [
-                  SvgPicture.asset('assets/images/document.svg'),
-                  Text(
-                    'Document',
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
+                  ],
+                ),
+                PagePrice(
+                  number: '1 - 10',
+                  days: 10,
+                ),
+                PagePrice(
+                  number: '10 - 20',
+                  days: 15,
+                ),
+                PagePrice(
+                  number: '30 - 40',
+                  days: 20,
+                ),
+                AddPage(
+                  title: 'Un Urgent Doucment :',
+                  onPressed: () {},
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Rate Per Page:',
+                      style: TextStyle(
+                        fontFamily: 'Mazzard',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              AddPage(
-                title: 'Urgent Doucment :',
-                onPressed: () {},
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Rate Per Page:',
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
+                    Text(
+                      '  5 AED',
+                      style: TextStyle(
+                        color: mainColor,
+                        fontFamily: 'Mazzard',
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  Text(
-                    '  5 AED',
-                    style: TextStyle(
-                      color: mainColor,
-                      fontFamily: 'Mazzard',
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-              PagePrice(
-                number: '1 - 10',
-                days: 10,
-              ),
-              PagePrice(
-                number: '10 - 20',
-                days: 15,
-              ),
-              PagePrice(
-                number: '30 - 40',
-                days: 20,
-              ),
-              AddPage(
-                title: 'Un Urgent Doucment :',
-                onPressed: () {},
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Rate Per Page:',
-                    style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Text(
-                    '  5 AED',
-                    style: TextStyle(
-                      color: mainColor,
-                      fontFamily: 'Mazzard',
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-              PagePrice(
-                number: '1 - 10',
-                days: 10,
-              ),
-              PagePrice(
-                number: '10 - 20',
-                days: 15,
-              ),
-              PagePrice(
-                number: '30 - 40',
-                days: 20,
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              LargeButton(title: 'Submit', textcolor: White, onPressed: () {})
-            ],
+                  ],
+                ),
+                PagePrice(
+                  number: '1 - 10',
+                  days: 10,
+                ),
+                PagePrice(
+                  number: '10 - 20',
+                  days: 15,
+                ),
+                PagePrice(
+                  number: '30 - 40',
+                  days: 20,
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                LargeButton(
+                    title: 'Submit',
+                    textcolor: White,
+                    onPressed: () {
+                      // save();
+
+                        serviceController.addservice(workingHours);
+                    })
+              ],
+            ),
           ),
         ),
       )),
@@ -551,8 +571,8 @@ class _ServiceScreenState extends State<ServiceScreen> {
   }
 
   Widget buildWorkingHourRow(String day) {
-    TimeOfDay startTime = TimeOfDay(hour: 9, minute: 0);
-    TimeOfDay endTime = TimeOfDay(hour: 17, minute: 0);
+    String startTime = '';
+    String endTime = '';
     bool isFrozen = false;
 
     return Column(
@@ -578,8 +598,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
               onChange: (value) {
                 print(value);
                 setState(() {
-                  startTime =
-                      TimeOfDay.fromDateTime(DateFormat('hh:mm').parse(value.toString()));
+                  startTime = value.toString();
                 });
               },
             ),
@@ -594,10 +613,10 @@ class _ServiceScreenState extends State<ServiceScreen> {
             Scheduleinput(
               hint: '17:00',
               fontSize: 20.0,
-              onChange: (value) {
+              onChange: (value)
+               {  print(value);
                 setState(() {
-                  endTime =
-                      TimeOfDay.fromDateTime(DateFormat('hh:mm').parse(value.toString()));
+                  endTime = value.toString();
                 });
               },
             ),

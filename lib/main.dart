@@ -14,6 +14,7 @@ import 'package:translation_vendor/screen/order_status/order_status.dart';
 import 'package:translation_vendor/screen/profile/profile.dart';
 import 'package:translation_vendor/screen/sale/sales.dart';
 import 'package:translation_vendor/screen/services/service.dart';
+import 'package:translation_vendor/screen/services/servicecontroller.dart';
 import 'package:translation_vendor/screen/splash/splash.dart';
 import 'package:translation_vendor/values/styles.dart';
 
@@ -21,6 +22,7 @@ void main() async {
   await LoadingHelper.init();
   Get.put(AuthController());
   Get.put(MainController());
+  Get.put(ServiceController());
   await GetStorage.init();
   runApp(const MyApp());
 }
@@ -43,7 +45,7 @@ class _MyAppState extends State<MyApp> {
       builder: EasyLoading.init(),
       title: "Trans",
       theme: Styles.lightTheme,
-      initialRoute: 'splash',
+      initialRoute: 'login',
       routes: {
         'login': (context) => const LoginScreen(),
         'splash': (context) => const SplashScreen(),

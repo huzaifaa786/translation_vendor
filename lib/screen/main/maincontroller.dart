@@ -53,6 +53,8 @@ class MainController extends GetxController {
     print(response);
     if (response['error'] == false) {
       vendor = Vendor(response['Vendor']);
+            GetStorage box = GetStorage();
+        box.write('vender_id', vendor!.id);
       if (vendor!.online == 1) {
         i = 0;
         print(i);
