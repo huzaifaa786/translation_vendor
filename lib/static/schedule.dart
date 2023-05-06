@@ -55,8 +55,9 @@ class Scheduleinput extends StatelessWidget {
             height: 60,
             width: MediaQuery.of(context).size.width * 0.3,
             child: TextFormField(
-              readOnly: readOnly,
+              readOnly: true,
               onChanged: onChange,
+              onTap: onpressed,
               enabled: enabled,
               obscureText: obscure,
               controller: controller,

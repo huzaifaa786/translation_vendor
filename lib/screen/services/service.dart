@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation_vendor/models/workinghour.dart';
@@ -560,7 +561,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     onPressed: () {
                       // save();
 
-                        serviceController.addservice(workingHours);
+                      serviceController.addservice(workingHours);
                     })
               ],
             ),
@@ -574,6 +575,8 @@ class _ServiceScreenState extends State<ServiceScreen> {
     String startTime = '';
     String endTime = '';
     bool isFrozen = false;
+    TextEditingController startTimeController = new TextEditingController();
+    TextEditingController endTimeController = new TextEditingController();
 
     return Column(
       children: [
@@ -593,7 +596,16 @@ class _ServiceScreenState extends State<ServiceScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Scheduleinput(
+              onpressed: () {
+                DatePicker.showTimePicker(context, showTitleActions: true,
+                    onChanged: (date) {
+                  var time = DateFormat.Hm().format(date);
+                  startTime = time;
+                  startTimeController.text = time.toString();
+                }, currentTime: DateTime.now());
+              },
               hint: '9:00',
+              controller: startTimeController,
               fontSize: 20.0,
               onChange: (value) {
                 print(value);
@@ -613,8 +625,8 @@ class _ServiceScreenState extends State<ServiceScreen> {
             Scheduleinput(
               hint: '17:00',
               fontSize: 20.0,
-              onChange: (value)
-               {  print(value);
+              onChange: (value) {
+                print(value);
                 setState(() {
                   endTime = value.toString();
                 });
