@@ -124,28 +124,33 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 SizedBox(
                   height: 23,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      ' Auid/Viedo',
-                      style: TextStyle(
-                        color: hintColor,
-                        fontFamily: 'Mazzard',
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
+                InkWell(
+                  onTap: () {
+                    addamount(context);
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        ' Auid/Viedo',
+                        style: TextStyle(
+                          color: hintColor,
+                          fontFamily: 'Mazzard',
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                    ),
-                    Text(
-                      ' 20AED',
-                      style: TextStyle(
-                        color: mainColor,
-                        fontFamily: 'Mazzard',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
+                      Text(
+                        ' 20AED',
+                        style: TextStyle(
+                          color: mainColor,
+                          fontFamily: 'Mazzard',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: 12,
@@ -560,7 +565,6 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     textcolor: White,
                     onPressed: () {
                       // save();
-
                       serviceController.addservice(workingHours);
                     })
               ],
@@ -575,9 +579,22 @@ class _ServiceScreenState extends State<ServiceScreen> {
     String startTime = '';
     String endTime = '';
     bool isFrozen = false;
-    TextEditingController startTimeController = new TextEditingController();
-    TextEditingController endTimeController = new TextEditingController();
-
+    final TextEditingController startTimeController = TextEditingController();
+    final TextEditingController endTimeController = TextEditingController();
+    WorkingHour workingHour =
+        WorkingHour(day: day, startTime: startTime, endTime: endTime);
+    int index = workingHours.indexWhere((hour) => hour.day == day);
+    if (index != 0) {
+      if (workingHours[index].startTime != '') {
+        startTimeController.text = workingHours[index].startTime!;
+      }
+      if (workingHours[index].endTime != '') {
+        endTimeController.text = workingHours[index].endTime!;
+      }
+    }
+    if (index < 7) {
+      workingHours.add(workingHour);
+    }
     return Column(
       children: [
         Row(
@@ -600,8 +617,11 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 DatePicker.showTimePicker(context, showTitleActions: true,
                     onChanged: (date) {
                   var time = DateFormat.Hm().format(date);
-                  startTime = time;
                   startTimeController.text = time.toString();
+                  startTime = time.toString();
+                  int index =
+                      workingHours.indexWhere((hour) => hour.day == day);
+                  workingHours[index].startTime = startTime;
                 }, currentTime: DateTime.now());
               },
               hint: '9:00',
@@ -623,8 +643,21 @@ class _ServiceScreenState extends State<ServiceScreen> {
               ),
             ),
             Scheduleinput(
+              onpressed: () {
+                DatePicker.showTimePicker(context, showTitleActions: true,
+                    onChanged: (date) {
+                  var time = DateFormat.Hm().format(date);
+                  endTimeController.text = time.toString();
+                  endTime = time.toString();
+
+                  int index =
+                      workingHours.indexWhere((hour) => hour.day == day);
+                  workingHours[index].endTime = endTime;
+                }, currentTime: DateTime.now());
+              },
               hint: '17:00',
               fontSize: 20.0,
+              controller: endTimeController,
               onChange: (value) {
                 print(value);
                 setState(() {
@@ -635,30 +668,16 @@ class _ServiceScreenState extends State<ServiceScreen> {
             StarButton(
               isFrozen: isFrozen,
               onPressed: () {
+                int index = workingHours.indexWhere((hour) => hour.day == day);
+                workingHours[index].isFrozen = !workingHours[index].isFrozen;
+                // Toggle the frozen state for the current day
                 setState(() {
-                  // Toggle the frozen state for the current day
-                  int index =
-                      workingHours.indexWhere((hour) => hour.day == day);
-                  if (index >= 0) {
-                    workingHours[index].startTime = startTime;
-                    workingHours[index].endTime = endTime;
-                    workingHours[index].isFrozen =
-                        !workingHours[index].isFrozen;
-                  } else {
-                    workingHours.add(WorkingHour(
-                      day: day,
-                      startTime: startTime,
-                      endTime: endTime,
-                      isFrozen: true,
-                    ));
-                  }
                   isFrozen = !isFrozen;
                 });
               },
             )
           ],
         ),
-        // Display a message indicating whether the day is frozen or unfrozen
         workingHours.any((hour) => hour.day == day && hour.isFrozen)
             ? Text('This day is frozen')
             : Text('This day is unfrozen'),
@@ -699,5 +718,42 @@ class _ServiceScreenState extends State<ServiceScreen> {
         ),
       ],
     ).show();
+  }
+
+  addamount(context) {
+    TextEditingController audiovideoController = TextEditingController();
+    TextEditingController inpersionController = TextEditingController();
+    Alert(
+        context: context,
+        title: "Add Price",
+        content: Column(
+          children: <Widget>[
+            TextField(
+              controller: audiovideoController,
+              decoration: InputDecoration(
+                labelText: 'Audio/video',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            TextField(
+              controller: inpersionController,
+              decoration: InputDecoration(
+                labelText: 'inpersion',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+          ],
+        ),
+        buttons: [
+          DialogButton(
+            onPressed: () async {
+              await save();
+            },
+            child: Text(
+              "save",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          )
+        ]).show();
   }
 }

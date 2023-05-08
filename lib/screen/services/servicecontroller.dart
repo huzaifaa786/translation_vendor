@@ -7,14 +7,21 @@ import 'package:translation_vendor/values/string.dart';
 
 class ServiceController extends GetxController {
   static ServiceController instance = Get.find();
-  void addservice(List<WorkingHour> workingHours) async {
+  void addservice(List<WorkingHour>? workingHours) async {
+
+print(workingHours!.length);
+    for (var element in workingHours) {
+      print(element.day);
+      print(element.startTime);
+      print(element.endTime);
+      print(element.isFrozen);
+      print('?????????');
+    }
     LoadingHelper.show();
     var url = BASE_URL + 'service/store';
     GetStorage box = GetStorage();
     int id = box.read('vender_id');
-    print('object');
-    print(id);
-    print(workingHours.toString());
+   
     var data = {
       'vendor_id': id,
       'schedual': workingHours,

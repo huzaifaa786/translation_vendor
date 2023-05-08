@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 class WorkingHour {
   String day;
-  String startTime;
-   String endTime;
+  String? startTime;
+   String? endTime;
   bool isFrozen;
 
   WorkingHour({
