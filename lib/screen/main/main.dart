@@ -154,7 +154,7 @@ class _MainScreenState extends State<MainScreen> {
                   totalSwitches: 2,
                   labels: ['Online', 'Offline'],
                   onToggle: (index) {
-                    setState(() {});
+                    // setState(() {});
                     mainController.toggleonline(index);
                   },
                   customIcons: [

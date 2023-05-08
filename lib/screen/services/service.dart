@@ -4,6 +4,7 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation_vendor/models/workinghour.dart';
+import 'package:translation_vendor/screen/services/schedule.dart';
 import 'package:translation_vendor/screen/services/servicecontroller.dart';
 import 'package:translation_vendor/static/addpage.dart';
 import 'package:translation_vendor/static/button.dart';
@@ -46,7 +47,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
   }
 
   save() {
-    print(workingHours);
+    // print(workingHours);
   }
 
   @override
@@ -211,13 +212,13 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 SizedBox(
                   height: 8,
                 ),
-                buildWorkingHourRow('Monday'),
-                buildWorkingHourRow('Tuesday'),
-                buildWorkingHourRow('Wednesday'),
-                buildWorkingHourRow('Thursday'),
-                buildWorkingHourRow('Friday'),
-                buildWorkingHourRow('Saturday'),
-                buildWorkingHourRow('Sunday'),
+                Schedule(day: 'Monday'),
+                Schedule(day:'Tuesday'),
+                Schedule(day:'Wednesday'),
+                Schedule(day:'Thursday'),
+                Schedule(day:'Friday'),
+                Schedule(day:'Saturday'),
+                Schedule(day:'Sunday'),
                 // Row(
                 //   children: [
                 //     Text(
@@ -575,115 +576,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
     );
   }
 
-  Widget buildWorkingHourRow(String day) {
-    String startTime = '';
-    String endTime = '';
-    bool isFrozen = false;
-    final TextEditingController startTimeController = TextEditingController();
-    final TextEditingController endTimeController = TextEditingController();
-    WorkingHour workingHour =
-        WorkingHour(day: day, startTime: startTime, endTime: endTime);
-    int index = workingHours.indexWhere((hour) => hour.day == day);
-    if (index != 0) {
-      if (workingHours[index].startTime != '') {
-        startTimeController.text = workingHours[index].startTime!;
-      }
-      if (workingHours[index].endTime != '') {
-        endTimeController.text = workingHours[index].endTime!;
-      }
-    }
-    if (index < 7) {
-      workingHours.add(workingHour);
-    }
-    return Column(
-      children: [
-        Row(
-          children: [
-            Text(
-              '$day Working Hours',
-              style: TextStyle(
-                fontFamily: 'Mazzard',
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Scheduleinput(
-              onpressed: () {
-                DatePicker.showTimePicker(context, showTitleActions: true,
-                    onChanged: (date) {
-                  var time = DateFormat.Hm().format(date);
-                  startTimeController.text = time.toString();
-                  startTime = time.toString();
-                  int index =
-                      workingHours.indexWhere((hour) => hour.day == day);
-                  workingHours[index].startTime = startTime;
-                }, currentTime: DateTime.now());
-              },
-              hint: '9:00',
-              controller: startTimeController,
-              fontSize: 20.0,
-              onChange: (value) {
-                print(value);
-                setState(() {
-                  startTime = value.toString();
-                });
-              },
-            ),
-            Text(
-              'To',
-              style: TextStyle(
-                fontFamily: 'Mazzard',
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            Scheduleinput(
-              onpressed: () {
-                DatePicker.showTimePicker(context, showTitleActions: true,
-                    onChanged: (date) {
-                  var time = DateFormat.Hm().format(date);
-                  endTimeController.text = time.toString();
-                  endTime = time.toString();
 
-                  int index =
-                      workingHours.indexWhere((hour) => hour.day == day);
-                  workingHours[index].endTime = endTime;
-                }, currentTime: DateTime.now());
-              },
-              hint: '17:00',
-              fontSize: 20.0,
-              controller: endTimeController,
-              onChange: (value) {
-                print(value);
-                setState(() {
-                  endTime = value.toString();
-                });
-              },
-            ),
-            StarButton(
-              isFrozen: isFrozen,
-              onPressed: () {
-                int index = workingHours.indexWhere((hour) => hour.day == day);
-                workingHours[index].isFrozen = !workingHours[index].isFrozen;
-                // Toggle the frozen state for the current day
-                setState(() {
-                  isFrozen = !isFrozen;
-                });
-              },
-            )
-          ],
-        ),
-        workingHours.any((hour) => hour.day == day && hour.isFrozen)
-            ? Text('This day is frozen')
-            : Text('This day is unfrozen'),
-      ],
-    );
-  }
 
   freezeday(context) {
     Alert(

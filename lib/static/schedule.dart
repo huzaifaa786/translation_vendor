@@ -14,7 +14,6 @@ class Scheduleinput extends StatelessWidget {
       this.enabled = true,
       this.readOnly = false,
       this.obscure = false,
-      this.onChange,
       this.showSuffix = false,
       this.validator,
       this.autovalidateMode,
@@ -38,7 +37,6 @@ class Scheduleinput extends StatelessWidget {
   final text;
   final autovalidateMode;
   final maxlines;
-  final onChange;
   final onpressed;
   final fontSize;
   final enabled;
@@ -56,7 +54,6 @@ class Scheduleinput extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.3,
             child: TextFormField(
               readOnly: true,
-              onChanged: onChange,
               onTap: onpressed,
               enabled: enabled,
               obscureText: obscure,
