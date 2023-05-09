@@ -21,13 +21,7 @@ class _ScheduleState extends State<Schedule> {
     int index = serviceController.workingHours
         .indexWhere((hour) => hour.day == widget.day!);
     if (index != 0) {
-      // if (workingHours[index].startTime != '') {
-      //   startTimeController.text = workingHours[index].startTime!;
-      // }
-      // if (workingHours[index].endTime != ''
-      //) {
-      //   endTimeController.text = workingHours[index].endTime!;
-      // }
+   
     }
     if (index < 7) {
       serviceController.workingHours.add(workingHour);
@@ -99,7 +93,7 @@ class _ScheduleState extends State<Schedule> {
                   serviceController.workingHours[index].endTime = endTime;
                 }, currentTime: DateTime.now());
               },
-              hint: '17:00',
+              hint: '9:00',
               fontSize: 20.0,
               controller: endTimeController,
             ),
