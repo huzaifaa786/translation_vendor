@@ -1,6 +1,7 @@
+// ignore_for_file: unused_field
+
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation_vendor/models/workinghour.dart';
@@ -8,14 +9,11 @@ import 'package:translation_vendor/screen/services/schedule.dart';
 import 'package:translation_vendor/screen/services/servicecontroller.dart';
 import 'package:translation_vendor/static/addpage.dart';
 import 'package:translation_vendor/static/button.dart';
-import 'package:translation_vendor/static/schedule.dart';
-import 'package:translation_vendor/static/star.button.dart';
 import 'package:translation_vendor/static/titletopbar.dart';
 import 'package:translation_vendor/static/page_p_day.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation_vendor/values/colors.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:intl/intl.dart';
 import 'package:translation_vendor/values/controllers.dart';
 
 class ServiceScreen extends StatefulWidget {
@@ -46,10 +44,6 @@ class _ServiceScreenState extends State<ServiceScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {});
   }
 
-  save() {
-    // print(workingHours);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,12 +64,15 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SvgPicture.asset('assets/images/dart.svg'),
-                    Text(
-                      ' Online Audio/Video',
-                      style: TextStyle(
-                        fontFamily: 'Mazzard',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 6, top: 2),
+                      child: Text(
+                        'Online Audio/Video',
+                        style: TextStyle(
+                          fontFamily: 'Mazzard',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     )
                   ],
@@ -112,12 +109,15 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 Row(
                   children: [
                     SvgPicture.asset('assets/images/shedule.svg'),
-                    Text(
-                      ' Schedule',
-                      style: TextStyle(
-                        fontFamily: 'Mazzard',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 6, top: 4),
+                      child: Text(
+                        'Schedule',
+                        style: TextStyle(
+                          fontFamily: 'Mazzard',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     )
                   ],
@@ -142,7 +142,9 @@ class _ServiceScreenState extends State<ServiceScreen> {
                         ),
                       ),
                       Text(
-                        ' 20AED',
+                        serviceController.audioORvideo == null
+                            ? '0' + ' AED'
+                            : serviceController.audioORvideo! + " AED",
                         style: TextStyle(
                           color: mainColor,
                           fontFamily: 'Mazzard',
@@ -160,7 +162,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      ' In Person',
+                      'In Person',
                       style: TextStyle(
                         color: hintColor,
                         fontFamily: 'Mazzard',
@@ -169,7 +171,9 @@ class _ServiceScreenState extends State<ServiceScreen> {
                       ),
                     ),
                     Text(
-                      ' 20AED',
+                      serviceController.InPersonPrice == null
+                          ? '0' + ' AED'
+                          : serviceController.InPersonPrice! + " AED",
                       style: TextStyle(
                         color: mainColor,
                         fontFamily: 'Mazzard',
@@ -213,13 +217,12 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   height: 8,
                 ),
                 Schedule(day: 'Monday'),
-                Schedule(day:'Tuesday'),
-                Schedule(day:'Wednesday'),
-                Schedule(day:'Thursday'),
-                Schedule(day:'Friday'),
-                Schedule(day:'Saturday'),
-                Schedule(day:'Sunday'),
-              
+                Schedule(day: 'Tuesday'),
+                Schedule(day: 'Wednesday'),
+                Schedule(day: 'Thursday'),
+                Schedule(day: 'Friday'),
+                Schedule(day: 'Saturday'),
+                Schedule(day: 'Sunday'),
                 Row(
                   children: [
                     SvgPicture.asset('assets/images/document.svg'),
@@ -325,8 +328,6 @@ class _ServiceScreenState extends State<ServiceScreen> {
     );
   }
 
-
-
   freezeday(context) {
     Alert(
       style: AlertStyle(
@@ -373,14 +374,14 @@ class _ServiceScreenState extends State<ServiceScreen> {
             TextField(
               controller: audiovideoController,
               decoration: InputDecoration(
-                labelText: 'Audio/video',
+                labelText: 'Audio/Video',
               ),
               keyboardType: TextInputType.number,
             ),
             TextField(
               controller: inpersionController,
               decoration: InputDecoration(
-                labelText: 'inpersion',
+                labelText: 'In Person',
               ),
               keyboardType: TextInputType.number,
             ),
@@ -388,8 +389,11 @@ class _ServiceScreenState extends State<ServiceScreen> {
         ),
         buttons: [
           DialogButton(
+            color: mainColor,
             onPressed: () async {
-              await save();
+              await serviceController.save(
+                  inpersionController.text, audiovideoController.text);
+                  Navigator.pop(context);
             },
             child: Text(
               "save",

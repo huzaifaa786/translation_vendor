@@ -10,6 +10,14 @@ import 'package:translation_vendor/values/string.dart';
 class ServiceController extends GetxController {
   static ServiceController instance = Get.find();
   List<WorkingHour> workingHours = [];
+  String? InPersonPrice;
+  String? audioORvideo;
+
+  save(inperson, audio) {
+    InPersonPrice = inperson;
+    audioORvideo = audio;
+    update();
+  }
 
   void addservice() async {
     LoadingHelper.show();
