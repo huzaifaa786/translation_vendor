@@ -566,7 +566,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     textcolor: White,
                     onPressed: () {
                       // save();
-                      serviceController.addservice(workingHours);
+                      serviceController.addservice();
                     })
               ],
             ),

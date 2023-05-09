@@ -60,7 +60,7 @@ class IconsButton extends StatelessWidget {
                   ),
                 ),
               ),
-               Text(
+              Text(
                 title,
                 style: TextStyle(
                   color: textcolor,
@@ -73,21 +73,17 @@ class IconsButton extends StatelessWidget {
                 height: 40,
                 width: 40,
                 decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.black,
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(45),
-                   
-                  ),
-                    color: Colors.white,
+                  // border: Border.all(
+                  //   color: Colors.black,
+                  // ),
+                  borderRadius: BorderRadius.all(Radius.circular(45)),
+                  color: Colors.white,
                 ),
                 child: Icon(
                   Icons.keyboard_arrow_right_outlined,
                   color: Colors.black,
                 ),
-              ),
-             
+              )
             ],
           ),
         ),
