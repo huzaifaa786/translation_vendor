@@ -466,7 +466,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
           DialogButton(
             color: mainColor,
             onPressed: () async {
-              await serviceController.save(
+              await serviceController.savedocument(
                   dayController.text, priceController.text);
               Navigator.pop(context);
             },
