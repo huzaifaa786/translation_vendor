@@ -15,10 +15,17 @@ class ServiceController extends GetxController {
   List<WorkingHour> workingHours = [];
   String? InPersonPrice;
   String? audioORvideo;
+  String? totalday;
+  String? tolalprice;
 
   save(inperson, audio) {
     InPersonPrice = inperson;
     audioORvideo = audio;
+    update();
+  }
+   savedocument(day, price) {
+    totalday = day;
+    tolalprice = price;
     update();
   }
 

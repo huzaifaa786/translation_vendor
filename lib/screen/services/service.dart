@@ -273,7 +273,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 ),
                 AddPage(
                   title: 'Urgent Doucment :',
-                  onPressed: () {},
+                  onPressed: () {   adddocument(context);},
                 ),
                 Row(
                   children: [
@@ -428,6 +428,46 @@ class _ServiceScreenState extends State<ServiceScreen> {
             onPressed: () async {
               await serviceController.save(
                   inpersionController.text, audiovideoController.text);
+              Navigator.pop(context);
+            },
+            child: Text(
+              "save",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          )
+        ]).show();
+  }
+  
+  adddocument(context) {
+    TextEditingController dayController = TextEditingController();
+    TextEditingController priceController = TextEditingController();
+    Alert(
+        context: context,
+        title: "Urgent Document",
+        content: Column(
+          children: <Widget>[
+            TextField(
+              controller: dayController,
+              decoration: InputDecoration(
+                labelText: 'day',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            TextField(
+              controller: priceController,
+              decoration: InputDecoration(
+                labelText: 'price',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+          ],
+        ),
+        buttons: [
+          DialogButton(
+            color: mainColor,
+            onPressed: () async {
+              await serviceController.save(
+                  dayController.text, priceController.text);
               Navigator.pop(context);
             },
             child: Text(
