@@ -34,16 +34,25 @@ class _ServiceScreenState extends State<ServiceScreen> {
     zoom: 14.4746,
   );
 
-  static const CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+  static CameraPosition? _kLake;
 
   List<WorkingHour> workingHours = [];
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {});
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await serviceController.getlocation();
+      setState(() {
+        print(serviceController.locationData!.latitude);
+        _kLake = CameraPosition(
+            // bearing: 192.8334901395799,
+            target: LatLng(serviceController.locationData!.latitude!,
+                serviceController.locationData!.longitude!),
+            tilt: 59.440717697143555,
+            zoom: 19.151926040649414);
+        print('object');
+        print(_kLake);
+      });
+    });
   }
 
   save() {
@@ -194,32 +203,55 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   ],
                 ),
                 SizedBox(height: 12),
-                Row(
-                  children: [
-                    Container(
-                      height: 250,
-                      width: MediaQuery.of(context).size.width * 0.922,
-                      child: GoogleMap(
-                        mapType: MapType.hybrid,
-                        initialCameraPosition: _kGooglePlex,
-                        onMapCreated: (GoogleMapController controller) {
-                          _controller.complete(controller);
-                        },
+                serviceController.locationData == null
+                    ? Container()
+                    : Row(
+                        children: [
+                          Container(
+                            height: 250,
+                            width: MediaQuery.of(context).size.width * 0.922,
+                            child: GoogleMap(
+                              // circles: serviceController.setCircles(),
+                              scrollGesturesEnabled: true,
+                              mapType: MapType.hybrid,
+                              initialCameraPosition:
+                                  serviceController.locationData != null
+                                      ? _kLake!
+                                      : _kGooglePlex,
+                              onMapCreated: (GoogleMapController controller) {
+                                _controller.complete(controller);
+                              },
+                              markers: {
+                                Marker(
+                                  markerId: const MarkerId("marker1"),
+                                  position:
+                                      const LatLng(37.422131, -122.084801),
+                                  draggable: true,
+                                  onDragEnd: (value) {
+                                    // value is the new position
+                                  },
+                                  // To do: custom marker icon
+                                ),
+                                Marker(
+                                  markerId: const MarkerId("marker2"),
+                                  position: const LatLng(
+                                      37.415768808487435, -122.08440050482749),
+                                ),
+                              },
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
                 SizedBox(
                   height: 8,
                 ),
                 Schedule(day: 'Monday'),
-                Schedule(day:'Tuesday'),
-                Schedule(day:'Wednesday'),
-                Schedule(day:'Thursday'),
-                Schedule(day:'Friday'),
-                Schedule(day:'Saturday'),
-                Schedule(day:'Sunday'),
-              
+                Schedule(day: 'Tuesday'),
+                Schedule(day: 'Wednesday'),
+                Schedule(day: 'Thursday'),
+                Schedule(day: 'Friday'),
+                Schedule(day: 'Saturday'),
+                Schedule(day: 'Sunday'),
                 Row(
                   children: [
                     SvgPicture.asset('assets/images/document.svg'),
@@ -324,8 +356,6 @@ class _ServiceScreenState extends State<ServiceScreen> {
       )),
     );
   }
-
-
 
   freezeday(context) {
     Alert(
