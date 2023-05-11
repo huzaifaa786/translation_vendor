@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 class WorkingHour {
   String day;
   String? startTime;
-   String? endTime;
+  String? endTime;
   bool isFrozen;
 
   WorkingHour({
@@ -11,4 +10,13 @@ class WorkingHour {
     required this.endTime,
     this.isFrozen = false,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'day': day,
+      'startTime': startTime,
+      'endTime': endTime,
+      'isFrozen': isFrozen,
+    };
+  }
 }

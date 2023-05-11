@@ -1,6 +1,5 @@
-import 'dart:collection';
+import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -13,44 +12,30 @@ import 'package:location/location.dart';
 class ServiceController extends GetxController {
   static ServiceController instance = Get.find();
   LocationData? locationData;
-  // Location
+  List<WorkingHour> workingHours = [];
+  String? InPersonPrice;
+  String? audioORvideo;
 
-  Set<Circle> _circles = HashSet<Circle>();
-  double? radius = 500;
-  int _circleIdCounter = 1;
-  bool _isCircle = true;
-
-  setCircles() {
-    final String circleIdVal = 'circle_id_$_circleIdCounter';
-    _circleIdCounter++;
-    print(
-        'Circle | Latitude: ${locationData!.latitude}  Longitude: ${locationData!.longitude}  Radius: $radius');
-    _circles.add(Circle(
-        circleId: CircleId(circleIdVal),
-        center: LatLng(locationData!.latitude!, locationData!.longitude!),
-        radius: radius!,
-        fillColor: Colors.redAccent.withOpacity(0.5),
-        strokeWidth: 3,
-        strokeColor: Colors.redAccent));
+  save(inperson, audio) {
+    InPersonPrice = inperson;
+    audioORvideo = audio;
+    update();
   }
 
-  void addservice(List<WorkingHour>? workingHours) async {
-    print(workingHours!.length);
-    for (var element in workingHours) {
-      print(element.day);
-      print(element.startTime);
-      print(element.endTime);
-      print(element.isFrozen);
-      print('?????????');
-    }
+  void addservice() async {
     LoadingHelper.show();
+    List<Map<String, dynamic>> jsonList =
+        workingHours.map((wh) => wh.toJson()).toList();
+    String workinghours = jsonEncode(jsonList);
     var url = BASE_URL + 'service/store';
     GetStorage box = GetStorage();
     int id = box.read('vender_id');
+    String? api_token = box.read('api_token');
 
     var data = {
       'vendor_id': id,
-      'schedual': workingHours,
+      'api_token': api_token,
+      'schedual': workinghours,
     };
     var response = await Api.execute(url: url, data: data);
     print(response);

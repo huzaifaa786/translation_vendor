@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:translation_vendor/models/workinghour.dart';
 import 'package:translation_vendor/static/schedule.dart';
 import 'package:translation_vendor/static/star.button.dart';
+import 'package:translation_vendor/values/controllers.dart';
 
 class Schedule extends StatefulWidget {
   const Schedule({super.key, this.day});
@@ -14,40 +15,36 @@ class Schedule extends StatefulWidget {
 }
 
 class _ScheduleState extends State<Schedule> {
-  List<WorkingHour> workingHours = [];
   void initState() {
-        WorkingHour workingHour =
+    WorkingHour workingHour =
         WorkingHour(day: widget.day!, startTime: startTime, endTime: endTime);
-    int index = workingHours.indexWhere((hour) => hour.day == widget.day!);
+    int index = serviceController.workingHours
+        .indexWhere((hour) => hour.day == widget.day!);
     if (index != 0) {
    
     }
     if (index < 7) {
-      workingHours.add(workingHour);
+      serviceController.workingHours.add(workingHour);
     }
     super.initState();
- 
   }
 
-  save() {
-  }
+  save() {}
 
-      String startTime = '';
-    String endTime = '';
-    bool isFrozen = false;
-    final TextEditingController startTimeController = TextEditingController();
-    final TextEditingController endTimeController = TextEditingController();
-
+  String startTime = '';
+  String endTime = '';
+  bool isFrozen = false;
+  final TextEditingController startTimeController = TextEditingController();
+  final TextEditingController endTimeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: [
         Row(
           children: [
             Text(
-              '$widget.day! Working Hours',
+              widget.day! + ' Working Hours',
               style: TextStyle(
                 fontFamily: 'Mazzard',
                 fontSize: 16,
@@ -66,9 +63,9 @@ class _ScheduleState extends State<Schedule> {
                   var time = DateFormat.Hm().format(date);
                   startTimeController.text = time.toString();
                   startTime = time.toString();
-                  int index = workingHours
+                  int index = serviceController.workingHours
                       .indexWhere((hour) => hour.day == widget.day!);
-                  workingHours[index].startTime = startTime;
+                  serviceController.workingHours[index].startTime = startTime;
                 }, currentTime: DateTime.now());
               },
               hint: '9:00',
@@ -91,11 +88,10 @@ class _ScheduleState extends State<Schedule> {
                   endTimeController.text = time.toString();
                   endTime = time.toString();
 
-                  int index = workingHours
+                  int index = serviceController.workingHours
                       .indexWhere((hour) => hour.day == widget.day!);
-                  workingHours[index].endTime = endTime;
-                }, 
-                currentTime: DateTime.now());
+                  serviceController.workingHours[index].endTime = endTime;
+                }, currentTime: DateTime.now());
               },
               hint: '9:00',
               fontSize: 20.0,
@@ -104,20 +100,26 @@ class _ScheduleState extends State<Schedule> {
             StarButton(
               isFrozen: isFrozen,
               onPressed: () {
-                int index =
-                    workingHours.indexWhere((hour) => hour.day == widget.day!);
+                int index = serviceController.workingHours
+                    .indexWhere((hour) => hour.day == widget.day!);
                 setState(() {
-                  bool toggle = workingHours[index].isFrozen;
-                  workingHours[index].isFrozen = !toggle;
-                  
+                  bool toggle = serviceController.workingHours[index].isFrozen;
+                  serviceController.workingHours[index].isFrozen = !toggle;
                 });
               },
             )
           ],
         ),
-        workingHours.any((hour) => hour.day == widget.day! && hour.isFrozen)
-            ? Text('This day is frozen')
-            : Text('This day is unfrozen'),
+        serviceController.workingHours
+                .any((hour) => hour.day == widget.day! && hour.isFrozen)
+            ? Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Text('This day is frozen'),
+              )
+            : Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Text('This day is unfrozen'),
+              ),
       ],
     );
   }
