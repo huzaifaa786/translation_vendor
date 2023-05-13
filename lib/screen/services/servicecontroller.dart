@@ -8,24 +8,19 @@ import 'package:translation_vendor/helper/loading.dart';
 import 'package:translation_vendor/models/workinghour.dart';
 import 'package:translation_vendor/values/string.dart';
 import 'package:location/location.dart';
+import 'package:translation_vendor/models/documentlist.dart';
 
 class ServiceController extends GetxController {
   static ServiceController instance = Get.find();
   LocationData? locationData;
   List<WorkingHour> workingHours = [];
+  List<Documentlist> documentlist = [];
   String? InPersonPrice;
   String? audioORvideo;
-  String? totalday;
-  String? tolalprice;
 
   save(inperson, audio) {
     InPersonPrice = inperson;
     audioORvideo = audio;
-    update();
-  }
-   savedocument(day, price) {
-    totalday = day;
-    tolalprice = price;
     update();
   }
 
@@ -77,7 +72,7 @@ class ServiceController extends GetxController {
     print(
         'latitude: ${locationData!.latitude}, longitude: ${locationData!.longitude}');
 
-        LoadingHelper.dismiss();
-        update();
+    LoadingHelper.dismiss();
+    update();
   }
 }

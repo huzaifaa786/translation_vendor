@@ -9,6 +9,7 @@ class InputFields extends StatelessWidget {
       this.controller,
       this.hint,
       this.text,
+      this.keyboardType,
       this.maxlines = false,
       this.enabled = true,
       this.readOnly = false,
@@ -29,6 +30,7 @@ class InputFields extends StatelessWidget {
   final validator;
   final bool? validate;
   final hint;
+  final keyboardType;
   final width;
   final type;
   final showSuffix;

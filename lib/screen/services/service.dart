@@ -4,7 +4,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+
+import 'package:translation_vendor/models/documentlist.dart';
 import 'package:translation_vendor/models/workinghour.dart';
+
+import 'package:translation_vendor/screen/services/document.dart';
 import 'package:translation_vendor/screen/services/schedule.dart';
 import 'package:translation_vendor/screen/services/servicecontroller.dart';
 import 'package:translation_vendor/static/addpage.dart';
@@ -35,6 +39,8 @@ class _ServiceScreenState extends State<ServiceScreen> {
   static CameraPosition? _kLake;
 
   List<WorkingHour> workingHours = [];
+  List<Documentlist> documentlist = [];
+
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -273,7 +279,9 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 ),
                 AddPage(
                   title: 'Urgent Doucment :',
-                  onPressed: () {   adddocument(context);},
+                  onPressed: () {
+                    addpage(context);
+                  },
                 ),
                 Row(
                   children: [
@@ -296,21 +304,13 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     ),
                   ],
                 ),
-                PagePrice(
-                  number: '1 - 10',
-                  days: 10,
-                ),
-                PagePrice(
-                  number: '10 - 20',
-                  days: 15,
-                ),
-                PagePrice(
-                  number: '30 - 40',
-                  days: 20,
-                ),
+                DocumentRate(page: '1 to 10'),
+                DocumentRate(page: '1 to 10'),
                 AddPage(
                   title: 'Un Urgent Doucment :',
-                  onPressed: () {},
+                  onPressed: () {
+                    addpage(context);
+                  },
                 ),
                 Row(
                   children: [
@@ -333,21 +333,8 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     ),
                   ],
                 ),
-                PagePrice(
-                  number: '1 - 10',
-                  days: 10,
-                ),
-                PagePrice(
-                  number: '10 - 20',
-                  days: 15,
-                ),
-                PagePrice(
-                  number: '30 - 40',
-                  days: 20,
-                ),
-                SizedBox(
-                  height: 12,
-                ),
+                DocumentRate(page: '1 to 10'),
+                DocumentRate(page: '1 to 10'),
                 LargeButton(
                     title: 'Submit',
                     textcolor: White,
@@ -437,26 +424,61 @@ class _ServiceScreenState extends State<ServiceScreen> {
           )
         ]).show();
   }
-  
-  adddocument(context) {
-    TextEditingController dayController = TextEditingController();
-    TextEditingController priceController = TextEditingController();
+
+  addpage(context) {
+    TextEditingController audiovideoController = TextEditingController();
+    TextEditingController inpersionController = TextEditingController();
     Alert(
         context: context,
-        title: "Urgent Document",
+        title: "Document",
         content: Column(
           children: <Widget>[
-            TextField(
-              controller: dayController,
+              TextField(
+              controller: inpersionController,
               decoration: InputDecoration(
-                labelText: 'day',
+                labelText: 'per page price',
               ),
               keyboardType: TextInputType.number,
             ),
             TextField(
-              controller: priceController,
+              controller: audiovideoController,
               decoration: InputDecoration(
-                labelText: 'price',
+                labelText: '1 to 10 page parice',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            TextField(
+              controller: inpersionController,
+              decoration: InputDecoration(
+                labelText: 'total day',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            TextField(
+              controller: audiovideoController,
+              decoration: InputDecoration(
+                labelText: '10 to 20 page parice',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            TextField(
+              controller: inpersionController,
+              decoration: InputDecoration(
+                labelText: 'total day',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            TextField(
+              controller: audiovideoController,
+              decoration: InputDecoration(
+                labelText: '30 to 40 page parice',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            TextField(
+              controller: inpersionController,
+              decoration: InputDecoration(
+                labelText: 'total day',
               ),
               keyboardType: TextInputType.number,
             ),
@@ -466,8 +488,8 @@ class _ServiceScreenState extends State<ServiceScreen> {
           DialogButton(
             color: mainColor,
             onPressed: () async {
-              await serviceController.savedocument(
-                  dayController.text, priceController.text);
+              await serviceController.save(
+                  inpersionController.text, audiovideoController.text);
               Navigator.pop(context);
             },
             child: Text(
