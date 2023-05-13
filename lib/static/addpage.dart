@@ -23,20 +23,18 @@ class AddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only( top: 20),
+      padding: const EdgeInsets.only(top: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             title,
             style: TextStyle(
-                fontWeight: FontWeight.w500, fontSize: 19, color:mainColor),
+                fontWeight: FontWeight.w500, fontSize: 19, color: mainColor),
           ),
-          Padding(
-              padding: const EdgeInsets.only(top: 15),
-              child: InkWell(
-                  onTap: onPressed,
-                child: SvgPicture.asset('assets/images/add.svg')))
+          InkWell(
+              onTap: onPressed,
+              child: SvgPicture.asset('assets/images/add.svg'))
         ],
       ),
     );
