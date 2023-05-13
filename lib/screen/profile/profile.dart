@@ -14,6 +14,7 @@ import 'package:translation_vendor/static/textbox.dart';
 import 'package:translation_vendor/static/addpage.dart';
 import 'package:translation_vendor/values/colors.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:translation_vendor/values/controllers.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -52,17 +53,20 @@ class _ProfileState extends State<Profile> {
                 },
               ),
               SizedBox(height: 12,),
-              Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
+              InkWell(
+                onTap: () { profileController.profileImage();},
+                child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(45),
+                      ),
                     ),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(45),
-                    ),
-                  ),
-                  child: Image.asset('assets/images/profile.png')),
+                    child: Image.asset('assets/images/profile.png')),
+              ),
               SizedBox(
                 height: 12,
               ),
@@ -212,7 +216,7 @@ class _ProfileState extends State<Profile> {
               ),
               LargeButton(
                 title: "Update",
-                onPressed: () {},
+                onPressed: () { profileController.editprofile();},
                 textcolor: White,
               )
             ],

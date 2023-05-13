@@ -1,14 +1,14 @@
 class Documentlist {
   String day;
-  String? price;
-  String? page;
-   String? perpage;
+  String? minpage;
+  String? maxpage;
+   String? price;
 
   Documentlist({
     required this.day,
-    required this.price,
-    required this.page,
-     required this.perpage,
+    required this.minpage,
+    required this.maxpage,
+     required this.price,
    
   });
 
@@ -16,8 +16,8 @@ class Documentlist {
     return {
       'day': day,
       'price': price,
-      'page': page,
-      'perpage': perpage,
+      'minpage': minpage,
+      'maxpage': maxpage,
     };
   }
 }

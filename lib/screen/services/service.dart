@@ -13,6 +13,7 @@ import 'package:translation_vendor/screen/services/schedule.dart';
 import 'package:translation_vendor/screen/services/servicecontroller.dart';
 import 'package:translation_vendor/static/addpage.dart';
 import 'package:translation_vendor/static/button.dart';
+import 'package:translation_vendor/static/schedule.dart';
 import 'package:translation_vendor/static/titletopbar.dart';
 import 'package:translation_vendor/static/page_p_day.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -39,7 +40,8 @@ class _ServiceScreenState extends State<ServiceScreen> {
   static CameraPosition? _kLake;
 
   List<WorkingHour> workingHours = [];
-  List<Documentlist> documentlist = [];
+  // List<Documentlist> unurgentdocument = [];
+  // List<Documentlist> urgentdocument = [];
 
   void initState() {
     super.initState();
@@ -280,7 +282,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 AddPage(
                   title: 'Urgent Doucment :',
                   onPressed: () {
-                    addpage(context);
+                    urgentdoc(context);
                   },
                 ),
                 Row(
@@ -294,7 +296,10 @@ class _ServiceScreenState extends State<ServiceScreen> {
                       ),
                     ),
                     Text(
-                      '  5 AED',
+                      serviceController.urgentdocument.length == 0
+                          ? '0 AED'
+                          : serviceController.urgentdocument[0].price! +
+                              '  AED',
                       style: TextStyle(
                         color: mainColor,
                         fontFamily: 'Mazzard',
@@ -304,8 +309,12 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     ),
                   ],
                 ),
-                DocumentRate(page: '1 to 10'),
-                DocumentRate(page: '1 to 10'),
+                for (var document in serviceController.urgentdocument)
+                  PagePrice(
+                    minpage: document.minpage,
+                    maxpage: document.maxpage,
+                    days: document.day,
+                  ),
                 AddPage(
                   title: 'Un Urgent Doucment :',
                   onPressed: () {
@@ -323,7 +332,10 @@ class _ServiceScreenState extends State<ServiceScreen> {
                       ),
                     ),
                     Text(
-                      '  5 AED',
+                      serviceController.unurgentdocument.length == 0
+                          ? '0 AED'
+                          : serviceController.unurgentdocument[0].price! +
+                              '  AED',
                       style: TextStyle(
                         color: mainColor,
                         fontFamily: 'Mazzard',
@@ -333,13 +345,21 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     ),
                   ],
                 ),
-                DocumentRate(page: '1 to 10'),
-                DocumentRate(page: '1 to 10'),
+                for (var document in serviceController.unurgentdocument)
+                  PagePrice(
+                    minpage: document.minpage,
+                    maxpage: document.maxpage,
+                    days: document.day,
+                  ),
+                SizedBox(
+                  height: 8,
+                ),
                 LargeButton(
                     title: 'Submit',
                     textcolor: White,
                     onPressed: () {
                       // save();
+                      print('object');
                       serviceController.addservice();
                     })
               ],
@@ -386,22 +406,20 @@ class _ServiceScreenState extends State<ServiceScreen> {
   }
 
   addamount(context) {
-    TextEditingController audiovideoController = TextEditingController();
-    TextEditingController inpersionController = TextEditingController();
     Alert(
         context: context,
         title: "Add Price",
         content: Column(
           children: <Widget>[
             TextField(
-              controller: audiovideoController,
+              controller: serviceController.audiovideoController,
               decoration: InputDecoration(
                 labelText: 'Audio/Video',
               ),
               keyboardType: TextInputType.number,
             ),
             TextField(
-              controller: inpersionController,
+              controller: serviceController.inpersionController,
               decoration: InputDecoration(
                 labelText: 'In Person',
               ),
@@ -414,7 +432,8 @@ class _ServiceScreenState extends State<ServiceScreen> {
             color: mainColor,
             onPressed: () async {
               await serviceController.save(
-                  inpersionController.text, audiovideoController.text);
+                  serviceController.inpersionController.text,
+                  serviceController.audiovideoController.text);
               Navigator.pop(context);
             },
             child: Text(
@@ -426,57 +445,42 @@ class _ServiceScreenState extends State<ServiceScreen> {
   }
 
   addpage(context) {
-    TextEditingController audiovideoController = TextEditingController();
-    TextEditingController inpersionController = TextEditingController();
+    TextEditingController perpageController = TextEditingController();
+    TextEditingController minController = TextEditingController();
+    TextEditingController maxController = TextEditingController();
+    TextEditingController totaldayController = TextEditingController();
     Alert(
         context: context,
         title: "Document",
         content: Column(
           children: <Widget>[
-              TextField(
-              controller: inpersionController,
+            TextField(
+              controller: perpageController,
               decoration: InputDecoration(
                 labelText: 'per page price',
               ),
               keyboardType: TextInputType.number,
             ),
             TextField(
-              controller: audiovideoController,
+              controller: minController,
               decoration: InputDecoration(
-                labelText: '1 to 10 page parice',
+                labelText: 'min page',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            Text(' To '),
+            TextField(
+              controller: maxController,
+              decoration: InputDecoration(
+                labelText: 'max page',
               ),
               keyboardType: TextInputType.number,
             ),
             TextField(
-              controller: inpersionController,
-              decoration: InputDecoration(
-                labelText: 'total day',
-              ),
-              keyboardType: TextInputType.number,
-            ),
-            TextField(
-              controller: audiovideoController,
-              decoration: InputDecoration(
-                labelText: '10 to 20 page parice',
-              ),
-              keyboardType: TextInputType.number,
-            ),
-            TextField(
-              controller: inpersionController,
-              decoration: InputDecoration(
-                labelText: 'total day',
-              ),
-              keyboardType: TextInputType.number,
-            ),
-            TextField(
-              controller: audiovideoController,
-              decoration: InputDecoration(
-                labelText: '30 to 40 page parice',
-              ),
-              keyboardType: TextInputType.number,
-            ),
-            TextField(
-              controller: inpersionController,
+              controller: totaldayController,
               decoration: InputDecoration(
                 labelText: 'total day',
               ),
@@ -487,9 +491,79 @@ class _ServiceScreenState extends State<ServiceScreen> {
         buttons: [
           DialogButton(
             color: mainColor,
-            onPressed: () async {
-              await serviceController.save(
-                  inpersionController.text, audiovideoController.text);
+            onPressed: () {
+              serviceController.unurgentdocument.add(Documentlist(
+                  day: totaldayController.text,
+                  minpage: minController.text,
+                  maxpage: maxController.text,
+                  price: perpageController.text));
+              print(serviceController.unurgentdocument);
+
+              Navigator.pop(context);
+            },
+            child: Text(
+              "save",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          )
+        ]).show();
+  }
+
+  urgentdoc(context) {
+    TextEditingController perpageController = TextEditingController();
+    TextEditingController minController = TextEditingController();
+    TextEditingController maxController = TextEditingController();
+    TextEditingController totaldayController = TextEditingController();
+    Alert(
+        context: context,
+        title: "Document",
+        content: Column(
+          children: <Widget>[
+            TextField(
+              controller: perpageController,
+              decoration: InputDecoration(
+                labelText: 'per page price',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            TextField(
+              controller: minController,
+              decoration: InputDecoration(
+                labelText: 'min page',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            Text(' To '),
+            TextField(
+              controller: maxController,
+              decoration: InputDecoration(
+                labelText: 'max page',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            TextField(
+              controller: totaldayController,
+              decoration: InputDecoration(
+                labelText: 'total day',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+          ],
+        ),
+        buttons: [
+          DialogButton(
+            color: mainColor,
+            onPressed: () {
+              serviceController.urgentdocument.add(Documentlist(
+                  day: totaldayController.text,
+                  minpage: minController.text,
+                  maxpage: maxController.text,
+                  price: perpageController.text));
+              print(serviceController.unurgentdocument);
+
               Navigator.pop(context);
             },
             child: Text(

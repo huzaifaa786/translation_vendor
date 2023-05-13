@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation_vendor/values/colors.dart';
@@ -8,6 +10,8 @@ class PagePrice extends StatelessWidget {
   const PagePrice(
       {super.key,
       this.days,
+      this.maxpage,
+      this.minpage,
       this.number,
       this.discription,
       this.image,
@@ -16,6 +20,8 @@ class PagePrice extends StatelessWidget {
   final days;
   final String? number;
   final discription;
+  final maxpage;
+  final minpage;
   final image;
   final bool extra;
   final Widget? services;
@@ -30,7 +36,15 @@ class PagePrice extends StatelessWidget {
           Row(
             children: [
               Text(
-                number!,
+                minpage == null ? '' : minpage,
+                style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 19,
+                    color: mainColor),
+              ),
+              Text(' To '),
+              Text(
+                maxpage == null ? '' :maxpage,
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 19,
