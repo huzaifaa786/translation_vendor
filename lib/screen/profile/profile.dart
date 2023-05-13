@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:translation_vendor/screen/profile/edit_model.dart';
+import 'package:translation_vendor/screen/profile/profilecontroller.dart';
 import 'package:translation_vendor/static/button.dart';
 import 'package:translation_vendor/static/imageinput.dart';
 import 'package:translation_vendor/static/password.dart';
@@ -41,8 +43,9 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.only(left: 15,right: 15),
+          child: GetBuilder<ProfileController>(
+        builder: (controller) => Padding(
+        padding: const EdgeInsets.only(left: 15, right: 15),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -52,9 +55,13 @@ class _ProfileState extends State<Profile> {
                   Navigator.pop(context);
                 },
               ),
-              SizedBox(height: 12,),
+              SizedBox(
+                height: 12,
+              ),
               InkWell(
-                onTap: () { profileController.profileImage();},
+                onTap: () {
+                  profileController.profileImage();
+                },
                 child: Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
@@ -65,7 +72,7 @@ class _ProfileState extends State<Profile> {
                         Radius.circular(45),
                       ),
                     ),
-                    child: Image.asset('assets/images/profile.png')),
+                    child: Image.network(profileController.profileimage!.path)),
               ),
               SizedBox(
                 height: 12,
@@ -209,23 +216,28 @@ class _ProfileState extends State<Profile> {
               ),
               ChangePassword(
                 title: 'Change Password',
-                onPressed: (){ChangePasswords(context);},
+                onPressed: () {
+                  ChangePasswords(context);
+                },
               ),
               SizedBox(
                 height: 15,
               ),
               LargeButton(
                 title: "Update",
-                onPressed: () { profileController.editprofile();},
+                onPressed: () {
+                  profileController.editprofile();
+                },
                 textcolor: White,
               )
             ],
           ),
         ),
-      )),
+      ))),
     );
   }
-   ChangePasswords(context) {
+
+  ChangePasswords(context) {
     Alert(context: context, content: EditModel(), buttons: [
       DialogButton(
           height: 0, color: White, onPressed: () async {}, child: Text(''))

@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
@@ -26,11 +29,12 @@ class ProfileController extends GetxController {
     int id = box.read('vender_id');
     String? api_token = box.read('api_token');
     print('objectdfdgfdg');
+    final profileimg = base64Encode(File(profileimage!.path).readAsBytesSync());
 
     var data = {
       'vendor_id': id,
       'api_token': api_token,
-      'profilepic': profileimage
+      'profilepic': profileimg
     };
     var response = await Api.execute(url: url, data: data);
     print(response);
