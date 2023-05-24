@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:translation_vendor/api/api.dart';
 import 'package:translation_vendor/helper/loading.dart';
@@ -21,6 +23,7 @@ class MainController extends GetxController {
       'online': isOnline.toString(),
     };
     var response = await Api.execute(url: url, data: data);
+    print('AAAAAAAAAAAAAAAAAAAAAAQQQQQQQQQQQQQQQQQQQQQQQQQQQQQFFFFFFFFFFFFFFF');
     print(response);
     LoadingHelper.dismiss();
     return response;
@@ -42,10 +45,10 @@ class MainController extends GetxController {
 
   void getVendor() async {
     LoadingHelper.show();
-    var url = BASE_URL + 'vendor/get';
+    var url = BASE_URL + 'vendor/show';
     GetStorage box = GetStorage();
     String api_token = box.read('api_token');
-    print(api_token);
+     
     var data = {
       'api_token': api_token,
     };
