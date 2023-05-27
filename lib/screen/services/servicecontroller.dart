@@ -44,9 +44,12 @@ class ServiceController extends GetxController {
     GetStorage box = GetStorage();
     int id = box.read('vender_id');
     String? api_token = box.read('api_token');
-    print('objectdfdgfdg');
-    print(unurgentdocument);
-    print(audiovideoController.text);
+    print(id);
+    print(api_token);
+    print(urgent);
+    print(unurgent);
+    print(unurgent);
+    print(unurgent);
 
     var data = {
       'vendor_id': id,

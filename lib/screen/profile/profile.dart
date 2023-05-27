@@ -39,201 +39,220 @@ class _ProfileState extends State<Profile> {
     });
   }
 
+  fetchUser() async {
+    await profileController.getVendor();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    fetchUser();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: GetBuilder<ProfileController>(
-        builder: (controller) => Padding(
-        padding: const EdgeInsets.only(left: 15, right: 15),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              TitleTopbar(
-                text: 'Profile',
-                ontap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              InkWell(
-                onTap: () {
-                  profileController.profileImage();
-                },
-                child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(45),
-                      ),
-                    ),
-                    child: Image.network(profileController.profileimage!.path)),
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              Text(
-                'Waston',
-                style: TextStyle(
-                  fontFamily: 'Mazzard',
-                  fontSize: 23,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+        child: GetBuilder<ProfileController>(
+          builder: (controller) => Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15),
+            child: SingleChildScrollView(
+              child: Column(
                 children: [
+                  TitleTopbar(
+                    text: 'Profile',
+                    ontap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      profileController.profileImage();
+                    },
+                    child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.black,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(55),
+                          ),
+                        ),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(45),
+                            child: Image.asset(
+                              'assets/images/5907.jpg',
+                              height: 90,
+                              width: 90,
+                            ))),
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
                   Text(
-                    'Waston ',
+                    'Waston',
                     style: TextStyle(
                       fontFamily: 'Mazzard',
                       fontSize: 23,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                  Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(40),
-                          ),
-                          color: Color.fromARGB(255, 218, 211, 211)),
-                      child: SvgPicture.asset('assets/images/edit.svg')),
-                ],
-              ),
-              EditPage(
-                title: 'About(English)',
-              ),
-              Text(
-                'Lorem ipsum dolor sit amet, consectetur\n adipiscing elit. Vitae amet placerat dignissim nibh\n dictum sit. Pretium ornare viverra.',
-                style: TextStyle(
-                  fontFamily: 'Mazzard',
-                  fontSize: 17,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              EditPage(
-                title: 'About(Arabic)',
-              ),
-              Text(
-                'Lorem ipsum dolor sit amet, consectetur\n adipiscing elit. Vitae amet placerat dignissim nibh\n dictum sit. Pretium ornare viverra.',
-                style: TextStyle(
-                  fontFamily: 'Mazzard',
-                  fontSize: 17,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              EditPage(
-                title: 'Mobile',
-              ),
-              Row(
-                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Waston ',
+                        style: TextStyle(
+                          fontFamily: 'Mazzard',
+                          fontSize: 23,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(40),
+                              ),
+                              color: Color.fromARGB(255, 218, 211, 211)),
+                          child: SvgPicture.asset('assets/images/edit.svg')),
+                    ],
+                  ),
+                  EditPage(
+                    title: 'About(English)',
+                  ),
                   Text(
-                    '+3942398345',
+                    'Lorem ipsum dolor sit amet, consectetur\n adipiscing elit. Vitae amet placerat dignissim nibh\n dictum sit. Pretium ornare viverra.',
                     style: TextStyle(
                       fontFamily: 'Mazzard',
                       fontSize: 17,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                ],
-              ),
-              AddPage(
-                title: 'Certificate',
-                onPressed: () {
-                  print(showCreate);
-                  setState(() {
-                    showCreate2 = !showCreate2;
-                    print(showCreate);
-                  });
-                },
-              ),
-              Row(
-                children: [
-                  SvgPicture.asset(
-                    'assets/images/certificate.svg',
-                    height: 24,
-                    width: 24,
+                  EditPage(
+                    title: 'About(Arabic)',
                   ),
                   Text(
-                    ' Lorem ipsum dolor sit ',
+                    'Lorem ipsum dolor sit amet, consectetur\n adipiscing elit. Vitae amet placerat dignissim nibh\n dictum sit. Pretium ornare viverra.',
                     style: TextStyle(
                       fontFamily: 'Mazzard',
                       fontSize: 17,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
+                  EditPage(
+                    title: 'Mobile',
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        '+3942398345',
+                        style: TextStyle(
+                          fontFamily: 'Mazzard',
+                          fontSize: 17,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                  AddPage(
+                    title: 'Certificate',
+                    onPressed: () {
+                      print(showCreate);
+                      setState(() {
+                        showCreate2 = !showCreate2;
+                        print(showCreate);
+                      });
+                    },
+                  ),
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/images/certificate.svg',
+                        height: 24,
+                        width: 24,
+                      ),
+                      Text(
+                        ' Lorem ipsum dolor sit ',
+                        style: TextStyle(
+                          fontFamily: 'Mazzard',
+                          fontSize: 17,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                  showCreate2 == true
+                      ? Imageinput(
+                          labelText: 'Certificate',
+                          imageIcon: 'assets/images/image.svg',
+                          onpressed: () {
+                            selectimage();
+                          },
+                        )
+                      : Container(),
+                  AddPage(
+                    title: 'Language',
+                    onPressed: () {
+                      print(showCreate);
+                      setState(() {
+                        showCreate = !showCreate;
+                        print(showCreate);
+                      });
+                    },
+                  ),
+                  showCreate == true
+                      ? InputFields(
+                          hint: 'Add language',
+                          showSuffix: true,
+                          suffix: 'ADD',
+                          onpressed: () {},
+                        )
+                      : Container(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextBox(
+                        title: 'English',
+                      ),
+                      TextBox(
+                        title: 'Arabic',
+                      ),
+                      TextBox(
+                        title: 'Persion',
+                      ),
+                    ],
+                  ),
+                  ChangePassword(
+                    title: 'Change Password',
+                    onPressed: () {
+                      ChangePasswords(context);
+                    },
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  LargeButton(
+                    title: "Update",
+                    onPressed: () {
+                      profileController.editprofile();
+                    },
+                    textcolor: White,
+                  )
                 ],
               ),
-              showCreate2 == true
-                  ? Imageinput(
-                      labelText: 'Certificate',
-                      imageIcon: 'assets/images/image.svg',
-                      onpressed: () {
-                        selectimage();
-                      },
-                    )
-                  : Container(),
-              AddPage(
-                title: 'Language',
-                onPressed: () {
-                  print(showCreate);
-                  setState(() {
-                    showCreate = !showCreate;
-                    print(showCreate);
-                  });
-                },
-              ),
-              showCreate == true
-                  ? InputFields(
-                      hint: 'Add language',
-                      showSuffix: true,
-                      suffix: 'ADD',
-                      onpressed: () {},
-                    )
-                  : Container(),
-              SizedBox(
-                height: 15,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextBox(
-                    title: 'English',
-                  ),
-                  TextBox(
-                    title: 'Arabic',
-                  ),
-                  TextBox(
-                    title: 'Persion',
-                  ),
-                ],
-              ),
-              ChangePassword(
-                title: 'Change Password',
-                onPressed: () {
-                  ChangePasswords(context);
-                },
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              LargeButton(
-                title: "Update",
-                onPressed: () {
-                  profileController.editprofile();
-                },
-                textcolor: White,
-              )
-            ],
+            ),
           ),
         ),
-      ))),
+      ),
     );
   }
 
