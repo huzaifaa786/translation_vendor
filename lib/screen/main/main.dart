@@ -35,7 +35,6 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       mainController.getVendor();
-      
     });
   }
 
@@ -49,7 +48,13 @@ class _MainScreenState extends State<MainScreen> {
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: Column(
             children: [
-              Topbar(),
+              Topbar(
+                image: mainController.vendor != null
+                    ? mainController.vendor!.profilepic == ''
+                        ? ''
+                        : mainController.vendor!.profilepic
+                    : '',
+              ),
               mainController.vendor != null
                   ? Padding(
                       padding: const EdgeInsets.only(top: 30),

@@ -52,12 +52,13 @@ class MainController extends GetxController {
     var data = {
       'api_token': api_token,
     };
+    print(data);
     var response = await Api.execute(url: url, data: data);
     print(response);
-    if (response['error'] == false) {
+    if (!response['error']) {
       vendor = Vendor(response['Vendor']);
-            GetStorage box = GetStorage();
-        box.write('vender_id', vendor!.id);
+      GetStorage box = GetStorage();
+      box.write('vender_id', vendor!.id);
       if (vendor!.online == 1) {
         i = 0;
         print(i);
