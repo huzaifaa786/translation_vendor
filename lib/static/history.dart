@@ -5,27 +5,32 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation_vendor/static/badge.dart';
 import 'package:translation_vendor/values/colors.dart';
 
+
 class HistoryCard extends StatelessWidget {
   const HistoryCard({
     super.key,
     this.image,
-    this.title,
+    this.id,
     this.day,
     this.type,
-    this.onPressed,
+    this.ontap,
     this.name,
+    this.price,
+    this.status,
   });
   final type;
   final name;
   final image;
-  final title;
+  final id;
   final day;
-  final onPressed;
+  final ontap;
+  final price;
+  final status;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onPressed,
+      onTap: ontap,
       child: Padding(
         padding: const EdgeInsets.all(4),
         child: Column(
@@ -33,52 +38,66 @@ class HistoryCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Column(
-                  children: [
-                    Container(
-                      height: 90,
-                      width: 90,
-                      child:
-                          Image(image: AssetImage('assets/images/history.png')),
-                    ),
-                  ],
-                ),
+                // Column(
+                //   children: [
+                //     ClipRRect(
+                //       borderRadius: BorderRadius.circular(45),
+                //       child: image == ''
+                //           ? Image(
+                //               image: AssetImage('assets/images/5907.jpg'),
+                //               height: 80,
+                //               width: 80,
+                //             )
+                //           : CachedNetworkImage(
+                //               imageUrl: image,
+                //               height: 80,
+                //               width: 80,
+                //             ),
+                //     ),
+                //   ],
+                // ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      title,
+                      'Order id # ' + id.toString(),
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
-                          fontFamily: 'Poppins'),
-                      maxLines: 2,
+                          fontFamily: 'Mazzard'),
+                    ),
+                    SizedBox(
+                      height: 4,
                     ),
                     Text(
                       name,
                       style: TextStyle(
                           fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'Poppins'),
-                      maxLines: 2,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Mazzard'),
+                    ),
+                    SizedBox(
+                      height: 4,
                     ),
                     Text(
                       type,
                       style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
-                          fontFamily: 'Poppins'),
-                      maxLines: 2,
+                          fontFamily: 'Mazzard'),
                     ),
-                    SizedBox(height: 3,),
+                    SizedBox(
+                      height: 4,
+                    ),
                     Row(
                       children: [
                         Icon(
                           Icons.access_time_outlined,
                           size: 14,
                         ),
-                        SizedBox(width: 3),
+                        SizedBox(
+                          width: 4,
+                        ),
                         Text(
                           "08:00-16:00 | 03.12.2022 ",
                           style: TextStyle(fontSize: 11),
@@ -87,46 +106,37 @@ class HistoryCard extends StatelessWidget {
                     ),
                   ],
                 ),
-              
-                Padding(
-                  padding: const EdgeInsets.only(top: 12),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        'AED  50',
-                        style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'Poppins'),
-                      ),
-                      Badgee(
-                        title: 'in progress',
-                        color: mainColor,
-                      ),
-                      SizedBox(height: 6),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 6,bottom: 6),
-                        child: Text(
-                          "View Document",
-                          style: TextStyle(
-                              color: Colors.blue,
-                              decoration: TextDecoration.underline,
-                              fontSize: 9),
-                        ),
-                      ),
-                      SvgPicture.asset(
-                        'assets/images/msg.svg',
-                        height: 17,
-                        width: 17,
-                      ),
-                    ],
-                  ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                     'AED '+price,
+                      style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'Mazzard'),
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Badgee(
+                      title: status == "3"
+                          ? 'Completed'
+                          : status == "2"
+                              ? "Rejected"
+                              : "In progress",
+                      color: status == "3"
+                          ? Colors.green
+                          : status == "2"
+                              ? Colors.red
+                              : mainColor,
+                    ),
+                  ],
                 )
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 12.0),
+              padding: const EdgeInsets.only(top: 20.0),
               child: Divider(
                 color: Colors.grey, //color of divider
                 height: 5, //height spacing of divider

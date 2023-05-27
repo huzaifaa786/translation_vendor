@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:translation_vendor/helper/loading.dart';
 
 import 'package:translation_vendor/screen/history/history.dart';
+import 'package:translation_vendor/screen/history/historycontroller.dart';
 import 'package:translation_vendor/screen/login/authcontroller.dart';
 import 'package:translation_vendor/screen/login/login.dart';
 import 'package:translation_vendor/screen/main/main.dart';
@@ -17,6 +18,7 @@ import 'package:translation_vendor/screen/sale/sales.dart';
 import 'package:translation_vendor/screen/services/service.dart';
 import 'package:translation_vendor/screen/services/servicecontroller.dart';
 import 'package:translation_vendor/screen/splash/splash.dart';
+import 'package:translation_vendor/values/controllers.dart';
 import 'package:translation_vendor/values/styles.dart';
 
 void main() async {
@@ -25,6 +27,7 @@ void main() async {
   Get.put(MainController());
   Get.put(ServiceController());
   Get.put(ProfileController());
+  Get.put(HistoryController());
   await GetStorage.init();
   runApp(const MyApp());
 }
