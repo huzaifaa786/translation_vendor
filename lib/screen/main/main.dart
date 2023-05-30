@@ -108,11 +108,6 @@ class _MainScreenState extends State<MainScreen> {
                 title: 'Order History',
                 onPressed: () {
                   Get.to(()=> HistoryScreen());
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => HistoryScreen(),
-                  //     ));
                 },
                 imgicon: 'assets/images/page.svg',
               ),

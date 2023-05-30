@@ -91,7 +91,7 @@ class ProfileController extends GetxController {
       final profileimge =
           base64Encode(File(profileimg!.path).readAsBytesSync());
       if (certificateImage!.path != '') {
-        print('No*****************************************************');
+        print('Yes*****************************************************');
         final certiimge =
             base64Encode(File(certificateImage!.path).readAsBytesSync());
         var data = {
@@ -110,6 +110,10 @@ class ProfileController extends GetxController {
           mainController.vendor = vendor;
           mainController.refresh();
           update();
+          Get.snackbar("Upadte.", "Profile Update Sucessfully.",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.green,
+              colorText: Colors.white);
           LoadingHelper.dismiss();
         } else {
           LoadingHelper.dismiss();
@@ -132,6 +136,10 @@ class ProfileController extends GetxController {
           mainController.vendor = vendor;
           mainController.refresh();
           update();
+          Get.snackbar("Upadte.", "Profile Update Sucessfully.",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.green,
+              colorText: Colors.white);
           LoadingHelper.dismiss();
         } else {
           LoadingHelper.dismiss();
@@ -158,6 +166,10 @@ class ProfileController extends GetxController {
           mainController.vendor = vendor;
           mainController.refresh();
           update();
+          Get.snackbar("Upadte.", "Profile Update Sucessfully.",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.green,
+              colorText: Colors.white);
           LoadingHelper.dismiss();
         } else {
           LoadingHelper.dismiss();
@@ -179,6 +191,10 @@ class ProfileController extends GetxController {
           mainController.vendor = vendor;
           mainController.refresh();
           update();
+          Get.snackbar("Upadte.", "Profile Update Sucessfully.",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.green,
+              colorText: Colors.white);
           LoadingHelper.dismiss();
         } else {
           LoadingHelper.dismiss();

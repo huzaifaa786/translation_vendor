@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:get/get.dart';
 import 'package:translation_vendor/static/titletopbar.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:translation_vendor/values/colors.dart';
@@ -44,7 +45,7 @@ class _SalesScreenState extends State<SalesScreen> {
                 TitleTopbar(
                   text: 'Sale',
                   ontap: () {
-                    Navigator.pop(context);
+                    Get.back();
                   },
                 ),
                 Container(

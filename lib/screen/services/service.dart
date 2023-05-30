@@ -74,7 +74,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 TitleTopbar(
                   text: 'Service',
                   ontap: () {
-                    Navigator.pop(context);
+                    Get.back();
                   },
                 ),
                 Row(
@@ -385,7 +385,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
             "yes",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Get.back(),
           color: mainColor,
         ),
         DialogButton(
@@ -398,7 +398,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
             "No",
             style: TextStyle(color: mainColor, fontSize: 20),
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Get.back(),
           color: White,
         ),
       ],
@@ -434,7 +434,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
               await serviceController.save(
                   serviceController.inpersionController.text,
                   serviceController.audiovideoController.text);
-              Navigator.pop(context);
+              Get.back();
             },
             child: Text(
               "save",
@@ -499,7 +499,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   price: perpageController.text));
               print(serviceController.unurgentdocument);
 
-              Navigator.pop(context);
+              Get.back();
             },
             child: Text(
               "save",
@@ -564,7 +564,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   price: perpageController.text));
               print(serviceController.unurgentdocument);
 
-              Navigator.pop(context);
+              Get.back();
             },
             child: Text(
               "save",

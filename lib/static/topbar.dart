@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:translation_vendor/screen/notification/notification.dart';
 import 'package:translation_vendor/screen/profile/profile.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -25,21 +26,13 @@ class Topbar extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NotificationScreen(),
-                      ));
+                  Get.to(() => NotificationScreen());
                 },
                 child: SvgPicture.asset('assets/images/notifcation.svg'),
               ),
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Profile(),
-                      ));
+                  Get.to(() => Profile());
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(left: 12),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:get/get.dart';
 import 'package:translation_vendor/static/notification.dart';
 import 'package:translation_vendor/static/titletopbar.dart';
 
@@ -24,7 +25,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             TitleTopbar(
               text: 'Notifications',
               ontap: () {
-                Navigator.pop(context);
+                Get.back();
               },
             ),
             SizedBox(height: 23,),

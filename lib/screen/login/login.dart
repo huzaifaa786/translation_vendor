@@ -375,7 +375,7 @@ class _LoginScreenState extends State<LoginScreen> {
             "ok",
             style: TextStyle(color: White, fontSize: 25),
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Get.back(),
         ),
       ],
     ).show();

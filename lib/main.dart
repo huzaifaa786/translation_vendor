@@ -20,7 +20,6 @@ import 'package:translation_vendor/screen/sale/sales.dart';
 import 'package:translation_vendor/screen/services/service.dart';
 import 'package:translation_vendor/screen/services/servicecontroller.dart';
 import 'package:translation_vendor/screen/splash/splash.dart';
-import 'package:translation_vendor/values/controllers.dart';
 import 'package:translation_vendor/values/styles.dart';
 
 void main() async {
@@ -48,7 +47,6 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      // navigatorKey: navigatorKey,
       builder: EasyLoading.init(),
       title: "Trans",
       theme: Styles.lightTheme,
