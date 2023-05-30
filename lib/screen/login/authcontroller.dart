@@ -141,6 +141,8 @@ class AuthController extends GetxController {
                       LoadingHelper.dismiss();
                       Vendor vendor = Vendor(response['Vendor']);
                       print(vendor);
+                      GetStorage box = GetStorage();
+                      box.write('api_token', vendor.apiToken);
                       return callback(true);
                     } else {
                       LoadingHelper.dismiss();
@@ -182,6 +184,8 @@ class AuthController extends GetxController {
                     if (!response['error']) {
                       Vendor vendor = Vendor(response['Vendor']);
                       print(vendor);
+                      GetStorage box = GetStorage();
+                      box.write('api_token', vendor.apiToken);
                       LoadingHelper.dismiss();
                       return callback(true);
                     } else {

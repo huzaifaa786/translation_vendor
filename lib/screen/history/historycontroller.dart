@@ -13,11 +13,11 @@ class HistoryController extends GetxController {
     LoadingHelper.show();
     var url = BASE_URL + 'vendor/order';
     GetStorage box = GetStorage();
-    int id = box.read('vendor_id');
+
     String api_token = box.read('api_token');
     var data = {
       'api_token': api_token,
-      'vendor_id': id,
+   
     };
    print(data);
     var response = await Api.execute(url: url, data: data);
@@ -28,11 +28,12 @@ class HistoryController extends GetxController {
         order.add(Order(van));
       }
       orders = order;
-       LoadingHelper.dismiss();
+      LoadingHelper.dismiss();
       print(orders);
       update();
     } else {
       print(response['error']);
+       LoadingHelper.dismiss();
     }
   }
 

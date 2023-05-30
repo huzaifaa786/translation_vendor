@@ -1,28 +1,41 @@
 import 'package:translation_vendor/models/user.dart';
 import 'package:translation_vendor/models/vendor.dart';
-
+import 'package:translation_vendor/models/document.dart';
 class Order {
   int? id;
   int? user_id;
-  String? price;
+  int? price;
+  int? duration;
+  int? vendor_id;
+  String? starttime;
+  String? endtime;
+  String? date;
   String? servicetype;
-  String? documenttype;
+  String? scheduletype;
   String? status;
-  String? vendor_id;
+  DateTime? created_at;
+
   User? user;
   Vendor? vendor;
-   //  Orderdoc? document;
+  // OrderDocument? document;
+
 
   Order(order) {
     id = order['id'];
     price = order['price'];
     servicetype = order['servicetype'];
-    documenttype = order['documenttype'];
+    scheduletype = order['scheduletype'];
+    duration = order['duration'];
+    starttime = order['starttime'];
+    endtime = order['endtime'];
+    date = order['date'];
     status = order['status'];
     vendor_id = order['vendor_id'];
     user_id = order['user_id'];
+    created_at =  DateTime.parse(order['created_at']).toLocal();
     user = User(order['user']);
     vendor = Vendor(order['vendor']);
-    // document =  Orderdoc(order['document']) ;
+    // document = OrderDocument(order['orderdocument']);
+  
   }
 }

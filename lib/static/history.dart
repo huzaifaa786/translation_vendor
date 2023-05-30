@@ -4,16 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation_vendor/static/badge.dart';
 import 'package:translation_vendor/values/colors.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
 
 class HistoryCard extends StatelessWidget {
   const HistoryCard({
     super.key,
     this.image,
     this.id,
+    this.servicetype,
     this.day,
     this.type,
     this.ontap,
+    this.date,
+    this.time,
     this.name,
     this.price,
     this.status,
@@ -21,6 +24,9 @@ class HistoryCard extends StatelessWidget {
   final type;
   final name;
   final image;
+  final servicetype;
+  final date;
+  final time;
   final id;
   final day;
   final ontap;
@@ -38,24 +44,24 @@ class HistoryCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                // Column(
-                //   children: [
-                //     ClipRRect(
-                //       borderRadius: BorderRadius.circular(45),
-                //       child: image == ''
-                //           ? Image(
-                //               image: AssetImage('assets/images/5907.jpg'),
-                //               height: 80,
-                //               width: 80,
-                //             )
-                //           : CachedNetworkImage(
-                //               imageUrl: image,
-                //               height: 80,
-                //               width: 80,
-                //             ),
-                //     ),
-                //   ],
-                // ),
+                Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(45),
+                      child: image == ''
+                          ? Image(
+                              image: AssetImage('assets/images/5907.jpg'),
+                              height: 80,
+                              width: 80,
+                            )
+                          : CachedNetworkImage(
+                              imageUrl: image,
+                              height: 80,
+                              width: 80,
+                            ),
+                    ),
+                  ],
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -99,7 +105,11 @@ class HistoryCard extends StatelessWidget {
                           width: 4,
                         ),
                         Text(
-                          "08:00-16:00 | 03.12.2022 ",
+                          time + " | ",
+                          style: TextStyle(fontSize: 11),
+                        ),
+                        Text(
+                          date,
                           style: TextStyle(fontSize: 11),
                         ),
                       ],
@@ -110,7 +120,7 @@ class HistoryCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                     'AED '+price,
+                      'AED ' + price.toString(),
                       style: TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.w600,
@@ -131,6 +141,29 @@ class HistoryCard extends StatelessWidget {
                               ? Colors.red
                               : mainColor,
                     ),
+                    SizedBox(height: 6),
+                     servicetype == "documentType"
+                        ? Column(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 6, bottom: 6),
+                                child: Text(
+                                  "View Document",
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      decoration: TextDecoration.underline,
+                                      fontSize: 9),
+                                ),
+                              ),
+                              SvgPicture.asset(
+                                'assets/images/msg.svg',
+                                height: 17,
+                                width: 17,
+                              ),
+                            ],
+                          )
+                        : Container(),
                   ],
                 )
               ],

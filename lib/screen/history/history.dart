@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:get/get.dart';
+import 'package:translation_vendor/screen/history/historycontroller.dart';
 import 'package:translation_vendor/screen/order_status/order_status.dart';
 import 'package:translation_vendor/static/history.dart';
 import 'package:translation_vendor/static/titletopbar.dart';
@@ -21,16 +23,16 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
   @override
   void initState() {
+    
     fetchOrder();
     super.initState();
   }
 
-  Widget build(BuildContext context) {
+   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.only(left: 12, right: 12),
-        child: Column(
+          child: GetBuilder<HistoryController>(
+        builder: (controller) => Column(
           children: [
             TitleTopbar(
               text: 'History',
@@ -38,42 +40,43 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 Navigator.pop(context);
               },
             ),
-            HistoryCard(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => OrderStatus(),
-                    ));
-              },
-              title: 'Order ID #34356',
-              name: 'willom son',
-              type: 'In person',
-            ),
-            HistoryCard(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => OrderStatus(),
-                    ));
-              },
-              title: 'Order ID #34356',
-              name: 'willom son',
-              type: 'In person',
-            ),
-            HistoryCard(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => OrderStatus(),
-                    ));
-              },
-              title: 'Order ID #34356',
-              name: 'willom son',
-              type: 'In person',
-            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: Column(
+                children: [
+                  controller.orders.length != 0
+                      ? Container(
+                          height: MediaQuery.of(context).size.height * 0.81,
+                          child: ListView.builder(
+                              itemCount: controller.orders.length,
+                              itemBuilder: (context, index) => HistoryCard(
+                                ontap: (){  Get.to(OrderStatus(order: controller.orders[index],));},
+                                    id: controller.orders[index].id,
+                                    name: controller.orders[index].vendor!.name,
+                                    image: controller
+                                        .orders[index].vendor!.profilepic,
+                                    price: controller.orders[index].price,
+                                    type: controller.orders[index].servicetype,
+                                    status: controller.orders[index].status,
+                                    time: controller.orders[index].starttime! + '-' + controller.orders[index].endtime!,
+                                    date: controller.orders[index].date,
+                                    servicetype: controller.orders[index].servicetype,
+                                  )),
+                        )
+                      : Container(
+                          height: MediaQuery.of(context).size.height * 0.22,
+                          width: MediaQuery.of(context).size.width,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text("No Order Found!"),
+                            ],
+                          ),
+                        ),
+                ],
+              ),
+            )
           ],
         ),
       )),
