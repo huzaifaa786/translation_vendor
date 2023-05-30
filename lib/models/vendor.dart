@@ -11,7 +11,10 @@ class Vendor {
   String? profilepic;
   String? certificate;
   String? status;
+  String? aboutEng;
+  String? aboutArabic;
   int? online;
+  List<dynamic>? language;
 
   Vendor(vendor) {
     id = vendor['id'];
@@ -24,6 +27,9 @@ class Vendor {
     profilepic = vendor['profilepic'] ?? '';
     certificate = vendor['certificate'] ?? '';
     status = vendor['status'];
+    aboutEng = vendor['about(Eng)'] ?? '';
+    aboutArabic = vendor['about(arabic)'] ?? '';
     online = vendor['online'];
+    language = jsonDecode(vendor['language']);
   }
 }

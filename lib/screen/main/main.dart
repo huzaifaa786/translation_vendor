@@ -91,11 +91,8 @@ class _MainScreenState extends State<MainScreen> {
                 child: IconsButton(
                   title: 'Profile',
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Profile(),
-                        ));
+                    profileController.clearVariables();
+                    Get.to(() => Profile());
                   },
                   imgicon: 'assets/images/person.svg',
                 ),
@@ -103,33 +100,26 @@ class _MainScreenState extends State<MainScreen> {
               IconsButton(
                 title: 'Services',
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ServiceScreen(),
-                      ));
+                  Get.to(() => ServiceScreen());
                 },
                 imgicon: 'assets/images/headphone.svg',
               ),
               IconsButton(
                 title: 'Order History',
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HistoryScreen(),
-                      ));
+                  Get.to(()=> HistoryScreen());
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => HistoryScreen(),
+                  //     ));
                 },
                 imgicon: 'assets/images/page.svg',
               ),
               IconsButton(
                 title: 'Sales',
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SalesScreen(),
-                      ));
+                  Get.to(() => SalesScreen());
                 },
                 imgicon: 'assets/images/sale.svg',
               ),
