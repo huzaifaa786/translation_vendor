@@ -24,10 +24,12 @@ class TextBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      margin: EdgeInsets.only(right: 8),
       width: MediaQuery.of(context).size.width * 0.28,
-      height: 60,
+      // height: 50,
       child: Container(
+        padding: EdgeInsets.fromLTRB(8, 12, 8, 12),
         decoration: BoxDecoration(
             border: Border.all(
               color: hintColor,
@@ -39,10 +41,11 @@ class TextBox extends StatelessWidget {
           children: [
             Text(
               title,
+              maxLines: null,
               style: TextStyle(
                 color: textcolor,
                 fontFamily: 'Poppins',
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.w500,
               ),
             ),

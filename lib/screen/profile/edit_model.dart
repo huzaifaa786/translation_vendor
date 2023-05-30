@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:translation_vendor/screen/profile/profilecontroller.dart';
 import 'package:translation_vendor/static/button.dart';
 import 'package:translation_vendor/static/password_field_two.dart';
+import 'package:translation_vendor/values/Validator.dart';
 import 'dart:ui' as ui;
 
 import 'package:translation_vendor/values/colors.dart';
+import 'package:translation_vendor/values/controllers.dart';
 
 class EditModel extends StatefulWidget {
-  const EditModel({Key? key, }) : super(key: key);
-  
+  EditModel({Key? key}) : super(key: key);
+
   @override
   State<EditModel> createState() => _EditModelState();
 }
 
 class _EditModelState extends State<EditModel> {
-  TextEditingController currentPassword = TextEditingController();
-  TextEditingController newPassword = TextEditingController();
-  TextEditingController confirmNewPassword = TextEditingController();
   bool _passwordVisible = true;
   bool _newpasswordVisible = true;
   bool _cpasswordVisible = true;
@@ -38,52 +39,54 @@ class _EditModelState extends State<EditModel> {
     });
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: ui.TextDirection.ltr,
-      child: Column(
+    return GetBuilder<ProfileController>(
+      builder: (controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          SizedBox(height: 6),
-         
-          SizedBox(height: 4),
+          SizedBox(height: 10),
           InputFieldPasswordTwo(
             hint: 'Enter current password',
             toggle: _toggle,
-            // imageIcon: 'assets/images/lock.svg',
             obscure: _passwordVisible,
-            controller: currentPassword,
+            controller: profileController.currentPassword,
+            validate: profileController.validateChangepasswordForm,
+            validator: (password) => Validators.passwordValidator(password),
           ),
-          SizedBox(height: 6),
-         
-          SizedBox(height: 4),
+          SizedBox(height: 10),
           InputFieldPasswordTwo(
             hint: 'Enter new password',
             toggle: _toggle1,
             // imageIcon: 'assets/images/lock.svg',
             obscure: _newpasswordVisible,
-            controller: newPassword,
+            controller: profileController.newPassword,
+            validate: profileController.validateChangepasswordForm,
+            validator: (password) => Validators.passwordValidator(password),
           ),
-          SizedBox(height: 6),
-        
-          SizedBox(height: 4),
+          SizedBox(height: 10),
           InputFieldPasswordTwo(
             hint: 'Enter confirm new password',
             toggle: _toggle2,
             // imageIcon: 'assets/images/lock.svg',
             obscure: _cpasswordVisible,
-            controller: confirmNewPassword,
+            controller: profileController.confirmNewPassword,
+            validate: profileController.validateChangepasswordForm,
+            validator: (password) => Validators.passwordValidator(password),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 16),
             child: LargeButton(
               title: 'Change',
               textcolor: White,
-              onPressed: ()  {
-                
+              onPressed: () {
+                print('object');
+                profileController.changepassword((success) {
+                  if (success) {
+                    // update(context);
+                    Get.back();
+                  }
+                });
               },
             ),
           )

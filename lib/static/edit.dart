@@ -23,7 +23,7 @@ class EditPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.only(top: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -32,19 +32,17 @@ class EditPage extends StatelessWidget {
             style: TextStyle(
                 fontWeight: FontWeight.w600, fontSize: 19, color: Colors.black),
           ),
-          Padding(
-              padding: const EdgeInsets.only(top: 15),
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(40),
-                    ),
-                    color: Color.fromARGB(255, 218, 211, 211)),
-                child: InkWell(
-                    onTap: onPressed,
-                    child: SvgPicture.asset('assets/images/edit.svg')),
-              ))
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(40),
+                ),
+                color: Color.fromARGB(255, 218, 211, 211)),
+            child: InkWell(
+                onTap: onPressed,
+                child: SvgPicture.asset('assets/images/edit.svg')),
+          )
         ],
       ),
     );

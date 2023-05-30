@@ -51,6 +51,7 @@ dependencies:
   intl: ^0.18.1
   location: ^4.4.0
   cached_network_image: ^3.2.3
+  auto_size_text_field: ^2.2.1
  
 
 dev_dependencies:
