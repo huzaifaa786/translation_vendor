@@ -214,7 +214,8 @@ class _OrderStatusState extends State<OrderStatus> {
                                     title: "Mark as Completed",
                                     textcolor: White,
                                     onPressed: () {
-                                      statusController.ordercomplete(widget.order!);
+                                        completeorder(context,widget.order);
+                                    
                                     })
                               ],
                             )
@@ -248,7 +249,7 @@ class _OrderStatusState extends State<OrderStatus> {
     );
   }
 
-  completeorder(context) {
+  completeorder(context,Order) {
     Alert(
       style: AlertStyle(
         titleStyle: TextStyle(fontSize: 27),
@@ -273,6 +274,7 @@ class _OrderStatusState extends State<OrderStatus> {
             setState(() {
               status = 3;
             });
+            statusController.ordercomplete(widget.order!);
             Get.back();
           },
           color: Colors.green,
