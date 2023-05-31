@@ -49,11 +49,11 @@ class _MainScreenState extends State<MainScreen> {
           child: Column(
             children: [
               Topbar(
-                image: mainController.vendor != null
-                    ? mainController.vendor!.profilepic == ''
-                        ? ''
-                        : mainController.vendor!.profilepic
-                    : '',
+                // image: mainController.vendor != null
+                //     ? mainController.vendor!.profilepic == ''
+                //         ? ''
+                //         : mainController.vendor!.profilepic
+                //     : '',
               ),
               mainController.vendor != null
                   ? Padding(

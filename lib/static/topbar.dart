@@ -30,28 +30,28 @@ class Topbar extends StatelessWidget {
                 },
                 child: SvgPicture.asset('assets/images/notifcation.svg'),
               ),
-              InkWell(
-                onTap: () {
-                  Get.to(() => Profile());
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 12),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: image == ''
-                        ? Image(
-                            image: AssetImage('assets/images/5907.jpg'),
-                            height: 28,
-                            width: 28,
-                          )
-                        : CachedNetworkImage(
-                            imageUrl: image,
-                            height: 28,
-                            width: 28,
-                          ),
-                  ),
-                ),
-              ),
+              // InkWell(
+              //   onTap: () {
+              //     Get.to(() => Profile());
+              //   },
+              //   child: Padding(
+              //     padding: const EdgeInsets.only(left: 12),
+              //     child: ClipRRect(
+              //       borderRadius: BorderRadius.circular(20),
+              //       child: image == ''
+              //           ? Image(
+              //               image: AssetImage('assets/images/5907.jpg'),
+              //               height: 28,
+              //               width: 28,
+              //             )
+              //           : CachedNetworkImage(
+              //               imageUrl: image,
+              //               height: 28,
+              //               width: 28,
+              //             ),
+              //     ),
+              //   ),
+              // ),
             ],
           )
         ],

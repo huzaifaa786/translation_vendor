@@ -125,15 +125,18 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 ),
                 Row(
                   children: [
-                    SvgPicture.asset('assets/images/shedule.svg'),
                     Padding(
-                      padding: const EdgeInsets.only(left: 6, top: 4),
+                      padding: const EdgeInsets.only(right:6.0),
+                      child: SvgPicture.asset('assets/images/shedule.svg'),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 6.0),
                       child: Text(
                         'Schedule',
                         style: TextStyle(
-                          fontFamily: 'Mazzard',
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Poppins',
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     )
@@ -204,12 +207,15 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 Row(
                   children: [
                     SvgPicture.asset('assets/images/location.svg'),
-                    Text(
-                      ' Determine range of service',
-                      style: TextStyle(
-                        fontFamily: 'Mazzard',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 6.0),
+                      child: Text(
+                        ' Determine range of service',
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     )
                   ],
@@ -220,8 +226,8 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     : Row(
                         children: [
                           Container(
-                            height: 250,
-                            width: MediaQuery.of(context).size.width * 0.922,
+                            height: 180,
+                            width: MediaQuery.of(context).size.width * 0.9,
                             child: GoogleMap(
                               // circles: serviceController.setCircles(),
                               scrollGesturesEnabled: true,
@@ -257,7 +263,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                         ],
                       ),
                 SizedBox(
-                  height: 8,
+                  height: 20,
                 ),
                 Schedule(day: 'Monday'),
                 Schedule(day: 'Tuesday'),

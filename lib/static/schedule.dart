@@ -45,7 +45,7 @@ class Scheduleinput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 15,bottom: 8),
+      padding: const EdgeInsets.only(top: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -69,11 +69,11 @@ class Scheduleinput extends StatelessWidget {
                 hintStyle: TextStyle(color: hintColor),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(width: 1, color: Colors.grey[500]!),
-                  borderRadius: BorderRadius.all(Radius.circular(6)),
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(width: 1, color: Colors.grey[500]!),
-                  borderRadius: BorderRadius.all(Radius.circular(6)),
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
                 ),
               ),
               cursorColor: Colors.black,

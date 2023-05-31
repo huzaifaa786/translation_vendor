@@ -46,7 +46,7 @@ class _ScheduleState extends State<Schedule> {
             Text(
               widget.day! + ' Working Hours',
               style: TextStyle(
-                fontFamily: 'Mazzard',
+                fontFamily: 'Poppins',
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
@@ -70,13 +70,13 @@ class _ScheduleState extends State<Schedule> {
               },
               hint: '9:00',
               controller: startTimeController,
-              fontSize: 20.0,
+              fontSize: 18.0,
             ),
             Text(
               'To',
               style: TextStyle(
-                fontFamily: 'Mazzard',
-                fontSize: 20,
+                fontFamily: 'Poppins',
+                fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -93,8 +93,8 @@ class _ScheduleState extends State<Schedule> {
                   serviceController.workingHours[index].endTime = endTime;
                 }, currentTime: DateTime.now());
               },
-              hint: '9:00',
-              fontSize: 20.0,
+              hint: '17:00',
+              fontSize: 18.0,
               controller: endTimeController,
             ),
             StarButton(
@@ -113,11 +113,11 @@ class _ScheduleState extends State<Schedule> {
         serviceController.workingHours
                 .any((hour) => hour.day == widget.day! && hour.isFrozen)
             ? Padding(
-                padding: const EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.only(bottom:12),
                 child: Text('This day is frozen'),
               )
             : Padding(
-                padding: const EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.only(bottom: 12),
                 child: Text('This day is unfrozen'),
               ),
       ],

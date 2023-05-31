@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:translation_vendor/values/colors.dart';
 
 class InputFieldPasswordTwo extends StatelessWidget {
   const InputFieldPasswordTwo(
