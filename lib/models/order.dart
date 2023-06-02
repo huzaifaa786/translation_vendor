@@ -1,6 +1,6 @@
 import 'package:translation_vendor/models/user.dart';
 import 'package:translation_vendor/models/vendor.dart';
-import 'package:translation_vendor/models/document.dart';
+
 class Order {
   int? id;
   int? user_id;
@@ -14,7 +14,6 @@ class Order {
   String? scheduletype;
   String? status;
   DateTime? created_at;
-
   User? user;
   Vendor? vendor;
   // OrderDocument? document;

@@ -54,7 +54,7 @@ class StatusController extends GetxController {
   }
      ordercomplete(Order order) async {
     LoadingHelper.show();
-    var url = BASE_URL + 'order/reject';
+    var url = BASE_URL + 'order/complete';
     GetStorage box = GetStorage();
 
     String api_token = box.read('api_token');
