@@ -252,14 +252,12 @@ class AuthController extends GetxController {
 
   void login(void Function(bool) callback) async {
     LoadingHelper.show();
-    print('object');
     final bool isFormValid =
         Validators.emptyStringValidator(userName.text, '') == null &&
             Validators.emptyStringValidator(password.text, '') == null;
     if (isFormValid) {
       var token = await FirebaseMessaging.instance.getToken();
       var url = BASE_URL + 'vendor/login';
-      ;
       var data = {
         'username': userName.text,
         'password': password.text,
@@ -296,7 +294,7 @@ class AuthController extends GetxController {
     GetStorage box = GetStorage();
     box.remove('api_token');
     Get.snackbar('Logout Successfully', '',
-        colorText: Colors.white, backgroundColor: mainColor);
+        colorText: Colors.white, backgroundColor: mainColor,snackPosition: SnackPosition.BOTTOM);
     Get.offAll(() => LoginScreen());
     LoadingHelper.dismiss();
   }
