@@ -74,7 +74,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 TitleTopbar(
                   text: 'Service',
                   ontap: () {
-                    Navigator.pop(context);
+                    Get.back();
                   },
                 ),
                 Row(
@@ -125,15 +125,18 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 ),
                 Row(
                   children: [
-                    SvgPicture.asset('assets/images/shedule.svg'),
                     Padding(
-                      padding: const EdgeInsets.only(left: 6, top: 4),
+                      padding: const EdgeInsets.only(right:6.0),
+                      child: SvgPicture.asset('assets/images/shedule.svg'),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 6.0),
                       child: Text(
                         'Schedule',
                         style: TextStyle(
-                          fontFamily: 'Mazzard',
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Poppins',
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     )
@@ -204,12 +207,15 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 Row(
                   children: [
                     SvgPicture.asset('assets/images/location.svg'),
-                    Text(
-                      ' Determine range of service',
-                      style: TextStyle(
-                        fontFamily: 'Mazzard',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 6.0),
+                      child: Text(
+                        ' Determine range of service',
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     )
                   ],
@@ -220,8 +226,8 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     : Row(
                         children: [
                           Container(
-                            height: 250,
-                            width: MediaQuery.of(context).size.width * 0.922,
+                            height: 180,
+                            width: MediaQuery.of(context).size.width * 0.9,
                             child: GoogleMap(
                               // circles: serviceController.setCircles(),
                               scrollGesturesEnabled: true,
@@ -257,7 +263,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                         ],
                       ),
                 SizedBox(
-                  height: 8,
+                  height: 20,
                 ),
                 Schedule(day: 'Monday'),
                 Schedule(day: 'Tuesday'),
@@ -385,7 +391,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
             "yes",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Get.back(),
           color: mainColor,
         ),
         DialogButton(
@@ -398,7 +404,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
             "No",
             style: TextStyle(color: mainColor, fontSize: 20),
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Get.back(),
           color: White,
         ),
       ],
@@ -434,7 +440,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
               await serviceController.save(
                   serviceController.inpersionController.text,
                   serviceController.audiovideoController.text);
-              Navigator.pop(context);
+              Get.back();
             },
             child: Text(
               "save",
@@ -499,7 +505,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   price: perpageController.text));
               print(serviceController.unurgentdocument);
 
-              Navigator.pop(context);
+              Get.back();
             },
             child: Text(
               "save",
@@ -564,7 +570,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   price: perpageController.text));
               print(serviceController.unurgentdocument);
 
-              Navigator.pop(context);
+              Get.back();
             },
             child: Text(
               "save",

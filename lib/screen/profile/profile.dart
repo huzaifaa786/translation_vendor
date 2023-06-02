@@ -59,7 +59,7 @@ class _ProfileState extends State<Profile> {
                   TitleTopbar(
                     text: 'Profile',
                     ontap: () {
-                      Navigator.pop(context);
+                      Get.back();
                     },
                   ),
                   profileController.vendor == null

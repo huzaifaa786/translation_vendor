@@ -30,21 +30,18 @@ class StarButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onPressed,
-      child: SizedBox(
-        width: 50,
-        height: 50,
-        child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(40),
-                ),
-                color: Color.fromARGB(255, 246, 237, 237)),
-            child: Image.asset(
-              'assets/images/star.png',
-              height: 34,
-              width: 34,
-            )),
-      ),
+      child: Container(
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(40),
+              ),
+              color: Color.fromARGB(255, 246, 237, 237)),
+          child: Image.asset(
+            'assets/images/star.png',
+            // height: 34,
+            // width: 34,
+          )),
     );
   }
 }

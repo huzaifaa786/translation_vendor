@@ -39,7 +39,7 @@ class _OrderStatusState extends State<OrderStatus> {
                   TitleTopbar(
                     text: 'Client',
                     ontap: () {
-                      Navigator.pop(context);
+                      Get.back();
                     },
                   ),
                   Padding(
@@ -275,6 +275,9 @@ class _OrderStatusState extends State<OrderStatus> {
             style: TextStyle(color: Colors.white, fontSize: 25),
           ),
           onPressed: () {
+            setState(() {
+              status = 3;
+            });
             statusController.ordercomplete(widget.order!);
             Get.back();
           },
@@ -289,7 +292,7 @@ class _OrderStatusState extends State<OrderStatus> {
             "No",
             style: TextStyle(color: White, fontSize: 25),
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Get.back(),
           color: Colors.red,
         ),
       ],

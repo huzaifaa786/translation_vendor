@@ -1,9 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables
 
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation_vendor/values/colors.dart';
 
 class PagePrice extends StatelessWidget {
@@ -44,7 +41,7 @@ class PagePrice extends StatelessWidget {
               ),
               Text(' To '),
               Text(
-                maxpage == null ? '' :maxpage,
+                maxpage == null ? '' : maxpage,
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 19,

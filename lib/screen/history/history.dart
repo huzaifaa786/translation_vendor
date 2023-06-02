@@ -37,7 +37,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             TitleTopbar(
               text: 'History',
               ontap: () {
-                Navigator.pop(context);
+                Get.back();
               },
             ),
             Padding(
