@@ -143,6 +143,7 @@ class AuthController extends GetxController {
                       print(vendor);
                       GetStorage box = GetStorage();
                       box.write('api_token', vendor.apiToken);
+                      box.write('vendor_id', vendor.id);
                       return callback(true);
                     } else {
                       LoadingHelper.dismiss();
@@ -186,6 +187,7 @@ class AuthController extends GetxController {
                       print(vendor);
                       GetStorage box = GetStorage();
                       box.write('api_token', vendor.apiToken);
+                      box.write('vendor_id', vendor.id);
                       LoadingHelper.dismiss();
                       return callback(true);
                     } else {
@@ -264,6 +266,7 @@ class AuthController extends GetxController {
         Vendor vendor = Vendor(response['vendor']);
         GetStorage box = GetStorage();
         box.write('api_token', vendor.apiToken);
+        box.write('vendor_id', vendor.id);
         LoadingHelper.dismiss();
         return callback(true);
       } else {

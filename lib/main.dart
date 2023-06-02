@@ -10,6 +10,7 @@ import 'package:translation_vendor/screen/login/authcontroller.dart';
 import 'package:translation_vendor/screen/login/login.dart';
 import 'package:translation_vendor/screen/main/main.dart';
 import 'package:translation_vendor/screen/main/maincontroller.dart';
+import 'package:translation_vendor/screen/notification/noticontroller.dart';
 import 'package:translation_vendor/screen/notification/notification.dart';
 import 'package:translation_vendor/screen/order_status/order_status.dart';
 import 'package:translation_vendor/screen/order_status/statuscontroller.dart';
@@ -32,6 +33,7 @@ void main() async {
   Get.put(HistoryController());
   Get.put(StatusController());
   Get.put(SaleController());
+  Get.put(NotificationController());
   await GetStorage.init();
   runApp(const MyApp());
 }

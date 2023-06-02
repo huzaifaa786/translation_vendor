@@ -111,62 +111,67 @@ class _OrderStatusState extends State<OrderStatus> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 12),
-                    child: Row(
-                      children: [
-                        Text(
-                          'Document',
-                          style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 12),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
+                  widget.order!.servicetype! =="documentType"
+                 ? Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 12),
+                        child: Row(
                           children: [
-                            Container(
-                              padding: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: mainColor.withOpacity(0.1),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(45),
+                            Text(
+                              'Document',
+                              style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14),
+                            )
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    color: mainColor.withOpacity(0.1),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(45),
+                                    ),
+                                  ),
+                                  child: SvgPicture.asset(
+                                    'assets/images/page.svg',
+                                    color: mainColor,
+                                    height: 12,
+                                    width: 12,
+                                  ),
                                 ),
-                              ),
-                              child: SvgPicture.asset(
-                                'assets/images/page.svg',
-                                color: mainColor,
-                                height: 12,
-                                width: 12,
-                              ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: Text(
+                                    'File Document 2',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 14),
+                                  ),
+                                ),
+                              ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Text(
-                                'File Document 2',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 14),
-                              ),
+                            Text(
+                              "View Document",
+                              style: TextStyle(
+                                  color: mainColor,
+                                  decoration: TextDecoration.underline,
+                                  fontSize: 14),
                             ),
                           ],
                         ),
-                        Text(
-                          "View Document",
-                          style: TextStyle(
-                              color: mainColor,
-                              decoration: TextDecoration.underline,
-                              fontSize: 14),
-                        ),
-                      ],
-                    ),
-                  ),
+                      ),
+                    ],
+                  ):Container(),
                   widget.order!.status! == "0"
                       ? Padding(
                           padding: const EdgeInsets.only(top: 19),
@@ -184,7 +189,7 @@ class _OrderStatusState extends State<OrderStatus> {
                               ),
                               LargeButton(
                                 onPressed: () {
-                                 statusController.orderreject(widget.order!);
+                                  statusController.orderreject(widget.order!);
                                 },
                                 title: 'Reject',
                                 textcolor: White,
@@ -214,8 +219,7 @@ class _OrderStatusState extends State<OrderStatus> {
                                     title: "Mark as Completed",
                                     textcolor: White,
                                     onPressed: () {
-                                        completeorder(context,widget.order);
-                                    
+                                      completeorder(context, widget.order);
                                     })
                               ],
                             )
@@ -249,7 +253,7 @@ class _OrderStatusState extends State<OrderStatus> {
     );
   }
 
-  completeorder(context,Order) {
+  completeorder(context, Order) {
     Alert(
       style: AlertStyle(
         titleStyle: TextStyle(fontSize: 27),

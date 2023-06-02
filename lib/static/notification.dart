@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:translation_vendor/values/colors.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class NotificationTile extends StatelessWidget {
   const NotificationTile({
@@ -7,10 +8,12 @@ class NotificationTile extends StatelessWidget {
     this.image,
     this.title,
     this.day,
+    this.price,
     this.ontap,
     this.name,
   });
   final name;
+  final price;
   final image;
   final title;
   final day;
@@ -33,16 +36,20 @@ class NotificationTile extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Container(
-                        height: 45,
-                        width: 45,
-                        decoration: BoxDecoration(
-                          color: mainColor,
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
-                        ),
-                        child:
-                            Image(image: AssetImage('assets/images/noti.png')),
-                      ),
+                       ClipRRect(
+                         borderRadius: BorderRadius.circular(45),
+                         child: image == ''
+                             ? Image(
+                                 image: AssetImage('assets/images/5907.jpg'),
+                                 height: 65,
+                                 width:65,
+                               )
+                             : CachedNetworkImage(
+                                 imageUrl: image,
+                                 height: 65,
+                                 width: 65,
+                               ),
+                       ),
                       Container(
                         padding: const EdgeInsets.only(left: 12),
                         width: MediaQuery.of(context).size.width * 0.7,
@@ -73,7 +80,7 @@ class NotificationTile extends StatelessWidget {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 4),
-                                  child: Text('AED 56',style: TextStyle(
+                                  child: Text('AED '+price,style: TextStyle(
                                         fontSize: 13,
                                         color:mainColor,
                                         fontWeight: FontWeight.w500),),
