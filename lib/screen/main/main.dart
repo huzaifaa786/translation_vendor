@@ -49,12 +49,12 @@ class _MainScreenState extends State<MainScreen> {
           child: Column(
             children: [
               Topbar(
-                // image: mainController.vendor != null
-                //     ? mainController.vendor!.profilepic == ''
-                //         ? ''
-                //         : mainController.vendor!.profilepic
-                //     : '',
-              ),
+                  // image: mainController.vendor != null
+                  //     ? mainController.vendor!.profilepic == ''
+                  //         ? ''
+                  //         : mainController.vendor!.profilepic
+                  //     : '',
+                  ),
               mainController.vendor != null
                   ? Padding(
                       padding: const EdgeInsets.only(top: 30),
@@ -107,14 +107,17 @@ class _MainScreenState extends State<MainScreen> {
               IconsButton(
                 title: 'Order History',
                 onPressed: () {
-                  Get.to(()=> HistoryScreen());
+                  Get.to(() => HistoryScreen());
                 },
                 imgicon: 'assets/images/page.svg',
               ),
               IconsButton(
                 title: 'Sales',
                 onPressed: () {
-                  Get.to(() => SalesScreen());
+                  saleController.clearVariable();
+                  Get.to(() => SalesScreen(
+                        id: mainController.vendor!.id.toString(),
+                      ));
                 },
                 imgicon: 'assets/images/sale.svg',
               ),

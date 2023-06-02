@@ -12,6 +12,7 @@ import 'package:translation_vendor/screen/login/login.dart';
 import 'package:translation_vendor/values/Validator.dart';
 import 'package:translation_vendor/values/colors.dart';
 import 'package:translation_vendor/values/string.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
@@ -120,6 +121,7 @@ class AuthController extends GetxController {
               if (languege!.length >= 1) {
                 if (certificateImage!.path == '') {
                   if (password.text == confirmPassword.text) {
+                    var token = await FirebaseMessaging.instance.getToken();
                     var lang = jsonEncode(languege);
                     var url = BASE_URL + 'vendor/register';
                     var data;
@@ -129,7 +131,8 @@ class AuthController extends GetxController {
                       'DOB': date.toString(),
                       'password': password.text.toString(),
                       'passport': passport,
-                      'language': lang
+                      'language': lang,
+                      'firebase_token': token
                     };
 
                     var response = await Api.execute(
@@ -164,9 +167,9 @@ class AuthController extends GetxController {
                   final certificate = base64Encode(
                       File(certificateImage!.path).readAsBytesSync());
                   if (password.text == confirmPassword.text) {
+                    var token = await FirebaseMessaging.instance.getToken();
                     var lang = jsonEncode(languege);
                     var url = BASE_URL + 'vendor/register';
-
                     var data;
                     data = {
                       'name': vendorName.text.toString(),
@@ -175,7 +178,8 @@ class AuthController extends GetxController {
                       'password': password.text.toString(),
                       'passport': passport,
                       'certificate': certificate,
-                      'language': lang
+                      'language': lang,
+                      'firebase_token': token
                     };
                     var response = await Api.execute(
                       url: url,
@@ -251,12 +255,13 @@ class AuthController extends GetxController {
         Validators.emptyStringValidator(userName.text, '') == null &&
             Validators.emptyStringValidator(password.text, '') == null;
     if (isFormValid) {
+      var token = await FirebaseMessaging.instance.getToken();
       var url = BASE_URL + 'vendor/login';
-      // var token = await FirebaseMessaging.instance.getToken();
+      ;
       var data = {
         'username': userName.text,
         'password': password.text,
-        // 'firebase_token': token,
+        'firebase_token': token,
       };
 
       var response = await Api.execute(url: url, data: data);

@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -23,6 +24,8 @@ import 'package:translation_vendor/screen/splash/splash.dart';
 import 'package:translation_vendor/values/styles.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await LoadingHelper.init();
   Get.put(AuthController());
   Get.put(MainController());
@@ -55,7 +58,7 @@ class _MyAppState extends State<MyApp> {
         'login': (context) => const LoginScreen(),
         'splash': (context) => const SplashScreen(),
         'notification': (context) => const NotificationScreen(),
-        'Sale': (context) => const SalesScreen(),
+        // 'Sale': (context) => const SalesScreen(),
         'history': (context) => const HistoryScreen(),
         'main': (context) => const MainScreen(),
         'orderstatus': (context) => const OrderStatus(),

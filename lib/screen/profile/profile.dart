@@ -21,6 +21,7 @@ import 'package:translation_vendor/values/colors.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation_vendor/values/controllers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:auto_size_text_field/auto_size_text_field.dart';
 
 class Profile extends StatefulWidget {

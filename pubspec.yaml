@@ -52,6 +52,9 @@ dependencies:
   location: ^4.4.0
   cached_network_image: ^3.2.3
   auto_size_text_field: ^2.2.1
+  cloud_firestore: ^4.8.0
+  firebase_core: ^2.13.1
+  firebase_messaging: ^14.6.2
  
 
 dev_dependencies:
