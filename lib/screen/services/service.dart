@@ -101,7 +101,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Rate Per 30 mintus:',
+                      'Rate Per 30 mintus: ',
                       style: TextStyle(
                         color: hintColor,
                         fontFamily: 'Mazzard',
@@ -110,7 +110,9 @@ class _ServiceScreenState extends State<ServiceScreen> {
                       ),
                     ),
                     Text(
-                      ' 20AED',
+                      serviceController.audioORvideo == null
+                            ? '0' + ' AED'
+                            : serviceController.audioORvideo! + " AED",
                       style: TextStyle(
                         color: mainColor,
                         fontFamily: 'Mazzard',
