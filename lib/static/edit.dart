@@ -30,7 +30,7 @@ class EditPage extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-                fontWeight: FontWeight.w600, fontSize: 19, color: Colors.black),
+                fontWeight: FontWeight.w600, fontSize: 16,fontFamily: "Poppins"),
           ),
           Container(
             padding: const EdgeInsets.all(8),

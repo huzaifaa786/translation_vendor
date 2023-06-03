@@ -68,24 +68,28 @@ class SaleController extends GetxController {
   }
 
   daySale(DateTime day) {
-    List<SaleModal> orderlist = orders
+    List<SaleModal> orderlist = searchedorders
         .where((i) =>
             i.date!.toLocal().toString().split(' ')[0] ==
             day.toLocal().toString().split(' ')[0])
         .toList();
-    searchedorders = orderlist;
+    searchedorders = orders;
+    print(orderlist);
     price = 0;
-    print(searchedorders);
-    for (var i = 0; i < searchedorders.length; i++) {
-      price += searchedorders[i].price!;
+    for (var i = 0; i < orderlist.length; i++) {
+      print(orderlist[i].price!);
+      price += orderlist[i].price!;
     }
-    print(price);
+    orderlist = [];
+    print(orderlist);
     update();
   }
 
   clearVariable() {
     today = DateTime.now();
     Ourdate = DateTime.now();
+    orders = [];
+    searchedorders = [];
     update();
   }
 }

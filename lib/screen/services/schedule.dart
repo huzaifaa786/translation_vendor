@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation_vendor/models/workinghour.dart';
 import 'package:translation_vendor/static/schedule.dart';
 import 'package:translation_vendor/static/star.button.dart';
+import 'package:translation_vendor/values/colors.dart';
 import 'package:translation_vendor/values/controllers.dart';
 
 class Schedule extends StatefulWidget {
@@ -20,19 +23,19 @@ class _ScheduleState extends State<Schedule> {
         WorkingHour(day: widget.day!, startTime: startTime, endTime: endTime);
     int index = serviceController.workingHours
         .indexWhere((hour) => hour.day == widget.day!);
-    if (index != 0) {
-   
-    }
+    if (index != 0) {}
     if (index < 7) {
       serviceController.workingHours.add(workingHour);
     }
+    startTimeController.text = startTime;
+    endTimeController.text = endTime;
     super.initState();
   }
 
   save() {}
 
-  String startTime = '';
-  String endTime = '';
+  String startTime = '09:00';
+  String endTime = '17:00';
   bool isFrozen = false;
   final TextEditingController startTimeController = TextEditingController();
   final TextEditingController endTimeController = TextEditingController();
@@ -100,12 +103,49 @@ class _ScheduleState extends State<Schedule> {
             StarButton(
               isFrozen: isFrozen,
               onPressed: () {
-                int index = serviceController.workingHours
+                int i = serviceController.workingHours
                     .indexWhere((hour) => hour.day == widget.day!);
-                setState(() {
-                  bool toggle = serviceController.workingHours[index].isFrozen;
-                  serviceController.workingHours[index].isFrozen = !toggle;
-                });
+                Alert(
+                  style: AlertStyle(
+                    titleStyle: TextStyle(fontSize: 25),
+                  ),
+                  context: context,
+                  title: serviceController.workingHours[i].isFrozen
+                      ? "Are you sure to unfreeze this day"
+                      : "Are you sure to freeze this day",
+                  buttons: [
+                    DialogButton(
+                      height: 60,
+                      radius: BorderRadius.circular(12),
+                      child: Text(
+                        "yes",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          bool toggle =
+                              serviceController.workingHours[i].isFrozen;
+                          serviceController.workingHours[i].isFrozen = !toggle;
+                        });
+                        Get.back();
+                      },
+                      color: mainColor,
+                    ),
+                    DialogButton(
+                      height: 60,
+                      radius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: mainColor,
+                      ),
+                      child: Text(
+                        "No",
+                        style: TextStyle(color: mainColor, fontSize: 20),
+                      ),
+                      onPressed: () => Get.back(),
+                      color: White,
+                    ),
+                  ],
+                ).show();
               },
             )
           ],
@@ -113,7 +153,7 @@ class _ScheduleState extends State<Schedule> {
         serviceController.workingHours
                 .any((hour) => hour.day == widget.day! && hour.isFrozen)
             ? Padding(
-                padding: const EdgeInsets.only(bottom:12),
+                padding: const EdgeInsets.only(bottom: 12),
                 child: Text('This day is frozen'),
               )
             : Padding(

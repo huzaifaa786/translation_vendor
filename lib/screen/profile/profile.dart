@@ -10,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:translation_vendor/screen/profile/edit_model.dart';
 import 'package:translation_vendor/screen/profile/profilecontroller.dart';
 import 'package:translation_vendor/static/button.dart';
+import 'package:translation_vendor/static/heading.dart';
 import 'package:translation_vendor/static/imageinput.dart';
 import 'package:translation_vendor/static/password.dart';
 import 'package:translation_vendor/static/titletopbar.dart';
@@ -116,8 +117,8 @@ class _ProfileState extends State<Profile> {
                             Text(
                               profileController.vendor!.name!,
                               style: TextStyle(
-                                fontFamily: 'Mazzard',
-                                fontSize: 23,
+                                fontFamily: 'Poppins',
+                                fontSize: 24,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -132,8 +133,8 @@ class _ProfileState extends State<Profile> {
                                               ' ',
                                           maxLines: null,
                                           style: TextStyle(
-                                            fontFamily: 'Mazzard',
-                                            fontSize: 23,
+                                            fontFamily: 'Poppins',
+                                            fontSize: 17,
                                             fontWeight: FontWeight.w500,
                                           ),
                                         ),
@@ -194,9 +195,9 @@ class _ProfileState extends State<Profile> {
                                           'About In english is empty. please write something about yourself in english.',
                                           textAlign: TextAlign.justify,
                                           style: TextStyle(
-                                              fontFamily: 'Mazzard',
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w400,
+                                              fontFamily: 'Poppins',
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w500,
                                               color: Colors.grey[400]),
                                         ),
                                       )
@@ -214,9 +215,10 @@ class _ProfileState extends State<Profile> {
                                                   .vendor!.aboutEng!,
                                               maxLines: null,
                                               style: TextStyle(
-                                                fontFamily: 'Mazzard',
-                                                fontSize: 17,
+                                                fontFamily: 'Poppins',
+                                                fontSize: 15,
                                                 fontWeight: FontWeight.w400,
+                                                color: Colors.grey[600],
                                               ),
                                             ),
                                           ),
@@ -257,9 +259,9 @@ class _ProfileState extends State<Profile> {
                                         'About In Arabic is empty. please write something about yourself in Arabic.',
                                         textAlign: TextAlign.justify,
                                         style: TextStyle(
-                                            fontFamily: 'Mazzard',
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w400,
+                                            fontFamily: 'Poppins',
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500,
                                             color: Colors.grey[400]),
                                       )
                                     : Row(
@@ -268,10 +270,10 @@ class _ProfileState extends State<Profile> {
                                             profileController
                                                 .vendor!.aboutArabic!,
                                             style: TextStyle(
-                                              fontFamily: 'Mazzard',
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w400,
-                                            ),
+                                                fontFamily: 'Poppins',
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w400,
+                                                color: Colors.grey[600]),
                                           ),
                                         ],
                                       )
@@ -309,8 +311,8 @@ class _ProfileState extends State<Profile> {
                                     ? Text(
                                         'No! Mobile number avaliable.',
                                         style: TextStyle(
-                                          fontFamily: 'Mazzard',
-                                          fontSize: 17,
+                                          fontFamily: 'Poppins',
+                                          fontSize: 12,
                                           fontWeight: FontWeight.w400,
                                         ),
                                       )
@@ -319,10 +321,10 @@ class _ProfileState extends State<Profile> {
                                           Text(
                                             profileController.vendor!.number!,
                                             style: TextStyle(
-                                              fontFamily: 'Mazzard',
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w400,
-                                            ),
+                                                fontFamily: 'Poppins',
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w400,
+                                                color: Colors.grey[600]),
                                           ),
                                         ],
                                       )
@@ -349,7 +351,7 @@ class _ProfileState extends State<Profile> {
                                       ),
                                     ),
                                   ),
-                            AddPage(
+                            ProfileHeading(
                               title: 'Certificate',
                               onPressed: () {
                                 profileController.openCertificateField();
@@ -363,9 +365,9 @@ class _ProfileState extends State<Profile> {
                                           'No! Certificate Avaliable. Upload your certicate so customer see this before order it may be helpful for you to get more orders.',
                                           textAlign: TextAlign.justify,
                                           style: TextStyle(
-                                              fontFamily: 'Mazzard',
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w400,
+                                              fontFamily: 'Poppins',
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w500,
                                               color: Colors.grey[400]),
                                         ),
                                       )
@@ -389,10 +391,10 @@ class _ProfileState extends State<Profile> {
                                                         1),
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
-                                                  fontFamily: 'Mazzard',
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.w400,
-                                                ),
+                                                    fontFamily: 'Poppins',
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w400,
+                                                    color: Colors.grey[600]),
                                               ),
                                             ),
                                           ),
@@ -417,10 +419,10 @@ class _ProfileState extends State<Profile> {
                                                     1),
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
-                                              fontFamily: 'Mazzard',
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w400,
-                                            ),
+                                                fontFamily: 'Poppins',
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w400,
+                                                color: Colors.grey[600]),
                                           ),
                                         ),
                                       ),
@@ -436,7 +438,7 @@ class _ProfileState extends State<Profile> {
                                     },
                                   )
                                 : Container(),
-                            AddPage(
+                            ProfileHeading(
                               title: 'Language',
                               onPressed: () {
                                 setState(() {

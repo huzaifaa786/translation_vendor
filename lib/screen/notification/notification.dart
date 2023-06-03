@@ -54,10 +54,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                     .notifications[index].user!.username,
                                 image: controller
                                     .notifications[index].user!.profilePic,
-                                      title: controller
-                                    .notifications[index].title,
-                                       price: controller
-                                    .notifications[index].orderr!.price.toString(),
+                                title: controller.notifications[index].title,
+                                price: controller
+                                    .notifications[index].orderr!.price
+                                    .toString(),
+                                day: notificationController.convertDateFormat(controller.notifications[index].created_at!),
                               )),
                     )
                   : Container(

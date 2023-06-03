@@ -7,8 +7,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'package:translation_vendor/models/documentlist.dart';
 import 'package:translation_vendor/models/workinghour.dart';
-
-import 'package:translation_vendor/screen/services/document.dart';
+import 'package:auto_size_text_field/auto_size_text_field.dart';
 import 'package:translation_vendor/screen/services/schedule.dart';
 import 'package:translation_vendor/screen/services/servicecontroller.dart';
 import 'package:translation_vendor/static/addpage.dart';
@@ -40,8 +39,6 @@ class _ServiceScreenState extends State<ServiceScreen> {
   static CameraPosition? _kLake;
 
   List<WorkingHour> workingHours = [];
-  // List<Documentlist> unurgentdocument = [];
-  // List<Documentlist> urgentdocument = [];
 
   void initState() {
     super.initState();
@@ -77,26 +74,27 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     Get.back();
                   },
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset('assets/images/dart.svg'),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 6, top: 2),
-                      child: Text(
-                        'Online Audio/Video',
-                        style: TextStyle(
-                          fontFamily: 'Mazzard',
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
+                Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset('assets/images/dart.svg'),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 6),
+                        child: Text(
+                          'Online Audio/Video',
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 4),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -104,20 +102,20 @@ class _ServiceScreenState extends State<ServiceScreen> {
                       'Rate Per 30 mintus: ',
                       style: TextStyle(
                         color: hintColor,
-                        fontFamily: 'Mazzard',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
+                        fontFamily: 'Poppins',
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                     Text(
                       serviceController.audioORvideo == null
-                            ? '0' + ' AED'
-                            : serviceController.audioORvideo! + " AED",
+                          ? '0' + ' AED'
+                          : serviceController.audioORvideo! + " AED",
                       style: TextStyle(
                         color: mainColor,
-                        fontFamily: 'Mazzard',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
+                        fontFamily: 'Poppins',
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ],
@@ -128,7 +126,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right:6.0),
+                      padding: const EdgeInsets.only(right: 6.0),
                       child: SvgPicture.asset('assets/images/shedule.svg'),
                     ),
                     Padding(
@@ -149,7 +147,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    addamount(context);
+                    serviceController.openaudioORvideoField();
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -163,47 +161,95 @@ class _ServiceScreenState extends State<ServiceScreen> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      Text(
-                        serviceController.audioORvideo == null
-                            ? '0' + ' AED'
-                            : serviceController.audioORvideo! + " AED",
-                        style: TextStyle(
-                          color: mainColor,
-                          fontFamily: 'Mazzard',
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
+                      serviceController.showaudioORvideoPriceField == false.obs
+                          ? Text(
+                              serviceController.audioORvideo == null
+                                  ? '0' + ' AED'
+                                  : serviceController.audioORvideo! + " AED",
+                              style: TextStyle(
+                                color: mainColor,
+                                fontFamily: 'Mazzard',
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            )
+                          : AutoSizeTextField(
+                              controller:
+                                  serviceController.audiovideoController,
+                              fullwidth: false,
+                              keyboardType: TextInputType.number,
+                              maxLength: 10,
+                              style: TextStyle(fontSize: 18),
+                              minWidth: MediaQuery.of(context).size.width * 0.3,
+                              decoration: InputDecoration(
+                                suffixIcon: InkWell(
+                                  onTap: () {
+                                    serviceController.EditaudioORvideoAbout();
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: Icon(Icons.check,
+                                        color: mainColor, size: 18),
+                                  ),
+                                ),
+                              ),
+                            ),
                     ],
                   ),
                 ),
                 SizedBox(
                   height: 12,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'In Person',
-                      style: TextStyle(
-                        color: hintColor,
-                        fontFamily: 'Mazzard',
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
+                InkWell(
+                  onTap: () {
+                    serviceController.openInPersonField();
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'In Person',
+                        style: TextStyle(
+                          color: hintColor,
+                          fontFamily: 'Mazzard',
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                    ),
-                    Text(
-                      serviceController.InPersonPrice == null
-                          ? '0' + ' AED'
-                          : serviceController.InPersonPrice! + " AED",
-                      style: TextStyle(
-                        color: mainColor,
-                        fontFamily: 'Mazzard',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
+                      serviceController.showInPersonPriceField == false.obs
+                          ? Text(
+                              serviceController.InPersonPrice == null
+                                  ? '0' + ' AED'
+                                  : serviceController.InPersonPrice! + " AED",
+                              style: TextStyle(
+                                color: mainColor,
+                                fontFamily: 'Mazzard',
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            )
+                          : AutoSizeTextField(
+                              controller: serviceController.inpersionController,
+                              fullwidth: false,
+                              keyboardType: TextInputType.number,
+                              maxLength: 10,
+                              style: TextStyle(fontSize: 18),
+                              minWidth: MediaQuery.of(context).size.width * 0.3,
+                              decoration: InputDecoration(
+                                suffixIcon: InkWell(
+                                  onTap: () {
+                                    serviceController.EditInPersonPrice();
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: Icon(Icons.check,
+                                        color: mainColor, size: 18),
+                                  ),
+                                ),
+                              ),
+                            ),
+                    ],
+                  ),
                 ),
                 SizedBox(height: 12),
                 Row(
@@ -233,7 +279,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                             child: GoogleMap(
                               // circles: serviceController.setCircles(),
                               scrollGesturesEnabled: true,
-                              mapType: MapType.hybrid,
+                              mapType: MapType.normal,
                               initialCameraPosition:
                                   serviceController.locationData != null
                                       ? _kLake!
@@ -275,14 +321,18 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 Schedule(day: 'Saturday'),
                 Schedule(day: 'Sunday'),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SvgPicture.asset('assets/images/document.svg'),
-                    Text(
-                      'Document',
-                      style: TextStyle(
-                        fontFamily: 'Mazzard',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Text(
+                        'Document',
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ],
@@ -293,29 +343,55 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     urgentdoc(context);
                   },
                 ),
-                Row(
-                  children: [
-                    Text(
-                      'Rate Per Page:',
-                      style: TextStyle(
-                        fontFamily: 'Mazzard',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
+                InkWell(
+                  onTap: () {
+                    serviceController.openurgentField();
+                  },
+                  child: Row(
+                    children: [
+                      Text(
+                        'Rate Per Page: ',
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
-                    ),
-                    Text(
-                      serviceController.urgentdocument.length == 0
-                          ? '0 AED'
-                          : serviceController.urgentdocument[0].price! +
-                              '  AED',
-                      style: TextStyle(
-                        color: mainColor,
-                        fontFamily: 'Mazzard',
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
+                      serviceController.showurgentPriceField == false.obs
+                          ? Text(
+                              serviceController.urgentPrice == null
+                                  ? '0 AED'
+                                  : serviceController.urgentPrice! + '  AED',
+                              style: TextStyle(
+                                color: mainColor,
+                                fontFamily: 'Poppins',
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )
+                          : AutoSizeTextField(
+                              controller: serviceController.urgentController,
+                              fullwidth: false,
+                              style: TextStyle(fontSize: 18),
+                              // maxLines: null,
+                              keyboardType: TextInputType.number,
+                              maxLength: 10,
+                              minWidth: MediaQuery.of(context).size.width * 0.3,
+                              decoration: InputDecoration(
+                                suffixIcon: InkWell(
+                                  onTap: () {
+                                    serviceController.EditurgentPrice();
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: Icon(Icons.check,
+                                        color: mainColor, size: 18),
+                                  ),
+                                ),
+                              ),
+                            ),
+                    ],
+                  ),
                 ),
                 for (var document in serviceController.urgentdocument)
                   PagePrice(
@@ -329,29 +405,55 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     addpage(context);
                   },
                 ),
-                Row(
-                  children: [
-                    Text(
-                      'Rate Per Page:',
-                      style: TextStyle(
-                        fontFamily: 'Mazzard',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
+                InkWell(
+                  onTap: () {
+                    serviceController.openUnurgentField();
+                  },
+                  child: Row(
+                    children: [
+                      Text(
+                        'Rate Per Page: ',
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
-                    ),
-                    Text(
-                      serviceController.unurgentdocument.length == 0
-                          ? '0 AED'
-                          : serviceController.unurgentdocument[0].price! +
-                              '  AED',
-                      style: TextStyle(
-                        color: mainColor,
-                        fontFamily: 'Mazzard',
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
+                      serviceController.showUnurgentPriceField == false.obs
+                          ? Text(
+                              serviceController.UnurgentPrice == null
+                                  ? '0 AED'
+                                  : serviceController.UnurgentPrice! + '  AED',
+                              style: TextStyle(
+                                color: mainColor,
+                                fontFamily: 'Poppins',
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )
+                          : AutoSizeTextField(
+                              controller: serviceController.UnurgentController,
+                              fullwidth: false,
+                              style: TextStyle(fontSize: 18),
+                              // maxLines: null,
+                              keyboardType: TextInputType.number,
+                              maxLength: 10,
+                              minWidth: MediaQuery.of(context).size.width * 0.3,
+                              decoration: InputDecoration(
+                                suffixIcon: InkWell(
+                                  onTap: () {
+                                    serviceController.EditUnurgentPrice();
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: Icon(Icons.check,
+                                        color: mainColor, size: 18),
+                                  ),
+                                ),
+                              ),
+                            ),
+                    ],
+                  ),
                 ),
                 for (var document in serviceController.unurgentdocument)
                   PagePrice(
@@ -359,17 +461,15 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     maxpage: document.maxpage,
                     days: document.day,
                   ),
-                SizedBox(
-                  height: 8,
-                ),
-                LargeButton(
-                    title: 'Submit',
-                    textcolor: White,
-                    onPressed: () {
-                      // save();
-                      print('object');
-                      serviceController.addservice();
-                    })
+                Padding(
+                  padding: const EdgeInsets.only(top: 20, bottom: 20),
+                  child: LargeButton(
+                      title: 'Submit',
+                      textcolor: White,
+                      onPressed: () {
+                        serviceController.addservice();
+                      }),
+                )
               ],
             ),
           ),
@@ -413,47 +513,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
     ).show();
   }
 
-  addamount(context) {
-    Alert(
-        context: context,
-        title: "Add Price",
-        content: Column(
-          children: <Widget>[
-            TextField(
-              controller: serviceController.audiovideoController,
-              decoration: InputDecoration(
-                labelText: 'Audio/Video',
-              ),
-              keyboardType: TextInputType.number,
-            ),
-            TextField(
-              controller: serviceController.inpersionController,
-              decoration: InputDecoration(
-                labelText: 'In Person',
-              ),
-              keyboardType: TextInputType.number,
-            ),
-          ],
-        ),
-        buttons: [
-          DialogButton(
-            color: mainColor,
-            onPressed: () async {
-              await serviceController.save(
-                  serviceController.inpersionController.text,
-                  serviceController.audiovideoController.text);
-              Get.back();
-            },
-            child: Text(
-              "save",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          )
-        ]).show();
-  }
-
   addpage(context) {
-    TextEditingController perpageController = TextEditingController();
     TextEditingController minController = TextEditingController();
     TextEditingController maxController = TextEditingController();
     TextEditingController totaldayController = TextEditingController();
@@ -463,34 +523,23 @@ class _ServiceScreenState extends State<ServiceScreen> {
         content: Column(
           children: <Widget>[
             TextField(
-              controller: perpageController,
-              decoration: InputDecoration(
-                labelText: 'per page price',
-              ),
-              keyboardType: TextInputType.number,
-            ),
-            TextField(
               controller: minController,
               decoration: InputDecoration(
-                labelText: 'min page',
+                labelText: 'Minimum page',
               ),
               keyboardType: TextInputType.number,
             ),
-            SizedBox(
-              height: 12,
-            ),
-            Text(' To '),
             TextField(
               controller: maxController,
               decoration: InputDecoration(
-                labelText: 'max page',
+                labelText: 'Maximum page',
               ),
               keyboardType: TextInputType.number,
             ),
             TextField(
               controller: totaldayController,
               decoration: InputDecoration(
-                labelText: 'total day',
+                labelText: 'Total days to complete',
               ),
               keyboardType: TextInputType.number,
             ),
@@ -500,14 +549,32 @@ class _ServiceScreenState extends State<ServiceScreen> {
           DialogButton(
             color: mainColor,
             onPressed: () {
-              serviceController.unurgentdocument.add(Documentlist(
-                  day: totaldayController.text,
-                  minpage: minController.text,
-                  maxpage: maxController.text,
-                  price: perpageController.text));
-              print(serviceController.unurgentdocument);
-
-              Get.back();
+              if (totaldayController.text != '') {
+                if (minController.text != '') {
+                  if (maxController.text != '') {
+                    serviceController.unurgentdocument.add(Documentlist(
+                        day: totaldayController.text,
+                        minpage: minController.text,
+                        maxpage: maxController.text));
+                    Get.back();
+                  } else {
+                    Get.snackbar('Error!', 'Fillout All TextFields.',
+                        colorText: Colors.white,
+                        backgroundColor: Colors.red,
+                        snackPosition: SnackPosition.BOTTOM);
+                  }
+                } else {
+                  Get.snackbar('Error!', 'Fillout All TextFields.',
+                      colorText: Colors.white,
+                      backgroundColor: Colors.red,
+                      snackPosition: SnackPosition.BOTTOM);
+                }
+              } else {
+                Get.snackbar('Error!', 'Fillout All TextFields.',
+                    colorText: Colors.white,
+                    backgroundColor: Colors.red,
+                    snackPosition: SnackPosition.BOTTOM);
+              }
             },
             child: Text(
               "save",
@@ -518,7 +585,6 @@ class _ServiceScreenState extends State<ServiceScreen> {
   }
 
   urgentdoc(context) {
-    TextEditingController perpageController = TextEditingController();
     TextEditingController minController = TextEditingController();
     TextEditingController maxController = TextEditingController();
     TextEditingController totaldayController = TextEditingController();
@@ -528,34 +594,23 @@ class _ServiceScreenState extends State<ServiceScreen> {
         content: Column(
           children: <Widget>[
             TextField(
-              controller: perpageController,
-              decoration: InputDecoration(
-                labelText: 'per page price',
-              ),
-              keyboardType: TextInputType.number,
-            ),
-            TextField(
               controller: minController,
               decoration: InputDecoration(
-                labelText: 'min page',
+                labelText: 'Minimum page',
               ),
               keyboardType: TextInputType.number,
             ),
-            SizedBox(
-              height: 12,
-            ),
-            Text(' To '),
             TextField(
               controller: maxController,
               decoration: InputDecoration(
-                labelText: 'max page',
+                labelText: 'Maximum page',
               ),
               keyboardType: TextInputType.number,
             ),
             TextField(
               controller: totaldayController,
               decoration: InputDecoration(
-                labelText: 'total day',
+                labelText: 'Total days to complete',
               ),
               keyboardType: TextInputType.number,
             ),
@@ -565,14 +620,33 @@ class _ServiceScreenState extends State<ServiceScreen> {
           DialogButton(
             color: mainColor,
             onPressed: () {
-              serviceController.urgentdocument.add(Documentlist(
-                  day: totaldayController.text,
-                  minpage: minController.text,
-                  maxpage: maxController.text,
-                  price: perpageController.text));
-              print(serviceController.unurgentdocument);
-
-              Get.back();
+              if (totaldayController.text != '') {
+                if (minController.text != '') {
+                  if (maxController.text != '') {
+                    serviceController.urgentdocument.add(Documentlist(
+                        day: totaldayController.text,
+                        minpage: minController.text,
+                        maxpage: maxController.text));
+                    print(serviceController.urgentdocument);
+                    Get.back();
+                  } else {
+                    Get.snackbar('Error!', 'Fillout All TextFields.',
+                        colorText: Colors.white,
+                        backgroundColor: Colors.red,
+                        snackPosition: SnackPosition.BOTTOM);
+                  }
+                } else {
+                  Get.snackbar('Error!', 'Fillout All TextFields.',
+                      colorText: Colors.white,
+                      backgroundColor: Colors.red,
+                      snackPosition: SnackPosition.BOTTOM);
+                }
+              } else {
+                Get.snackbar('Error!', 'Fillout All TextFields.',
+                    colorText: Colors.white,
+                    backgroundColor: Colors.red,
+                    snackPosition: SnackPosition.BOTTOM);
+              }
             },
             child: Text(
               "save",

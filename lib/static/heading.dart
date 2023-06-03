@@ -4,18 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation_vendor/values/colors.dart';
 
-class ChangePassword extends StatelessWidget {
-  const ChangePassword(
+class ProfileHeading extends StatelessWidget {
+  const ProfileHeading(
       {super.key,
       this.title,
-      this.ontap,
       this.onPressed,
       this.discription,
       this.image,
       this.extra = false,
       this.services});
   final title;
-  final ontap;
   final onPressed;
   final discription;
   final image;
@@ -25,7 +23,7 @@ class ChangePassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only( top: 25,bottom: 15),
+      padding: const EdgeInsets.only(top: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -34,25 +32,9 @@ class ChangePassword extends StatelessWidget {
             style: TextStyle(
                 fontWeight: FontWeight.w600, fontSize: 16,fontFamily: "Poppins"),
           ),
-       GestureDetector(
+          InkWell(
               onTap: onPressed,
-              child: Container(
-                padding: EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                 border: Border.all(
-                      color: Colors.grey,
-                    ),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(60),
-                    ),
-                ),
-                child: Icon(
-                  
-                  Icons.keyboard_arrow_right_outlined,
-                  
-                ),
-              ),
-            ),
+              child: SvgPicture.asset('assets/images/add.svg'))
         ],
       ),
     );

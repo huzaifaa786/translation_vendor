@@ -26,7 +26,7 @@ class PagePrice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, top: 20),
+      padding: const EdgeInsets.only(top: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -35,24 +35,27 @@ class PagePrice extends StatelessWidget {
               Text(
                 minpage == null ? '' : minpage,
                 style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    fontSize: 19,
                     color: mainColor),
               ),
-              Text(' To '),
+              Text('-'),
               Text(
                 maxpage == null ? '' : maxpage,
                 style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    fontSize: 19,
                     color: mainColor),
               ),
               Text(
                 '  Pages.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 16,
                     fontWeight: FontWeight.w400,
-                    fontSize: 19,
                     color: Colors.black),
               ),
             ],
@@ -62,23 +65,26 @@ class PagePrice extends StatelessWidget {
               Text(
                 'In ',
                 style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 16,
                     fontWeight: FontWeight.w400,
-                    fontSize: 22,
                     color: Colors.black),
               ),
               Text(
                 days.toString(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    fontSize: 20,
                     color: mainColor),
               ),
               Text(
                 '  days',
                 style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 16,
                     fontWeight: FontWeight.w400,
-                    fontSize: 20,
                     color: Colors.black),
               )
             ],

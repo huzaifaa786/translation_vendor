@@ -23,14 +23,14 @@ class AddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.only(top: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             title,
             style: TextStyle(
-                fontWeight: FontWeight.w500, fontSize: 19, color: mainColor),
+                fontWeight: FontWeight.w600, fontSize: 15, fontFamily: 'Poppins',color: mainColor),
           ),
           InkWell(
               onTap: onPressed,

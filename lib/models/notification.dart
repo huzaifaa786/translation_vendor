@@ -11,10 +11,13 @@ class Notificationn {
   String? title;
   Orderr? orderr;
   User? user;
+  String? created_at;
+
   Notificationn(notification) {
     id = notification['id'];
     title = notification['title'];
     orderr = Orderr(notification['order']);
     user = User(notification['user']);
+    created_at = notification['created_at'];
   }
 }

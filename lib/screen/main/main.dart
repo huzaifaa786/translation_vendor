@@ -100,6 +100,7 @@ class _MainScreenState extends State<MainScreen> {
               IconsButton(
                 title: 'Services',
                 onPressed: () {
+                  serviceController.clearServiceScreen();
                   Get.to(() => ServiceScreen());
                 },
                 imgicon: 'assets/images/headphone.svg',

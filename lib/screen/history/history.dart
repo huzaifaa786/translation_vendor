@@ -46,7 +46,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 children: [
                   controller.orders.length != 0
                       ? Container(
-                          height: MediaQuery.of(context).size.height * 0.81,
+                          height: MediaQuery.of(context).size.height * 0.85,
                           child: ListView.builder(
                               itemCount: controller.orders.length,
                               itemBuilder: (context, index) => HistoryCard(
