@@ -37,6 +37,20 @@ class NotificationController extends GetxController {
     }
   }
 
+   readnotifications() async {
+    LoadingHelper.show();
+    print('object');
+    var url = BASE_URL + 'notification/read';
+    GetStorage box = GetStorage();
+
+    String api_token = box.read('api_token');
+    var data;
+    data = {'api_token': api_token};
+
+    await Api.execute(url: url, data: data);
+    LoadingHelper.dismiss();
+  }
+
   String convertDateFormat(String inputDate) {
     List<String> weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     DateTime dateTime = DateTime.parse(inputDate);

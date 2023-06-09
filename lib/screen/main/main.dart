@@ -31,10 +31,29 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
+  bool? checkNoti = false;
+
+  checkNotifications() async {
+    GetStorage box = GetStorage();
+
+    String authCheck = box.read('api_token');
+    print(authCheck);
+    if (authCheck != null) {
+      var mcheckNotification = await mainController.CheckNotications();
+      setState(() {
+        checkNoti = mcheckNotification;
+        print(checkNoti);
+      });
+    } else {
+      print('object');
+    }
+  }
+
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       mainController.getVendor();
+      checkNotifications();
     });
   }
 
@@ -49,6 +68,8 @@ class _MainScreenState extends State<MainScreen> {
           child: Column(
             children: [
               Topbar(
+                
+                  checkNewNoti: checkNoti,
                   // image: mainController.vendor != null
                   //     ? mainController.vendor!.profilepic == ''
                   //         ? ''

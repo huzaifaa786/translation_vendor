@@ -38,10 +38,12 @@ class AuthController extends GetxController {
 
   void showErrors() {
     validateSignUpForm = true.obs;
+    update();
   }
 
   void showSignInErrors() {
     validateSignInForm = true.obs;
+    update();
   }
 
 //////////////////////////  Clear Variable Functions   ///////////////////////////////////
@@ -58,6 +60,7 @@ class AuthController extends GetxController {
     languege = [];
     passportImage = XFile('');
     certificateImage = XFile('');
+    update();
   }
 
 //////////////////////////  select Passport Image Functions   ///////////////////////////////////
@@ -294,7 +297,9 @@ class AuthController extends GetxController {
     GetStorage box = GetStorage();
     box.remove('api_token');
     Get.snackbar('Logout Successfully', '',
-        colorText: Colors.white, backgroundColor: mainColor,snackPosition: SnackPosition.BOTTOM);
+        colorText: Colors.white,
+        backgroundColor: mainColor,
+        snackPosition: SnackPosition.BOTTOM);
     Get.offAll(() => LoginScreen());
     LoadingHelper.dismiss();
   }

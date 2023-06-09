@@ -36,7 +36,7 @@ class Validators {
   static String? passwordValidator(String? password) {
 
     if (password!.length < 6) {
-      return "*Password must be 6 characters long";
+      return "*Password must be atleast 6 characters";
     } else {
       return null;
     }
