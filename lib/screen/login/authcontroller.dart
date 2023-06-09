@@ -150,6 +150,10 @@ class AuthController extends GetxController {
                       GetStorage box = GetStorage();
                       box.write('api_token', vendor.apiToken);
                       box.write('vendor_id', vendor.id);
+                      ClearSignupVariables();
+                      validateSignUpForm = false.obs;
+                      update();
+                      Get.offAll(() => LoginScreen());
                       return callback(true);
                     } else {
                       LoadingHelper.dismiss();

@@ -305,12 +305,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 setState(() {});
                                 authController.SignUp((success) {
                                   if (success) {
+                                    
                                     vendorrequest(context);
-                                    setState(() {});
-                                    authController.ClearSignupVariables();
-                                    authController.validateSignUpForm = false.obs;
-                                     print('authController.validateSignUpForm');
-                                   print(authController.validateSignUpForm);
                                   }
                                 });
                               },

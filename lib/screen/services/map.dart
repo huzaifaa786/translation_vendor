@@ -133,7 +133,8 @@ class _VendorMapScreenState extends State<VendorMapScreen> {
                     child: LocationField(
                       onChange: onchange,
                       labelText: 'Radius',
-                      type: TextInputType.numberWithOptions(signed: false,decimal: true),
+                      type: TextInputType.numberWithOptions(
+                          signed: false, decimal: true),
                       hint: 'Enter Radius In KiloMeters',
                     ),
                   ),
