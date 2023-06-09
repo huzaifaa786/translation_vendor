@@ -25,6 +25,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool _obscureText = true;
+  bool _obscureText1 = true;
   int index = 1;
 
   getindex(id) async {
@@ -38,6 +40,18 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool showCreate = false;
   bool show = false;
+
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
+  void _toggle1() {
+    setState(() {
+      _obscureText1 = !_obscureText1;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -259,7 +273,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               hint: 'Password',
                               borderColor: Colors.black,
                               imageColor: Colors.black,
-                              obscure: true,
+                              toggle: _toggle,
+                              obscure: _obscureText,
                               validate: authController.validateSignUpForm,
                               validator: (password) =>
                                   Validators.passwordValidator(password),
@@ -273,7 +288,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               hint: 'Confirm Password',
                               borderColor: Colors.black,
                               imageColor: Colors.black,
-                              obscure: true,
+                              toggle: _toggle1,
+                              obscure: _obscureText1,
                               validate: authController.validateSignUpForm,
                               validator: (password) =>
                                   Validators.passwordValidator(password),
@@ -290,9 +306,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 authController.SignUp((success) {
                                   if (success) {
                                     vendorrequest(context);
+                                    setState(() {});
                                     authController.ClearSignupVariables();
-                                    authController.validateSignUpForm =
-                                        false.obs;
+                                    authController.validateSignUpForm = false.obs;
+                                     print('authController.validateSignUpForm');
+                                   print(authController.validateSignUpForm);
                                   }
                                 });
                               },
@@ -319,7 +337,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: InputFieldPassword(
                               imageIcon: 'assets/images/password.svg',
                               hint: 'Password',
-                              obscure: true,
+                              toggle: _toggle,
+                              obscure: _obscureText,
                               controller: authController.password,
                               validate: authController.validateSignInForm,
                               validator: (password) =>

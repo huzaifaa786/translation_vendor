@@ -19,10 +19,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
     await notificationController.getnoti();
     setState(() {});
   }
+   readnotification() async {
+    await notificationController.readnotifications();
+    setState(() {});
+  }
 
   @override
   void initState() {
     fetchOrder();
+    readnotification();
     super.initState();
   }
 

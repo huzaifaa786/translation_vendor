@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:translation_vendor/values/colors.dart';
 
 class InputFieldPassword extends StatelessWidget {
-   InputFieldPassword(
+  InputFieldPassword(
       {Key? key,
       this.controller,
       this.borderColor = mainColor,
@@ -75,6 +75,17 @@ class InputFieldPassword extends StatelessWidget {
                     color: imageColor,
                   ),
                 ),
+              ),
+            ),
+            suffixIcon: GestureDetector(
+              onTap: () {
+                toggle();
+              },
+              child: Icon(
+                obscure
+                    ? Icons.visibility_off_outlined
+                    : Icons.visibility_outlined,
+                color: Colors.black,
               ),
             ),
             filled: true,

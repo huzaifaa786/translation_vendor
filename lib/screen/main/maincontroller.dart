@@ -12,6 +12,26 @@ class MainController extends GetxController {
   static MainController instance = Get.find();
   bool isOnline = false;
   int i = 0;
+
+  CheckNotications() async {
+    LoadingHelper.show();
+    var url = BASE_URL + 'notification/check';
+    GetStorage box = GetStorage();
+
+    String api_token = box.read('api_token');
+    var data = {'api_token': api_token};
+    var response = await Api.execute(url: url, data: data);
+
+    LoadingHelper.dismiss();
+    if (response['exist'] == true) {
+      print("kjkjkjhkjhkjh");
+      return true;
+    } else {
+      print("kjkjkjhkjhkjhghjgjhgjhg");
+      return false;
+    }
+  }
+
   void online() async {
     LoadingHelper.show();
     var url = BASE_URL + 'vendor/online';
@@ -48,7 +68,7 @@ class MainController extends GetxController {
     var url = BASE_URL + 'vendor/show';
     GetStorage box = GetStorage();
     String api_token = box.read('api_token');
-     
+
     var data = {
       'api_token': api_token,
     };
