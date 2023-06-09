@@ -30,18 +30,21 @@ class EditPage extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-                fontWeight: FontWeight.w600, fontSize: 16,fontFamily: "Poppins"),
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+                fontFamily: "Poppins"),
           ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(40),
-                ),
-                color: Color.fromARGB(255, 218, 211, 211)),
-            child: InkWell(
-                onTap: onPressed,
-                child: SvgPicture.asset('assets/images/edit.svg')),
+          InkWell(
+            onTap: onPressed,
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(40),
+                  ),
+                  color: Color.fromARGB(255, 218, 211, 211)),
+              child: SvgPicture.asset('assets/images/edit.svg'),
+            ),
           )
         ],
       ),

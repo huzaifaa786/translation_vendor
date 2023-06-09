@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation_vendor/screen/profile/profilecontroller.dart';
 import 'package:translation_vendor/static/button.dart';
 import 'package:translation_vendor/static/password_field_two.dart';
 import 'package:translation_vendor/values/Validator.dart';
-import 'dart:ui' as ui;
-
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation_vendor/values/colors.dart';
 import 'package:translation_vendor/values/controllers.dart';
 
@@ -83,8 +83,8 @@ class _EditModelState extends State<EditModel> {
                 print('object');
                 profileController.changepassword((success) {
                   if (success) {
-                    // update(context);
                     Get.back();
+                    update(context);
                   }
                 });
               },
@@ -93,5 +93,35 @@ class _EditModelState extends State<EditModel> {
         ],
       ),
     );
+  }
+
+  update(context) {
+    Alert(
+      style: AlertStyle(
+        titleStyle: TextStyle(fontSize: 25),
+      ),
+      context: context,
+      title: "Successfully Updated ",
+      image: SvgPicture.asset(
+        "assets/images/tick.svg",
+        height: 90,
+      ),
+      buttons: [
+        DialogButton(
+          radius: BorderRadius.all(
+            Radius.circular(12),
+          ),
+          height: 60,
+          child: Text(
+            "Ok",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () {
+            Get.back();
+          },
+          color: mainColor,
+        ),
+      ],
+    ).show();
   }
 }

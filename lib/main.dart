@@ -4,6 +4,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:translation_vendor/helper/loading.dart';
+import 'package:translation_vendor/screen/services/map.dart';
 
 import 'package:translation_vendor/screen/history/history.dart';
 import 'package:translation_vendor/screen/history/historycontroller.dart';
@@ -18,7 +19,6 @@ import 'package:translation_vendor/screen/order_status/statuscontroller.dart';
 import 'package:translation_vendor/screen/profile/profile.dart';
 import 'package:translation_vendor/screen/profile/profilecontroller.dart';
 import 'package:translation_vendor/screen/sale/salecontroller.dart';
-import 'package:translation_vendor/screen/sale/sales.dart';
 import 'package:translation_vendor/screen/services/service.dart';
 import 'package:translation_vendor/screen/services/servicecontroller.dart';
 import 'package:translation_vendor/screen/splash/splash.dart';
@@ -57,6 +57,7 @@ class _MyAppState extends State<MyApp> {
       theme: Styles.lightTheme,
       initialRoute: 'splash',
       routes: {
+        'map':(p0) => VendorMapScreen(),
         'login': (context) => const LoginScreen(),
         'splash': (context) => const SplashScreen(),
         'notification': (context) => const NotificationScreen(),

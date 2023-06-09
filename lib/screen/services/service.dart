@@ -8,10 +8,13 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation_vendor/models/documentlist.dart';
 import 'package:translation_vendor/models/workinghour.dart';
 import 'package:auto_size_text_field/auto_size_text_field.dart';
+import 'package:translation_vendor/screen/services/map.dart';
 import 'package:translation_vendor/screen/services/schedule.dart';
 import 'package:translation_vendor/screen/services/servicecontroller.dart';
+import 'package:translation_vendor/static/LocationButton.dart';
 import 'package:translation_vendor/static/addpage.dart';
 import 'package:translation_vendor/static/button.dart';
+import 'package:translation_vendor/static/icon_button.dart';
 import 'package:translation_vendor/static/schedule.dart';
 import 'package:translation_vendor/static/titletopbar.dart';
 import 'package:translation_vendor/static/page_p_day.dart';
@@ -95,30 +98,60 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   ),
                 ),
                 SizedBox(height: 4),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Rate Per 30 mintus: ',
-                      style: TextStyle(
-                        color: hintColor,
-                        fontFamily: 'Poppins',
-                        fontSize: 15,
-                        fontWeight: FontWeight.w400,
+                InkWell(
+                  onTap: () {
+                    serviceController.openOnlineAudioORvideoField();
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Rate Per 30 mintus: ',
+                        style: TextStyle(
+                          color: hintColor,
+                          fontFamily: 'Poppins',
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
-                    ),
-                    Text(
-                      serviceController.audioORvideo == null
-                          ? '0' + ' AED'
-                          : serviceController.audioORvideo! + " AED",
-                      style: TextStyle(
-                        color: mainColor,
-                        fontFamily: 'Poppins',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
+                      serviceController.showOnlineAudioORvideoPriceField ==
+                              false.obs
+                          ? Text(
+                              serviceController.onlineAudioORvideo == null
+                                  ? '0' + ' AED'
+                                  : serviceController.onlineAudioORvideo! +
+                                      " AED",
+                              style: TextStyle(
+                                color: mainColor,
+                                fontFamily: 'Poppins',
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )
+                          : AutoSizeTextField(
+                              controller:
+                                  serviceController.onlineAudiovideoController,
+                              fullwidth: false,
+                              keyboardType: TextInputType.number,
+                              maxLength: 10,
+                              style: TextStyle(fontSize: 18),
+                              minWidth: MediaQuery.of(context).size.width * 0.3,
+                              decoration: InputDecoration(
+                                suffixIcon: InkWell(
+                                  onTap: () {
+                                    serviceController
+                                        .EditOnlineAudioORvideoAbout();
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: Icon(Icons.check,
+                                        color: mainColor, size: 18),
+                                  ),
+                                ),
+                              ),
+                            ),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: 23,
@@ -269,47 +302,54 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   ],
                 ),
                 SizedBox(height: 12),
-                serviceController.locationData == null
-                    ? Container()
-                    : Row(
-                        children: [
-                          Container(
-                            height: 180,
-                            width: MediaQuery.of(context).size.width * 0.9,
-                            child: GoogleMap(
-                              // circles: serviceController.setCircles(),
-                              scrollGesturesEnabled: true,
-                              mapType: MapType.normal,
-                              initialCameraPosition:
-                                  serviceController.locationData != null
-                                      ? _kLake!
-                                      : _kGooglePlex,
-                              onMapCreated: (GoogleMapController controller) {
-                                _controller.complete(controller);
-                              },
-                              markers: {
-                                Marker(
-                                  markerId: const MarkerId("marker1"),
-                                  position: LatLng(
-                                      serviceController.locationData!.latitude!,
-                                      serviceController
-                                          .locationData!.longitude!),
-                                  draggable: true,
-                                  onDragEnd: (value) {
-                                    // value is the new position
-                                  },
-                                  // To do: custom marker icon
-                                ),
-                                Marker(
-                                  markerId: const MarkerId("marker2"),
-                                  position: const LatLng(
-                                      37.415768808487435, -122.08440050482749),
-                                ),
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
+                LocationButton(
+                    title: 'Choose location',
+                    icon: Icons.my_location_rounded,
+                    onPressed: () {
+                      // controller.getlocation();
+                      Get.to(() => VendorMapScreen());
+                    }),
+                // serviceController.locationData == null
+                //     ? Container()
+                //     : Row(
+                //         children: [
+                //           Container(
+                //             height: 180,
+                //             width: MediaQuery.of(context).size.width * 0.9,
+                //             child: GoogleMap(
+                //               // circles: serviceController.setCircles(),
+                //               scrollGesturesEnabled: true,
+                //               mapType: MapType.hybrid,
+                //               initialCameraPosition:
+                //                   serviceController.locationData != null
+                //                       ? _kLake!
+                //                       : _kGooglePlex,
+                //               onMapCreated: (GoogleMapController controller) {
+                //                 _controller.complete(controller);
+                //               },
+                //               markers: {
+                //                 Marker(
+                //                   markerId: const MarkerId("marker1"),
+                //                   position: LatLng(
+                //                       serviceController.locationData!.latitude!,
+                //                       serviceController
+                //                           .locationData!.longitude!),
+                //                   draggable: true,
+                //                   onDragEnd: (value) {
+                //                     // value is the new position
+                //                   },
+                //                   // To do: custom marker icon
+                //                 ),
+                //                 Marker(
+                //                   markerId: const MarkerId("marker2"),
+                //                   position: const LatLng(
+                //                       37.415768808487435, -122.08440050482749),
+                //                 ),
+                //               },
+                //             ),
+                //           ),
+                //         ],
+                //       ),
                 SizedBox(
                   height: 20,
                 ),

@@ -34,9 +34,7 @@ class Validators {
 
   /// Validates the Password for User Authentication
   static String? passwordValidator(String? password) {
-    // ignore: unnecessary_raw_strings
-    // final digitRegExp =
-    //     RegExp(r'^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{1,}$');
+
     if (password!.length < 6) {
       return "*Password must be 6 characters long";
     } else {

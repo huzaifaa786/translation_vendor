@@ -61,8 +61,9 @@ class _ScheduleState extends State<Schedule> {
           children: [
             Scheduleinput(
               onpressed: () {
-                DatePicker.showTimePicker(context, showTitleActions: true,
-                    onChanged: (date) {
+                DatePicker.showTimePicker(context,
+                    showTitleActions: true,
+                    showSecondsColumn: false, onChanged: (date) {
                   var time = DateFormat.Hm().format(date);
                   startTimeController.text = time.toString();
                   startTime = time.toString();
@@ -85,8 +86,9 @@ class _ScheduleState extends State<Schedule> {
             ),
             Scheduleinput(
               onpressed: () {
-                DatePicker.showTimePicker(context, showTitleActions: true,
-                    onChanged: (date) {
+                DatePicker.showTimePicker(context,
+                    showTitleActions: true,
+                    showSecondsColumn: false, onChanged: (date) {
                   var time = DateFormat.Hm().format(date);
                   endTimeController.text = time.toString();
                   endTime = time.toString();
