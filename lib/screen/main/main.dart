@@ -36,7 +36,7 @@ class _MainScreenState extends State<MainScreen> {
   checkNotifications() async {
     GetStorage box = GetStorage();
 
-    String authCheck = box.read('api_token');
+    String? authCheck = box.read('api_token');
     print(authCheck);
     if (authCheck != null) {
       var mcheckNotification = await mainController.CheckNotications();
@@ -49,9 +49,23 @@ class _MainScreenState extends State<MainScreen> {
     }
   }
 
+  String? greeting = '';
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      var hour = DateTime.now().hour;
+      setState(() {
+        if ((hour >= 5) && (hour < 12)) {
+          greeting = 'Good Morning';
+        } else if ((hour >= 12) && (hour <= 16)) {
+          greeting = 'Good Afternoon';
+        } else if ((hour > 16) && (hour < 20)) {
+          greeting = 'Good Evening';
+        } else {
+          greeting = 'Good Night';
+        }
+      });
+      print(greeting);
       mainController.getVendor();
       checkNotifications();
     });
@@ -68,45 +82,48 @@ class _MainScreenState extends State<MainScreen> {
           child: Column(
             children: [
               Topbar(
-                
-                  checkNewNoti: checkNoti,
-                  // image: mainController.vendor != null
-                  //     ? mainController.vendor!.profilepic == ''
-                  //         ? ''
-                  //         : mainController.vendor!.profilepic
-                  //     : '',
-                  ),
-              mainController.vendor != null
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 30),
-                      child: Row(
-                        children: [
-                          Text(
-                            'Good Morning, \n' + mainController.vendor!.name!,
-                            style: TextStyle(
-                                fontSize: 30,
-                                color: mainColor,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: 'Poppins'),
+                checkNewNoti: checkNoti,
+                // image: mainController.vendor != null
+                //     ? mainController.vendor!.profilepic == ''
+                //         ? ''
+                //         : mainController.vendor!.profilepic
+                //     : '',
+              ),
+              greeting != ''
+                  ? mainController.vendor != null
+                      ? Padding(
+                          padding: const EdgeInsets.only(top: 30),
+                          child: Row(
+                            children: [
+                              Text(
+                                greeting! +
+                                    ', \n' +
+                                    mainController.vendor!.name!,
+                                style: TextStyle(
+                                    fontSize: 30,
+                                    color: mainColor,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'Poppins'),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.only(top: 30),
-                      child: Row(
-                        children: [
-                          Text(
-                            'Good Morning, \n',
-                            style: TextStyle(
-                                fontSize: 30,
-                                color: mainColor,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: 'Poppins'),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.only(top: 30),
+                          child: Row(
+                            children: [
+                              Text(
+                                greeting! + ', \n',
+                                style: TextStyle(
+                                    fontSize: 30,
+                                    color: mainColor,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'Poppins'),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
+                        )
+                  : Container(),
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: IconsButton(

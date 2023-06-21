@@ -86,12 +86,13 @@ class AuthController extends GetxController {
   }
 
 //////////////////////////  Language store In list Functions   ///////////////////////////////////
+  String? selectedLanguage;
 
   Future<void> storeLanguageList() async {
-    languege!.add(languageController.text);
+    languege!.add(selectedLanguage);
     print(languege);
     update();
-    languageController.clear();
+    selectedLanguage = null;
   }
 
 //////////////////////////  Register Functions   ///////////////////////////////////
@@ -189,10 +190,7 @@ class AuthController extends GetxController {
                       'language': lang,
                       'firebase_token': token
                     };
-                    var response = await Api.execute(
-                      url: url,
-                      data: data,
-                    );
+                    var response = await Api.execute(url: url, data: data);
                     if (!response['error']) {
                       Vendor vendor = Vendor(response['Vendor']);
                       print(vendor);

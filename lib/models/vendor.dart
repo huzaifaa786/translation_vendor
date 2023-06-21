@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:translation_vendor/models/service.dart';
+
 class Vendor {
-  int? id;
+  String? id;
   String? name;
   String? username;
   String? apiToken;
@@ -15,6 +17,7 @@ class Vendor {
   String? aboutArabic;
   int? online;
   List<dynamic>? language;
+  VendorService? service;
 
   Vendor(vendor) {
     id = vendor['id'];
@@ -31,5 +34,7 @@ class Vendor {
     aboutArabic = vendor['about(arabic)'] ?? '';
     online = vendor['online'];
     language = jsonDecode(vendor['language']);
+    service =
+        vendor['service'] != null ? VendorService(vendor['service']) : null;
   }
 }

@@ -7,7 +7,7 @@ import 'package:translation_vendor/models/document.dart';
 class Notificationn {
   int? id;
   int? user_id;
-  int? vendor_id;
+  String? vendor_id;
   String? title;
   Orderr? orderr;
   User? user;

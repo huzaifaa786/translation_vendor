@@ -51,6 +51,7 @@ class LocationField extends StatelessWidget {
     return Column(
       children: [
         TextFormField(
+          maxLength: 6,
           controller: controller,
           validator: validator,
           onChanged: onChange,
@@ -76,7 +77,6 @@ class LocationField extends StatelessWidget {
                 fontSize: 14,
                 color: Colors.black),
             hintText: hint,
-            
           ),
         ),
       ],

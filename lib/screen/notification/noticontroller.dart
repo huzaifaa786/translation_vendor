@@ -16,7 +16,7 @@ class NotificationController extends GetxController {
     GetStorage box = GetStorage();
 
     String api_token = box.read('api_token');
-    int vendor_id = box.read('vendor_id');
+    String vendor_id = box.read('vendor_id');
     var data = {
       'api_token': api_token,
       'id': vendor_id,

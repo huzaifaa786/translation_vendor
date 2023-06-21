@@ -335,16 +335,13 @@ class ProfileController extends GetxController {
   }
 
 ///////////////////////// Language Edit /////////////////////////////////////
+  String? selectedLanguage;
 
-  void addLanguage(void Function(bool) callback) {
-    if (languageController.text != '') {
-      vendor!.language!.add(languageController.text);
-      print(vendor!.language);
-      update();
-      return callback(true);
-    } else {
-      return callback(false);
-    }
+  void addLanguage() {
+    vendor!.language!.add(selectedLanguage);
+    print(vendor!.language);
+    selectedLanguage = null;
+    update();
   }
 
 ////////////////////////////// Certificate //////////////////////////////////
