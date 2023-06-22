@@ -322,6 +322,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 setState(() {});
                                 authController.SignUp((success) {
                                   if (success) {
+                                    Get.offAll(() => LoginScreen());
                                     vendorrequest(context);
                                   }
                                 });
