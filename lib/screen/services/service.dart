@@ -65,6 +65,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
         serviceController.unurgentdocument = mainController.vendor!.service!.unurgent!;
         serviceController.chnagePoint = LatLng(double.parse(mainController.vendor!.service!.lat!), double.parse(mainController.vendor!.service!.lng!));
         serviceController.radius = double.parse(mainController.vendor!.service!.radius!);
+        serviceController.workingHours = mainController.vendor!.service!.schedule!;
       }
     });
   }
@@ -319,13 +320,13 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 SizedBox(
                   height: 20,
                 ),
-                Schedule(day: 'Monday'),
-                Schedule(day: 'Tuesday'),
-                Schedule(day: 'Wednesday'),
-                Schedule(day: 'Thursday'),
-                Schedule(day: 'Friday'),
-                Schedule(day: 'Saturday'),
-                Schedule(day: 'Sunday'),
+                Schedule(day: 'Monday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![0].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![0].endTime),
+                Schedule(day: 'Tuesday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![1].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![1].endTime),
+                Schedule(day: 'Wednesday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![2].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![2].endTime),
+                Schedule(day: 'Thursday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![3].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![3].endTime),
+                Schedule(day: 'Friday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![4].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![4].endTime),
+                Schedule(day: 'Saturday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![5].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![5].endTime),
+                Schedule(day: 'Sunday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![6].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![6].endTime),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

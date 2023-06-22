@@ -10,8 +10,10 @@ import 'package:translation_vendor/values/colors.dart';
 import 'package:translation_vendor/values/controllers.dart';
 
 class Schedule extends StatefulWidget {
-  const Schedule({super.key, this.day});
+ Schedule({super.key, this.day, this.startTime = '09:00',this.endTime = '17:00'});
   final String? day;
+  String? startTime;
+  String? endTime;
 
   @override
   State<Schedule> createState() => _ScheduleState();
@@ -20,22 +22,22 @@ class Schedule extends StatefulWidget {
 class _ScheduleState extends State<Schedule> {
   void initState() {
     WorkingHour workingHour =
-        WorkingHour(day: widget.day!, startTime: startTime, endTime: endTime);
+        WorkingHour(day: widget.day!, startTime:widget.startTime, endTime: widget.endTime);
     int index = serviceController.workingHours
         .indexWhere((hour) => hour.day == widget.day!);
     if (index != 0) {}
     if (index < 7) {
       serviceController.workingHours.add(workingHour);
     }
-    startTimeController.text = startTime;
-    endTimeController.text = endTime;
+    startTimeController.text = widget.startTime!;
+    endTimeController.text = widget.endTime!;
     super.initState();
   }
 
   save() {}
 
-  String startTime = '09:00';
-  String endTime = '17:00';
+  // String startTime = '09:00';
+  // String endTime = '17:00';
   bool isFrozen = false;
   final TextEditingController startTimeController = TextEditingController();
   final TextEditingController endTimeController = TextEditingController();
@@ -66,10 +68,10 @@ class _ScheduleState extends State<Schedule> {
                     showSecondsColumn: false, onChanged: (date) {
                   var time = DateFormat.Hm().format(date);
                   startTimeController.text = time.toString();
-                  startTime = time.toString();
+                  widget.startTime = time.toString();
                   int index = serviceController.workingHours
                       .indexWhere((hour) => hour.day == widget.day!);
-                  serviceController.workingHours[index].startTime = startTime;
+                  serviceController.workingHours[index].startTime = widget.startTime;
                 }, currentTime: DateTime.now());
               },
               hint: '9:00',
@@ -91,11 +93,11 @@ class _ScheduleState extends State<Schedule> {
                     showSecondsColumn: false, onChanged: (date) {
                   var time = DateFormat.Hm().format(date);
                   endTimeController.text = time.toString();
-                  endTime = time.toString();
+                  widget.endTime = time.toString();
 
                   int index = serviceController.workingHours
                       .indexWhere((hour) => hour.day == widget.day!);
-                  serviceController.workingHours[index].endTime = endTime;
+                  serviceController.workingHours[index].endTime = widget.endTime;
                 }, currentTime: DateTime.now());
               },
               hint: '17:00',

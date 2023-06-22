@@ -2,13 +2,14 @@ import 'dart:convert';
 
 import 'package:translation_vendor/models/documentlist.dart';
 import 'package:translation_vendor/models/schedual.dart';
+import 'package:translation_vendor/models/workinghour.dart';
 
 class VendorService {
   int? id;
   String? vendor_id;
   List<Documentlist>? urgent;
   List<Documentlist>? unurgent;
-  List<Schedual>? schedual;
+  List<WorkingHour>? schedule;
   String? inperson;
   String? audiovideo;
   String? onlineaudiovideoPrice;
@@ -31,16 +32,21 @@ class VendorService {
     lng = service['longitude'];
     urgent = documentlist(jsonDecode(service['urgent']));
     unurgent = undocumentlist(jsonDecode(service['unurgent']));
-    schedual = schedulelist(jsonDecode(service['schedual']));
+    schedule = schedulelist(jsonDecode(service['schedual']));
   }
 
-  List<Schedual> schedulelist(List<dynamic> scheduleData) {
-    final List<Schedual> schedualList = [];
+  List<WorkingHour> schedulelist(List<dynamic> scheduleData) {
+    final List<WorkingHour> scheduleList = []; // Updated variable name
 
     for (var i = 0; i < scheduleData.length; i++) {
-      schedualList.add(Schedual(scheduleData[i]));
+      scheduleList.add(WorkingHour(
+        day: scheduleData[i]['day'],
+        startTime: scheduleData[i]['startTime'],
+        endTime: scheduleData[i]['endTime'],
+        isFrozen: scheduleData[i]['isFrozen'],
+      ));
     }
-    return schedualList;
+    return scheduleList; // Updated variable name
   }
 
   List<Documentlist> documentlist(List<dynamic> urgentData) {
