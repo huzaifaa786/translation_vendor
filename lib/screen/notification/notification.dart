@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
+import 'package:translation_vendor/screen/main/main.dart';
 import 'package:translation_vendor/screen/notification/noticontroller.dart';
 import 'package:translation_vendor/static/notification.dart';
 import 'package:translation_vendor/static/titletopbar.dart';
@@ -19,7 +20,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
     await notificationController.getnoti();
     setState(() {});
   }
-   readnotification() async {
+
+  readnotification() async {
     await notificationController.readnotifications();
     setState(() {});
   }
@@ -43,38 +45,45 @@ class _NotificationScreenState extends State<NotificationScreen> {
               TitleTopbar(
                 text: 'Notifications',
                 ontap: () {
-                  Navigator.pop(context);
+                  Get.back();
                 },
               ),
               SizedBox(
                 height: 23,
               ),
               controller.notifications.length != 0
-                  ? Container(
-                      height: MediaQuery.of(context).size.height * 0.81,
-                      child: ListView.builder(
-                          itemCount: controller.notifications.length,
-                          itemBuilder: (context, index) => NotificationTile(
-                                name: controller
-                                    .notifications[index].user!.username,
-                                image: controller
-                                    .notifications[index].user!.profilePic,
-                                title: controller.notifications[index].title,
-                                price: controller
-                                    .notifications[index].orderr!.price
-                                    .toString(),
-                                day: notificationController.convertDateFormat(controller.notifications[index].created_at!),
-                              )),
+                  ? Flexible(
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.81,
+                        child: ListView.builder(
+                            itemCount: controller.notifications.length,
+                            itemBuilder: (context, index) => NotificationTile(
+                                  name: controller
+                                      .notifications[index].user!.username,
+                                  image: controller
+                                      .notifications[index].user!.profilePic,
+                                  title:
+                                      controller.notifications[index].title,
+                                  price: controller
+                                      .notifications[index].orderr!.price
+                                      .toString(),
+                                  day: notificationController
+                                      .convertDateFormat(controller
+                                          .notifications[index].created_at!),
+                                )),
+                      ),
                     )
-                  : Container(
-                      height: MediaQuery.of(context).size.height * 0.22,
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text("No Order Found!"),
-                        ],
+                  : Flexible(
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.9,
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("Empty Notification Scrren."),
+                          ],
+                        ),
                       ),
                     ),
             ],

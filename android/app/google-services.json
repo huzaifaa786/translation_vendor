@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "730843891402",
-    "project_id": "klicks-vendor",
-    "storage_bucket": "klicks-vendor.appspot.com"
+    "project_number": "940267686745",
+    "project_id": "translation-vendor",
+    "storage_bucket": "translation-vendor.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:730843891402:android:816f757d8ca80f750e1633",
+        "mobilesdk_app_id": "1:940267686745:android:7b1899e3ce9c9582745a48",
         "android_client_info": {
           "package_name": "com.example.translation_vendor"
         }
       },
       "oauth_client": [
         {
-          "client_id": "730843891402-2h0ttiivjocq2r26rqjr2sdhh50opju5.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.translation_vendor",
-            "certificate_hash": "7fcdb3799ecf46658f131ed7ebe19a2735101b61"
-          }
-        },
-        {
-          "client_id": "730843891402-4925dkdg7aioppsmq3qk3uva00vq22cj.apps.googleusercontent.com",
+          "client_id": "940267686745-bs1c5lrk5d6u1s1ttlhatui7tn97avv3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDE4K5XK2ePIR4vxCpqyRp4kTMiRUO2qW4"
+          "current_key": "AIzaSyDUzhw9I2jFe1WymG7M-v141xgy-J4Ylig"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "730843891402-4925dkdg7aioppsmq3qk3uva00vq22cj.apps.googleusercontent.com",
+              "client_id": "940267686745-bs1c5lrk5d6u1s1ttlhatui7tn97avv3.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

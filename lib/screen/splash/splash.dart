@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:translation_vendor/helper/loading.dart';
 import 'package:translation_vendor/screen/login/login.dart';
 import 'package:translation_vendor/screen/main/main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

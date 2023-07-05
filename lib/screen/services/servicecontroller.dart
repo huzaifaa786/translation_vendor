@@ -7,7 +7,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:translation_vendor/api/api.dart';
 import 'package:translation_vendor/helper/loading.dart';
 import 'package:translation_vendor/models/workinghour.dart';
+import 'package:translation_vendor/screen/main/main.dart';
 import 'package:translation_vendor/values/colors.dart';
+import 'package:translation_vendor/values/controllers.dart';
 import 'package:translation_vendor/values/string.dart';
 import 'package:location/location.dart';
 import 'package:translation_vendor/models/documentlist.dart';
@@ -140,7 +142,7 @@ class ServiceController extends GetxController {
                         String unurgent = jsonEncode(jsonList2);
                         var url = BASE_URL + 'service/store';
                         GetStorage box = GetStorage();
-                        int id = box.read('vender_id');
+                        String id = box.read('vender_id');
                         String? api_token = box.read('api_token');
                         var data = {
                           'vendor_id': id,
@@ -148,10 +150,10 @@ class ServiceController extends GetxController {
                           'schedual': workinghours,
                           'urgent': urgent,
                           'unurgent': unurgent,
-                          'inperson': inpersionController.text.toString(),
-                          'audiovideo': audiovideoController.text.toString(),
+                          'inperson': InPersonPrice,
+                          'audiovideo': audioORvideo,
                           'onlineaudiovideo':
-                              onlineAudiovideoController.text.toString(),
+                              onlineAudioORvideo,
                           'urgentprice': urgentPrice,
                           'unurgentprice': UnurgentPrice,
                           'latitude': chnagePoint!.latitude.toString(),
@@ -166,6 +168,7 @@ class ServiceController extends GetxController {
                             colorText: Colors.white,
                             backgroundColor: Colors.green,
                             snackPosition: SnackPosition.BOTTOM);
+                            Get.offAll(()=> MainScreen());
                         return response;
                       } else {
                         LoadingHelper.dismiss();

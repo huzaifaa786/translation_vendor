@@ -6,6 +6,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation_vendor/screen/login/authcontroller.dart';
 import 'package:translation_vendor/screen/main/main.dart';
 import 'package:translation_vendor/static/button.dart';
+import 'package:translation_vendor/static/dropdown.dart';
 import 'package:translation_vendor/static/icon_inputfield.dart';
 import 'package:translation_vendor/static/imageinput.dart';
 import 'package:translation_vendor/static/inputfield.dart';
@@ -16,6 +17,7 @@ import 'package:translation_vendor/static/stackinputfield.dart';
 import 'package:translation_vendor/values/Validator.dart';
 import 'package:translation_vendor/values/colors.dart';
 import 'package:translation_vendor/values/controllers.dart';
+import 'package:translation_vendor/values/language.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -28,6 +30,13 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _obscureText = true;
   bool _obscureText1 = true;
   int index = 1;
+
+  switchfromlang(value) {
+    setState(() {
+      authController.selectedLanguage = value as String;
+      authController.storeLanguageList();
+    });
+  }
 
   getindex(id) async {
     setState(() {
@@ -237,18 +246,26 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                               )),
                           showCreate == true
-                              ? InputFields(
-                                  hint: 'Add language',
-                                  controller: authController.languageController,
-                                  showSuffix: true,
-                                  suffix: 'ADD',
-                                  onpressed: () {
-                                    if (authController
-                                        .languageController.text.isNotEmpty) {
-                                      authController.storeLanguageList();
-                                    }
-                                  },
-                                )
+                              ? DropdownField(
+                                  items: Languages(),
+                                  text: 'Add Language',
+                                  selectedvalue:
+                                      authController.selectedLanguage,
+                                  icon: ImageIcon(AssetImage(
+                                      'assets/images/drop_arrow.png')),
+                                  onChange: switchfromlang)
+                              //  InputFields(
+                              //     hint: 'Add language',
+                              //     controller: authController.languageController,
+                              //     showSuffix: true,
+                              //     suffix: 'ADD',
+                              //     onpressed: () {
+                              //       if (authController
+                              //           .languageController.text.isNotEmpty) {
+                              //         authController.storeLanguageList();
+                              //       }
+                              //     },
+                              //   )
                               : Container(),
                           Padding(
                             padding: const EdgeInsets.only(top: 25.0),
@@ -305,7 +322,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 setState(() {});
                                 authController.SignUp((success) {
                                   if (success) {
-                                    
+                                    Get.offAll(() => LoginScreen());
                                     vendorrequest(context);
                                   }
                                 });
@@ -336,9 +353,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               toggle: _toggle,
                               obscure: _obscureText,
                               controller: authController.password,
-                              validate: authController.validateSignInForm,
-                              validator: (password) =>
-                                  Validators.passwordValidator(password),
+                              // validate: authController.validateSignInForm,
+                              // validator: (password) =>
+                              //     Validators.passwordValidator(password),
                             ),
                           ),
                           Padding(
@@ -348,7 +365,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               title: 'Login',
                               textcolor: White,
                               onPressed: () {
-                                setState(() {});
+                                setState(() {
+                                  showCreate = false;
+                                  print(showCreate);
+                                });
                                 authController.login((success) {
                                   if (success) {
                                     authController.ClearSignupVariables();

@@ -6,7 +6,7 @@ class Order {
   int? user_id;
   int? price;
   int? duration;
-  int? vendor_id;
+  String? vendor_id;
   String? starttime;
   String? endtime;
   String? date;

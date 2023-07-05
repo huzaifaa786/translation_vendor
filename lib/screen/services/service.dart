@@ -4,18 +4,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-
 import 'package:translation_vendor/models/documentlist.dart';
-import 'package:translation_vendor/models/workinghour.dart';
 import 'package:auto_size_text_field/auto_size_text_field.dart';
+import 'package:translation_vendor/models/vendor.dart';
 import 'package:translation_vendor/screen/services/map.dart';
 import 'package:translation_vendor/screen/services/schedule.dart';
 import 'package:translation_vendor/screen/services/servicecontroller.dart';
 import 'package:translation_vendor/static/LocationButton.dart';
 import 'package:translation_vendor/static/addpage.dart';
 import 'package:translation_vendor/static/button.dart';
-import 'package:translation_vendor/static/icon_button.dart';
-import 'package:translation_vendor/static/schedule.dart';
 import 'package:translation_vendor/static/titletopbar.dart';
 import 'package:translation_vendor/static/page_p_day.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -41,8 +38,6 @@ class _ServiceScreenState extends State<ServiceScreen> {
 
   static CameraPosition? _kLake;
 
-  List<WorkingHour> workingHours = [];
-
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -58,6 +53,20 @@ class _ServiceScreenState extends State<ServiceScreen> {
         print('object');
         print(_kLake);
       });
+      if (mainController.vendor!.service != null) {
+        setState(() {});
+        serviceController.onlineAudioORvideo =
+            mainController.vendor!.service!.onlineaudiovideoPrice;
+        serviceController.audioORvideo = mainController.vendor!.service!.audiovideo;
+        serviceController.InPersonPrice = mainController.vendor!.service!.inperson;
+        serviceController.urgentPrice = mainController.vendor!.service!.urgentprice;
+        serviceController.UnurgentPrice = mainController.vendor!.service!.unurgentprice;
+        serviceController.urgentdocument = mainController.vendor!.service!.urgent!;
+        serviceController.unurgentdocument = mainController.vendor!.service!.unurgent!;
+        serviceController.chnagePoint = LatLng(double.parse(mainController.vendor!.service!.lat!), double.parse(mainController.vendor!.service!.lng!));
+        serviceController.radius = double.parse(mainController.vendor!.service!.radius!);
+        serviceController.workingHours = mainController.vendor!.service!.schedule!;
+      }
     });
   }
 
@@ -306,60 +315,18 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     title: 'Choose location',
                     icon: Icons.my_location_rounded,
                     onPressed: () {
-                      // controller.getlocation();
                       Get.to(() => VendorMapScreen());
                     }),
-                // serviceController.locationData == null
-                //     ? Container()
-                //     : Row(
-                //         children: [
-                //           Container(
-                //             height: 180,
-                //             width: MediaQuery.of(context).size.width * 0.9,
-                //             child: GoogleMap(
-                //               // circles: serviceController.setCircles(),
-                //               scrollGesturesEnabled: true,
-                //               mapType: MapType.hybrid,
-                //               initialCameraPosition:
-                //                   serviceController.locationData != null
-                //                       ? _kLake!
-                //                       : _kGooglePlex,
-                //               onMapCreated: (GoogleMapController controller) {
-                //                 _controller.complete(controller);
-                //               },
-                //               markers: {
-                //                 Marker(
-                //                   markerId: const MarkerId("marker1"),
-                //                   position: LatLng(
-                //                       serviceController.locationData!.latitude!,
-                //                       serviceController
-                //                           .locationData!.longitude!),
-                //                   draggable: true,
-                //                   onDragEnd: (value) {
-                //                     // value is the new position
-                //                   },
-                //                   // To do: custom marker icon
-                //                 ),
-                //                 Marker(
-                //                   markerId: const MarkerId("marker2"),
-                //                   position: const LatLng(
-                //                       37.415768808487435, -122.08440050482749),
-                //                 ),
-                //               },
-                //             ),
-                //           ),
-                //         ],
-                //       ),
                 SizedBox(
                   height: 20,
                 ),
-                Schedule(day: 'Monday'),
-                Schedule(day: 'Tuesday'),
-                Schedule(day: 'Wednesday'),
-                Schedule(day: 'Thursday'),
-                Schedule(day: 'Friday'),
-                Schedule(day: 'Saturday'),
-                Schedule(day: 'Sunday'),
+                Schedule(day: 'Monday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![0].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![0].endTime),
+                Schedule(day: 'Tuesday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![1].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![1].endTime),
+                Schedule(day: 'Wednesday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![2].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![2].endTime),
+                Schedule(day: 'Thursday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![3].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![3].endTime),
+                Schedule(day: 'Friday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![4].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![4].endTime),
+                Schedule(day: 'Saturday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![5].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![5].endTime),
+                Schedule(day: 'Sunday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![6].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![6].endTime),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

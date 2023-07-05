@@ -10,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:translation_vendor/screen/profile/edit_model.dart';
 import 'package:translation_vendor/screen/profile/profilecontroller.dart';
 import 'package:translation_vendor/static/button.dart';
+import 'package:translation_vendor/static/dropdown.dart';
 import 'package:translation_vendor/static/heading.dart';
 import 'package:translation_vendor/static/imageinput.dart';
 import 'package:translation_vendor/static/password.dart';
@@ -24,6 +25,7 @@ import 'package:translation_vendor/values/controllers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:auto_size_text_field/auto_size_text_field.dart';
+import 'package:translation_vendor/values/language.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -36,6 +38,14 @@ class _ProfileState extends State<Profile> {
   bool showCreate2 = false;
   bool showCreate = false;
   bool show = false;
+
+  switchfromlang(value) {
+    setState(() {
+      profileController.selectedLanguage = value as String;
+      profileController.addLanguage();
+      showCreate = !showCreate;
+    });
+  }
 
   fetchVendor() async {
     await profileController.getVendor();
@@ -448,23 +458,31 @@ class _ProfileState extends State<Profile> {
                               },
                             ),
                             showCreate == true
-                                ? InputFields(
-                                    hint: 'Add language',
-                                    showSuffix: true,
-                                    controller:
-                                        profileController.languageController,
-                                    suffix: 'ADD',
-                                    onpressed: () {
-                                      profileController.addLanguage((success) {
-                                        if (success) {
-                                          setState(() {
-                                            showCreate = !showCreate;
-                                            print(showCreate);
-                                          });
-                                        }
-                                      });
-                                    },
-                                  )
+                                ? DropdownField(
+                                    items: Languages(),
+                                    text: 'Add Language',
+                                    selectedvalue:
+                                        authController.selectedLanguage,
+                                    icon: ImageIcon(AssetImage(
+                                        'assets/images/drop_arrow.png')),
+                                    onChange: switchfromlang)
+                                //  InputFields(
+                                //     hint: 'Add language',
+                                //     showSuffix: true,
+                                //     controller:
+                                //         profileController.languageController,
+                                //     suffix: 'ADD',
+                                //     onpressed: () {
+                                //       profileController.addLanguage((success) {
+                                //         if (success) {
+                                //           setState(() {
+                                //             showCreate = !showCreate;
+                                //             print(showCreate);
+                                //           });
+                                //         }
+                                //       });
+                                //     },
+                                //   )
                                 : Container(),
                             SizedBox(
                               height: 15,
