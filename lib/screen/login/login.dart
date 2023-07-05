@@ -187,8 +187,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 )),
                             isDropdownHideUnderline: true,
                             isFormValidator: true,
-                            startYear: 1970,
-                            endYear: 2030,
+                            startYear: 1950,
+                            endYear: 2010,
                             width: 10,
                             onChangedDay: (value) =>
                                 authController.day = value!,
