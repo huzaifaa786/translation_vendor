@@ -1,11 +1,17 @@
+import 'dart:developer';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:translation_vendor/models/service.dart';
 import 'package:translation_vendor/static/locationField.dart';
 import 'package:translation_vendor/values/colors.dart';
 import 'package:translation_vendor/values/controllers.dart';
 
 class VendorMapScreen extends StatefulWidget {
+   const VendorMapScreen({super.key, this.service});
+  final VendorService? service;
   @override
   _VendorMapScreenState createState() => _VendorMapScreenState();
 }
@@ -24,6 +30,22 @@ class _VendorMapScreenState extends State<VendorMapScreen> {
     setState(() {
       mapController = controller;
     });
+    print('widget.service&&&&&&');
+    print(widget.service!.lat);
+    print(widget.service!.lng);
+     setState(() {
+      circles.clear();
+      circles.add(
+        Circle(
+          circleId: CircleId('delivery_radius'),
+          center: LatLng(widget.service!.lat!, widget.service!.lng!),
+          radius: widget.service!.radius!,
+          strokeColor: Colors.blue,
+          fillColor: Colors.blue.withOpacity(0.3),
+          strokeWidth: 2,
+        ),
+      );
+  });
   }
 
   void onchange(String rad) {

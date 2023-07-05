@@ -15,9 +15,9 @@ class VendorService {
   String? onlineaudiovideoPrice;
   String? urgentprice;
   String? unurgentprice;
-  String? radius;
-  String? lat;
-  String? lng;
+  double? radius;
+  double? lat;
+  double? lng;
 
   VendorService(service) {
     id = service['id'];
@@ -27,9 +27,9 @@ class VendorService {
     onlineaudiovideoPrice = service['onlineaudiovideo'];
     urgentprice = service['urgentprice'];
     unurgentprice = service['unurgentprice'];
-    radius = service['radius'];
-    lat = service['latitude'];
-    lng = service['longitude'];
+    radius = double.parse(service['radius'].toString());
+    lat = double.parse(service['latitude'].toString());
+    lng = double.parse(service['longitude'].toString());
     urgent = documentlist(jsonDecode(service['urgent']));
     unurgent = undocumentlist(jsonDecode(service['unurgent']));
     schedule = schedulelist(jsonDecode(service['schedual']));

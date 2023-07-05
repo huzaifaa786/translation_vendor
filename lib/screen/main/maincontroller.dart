@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:translation_vendor/api/api.dart';
 import 'package:translation_vendor/helper/loading.dart';
 import 'package:translation_vendor/models/vendor.dart';
+import 'package:translation_vendor/screen/main/main.dart';
+import 'package:translation_vendor/screen/profile/profile.dart';
 import 'package:translation_vendor/values/controllers.dart';
 import 'package:translation_vendor/values/string.dart';
 import 'package:get_storage/get_storage.dart';
@@ -84,11 +86,19 @@ class MainController extends GetxController {
         print(i);
       } else {
         i = 1;
-        print(i);
       }
+        print(i);
+        print('ffffffffffffffffffffff');
+      print(vendor!.profile!);
+         if (vendor!.profile! == '0'){
+          print('hhhhhhhhhhhhhhhhhhhhhh');
+        Get.offAll(() => Profile());
+
+         }
+   
       update();
       LoadingHelper.dismiss();
-    } else {
+     }else {
       LoadingHelper.dismiss();
       Get.snackbar('Error!', response['error_data']);
     }

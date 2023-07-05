@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:translation_vendor/api/api.dart';
 import 'package:translation_vendor/helper/loading.dart';
+import 'package:translation_vendor/models/service.dart';
 import 'package:translation_vendor/models/workinghour.dart';
 import 'package:translation_vendor/screen/main/main.dart';
 import 'package:translation_vendor/values/colors.dart';
@@ -38,6 +39,7 @@ class ServiceController extends GetxController {
   RxBool validateSignUpForm = false.obs;
   double? radius;
   LatLng? chnagePoint;
+  VendorService? service;
 
 ////////////////////////// Inperson Input Functionlity ////////////////////////
   openInPersonField() {
@@ -168,7 +170,7 @@ class ServiceController extends GetxController {
                             colorText: Colors.white,
                             backgroundColor: Colors.green,
                             snackPosition: SnackPosition.BOTTOM);
-                            Get.offAll(()=> MainScreen());
+                          
                         return response;
                       } else {
                         LoadingHelper.dismiss();
@@ -296,5 +298,27 @@ class ServiceController extends GetxController {
     showurgentPriceField = false.obs;
     showOnlineAudioORvideoPriceField = false.obs;
     update();
+  }
+
+    getservice() async {
+    LoadingHelper.show();
+    var url = BASE_URL + 'service/get';
+    GetStorage box = GetStorage();
+    String vendor_id = box.read('vendor_id');
+    print(vendor_id);
+    var data = {
+      'id': vendor_id,
+    };
+    print(data);
+    var response = await Api.execute(url: url, data: data);
+    print(response);
+    if (!response['error']) {
+      service = VendorService(response['service']);
+      update();
+      LoadingHelper.dismiss();
+    } else {
+      LoadingHelper.dismiss();
+      Get.snackbar('Error!', response['error_data']);
+    }
   }
 }

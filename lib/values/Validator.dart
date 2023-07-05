@@ -84,4 +84,24 @@ class Validators {
       return null;
     }
   }
+ static String? languageValidator(List<dynamic>? language) {
+  if (language == null || language.length < 2) {
+    return "*Select at least 2 languages";
+  } else {
+    return null;
+  }
 }
+
+    // if (password == null) {
+    //   return null;
+    // } else if (password.isEmpty) {
+    //   return "Password can't be empty";
+    // } else if (!digitRegExp.hasMatch(password)) {
+    //   return "Password must contain numbers and special character";
+    // } else if (password.length < 8) {
+    //   return "Password must be 8 characters long";
+    // } else {
+    //   return null;
+    // }
+  }
+

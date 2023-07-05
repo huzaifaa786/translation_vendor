@@ -100,11 +100,13 @@ class AuthController extends GetxController {
   void SignUp(void Function(bool) callback) async {
     LoadingHelper.show();
     final bool isFormValid =
+       Validators.languageValidator(languege) == null &&
         Validators.emptyStringValidator(vendorName.text, '') == null &&
             Validators.emptyStringValidator(userName.text, '') == null &&
             Validators.emptyStringValidator(password.text, '') == null &&
             Validators.emptyStringValidator(confirmPassword.text, '') == null;
     if (isFormValid) {
+    
       if (year == '') {
         LoadingHelper.dismiss();
         Get.snackbar('Invalid Date Format.', 'Select complete Date of Birth.',
@@ -122,7 +124,7 @@ class AuthController extends GetxController {
               final passport =
                   base64Encode(File(passportImage!.path).readAsBytesSync());
 
-              if (languege!.length >= 1) {
+              if (languege!.length >= 2) {
                 if (certificateImage!.path == '') {
                   if (password.text == confirmPassword.text) {
                     var token = await FirebaseMessaging.instance.getToken();
@@ -215,7 +217,7 @@ class AuthController extends GetxController {
               } else {
                 LoadingHelper.dismiss();
                 Get.snackbar(
-                    "Language Field Invalid.", 'Select atleast one Language.',
+                    "Language Field Invalid.", 'Select atleast two Language.',
                     snackPosition: SnackPosition.BOTTOM,
                     backgroundColor: Colors.red,
                     colorText: Colors.white);

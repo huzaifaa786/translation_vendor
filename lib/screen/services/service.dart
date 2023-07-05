@@ -38,8 +38,14 @@ class _ServiceScreenState extends State<ServiceScreen> {
 
   static CameraPosition? _kLake;
 
+    fetchservice() async {
+    await serviceController.getservice();
+    setState(() {});
+  }
+
   void initState() {
     super.initState();
+    fetchservice();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await serviceController.getlocation();
       setState(() {
@@ -57,15 +63,24 @@ class _ServiceScreenState extends State<ServiceScreen> {
         setState(() {});
         serviceController.onlineAudioORvideo =
             mainController.vendor!.service!.onlineaudiovideoPrice;
-        serviceController.audioORvideo = mainController.vendor!.service!.audiovideo;
-        serviceController.InPersonPrice = mainController.vendor!.service!.inperson;
-        serviceController.urgentPrice = mainController.vendor!.service!.urgentprice;
-        serviceController.UnurgentPrice = mainController.vendor!.service!.unurgentprice;
-        serviceController.urgentdocument = mainController.vendor!.service!.urgent!;
-        serviceController.unurgentdocument = mainController.vendor!.service!.unurgent!;
-        serviceController.chnagePoint = LatLng(double.parse(mainController.vendor!.service!.lat!), double.parse(mainController.vendor!.service!.lng!));
-        serviceController.radius = double.parse(mainController.vendor!.service!.radius!);
-        serviceController.workingHours = mainController.vendor!.service!.schedule!;
+        serviceController.audioORvideo =
+            mainController.vendor!.service!.audiovideo;
+        serviceController.InPersonPrice =
+            mainController.vendor!.service!.inperson;
+        serviceController.urgentPrice =
+            mainController.vendor!.service!.urgentprice;
+        serviceController.UnurgentPrice =
+            mainController.vendor!.service!.unurgentprice;
+        serviceController.urgentdocument =
+            mainController.vendor!.service!.urgent!;
+        serviceController.unurgentdocument =
+            mainController.vendor!.service!.unurgent!;
+        serviceController.chnagePoint = LatLng(
+            mainController.vendor!.service!.lat!,
+            mainController.vendor!.service!.lng!);
+        serviceController.radius = mainController.vendor!.service!.radius!;
+        serviceController.workingHours =
+            mainController.vendor!.service!.schedule!;
       }
     });
   }
@@ -315,18 +330,74 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     title: 'Choose location',
                     icon: Icons.my_location_rounded,
                     onPressed: () {
-                      Get.to(() => VendorMapScreen());
+                      Get.to(() => VendorMapScreen(service : mainController.vendor!.service));
                     }),
                 SizedBox(
                   height: 20,
                 ),
-                Schedule(day: 'Monday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![0].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![0].endTime),
-                Schedule(day: 'Tuesday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![1].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![1].endTime),
-                Schedule(day: 'Wednesday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![2].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![2].endTime),
-                Schedule(day: 'Thursday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![3].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![3].endTime),
-                Schedule(day: 'Friday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![4].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![4].endTime),
-                Schedule(day: 'Saturday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![5].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![5].endTime),
-                Schedule(day: 'Sunday',startTime: mainController.vendor!.service ==null ? '09:00' :mainController.vendor!.service!.schedule![6].startTime,endTime: mainController.vendor!.service ==null ? '17:00' :mainController.vendor!.service!.schedule![6].endTime),
+                Schedule(
+                    day: 'Monday',
+                    startTime: mainController.vendor!.service == null
+                        ? '09:00'
+                        : mainController
+                            .vendor!.service!.schedule![0].startTime,
+                    endTime: mainController.vendor!.service == null
+                        ? '17:00'
+                        : mainController.vendor!.service!.schedule![0].endTime),
+                Schedule(
+                    day: 'Tuesday',
+                    startTime: mainController.vendor!.service == null
+                        ? '09:00'
+                        : mainController
+                            .vendor!.service!.schedule![1].startTime,
+                    endTime: mainController.vendor!.service == null
+                        ? '17:00'
+                        : mainController.vendor!.service!.schedule![1].endTime),
+                Schedule(
+                    day: 'Wednesday',
+                    startTime: mainController.vendor!.service == null
+                        ? '09:00'
+                        : mainController
+                            .vendor!.service!.schedule![2].startTime,
+                    endTime: mainController.vendor!.service == null
+                        ? '17:00'
+                        : mainController.vendor!.service!.schedule![2].endTime),
+                Schedule(
+                    day: 'Thursday',
+                    startTime: mainController.vendor!.service == null
+                        ? '09:00'
+                        : mainController
+                            .vendor!.service!.schedule![3].startTime,
+                    endTime: mainController.vendor!.service == null
+                        ? '17:00'
+                        : mainController.vendor!.service!.schedule![3].endTime),
+                Schedule(
+                    day: 'Friday',
+                    startTime: mainController.vendor!.service == null
+                        ? '09:00'
+                        : mainController
+                            .vendor!.service!.schedule![4].startTime,
+                    endTime: mainController.vendor!.service == null
+                        ? '17:00'
+                        : mainController.vendor!.service!.schedule![4].endTime),
+                Schedule(
+                    day: 'Saturday',
+                    startTime: mainController.vendor!.service == null
+                        ? '09:00'
+                        : mainController
+                            .vendor!.service!.schedule![5].startTime,
+                    endTime: mainController.vendor!.service == null
+                        ? '17:00'
+                        : mainController.vendor!.service!.schedule![5].endTime),
+                Schedule(
+                    day: 'Sunday',
+                    startTime: mainController.vendor!.service == null
+                        ? '09:00'
+                        : mainController
+                            .vendor!.service!.schedule![6].startTime,
+                    endTime: mainController.vendor!.service == null
+                        ? '17:00'
+                        : mainController.vendor!.service!.schedule![6].endTime),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -401,10 +472,16 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   ),
                 ),
                 for (var document in serviceController.urgentdocument)
-                  PagePrice(
-                    minpage: document.minpage,
-                    maxpage: document.maxpage,
-                    days: document.day,
+                  InkWell(
+                    onTap: () {
+                      editurgentdoc(context, document.minpage, document.maxpage,
+                          document.day);
+                    },
+                    child: PagePrice(
+                      minpage: document.minpage,
+                      maxpage: document.maxpage,
+                      days: document.day,
+                    ),
                   ),
                 AddPage(
                   title: 'Un Urgent Doucment :',
@@ -463,10 +540,16 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   ),
                 ),
                 for (var document in serviceController.unurgentdocument)
-                  PagePrice(
-                    minpage: document.minpage,
-                    maxpage: document.maxpage,
-                    days: document.day,
+                  InkWell(
+                    onTap: () {
+                      editunurgentdoc(context, document.minpage,
+                          document.maxpage, document.day);
+                    },
+                    child: PagePrice(
+                      minpage: document.minpage,
+                      maxpage: document.maxpage,
+                      days: document.day,
+                    ),
                   ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20, bottom: 20),
@@ -582,6 +665,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     backgroundColor: Colors.red,
                     snackPosition: SnackPosition.BOTTOM);
               }
+              setState(() {});
             },
             child: Text(
               "save",
@@ -631,9 +715,10 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 if (minController.text != '') {
                   if (maxController.text != '') {
                     serviceController.urgentdocument.add(Documentlist(
-                        day: totaldayController.text,
-                        minpage: minController.text,
-                        maxpage: maxController.text));
+                      day: totaldayController.text,
+                      minpage: minController.text,
+                      maxpage: maxController.text,
+                    ));
                     print(serviceController.urgentdocument);
                     Get.back();
                   } else {
@@ -654,12 +739,154 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     backgroundColor: Colors.red,
                     snackPosition: SnackPosition.BOTTOM);
               }
+              setState(() {});
             },
             child: Text(
               "save",
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
           )
+        ]).show();
+  }
+
+  editurgentdoc(context, minpage, maxpage, day) {
+    TextEditingController minController =
+        TextEditingController(text: minpage.toString());
+    TextEditingController maxController =
+        TextEditingController(text: maxpage.toString());
+    TextEditingController totaldayController =
+        TextEditingController(text: day.toString());
+    Alert(
+      context: context,
+      title: "Document",
+      content: Column(
+        children: <Widget>[
+          TextField(
+            controller: minController,
+            decoration: InputDecoration(
+              labelText: 'Minimum page',
+            ),
+            keyboardType: TextInputType.number,
+          ),
+          TextField(
+            controller: maxController,
+            decoration: InputDecoration(
+              labelText: 'Maximum page',
+            ),
+            keyboardType: TextInputType.number,
+          ),
+          TextField(
+            controller: totaldayController,
+            decoration: InputDecoration(
+              labelText: 'Total days to complete',
+            ),
+            keyboardType: TextInputType.number,
+          ),
+        ],
+      ),
+      buttons: [
+        DialogButton(
+          color: mainColor,
+          onPressed: () {
+            // Retrieve the updated values from the text controllers
+            String updatedMinPage = minController.text;
+            String updatedMaxPage = maxController.text;
+            String updatedDay = totaldayController.text;
+
+            // Find the index of the item you want to update in the list
+            int index = serviceController.urgentdocument.indexWhere(
+                (document) =>
+                    document.minpage == minpage &&
+                    document.maxpage == maxpage &&
+                    document.day == day);
+
+            if (index != -1) {
+              // Update the item at the found index
+              serviceController.urgentdocument[index].minpage = updatedMinPage;
+              serviceController.urgentdocument[index].maxpage = updatedMaxPage;
+              serviceController.urgentdocument[index].day = updatedDay;
+            }
+              serviceController.addservice();
+            setState(() {});
+            // Close the dialog
+            Get.back();
+          },
+          child: Text(
+            "save",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        )
+      ],
+    ).show();
+  }
+
+  editunurgentdoc(context, minpage, maxpage, day) {
+    TextEditingController minController =
+        TextEditingController(text: minpage.toString());
+    TextEditingController maxController =
+        TextEditingController(text: maxpage.toString());
+    TextEditingController totaldayController =
+        TextEditingController(text: day.toString());
+    Alert(
+        context: context,
+        title: "Document",
+        content: Column(
+          children: <Widget>[
+            TextField(
+              controller: minController,
+              decoration: InputDecoration(
+                labelText: 'Minimum page',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            TextField(
+              controller: maxController,
+              decoration: InputDecoration(
+                labelText: 'Maximum page',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            TextField(
+              controller: totaldayController,
+              decoration: InputDecoration(
+                labelText: 'Total days to complete',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+          ],
+        ),
+        buttons: [
+         DialogButton(
+          color: mainColor,
+          onPressed: () {
+            // Retrieve the updated values from the text controllers
+            String updatedMinPage = minController.text;
+            String updatedMaxPage = maxController.text;
+            String updatedDay = totaldayController.text;
+
+            // Find the index of the item you want to update in the list
+            int index = serviceController.unurgentdocument.indexWhere(
+                (document) =>
+                    document.minpage == minpage &&
+                    document.maxpage == maxpage &&
+                    document.day == day);
+
+            if (index != -1) {
+              // Update the item at the found index
+              serviceController.unurgentdocument[index].minpage = updatedMinPage;
+              serviceController.unurgentdocument[index].maxpage = updatedMaxPage;
+              serviceController.unurgentdocument[index].day = updatedDay;
+            }
+              serviceController.addservice();
+            setState(() {});
+            // Close the dialog
+            Get.back();
+          },
+          child: Text(
+            "save",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        )
         ]).show();
   }
 }

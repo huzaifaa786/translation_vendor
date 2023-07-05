@@ -6,6 +6,8 @@ import 'package:translation_vendor/helper/loading.dart';
 import 'package:translation_vendor/screen/login/login.dart';
 import 'package:translation_vendor/screen/main/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:translation_vendor/screen/profile/profile.dart';
+import 'package:translation_vendor/values/controllers.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -41,6 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (authCheck == null) {
       Get.off(() => LoginScreen());
     } else {
+        
       Get.off(() => MainScreen());
     }
   }

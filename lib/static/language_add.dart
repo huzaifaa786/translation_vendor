@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:translation_vendor/values/colors.dart';
 
 class LanguageAdd extends StatelessWidget {
@@ -17,7 +19,7 @@ class LanguageAdd extends StatelessWidget {
       this.onChange,
       this.imageIcon,
       this.hint,
-      this.validator,
+      this.validator = null,
       this.autovalidateMode,
       this.validate,
       this.icon,
@@ -30,7 +32,7 @@ class LanguageAdd extends StatelessWidget {
 
   final controller;
   final validator;
-  final bool? validate;
+  final RxBool? validate;
   final labelText;
   final width;
   final hint;
@@ -52,6 +54,7 @@ class LanguageAdd extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+  
         Stack(
           children: [
             Padding(
@@ -59,7 +62,9 @@ class LanguageAdd extends StatelessWidget {
               child: Container(
                 height: 60,
                 // width: MediaQuery.of(context).size.width * 10,
+                
                 decoration: BoxDecoration(
+                  
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.all(
                     Radius.circular(12),
@@ -71,6 +76,7 @@ class LanguageAdd extends StatelessWidget {
                     Container(
                         padding: const EdgeInsets.all(8),
                         width: MediaQuery.of(context).size.width * .7,
+                        
                         child: Text(
                           text,
                           maxLines: 2,

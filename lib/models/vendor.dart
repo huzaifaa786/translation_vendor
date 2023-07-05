@@ -14,6 +14,7 @@ class Vendor {
   String? certificate;
   String? status;
   String? aboutEng;
+  String? profile;
   String? aboutArabic;
   int? online;
   List<dynamic>? language;
@@ -25,6 +26,7 @@ class Vendor {
     username = vendor['username'];
     apiToken = vendor['api_token'] ?? '';
     dob = vendor['DOB'];
+    profile = vendor['profile'];
     passport = vendor['passport'];
     number = vendor['number'] ?? '';
     profilepic = vendor['profilepic'] ?? '';

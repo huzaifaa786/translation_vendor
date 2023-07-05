@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:translation_vendor/models/language.dart';
 import 'package:translation_vendor/screen/login/authcontroller.dart';
 import 'package:translation_vendor/screen/main/main.dart';
 import 'package:translation_vendor/static/button.dart';
@@ -233,10 +234,18 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           Padding(
-                              padding: const EdgeInsets.only(top: 15),
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Text('select atleast 2 languages',style: TextStyle(color: Colors.red),),
+                          ),
+                          Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              
                               child: LanguageAdd(
                                 labelText: ' Language',
                                 text: authController.languege!.join(',  '),
+                                validate: authController.validateSignUpForm,
+                                validator: (language) =>
+                                    Validators.languageValidator(language),
                                 imageIcon: 'assets/images/add.svg',
                                 onpressed: () {
                                   setState(() {

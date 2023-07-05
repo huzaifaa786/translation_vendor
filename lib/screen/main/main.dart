@@ -30,6 +30,7 @@ class _MainScreenState extends State<MainScreen> {
       index = id;
     });
   }
+ 
 
   String? greeting = '';
   void initState() {
@@ -70,7 +71,7 @@ class _MainScreenState extends State<MainScreen> {
                           child: Row(
                             children: [
                               Text(
-                                greeting! +
+                                'Hello' +
                                     ', \n' +
                                     mainController.vendor!.name!,
                                 style: TextStyle(
