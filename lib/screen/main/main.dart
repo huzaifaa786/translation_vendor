@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+import 'package:translation_vendor/screen/chat/chats.dart';
 import 'package:translation_vendor/screen/history/history.dart';
 import 'package:translation_vendor/screen/main/maincontroller.dart';
 import 'package:translation_vendor/screen/profile/profile.dart';
@@ -131,6 +132,15 @@ class _MainScreenState extends State<MainScreen> {
                   saleController.clearVariable();
                   Get.to(() => SalesScreen(
                         id: mainController.vendor!.id.toString(),
+                      ));
+                },
+                imgicon: 'assets/images/sale.svg',
+              ),
+                 IconsButton(
+                title: 'Chat',
+                onPressed: () {
+                  saleController.clearVariable();
+                  Get.to(() => Chats_screen(
                       ));
                 },
                 imgicon: 'assets/images/sale.svg',

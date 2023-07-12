@@ -1,3 +1,4 @@
+import 'package:translation_vendor/screen/chat/chatcontroller.dart';
 import 'package:translation_vendor/screen/history/historycontroller.dart';
 import 'package:translation_vendor/screen/login/authcontroller.dart';
 import 'package:translation_vendor/screen/main/maincontroller.dart';
@@ -15,3 +16,4 @@ HistoryController historyController = HistoryController.instance;
 StatusController statusController = StatusController.instance;
 SaleController saleController = SaleController.instance;
 NotificationController notificationController = NotificationController.instance;
+ChatController chatController = ChatController.instance;

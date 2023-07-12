@@ -4,3 +4,4 @@ const mainColor = Color(4281622651);
 const hintColor = Color(4286743170);
 const notiNameCOlor = Color(4290338683);
 const White = Colors.white;
+const hintText = Color.fromARGB(255, 141, 141, 141);

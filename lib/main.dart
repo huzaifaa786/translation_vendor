@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:translation_vendor/screen/chat/chatcontroller.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -37,6 +38,7 @@ void main() async {
   Get.put(HistoryController());
   Get.put(StatusController());
   Get.put(SaleController());
+  Get.put(ChatController());
   Get.put(NotificationController());
   await GetStorage.init();
   runApp(const MyApp());
