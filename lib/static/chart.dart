@@ -1,21 +1,21 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ChartCards extends StatelessWidget {
-  const ChartCards( {Key? key,
-      required this.msg,
-      required this.name,
-      required this.imgicon,
-      this.onPressed,
-      })
-      : super(key: key);
-  final  msg;
-  final  name;
-  final  imgicon;
+  const ChartCards({
+    Key? key,
+    required this.msg,
+    required this.name,
+    required this.imgicon,
+    this.onPressed,
+  }) : super(key: key);
+  final msg;
+  final name;
+  final imgicon;
   final onPressed;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class ChartCards extends StatelessWidget {
         child: Row(
           children: <Widget>[
             // ClipRRect(
-      
+
             // borderRadius: BorderRadius.circular(40.0),
             // child: Image.network('http://10.0.2.2:8000/api/image',
             // height: 100,
@@ -43,13 +43,20 @@ class ChartCards extends StatelessWidget {
                 borderRadius: BorderRadius.circular(70),
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(22),
-                child: SvgPicture.asset(
-                 imgicon,
-                  width: 64,
-                  height: 64,
-                  fit: BoxFit.cover,
-                ),
+                borderRadius: BorderRadius.circular(45),
+                child:
+                //  imgicon == ''
+                //     ? 
+                    Image(
+                        image: AssetImage('assets/images/5907.jpg'),
+                        height: 64,
+                        width: 64,
+                      )
+                    // : CachedNetworkImage(
+                    //     imageUrl: imgicon,
+                    //     height: 64,
+                    //     width: 64,
+                    //   ),
               ),
             ),
             Expanded(

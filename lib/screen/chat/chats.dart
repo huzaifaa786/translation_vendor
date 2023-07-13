@@ -111,12 +111,17 @@ class _Chats_screenState extends State<Chats_screen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => Chatdetails_screen(
-                              contacts: chatController.contacts[index]),
+                            contactid: chatController.contacts[index].id,
+                            contactname:
+                                chatController.contacts[index].username,
+                            contactPic:
+                                chatController.contacts[index].profilePic,
+                          ),
                         ));
                   },
                   msg: 'message',
                   name: chatController.contacts[index].username,
-                  imgicon: "assets/images/splash_3.svg"),
+                  imgicon: "assets/images/5907.jpg"),
             ),
           ),
         ],

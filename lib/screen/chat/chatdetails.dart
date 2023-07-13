@@ -1,20 +1,18 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'dart:io' as io;
-
 import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
-import 'package:translation_vendor/models/contact.dart';
 import 'package:translation_vendor/screen/chat/chatcontroller.dart';
 import 'package:translation_vendor/static/chattopbar.dart';
 import 'package:translation_vendor/static/rplycharcard.dart';
 import 'package:translation_vendor/values/controllers.dart';
 
 class Chatdetails_screen extends StatefulWidget {
-  const Chatdetails_screen({super.key, required this.contacts});
-  final Contact? contacts;
+  const Chatdetails_screen({super.key, required this.contactid,required this.contactname,required this.contactPic,});
+  final String? contactid;
+  final String? contactname;
+  final String? contactPic;
+
   @override
   State<Chatdetails_screen> createState() => _Chatdetails_screenState();
 }
@@ -24,15 +22,16 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
 
   @override
   void initState() {
-    chatController.initPusher(widget.contacts!.id);
-    chatController.fetchmassage(widget.contacts!.id);
+    chatController.massages = RxList([]);
+    chatController.initPusher(widget.contactid!);
+    chatController.fetchmassage(widget.contactid!);
     super.initState();
   }
 
   @override
   void dispose() {
     pusher.disconnect();
-    pusher.unsubscribe(channelName: "private-chatify.${widget.contacts!.id}");
+    pusher.unsubscribe(channelName: "private-chatify.${widget.contactid!}");
     super.dispose();
   }
 
@@ -64,8 +63,8 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
           child: Column(
             children: [
               ChatTopBar(
-                name: widget.contacts!.username,
-                image: widget.contacts!.profilePic,
+                name: widget.contactname,
+                // image: widget.contactPic,
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 25, 20, 0),
@@ -120,7 +119,7 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                                           1 -
                                           index]
                                       .to_id ==
-                                  widget.contacts!.id
+                                  widget.contactid!
                               ? false
                               : true,
                           fileName: controller

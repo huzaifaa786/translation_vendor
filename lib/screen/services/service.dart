@@ -88,6 +88,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: White,
       body: SafeArea(
           child: GetBuilder<ServiceController>(
         builder: (controller) => Padding(
@@ -123,6 +124,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 ),
                 SizedBox(height: 4),
                 InkWell(
+                  focusColor: White,
                   onTap: () {
                     serviceController.openOnlineAudioORvideoField();
                   },
@@ -203,6 +205,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   height: 23,
                 ),
                 InkWell(
+                  focusColor: White,
                   onTap: () {
                     serviceController.openaudioORvideoField();
                   },
@@ -258,6 +261,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   height: 12,
                 ),
                 InkWell(
+                  focusColor: White,
                   onTap: () {
                     serviceController.openInPersonField();
                   },
@@ -422,6 +426,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   },
                 ),
                 InkWell(
+                  focusColor: White,
                   onTap: () {
                     serviceController.openurgentField();
                   },
@@ -490,6 +495,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   },
                 ),
                 InkWell(
+                  focusColor: White,
                   onTap: () {
                     serviceController.openUnurgentField();
                   },

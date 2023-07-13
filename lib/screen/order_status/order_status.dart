@@ -1,8 +1,7 @@
-// ignore_for_file: prefer_const_constructors
-
-import 'dart:math';
+// ignore_for_file: prefer_const_constructors, deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:translation_vendor/models/order.dart';
@@ -13,7 +12,6 @@ import 'package:translation_vendor/static/statustitle.dart';
 import 'package:translation_vendor/static/titletopbar.dart';
 import 'package:translation_vendor/values/colors.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:intl/intl.dart';
 import 'package:translation_vendor/values/controllers.dart';
 
 class OrderStatus extends StatefulWidget {
@@ -111,70 +109,136 @@ class _OrderStatusState extends State<OrderStatus> {
                       ),
                     ),
                   ),
-                  widget.order!.servicetype! =="documentType"
-                 ? Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 12),
-                        child: Row(
+                  widget.order!.servicetype! == "document"
+                      ? Column(
                           children: [
-                            Text(
-                              'Document',
-                              style: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 12),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                    color: mainColor.withOpacity(0.1),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(45),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 12),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Document',
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 14),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 12),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.all(8),
+                                        decoration: BoxDecoration(
+                                          color: mainColor.withOpacity(0.1),
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(45),
+                                          ),
+                                        ),
+                                        child: SvgPicture.asset(
+                                          'assets/images/page.svg',
+                                          color: mainColor,
+                                          height: 12,
+                                          width: 12,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 5),
+                                        child: Text(
+                                          'Document',
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 14),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      FileDownloader.downloadFile(
+                                        url: widget.order!.document!.file!,
+                                        name: 'File',
+                                        onProgress: (fileName, progress) {
+                                          Get.snackbar(
+                                              'Downloading ' + fileName!,
+                                              'Downloaded ' +
+                                                  progress.toString() +
+                                                  '%',
+                                              snackPosition:
+                                                  SnackPosition.BOTTOM,
+                                              backgroundColor: Colors.green,
+                                              colorText: Colors.white);
+                                        },
+                                        onDownloadCompleted: (path) async {
+                                          Get.snackbar(
+                                              'File downloaded successfully.',
+                                              '',
+                                              snackPosition:
+                                                  SnackPosition.BOTTOM,
+                                              backgroundColor: Colors.green,
+                                              colorText: Colors.white);
+                                        },
+                                        onDownloadError: (errorMessage) {
+                                          Get.snackbar('Error!', errorMessage,
+                                              snackPosition:
+                                                  SnackPosition.BOTTOM,
+                                              backgroundColor: Colors.red,
+                                              colorText: Colors.white);
+                                        },
+                                      );
+                                    },
+                                    child: Text(
+                                      "View Document",
+                                      style: TextStyle(
+                                          color: mainColor,
+                                          decoration: TextDecoration.underline,
+                                          fontSize: 14),
                                     ),
                                   ),
-                                  child: SvgPicture.asset(
-                                    'assets/images/page.svg',
-                                    color: mainColor,
-                                    height: 12,
-                                    width: 12,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 5),
-                                  child: Text(
-                                    'File Document 2',
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 14),
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                            Text(
-                              "View Document",
-                              style: TextStyle(
-                                  color: mainColor,
-                                  decoration: TextDecoration.underline,
-                                  fontSize: 14),
-                            ),
+                            widget.order!.status! == "0"
+                                ? Container()
+                                : widget.order!.status! == "2"
+                                    ? Container()
+                                    : Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 8.0),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Message',
+                                                  style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 14),
+                                                ),
+                                                Text(widget.order!.document!
+                                                    .discription!),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      )
                           ],
-                        ),
-                      ),
-                    ],
-                  ):Container(),
+                        )
+                      : Container(),
                   widget.order!.status! == "0"
                       ? Padding(
-                          padding: const EdgeInsets.only(top: 19),
+                          padding: const EdgeInsets.only(top: 40),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -205,7 +269,7 @@ class _OrderStatusState extends State<OrderStatus> {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(
-                                      top: 30, bottom: 20),
+                                      top: 40, bottom: 20),
                                   child: Text(
                                     'Order In Progress',
                                     style: TextStyle(

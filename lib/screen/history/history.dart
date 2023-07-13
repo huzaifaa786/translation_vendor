@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
+import 'package:translation_vendor/screen/chat/chatdetails.dart';
 import 'package:translation_vendor/screen/history/historycontroller.dart';
 import 'package:translation_vendor/screen/order_status/order_status.dart';
 import 'package:translation_vendor/static/history.dart';
@@ -57,15 +58,35 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                     ));
                                   },
                                   id: controller.orders[index].id,
-                                  name: controller.orders[index].vendor!.name,
-                                  image: controller
-                                      .orders[index].vendor!.profilepic,
+                                  name: controller.orders[index].user!.username,
+                                  image:
+                                      controller.orders[index].user!.profilePic,
                                   price: controller.orders[index].price,
                                   type: controller.orders[index].servicetype,
                                   status: controller.orders[index].status,
+                                  onmsgtap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              Chatdetails_screen(
+                                            contactid: controller.orders[index].user!.id.toString(),
+                                            contactname: controller.orders[index].user!.username,
+                                            contactPic: controller.orders[index].user!.profilePic,
+                                          ),
+                                        ));
+                                  },
                                   time: controller.orders[index].starttime! +
-                                      '-' +
-                                      controller.orders[index].endtime!,
+                                              controller
+                                                  .orders[index].servicetype! ==
+                                          'document'
+                                      ? Text('')
+                                      : '-' +
+                                                  controller.orders[index]
+                                                      .servicetype! ==
+                                              'document'
+                                          ? Text('')
+                                          : controller.orders[index].endtime!,
                                   date: controller.orders[index].date,
                                   servicetype:
                                       controller.orders[index].servicetype,

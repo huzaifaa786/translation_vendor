@@ -46,17 +46,19 @@ class ChatTopBar extends StatelessWidget {
                 ),
                 child:  ClipRRect(
                       borderRadius: BorderRadius.circular(45),
-                      child: image == ''
-                          ? Image(
+                      child:
+                      //  image == ''
+                      //     ? 
+                          Image(
                               image: AssetImage('assets/images/5907.jpg'),
                               height: 80,
                               width: 80,
                             )
-                          : CachedNetworkImage(
-                              imageUrl: image,
-                              height: 80,
-                              width: 80,
-                            ),
+                          // : CachedNetworkImage(
+                          //     imageUrl: image,
+                          //     height: 80,
+                          //     width: 80,
+                          //   ),
                     ),
               ),
               Padding(
@@ -69,31 +71,31 @@ class ChatTopBar extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 19, fontWeight: FontWeight.w500),
                     ),
-                    Row(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Color(0xFF34607B),
-                            borderRadius: BorderRadius.circular(999),
-                          ),
-                          height: 12,
-                          width: 12,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 5.0),
-                          child: Text(
-                            'Online',
-                            style: TextStyle(
-                              fontFamily: 'Sk-Modernist',
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12,
-                              height: 1.5,
-                              color: Color(0xFF34607B),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     Container(
+                    //       decoration: BoxDecoration(
+                    //         color: Color(0xFF34607B),
+                    //         borderRadius: BorderRadius.circular(999),
+                    //       ),
+                    //       height: 12,
+                    //       width: 12,
+                    //     ),
+                    //     Padding(
+                    //       padding: const EdgeInsets.only(left: 5.0),
+                    //       child: Text(
+                    //         'Online',
+                    //         style: TextStyle(
+                    //           fontFamily: 'Sk-Modernist',
+                    //           fontWeight: FontWeight.w400,
+                    //           fontSize: 12,
+                    //           height: 1.5,
+                    //           color: Color(0xFF34607B),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),

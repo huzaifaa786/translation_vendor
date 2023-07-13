@@ -1,3 +1,4 @@
+import 'package:translation_vendor/models/document.dart';
 import 'package:translation_vendor/models/user.dart';
 import 'package:translation_vendor/models/vendor.dart';
 
@@ -16,8 +17,7 @@ class Order {
   DateTime? created_at;
   User? user;
   Vendor? vendor;
-  // OrderDocument? document;
-
+  OrderDocument? document;
 
   Order(order) {
     id = order['id'];
@@ -31,10 +31,11 @@ class Order {
     status = order['status'];
     vendor_id = order['vendor_id'];
     user_id = order['user_id'];
-    created_at =  DateTime.parse(order['created_at']).toLocal();
+    order['servicetype'] == 'document'
+        ? document = OrderDocument(order['document'])
+        : '';
+    created_at = DateTime.parse(order['created_at']).toLocal();
     user = User(order['user']);
     vendor = Vendor(order['vendor']);
-    // document = OrderDocument(order['orderdocument']);
-  
   }
 }
