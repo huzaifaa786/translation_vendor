@@ -8,10 +8,16 @@ import 'package:translation_vendor/static/rplycharcard.dart';
 import 'package:translation_vendor/values/controllers.dart';
 
 class Chatdetails_screen extends StatefulWidget {
-  const Chatdetails_screen({super.key, required this.contactid,required this.contactname,required this.contactPic,});
+  const Chatdetails_screen(
+      {super.key,
+      required this.contactid,
+      required this.contactname,
+      required this.contactPic,
+      required this.screen});
   final String? contactid;
   final String? contactname;
   final String? contactPic;
+  final String? screen;
 
   @override
   State<Chatdetails_screen> createState() => _Chatdetails_screenState();
@@ -25,7 +31,13 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
     chatController.massages = RxList([]);
     chatController.initPusher(widget.contactid!);
     chatController.fetchmassage(widget.contactid!);
+    msg();
     super.initState();
+  }
+
+  msg() async {
+    await chatController.makeseen(widget.contactid!);
+    await chatController.unseenchat();
   }
 
   @override
@@ -64,7 +76,9 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
             children: [
               ChatTopBar(
                 name: widget.contactname,
-                // image: widget.contactPic,
+                image: widget.screen == 'order'
+                    ? widget.contactPic
+                    : 'https://translation.klickwash.net/' + widget.contactPic!,
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 25, 20, 0),

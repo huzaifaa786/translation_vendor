@@ -75,6 +75,7 @@ class NotificationTile extends StatelessWidget {
                                         color: notiNameCOlor,
                                         fontWeight: FontWeight.w500),
                                   ),
+                                  price != ''?
                                   Padding(
                                     padding: const EdgeInsets.only(top: 4),
                                     child: Text(
@@ -84,7 +85,7 @@ class NotificationTile extends StatelessWidget {
                                           color: mainColor,
                                           fontWeight: FontWeight.w500),
                                     ),
-                                  ),
+                                  ): Container(),
                                 ],
                               ),
                               Padding(

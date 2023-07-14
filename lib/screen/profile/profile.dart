@@ -12,6 +12,7 @@ import 'package:translation_vendor/screen/profile/profilecontroller.dart';
 import 'package:translation_vendor/static/button.dart';
 import 'package:translation_vendor/static/dropdown.dart';
 import 'package:translation_vendor/static/heading.dart';
+import 'package:translation_vendor/static/image.dart';
 import 'package:translation_vendor/static/imageinput.dart';
 import 'package:translation_vendor/static/password.dart';
 import 'package:translation_vendor/static/titletopbar.dart';
@@ -391,20 +392,31 @@ class _ProfileState extends State<Profile> {
                                           Flexible(
                                             child: Container(
                                               padding: EdgeInsets.only(left: 6),
-                                              child: Text(
-                                                profileController
-                                                    .vendor!.certificate!
-                                                    .substring(profileController
-                                                            .vendor!
-                                                            .certificate!
-                                                            .lastIndexOf('/') +
-                                                        1),
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                    fontFamily: 'Poppins',
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: Colors.grey[600]),
+                                              child: InkWell(
+                                                onTap: () {
+                                                  Get.to(
+                                                    () => FullScreenImagePage(
+                                                      imageUrl:
+                                                          profileController
+                                                              .vendor!
+                                                              .certificate!,
+                                                    ),
+                                                  );
+                                                },
+                                                child: Text(
+                                                  Uri.parse(profileController
+                                                          .vendor!.certificate!)
+                                                      .pathSegments
+                                                      .last,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: Colors.grey[600]),
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -422,11 +434,7 @@ class _ProfileState extends State<Profile> {
                                           padding: EdgeInsets.only(left: 6),
                                           child: Text(
                                             profileController
-                                                .certificateImage!.path
-                                                .substring(profileController
-                                                        .certificateImage!.path
-                                                        .lastIndexOf('/') +
-                                                    1),
+                                                .certificateImage!.path,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
                                                 fontFamily: 'Poppins',

@@ -8,6 +8,7 @@ class Contact {
     id = contact['id'].toString();
     username = contact['username'] ?? contact['name'];
     profilePic = contact['profilepic'] ?? '';
+    print(contact['max_created_at']);
     lastmessageTime = contact['max_created_at'];
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:translation_vendor/screen/main/main.dart';
 import 'package:translation_vendor/screen/notification/noticontroller.dart';
+import 'package:translation_vendor/screen/order_status/order_status.dart';
 import 'package:translation_vendor/static/notification.dart';
 import 'package:translation_vendor/static/titletopbar.dart';
 import 'package:translation_vendor/values/controllers.dart';
@@ -49,7 +50,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 },
               ),
               SizedBox(
-                height:8,
+                height: 8,
               ),
               controller.notifications.length != 0
                   ? Flexible(
@@ -58,17 +59,29 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         child: ListView.builder(
                             itemCount: controller.notifications.length,
                             itemBuilder: (context, index) => NotificationTile(
+                                  ontap: () {
+                                    controller.notifications[index].orderr !=
+                                            null
+                                        ? Get.to(OrderStatus(
+                                            order: controller
+                                                .notifications[index].orderr,
+                                          ))
+                                        : null;
+                                  },
                                   name: controller
                                       .notifications[index].user!.username,
                                   image: controller
                                       .notifications[index].user!.profilePic,
-                                  title:
-                                      controller.notifications[index].title,
-                                  price: controller
-                                      .notifications[index].orderr!.price
-                                      .toString(),
-                                  day: notificationController
-                                      .convertDateFormat(controller
+                                  title: controller.notifications[index].title,
+                                  price:
+                                      controller.notifications[index].orderr !=
+                                              null
+                                          ? controller.notifications[index]
+                                              .orderr!.price
+                                              .toString()
+                                          : '',
+                                  day: notificationController.convertDateFormat(
+                                      controller
                                           .notifications[index].created_at!),
                                 )),
                       ),

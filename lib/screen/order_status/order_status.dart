@@ -195,7 +195,7 @@ class _OrderStatusState extends State<OrderStatus> {
                                       );
                                     },
                                     child: Text(
-                                      "View Document",
+                                      "Download Document",
                                       style: TextStyle(
                                           color: mainColor,
                                           decoration: TextDecoration.underline,

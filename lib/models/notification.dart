@@ -9,14 +9,14 @@ class Notificationn {
   int? user_id;
   String? vendor_id;
   String? title;
-  Orderr? orderr;
+  Order? orderr;
   User? user;
   String? created_at;
 
   Notificationn(notification) {
     id = notification['id'];
     title = notification['title'];
-    orderr = Orderr(notification['order']);
+    orderr = notification['order'] != null ? Order(notification['order']) : null;
     user = User(notification['user']);
     created_at = notification['created_at'];
   }

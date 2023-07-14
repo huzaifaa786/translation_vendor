@@ -37,11 +37,16 @@ class ProfileController extends GetxController {
 //////////////////////////// Profile Image Picker //////////////////////////////////////
 
   selectcertificateImage() async {
-    final ImagePicker _picker = ImagePicker();
-    var image1 = await _picker.pickImage(source: ImageSource.gallery);
-    certificateImage = image1;
-    showCertificateField = false.obs;
-    update();
+      final ImagePicker _picker = ImagePicker();
+      var image1 = await _picker.pickImage(source: ImageSource.gallery);
+      if (image1 != null) {
+        certificateImage = image1;
+        showCertificateField = false.obs;
+        update();
+      } else {
+        certificateImage = XFile('');
+        update();
+      }
   }
 
 //////////////////////////// Profile Image Picker //////////////////////////////////////
@@ -51,6 +56,9 @@ class ProfileController extends GetxController {
     var image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       profileimg = image;
+      update();
+    } else {
+      profileimg = XFile('');
       update();
     }
   }
@@ -197,7 +205,7 @@ class ProfileController extends GetxController {
               snackPosition: SnackPosition.BOTTOM,
               backgroundColor: Colors.green,
               colorText: Colors.white);
-               Get.offAll(() => MainScreen());
+          Get.offAll(() => MainScreen());
           LoadingHelper.dismiss();
         } else {
           LoadingHelper.dismiss();

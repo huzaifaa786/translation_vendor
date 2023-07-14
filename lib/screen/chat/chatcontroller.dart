@@ -72,6 +72,7 @@ class ChatController extends GetxController {
   }
 
   getContacts() async {
+    print('0');
     LoadingHelper.show();
     var url = BASE_URL + 'getContacts';
     var data;
@@ -79,11 +80,13 @@ class ChatController extends GetxController {
     data = {
       'api_token': box.read('api_token')!,
     };
+    print('1');
     var response = await Api.execute(url: url, data: data);
     contacts = <Contact>[];
     for (var contact in response['contacts']) {
       contacts.add(Contact(contact));
     }
+    print('2');
     update();
     LoadingHelper.dismiss();
   }
@@ -154,42 +157,42 @@ class ChatController extends GetxController {
     }
   }
 
-sendMassage() async {
-  var url = BASE_URL + 'sendMessage';
-  var data;
-  GetStorage box = GetStorage();
+  sendMassage() async {
+    var url = BASE_URL + 'sendMessage';
+    var data;
+    GetStorage box = GetStorage();
 
-  String fileName = file?.path.split('/').last ?? ''; // Get the file name if it exists
-  print(fileName);
+    String fileName =
+        file?.path.split('/').last ?? ''; // Get the file name if it exists
+    print(fileName);
 
-  data = dio.FormData.fromMap({
-    'api_token': box.read('api_token')!,
-    'message': massagecontroller.text.toString(),
-    'type': 'user',
-    'temporaryMsgId': main(),
-    'id': activeUserId,
-  });
+    data = dio.FormData.fromMap({
+      'api_token': box.read('api_token')!,
+      'message': massagecontroller.text.toString(),
+      'type': 'user',
+      'temporaryMsgId': main(),
+      'id': activeUserId,
+    });
 
-  if (file != null) {
-    data.files.add(
-      MapEntry(
-        'file',
-        await dio.MultipartFile.fromFile(file!.path, filename: fileName),
-      ),
-    );
+    if (file != null) {
+      data.files.add(
+        MapEntry(
+          'file',
+          await dio.MultipartFile.fromFile(file!.path, filename: fileName),
+        ),
+      );
+    }
+
+    var response = await Api.execute(url: url, data: data);
+
+    response['message']['body'] = response['message']['message'];
+    response['message']['created_at'] = response['message']['created_at'];
+
+    massages.add(Msg(response['message']));
+
+    update();
+    ClearVariable();
   }
-
-  var response = await Api.execute(url: url, data: data);
-
-  response['message']['body'] = response['message']['message'];
-  response['message']['created_at'] = response['message']['created_at'];
-
-  massages.add(Msg(response['message']));
-
-  update();
-  ClearVariable();
-}
-
 
   fetchmassage(id) async {
     LoadingHelper.show();
@@ -211,5 +214,35 @@ sendMassage() async {
 
       update();
     }
+  }
+
+  makeseen(id) async {
+    LoadingHelper.show();
+    var url = BASE_URL + 'makeSeen';
+    var data;
+    GetStorage box = GetStorage();
+    print(box.read('api_token'));
+    data = {
+      'api_token': box.read('api_token'),
+      'id': id,
+    };
+    var response = await Api.execute(url: url, data: data);
+    print(response);
+    LoadingHelper.dismiss();
+  }
+
+  String? unseen;
+  unseenchat() async {
+    LoadingHelper.show();
+    var url = BASE_URL + 'unseen/all';
+    var data;
+    GetStorage box = GetStorage();
+    data = {
+      'api_token': box.read('api_token'),
+    };
+    var response = await Api.execute(url: url, data: data);
+    unseen = response['unseen'].toString();
+    update();
+    LoadingHelper.dismiss();
   }
 }

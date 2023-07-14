@@ -44,22 +44,20 @@ class ChatTopBar extends StatelessWidget {
                   border: Border.all(width: 2, color: Color(0xFF34607B)),
                   borderRadius: BorderRadius.circular(70),
                 ),
-                child:  ClipRRect(
-                      borderRadius: BorderRadius.circular(45),
-                      child:
-                      //  image == ''
-                      //     ? 
-                          Image(
-                              image: AssetImage('assets/images/5907.jpg'),
-                              height: 80,
-                              width: 80,
-                            )
-                          // : CachedNetworkImage(
-                          //     imageUrl: image,
-                          //     height: 80,
-                          //     width: 80,
-                          //   ),
-                    ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(22),
+                  child: image == 'https://translation.klickwash.net/'
+                      ? Image(
+                          image: AssetImage('assets/images/5907.jpg'),
+                          height: 64,
+                          width: 64,
+                        )
+                      : CachedNetworkImage(
+                          imageUrl: image,
+                          height: 64,
+                          width: 64,
+                        ),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 12.0),
