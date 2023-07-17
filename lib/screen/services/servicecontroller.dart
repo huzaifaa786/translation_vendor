@@ -170,7 +170,7 @@ class ServiceController extends GetxController {
                             colorText: Colors.white,
                             backgroundColor: Colors.green,
                             snackPosition: SnackPosition.BOTTOM);
-                          
+                          Get.to(()=> MainScreen());
                         return response;
                       } else {
                         LoadingHelper.dismiss();

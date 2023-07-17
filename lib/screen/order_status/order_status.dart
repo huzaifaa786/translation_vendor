@@ -84,7 +84,7 @@ class _OrderStatusState extends State<OrderStatus> {
                           ),
                           CheckOutTile(
                             title: 'Phone number:',
-                            discription: widget.order!.user!.number!,
+                            discription: widget.order!.user!.number == null ? '' :widget.order!.user!.number,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

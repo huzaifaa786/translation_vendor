@@ -202,7 +202,16 @@ class _ReplyMessageCardState extends State<ReplyMessageCard> {
                                                 backgroundColor: Colors.green,
                                                 colorText: Colors.white);
                                           },
-                                          onDownloadCompleted: (path) async {});
+                                          onDownloadCompleted: (path) async {
+                                            Get.snackbar(
+                                                'Downloading Successfully.',
+                                                'Downloaded at device path ' +
+                                                    path.toString(),
+                                                snackPosition:
+                                                    SnackPosition.BOTTOM,
+                                                backgroundColor: Colors.green,
+                                                colorText: Colors.white);
+                                          });
                                     },
                                   ),
                                 ),

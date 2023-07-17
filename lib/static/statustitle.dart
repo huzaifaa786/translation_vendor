@@ -22,36 +22,37 @@ class CheckOutTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
-      child: Row(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14,
-                    color: Colors.black),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Text(
-                  discription,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                  fontFamily: 'Poppins',
-
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18,
-                      color: mainColor),
+      child: discription != ''
+          ? Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          color: Colors.black),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: Text(
+                        discription,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
+                            color: mainColor),
+                      ),
+                    )
+                  ],
                 ),
-              )
-            ],
-          ),
-        ],
-      ),
+              ],
+            )
+          : Container(),
     );
   }
 }
