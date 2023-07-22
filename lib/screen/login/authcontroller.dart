@@ -23,6 +23,7 @@ class AuthController extends GetxController {
   RxBool validateSignInForm = false.obs;
   RxBool success = new RxBool(true);
   TextEditingController vendorName = TextEditingController();
+  TextEditingController certificateName = TextEditingController();
   TextEditingController userName = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
@@ -54,6 +55,7 @@ class AuthController extends GetxController {
     password.clear();
     confirmPassword.clear();
     languageController.clear();
+    certificateName.clear();
     year = '';
     month = '';
     day = '';
@@ -71,6 +73,9 @@ class AuthController extends GetxController {
     if (image != null) {
       passportImage = image;
       update();
+    } else {
+      passportImage = XFile('');
+      update();
     }
   }
 
@@ -81,6 +86,10 @@ class AuthController extends GetxController {
     var image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       certificateImage = image;
+      // certificateName.text = certificateImage!.name;
+      update();
+    } else {
+      certificateImage = XFile('');
       update();
     }
   }
@@ -99,14 +108,12 @@ class AuthController extends GetxController {
 
   void SignUp(void Function(bool) callback) async {
     LoadingHelper.show();
-    final bool isFormValid =
-       Validators.languageValidator(languege) == null &&
+    final bool isFormValid = Validators.languageValidator(languege) == null &&
         Validators.emptyStringValidator(vendorName.text, '') == null &&
-            Validators.emptyStringValidator(userName.text, '') == null &&
-            Validators.emptyStringValidator(password.text, '') == null &&
-            Validators.emptyStringValidator(confirmPassword.text, '') == null;
+        Validators.emptyStringValidator(userName.text, '') == null &&
+        Validators.emptyStringValidator(password.text, '') == null &&
+        Validators.emptyStringValidator(confirmPassword.text, '') == null;
     if (isFormValid) {
-    
       if (year == '') {
         LoadingHelper.dismiss();
         Get.snackbar('Invalid Date Format.', 'Select complete Date of Birth.',
@@ -173,42 +180,54 @@ class AuthController extends GetxController {
                 } else {
                   final certificate = base64Encode(
                       File(certificateImage!.path).readAsBytesSync());
-                  if (password.text == confirmPassword.text) {
-                    var token = await FirebaseMessaging.instance.getToken();
-                    var lang = jsonEncode(languege);
-                    var url = BASE_URL + 'vendor/register';
-                    var data;
-                    data = {
-                      'name': vendorName.text.toString(),
-                      'username': userName.text.toString(),
-                      'DOB': date.toString(),
-                      'password': password.text.toString(),
-                      'passport': passport,
-                      'certificate': certificate,
-                      'language': lang,
-                      'firebase_token': token
-                    };
-                    var response = await Api.execute(url: url, data: data);
-                    if (!response['error']) {
-                      Vendor vendor = Vendor(response['Vendor']);
-                      print(vendor);
-                      GetStorage box = GetStorage();
-                      box.write('api_token', vendor.apiToken);
-                      box.write('vendor_id', vendor.id);
-                      LoadingHelper.dismiss();
-                      return callback(true);
+                  final bool isFormValid = Validators.emptyStringValidator(
+                          certificateName.text, '') ==
+                      null;
+                  if (isFormValid) {
+                    if (password.text == confirmPassword.text) {
+                      var token = await FirebaseMessaging.instance.getToken();
+                      var lang = jsonEncode(languege);
+                      var url = BASE_URL + 'vendor/register';
+                      var data;
+                      data = {
+                        'name': vendorName.text.toString(),
+                        'username': userName.text.toString(),
+                        'DOB': date.toString(),
+                        'password': password.text.toString(),
+                        'passport': passport,
+                        'certificate': certificate,
+                        'certifcate_name': certificateName.text.toString(),
+                        'language': lang,
+                        'firebase_token': token
+                      };
+                      var response = await Api.execute(url: url, data: data);
+                      if (!response['error']) {
+                        Vendor vendor = Vendor(response['Vendor']);
+                        print(vendor);
+                        ClearSignupVariables();
+                        validateSignUpForm = false.obs;
+                        update();
+                        LoadingHelper.dismiss();
+                        return callback(true);
+                      } else {
+                        LoadingHelper.dismiss();
+                        Get.snackbar("Error!", response['error_data'],
+                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: Colors.red,
+                            colorText: Colors.white);
+                        return callback(false);
+                      }
                     } else {
                       LoadingHelper.dismiss();
-                      Get.snackbar("Error!", response['error_data'],
+                      Get.snackbar("Invalid Password.",
+                          'Passowrd And Confirm passsword must be same.',
                           snackPosition: SnackPosition.BOTTOM,
                           backgroundColor: Colors.red,
                           colorText: Colors.white);
-                      return callback(false);
                     }
                   } else {
                     LoadingHelper.dismiss();
-                    Get.snackbar("Invalid Password.",
-                        'Passowrd And Confirm passsword must be same.',
+                    Get.snackbar('Please enter certificate name', '',
                         snackPosition: SnackPosition.BOTTOM,
                         backgroundColor: Colors.red,
                         colorText: Colors.white);
@@ -248,6 +267,7 @@ class AuthController extends GetxController {
     } else {
       LoadingHelper.dismiss();
       showErrors();
+      update();
     }
   }
 

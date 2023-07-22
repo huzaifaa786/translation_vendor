@@ -7,6 +7,7 @@ import 'package:translation_vendor/models/language.dart';
 import 'package:translation_vendor/screen/login/authcontroller.dart';
 import 'package:translation_vendor/screen/main/main.dart';
 import 'package:translation_vendor/static/button.dart';
+import 'package:translation_vendor/static/certificate.dart';
 import 'package:translation_vendor/static/dropdown.dart';
 import 'package:translation_vendor/static/icon_inputfield.dart';
 import 'package:translation_vendor/static/imageinput.dart';
@@ -224,10 +225,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 15),
-                            child: Imageinput(
-                              labelText: ' Certificate (Optional) ',
-                              imageIcon: 'assets/images/image.svg',
-                              text: authController.certificateImage!.name,
+                            child: Certificateinput(
+                              controller: authController.certificateName,
+                              labelText: 'Certificate (Optional)',
+                              hint: 'Enter certificate name',
                               onpressed: () {
                                 authController.selectCertificateImage();
                               },
@@ -235,11 +236,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
-                            child: Text('select atleast 2 languages',style: TextStyle(color: Colors.red),),
+                            child: Text(
+                              'select atleast 2 languages',
+                              style: TextStyle(color: Colors.red),
+                            ),
                           ),
                           Padding(
                               padding: const EdgeInsets.only(top: 10),
-                              
                               child: LanguageAdd(
                                 labelText: ' Language',
                                 text: authController.languege!.join(',  '),

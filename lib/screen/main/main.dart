@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation_vendor/screen/chat/chatcontroller.dart';
 import 'package:translation_vendor/screen/chat/chats.dart';
 import 'package:translation_vendor/screen/history/history.dart';
@@ -177,9 +178,17 @@ class _MainScreenState extends State<MainScreen> {
                     initialLabelIndex: mainController.i,
                     totalSwitches: 2,
                     labels: ['Online', 'Offline'],
-                    onToggle: (index) {
-                      // setState(() {});
-                      mainController.toggleonline(index);
+                    onToggle: (index) async {
+                      if(index == mainController.i){
+
+                      }else{
+                        mainController.notoggle(mainController.i);
+                      var i = await updateStatus(context);
+                      print(i);
+                      i == true ? mainController.toggleonline(index) : null;
+                      print(index);
+                      setState(() {});
+                      }
                     },
                     customIcons: [
                       Icon(Icons.radio_button_on_outlined,
@@ -217,5 +226,46 @@ class _MainScreenState extends State<MainScreen> {
         ),
       )),
     );
+  }
+
+  Future<bool> updateStatus(BuildContext context) async {
+    bool? result = await Alert(
+      style: AlertStyle(
+        titleStyle: TextStyle(fontSize: 25),
+      ),
+      context: context,
+      title: "Are you sure you want to update Online/Offline Status",
+      buttons: [
+        DialogButton(
+          radius: BorderRadius.all(
+            Radius.circular(12),
+          ),
+          height: 60,
+          child: Text(
+            'Yes',
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () {
+            Navigator.of(context, rootNavigator: true).pop(true);
+          },
+          color: mainColor,
+        ),
+        DialogButton(
+          radius: BorderRadius.all(
+            Radius.circular(12),
+          ),
+          height: 60,
+          child: Text(
+            "No",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () {
+            Navigator.of(context, rootNavigator: true).pop(false);
+          },
+          color: mainColor,
+        ),
+      ],
+    ).show();
+    return result ?? false;
   }
 }

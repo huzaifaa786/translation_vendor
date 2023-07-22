@@ -56,7 +56,7 @@ class NotificationController extends GetxController {
     DateTime dateTime = DateTime.parse(inputDate);
     String formattedDate = weekdays[dateTime.weekday - 1] +
         ', ' +
-        DateFormat('hh:mm a').format(dateTime);
+        DateFormat('dd-MM-yyyy').format(dateTime);
     return formattedDate;
   }
 }

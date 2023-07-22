@@ -32,21 +32,23 @@ class ProfileController extends GetxController {
   TextEditingController currentPassword = TextEditingController();
   TextEditingController newPassword = TextEditingController();
   TextEditingController confirmNewPassword = TextEditingController();
+  TextEditingController certificateName = TextEditingController();
   RxBool validateChangepasswordForm = false.obs;
 
 //////////////////////////// Profile Image Picker //////////////////////////////////////
 
   selectcertificateImage() async {
-      final ImagePicker _picker = ImagePicker();
-      var image1 = await _picker.pickImage(source: ImageSource.gallery);
-      if (image1 != null) {
-        certificateImage = image1;
-        showCertificateField = false.obs;
-        update();
-      } else {
-        certificateImage = XFile('');
-        update();
-      }
+    final ImagePicker _picker = ImagePicker();
+    var image1 = await _picker.pickImage(source: ImageSource.gallery);
+    if (image1 != null) {
+      certificateImage = image1;
+      // certificateName.text = certificateImage!.name;
+      // showCertificateField = false.obs;
+      update();
+    } else {
+      certificateImage = XFile('');
+      update();
+    }
   }
 
 //////////////////////////// Profile Image Picker //////////////////////////////////////
@@ -104,30 +106,45 @@ class ProfileController extends GetxController {
         print('Yes*****************************************************');
         final certiimge =
             base64Encode(File(certificateImage!.path).readAsBytesSync());
-        var data = {
-          'api_token': api_token,
-          'profilepic': profileimge,
-          'username': vendor!.username,
-          'about(Eng)': vendor!.aboutEng,
-          'about(arabic)': vendor!.aboutArabic,
-          'language': lang,
-          'number': vendor!.number,
-          'certificate': certiimge,
-        };
-        var response = await Api.execute(url: url, data: data);
-        if (!response['error']) {
-          vendor = Vendor(response['vendor']);
-          mainController.vendor = vendor;
-          mainController.refresh();
-          update();
-          Get.snackbar("Upadte.", "Profile Update Sucessfully.",
-              snackPosition: SnackPosition.BOTTOM,
-              backgroundColor: Colors.green,
-              colorText: Colors.white);
-          LoadingHelper.dismiss();
+        final bool isFormValid =
+            Validators.emptyStringValidator(certificateName.text, '') == null;
+        if (isFormValid) {
+          var data = {
+            'api_token': api_token,
+            'profilepic': profileimge,
+            'username': vendor!.username,
+            'about(Eng)': vendor!.aboutEng,
+            'about(arabic)': vendor!.aboutArabic,
+            'language': lang,
+            'number': vendor!.number,
+            'certificate': certiimge,
+            'certifcate_name': certificateName.text.toString(),
+          };
+          var response = await Api.execute(url: url, data: data);
+          if (!response['error']) {
+            vendor = Vendor(response['vendor']);
+            mainController.vendor = vendor;
+            mainController.refresh();
+            update();
+            Get.snackbar("Upadte.", "Profile Update Sucessfully.",
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Colors.green,
+                colorText: Colors.white);
+            Get.offAll(() => MainScreen());
+            LoadingHelper.dismiss();
+          } else {
+            LoadingHelper.dismiss();
+            Get.snackbar('Error!', response['error_data'],
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Colors.red,
+                colorText: Colors.white);
+          }
         } else {
           LoadingHelper.dismiss();
-          Get.snackbar('Error!', response['error_data']);
+          Get.snackbar('Please enter certificate name', '',
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.red,
+              colorText: Colors.white);
         }
       } else {
         print('No*****************************************************');
@@ -150,6 +167,7 @@ class ProfileController extends GetxController {
               snackPosition: SnackPosition.BOTTOM,
               backgroundColor: Colors.green,
               colorText: Colors.white);
+          Get.offAll(() => MainScreen());
           LoadingHelper.dismiss();
         } else {
           LoadingHelper.dismiss();
@@ -161,29 +179,44 @@ class ProfileController extends GetxController {
         print('yes***********************************************');
         final certiimge =
             base64Encode(File(certificateImage!.path).readAsBytesSync());
-        var data = {
-          'api_token': api_token,
-          'username': vendor!.username,
-          'about(Eng)': vendor!.aboutEng,
-          'about(arabic)': vendor!.aboutArabic,
-          'language': lang,
-          'number': vendor!.number,
-          'certificate': certiimge,
-        };
-        var response = await Api.execute(url: url, data: data);
-        if (!response['error']) {
-          vendor = Vendor(response['vendor']);
-          mainController.vendor = vendor;
-          mainController.refresh();
-          update();
-          Get.snackbar("Upadte.", "Profile Update Sucessfully.",
-              snackPosition: SnackPosition.BOTTOM,
-              backgroundColor: Colors.green,
-              colorText: Colors.white);
-          LoadingHelper.dismiss();
+        final bool isFormValid =
+            Validators.emptyStringValidator(certificateName.text, '') == null;
+        if (isFormValid) {
+          var data = {
+            'api_token': api_token,
+            'username': vendor!.username,
+            'about(Eng)': vendor!.aboutEng,
+            'about(arabic)': vendor!.aboutArabic,
+            'language': lang,
+            'number': vendor!.number,
+            'certificate': certiimge,
+            'certifcate_name': certificateName.text.toString(),
+          };
+          var response = await Api.execute(url: url, data: data);
+          if (!response['error']) {
+            vendor = Vendor(response['vendor']);
+            mainController.vendor = vendor;
+            mainController.refresh();
+            update();
+            Get.snackbar("Upadte.", "Profile Update Sucessfully.",
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Colors.green,
+                colorText: Colors.white);
+            Get.offAll(() => MainScreen());
+            LoadingHelper.dismiss();
+          } else {
+            LoadingHelper.dismiss();
+            Get.snackbar('Error!', response['error_data'],
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Colors.red,
+                colorText: Colors.white);
+          }
         } else {
           LoadingHelper.dismiss();
-          Get.snackbar('Error!', response['error_data']);
+          Get.snackbar('Please enter certificate name', '',
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.red,
+              colorText: Colors.white);
         }
       } else {
         print('No*****************************************************');
@@ -336,6 +369,8 @@ class ProfileController extends GetxController {
     certificateImage = XFile('');
     vendor = null;
     languageController.clear();
+    certificateName.clear();
+    showCertificateField = false.obs;
   }
 
   clearchangepasswordVariables() {

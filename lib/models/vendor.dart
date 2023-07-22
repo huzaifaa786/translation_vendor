@@ -12,6 +12,7 @@ class Vendor {
   String? number;
   String? profilepic;
   String? certificate;
+  String? certifcate_name;
   String? status;
   String? aboutEng;
   String? profile;
@@ -31,6 +32,7 @@ class Vendor {
     number = vendor['number'] ?? '';
     profilepic = vendor['profilepic'] ?? '';
     certificate = vendor['certificate'] ?? '';
+    certifcate_name = vendor['certifcate_name'] ?? '';
     status = vendor['status'];
     aboutEng = vendor['about(Eng)'] ?? '';
     aboutArabic = vendor['about(arabic)'] ?? '';

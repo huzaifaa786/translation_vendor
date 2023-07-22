@@ -85,7 +85,7 @@ class HistoryCard extends StatelessWidget {
                             name,
                             style: TextStyle(
                                 fontSize: 15,
-                                fontWeight: FontWeight.w400,
+                                fontWeight: FontWeight.w600,
                                 fontFamily: 'Mazzard'),
                           ),
                           SizedBox(
@@ -95,7 +95,7 @@ class HistoryCard extends StatelessWidget {
                             type,
                             style: TextStyle(
                                 fontSize: 13,
-                                fontWeight: FontWeight.w400,
+                                fontWeight: FontWeight.w600,
                                 fontFamily: 'Mazzard'),
                           ),
                           SizedBox(

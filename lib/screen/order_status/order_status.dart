@@ -13,6 +13,7 @@ import 'package:translation_vendor/static/titletopbar.dart';
 import 'package:translation_vendor/values/colors.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation_vendor/values/controllers.dart';
+import 'package:intl/intl.dart';
 
 class OrderStatus extends StatefulWidget {
   const OrderStatus({super.key, this.order});
@@ -23,6 +24,22 @@ class OrderStatus extends StatefulWidget {
 
 class _OrderStatusState extends State<OrderStatus> {
   int status = 0;
+  String? sformattedTime;
+  String? eformattedTime; 
+  String? docformattedTime; 
+  @override
+  void initState() {
+    String stimeStr = widget.order!.starttime!;
+    String etimeStr = widget.order!.endtime!;
+    // String documenttime= widget.order!.created_at!;
+    DateTime stime = DateFormat('H:m:s').parse(stimeStr);
+    DateTime etime = DateFormat('H:m:s').parse(etimeStr);
+    sformattedTime = DateFormat('HH:mm').format(stime);
+    eformattedTime = DateFormat('HH:mm').format(etime);
+    docformattedTime = DateFormat('HH:mm').format(widget.order!.created_at!);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +52,7 @@ class _OrderStatusState extends State<OrderStatus> {
               child: Column(
                 children: [
                   TitleTopbar(
-                    text: 'Client',
+                    text: 'Order Details',
                     ontap: () {
                       Get.back();
                     },
@@ -80,12 +97,16 @@ class _OrderStatusState extends State<OrderStatus> {
                           ),
                           CheckOutTile(
                             title: 'Type of Service :',
-                            discription: widget.order!.servicetype!,
+                            discription: widget.order!.servicetype ==
+                                        'instant' ? 'Instant video / audio meeting':widget.order!.servicetype ==
+                                        'document' ? 'Documents translation': widget.order!.scheduletype == 'audio/video' ? 'Audio/Video': 'In person meeting' ,
                           ),
-                          CheckOutTile(
-                            title: 'Phone number:',
-                            discription: widget.order!.user!.number == null ? '' :widget.order!.user!.number,
-                          ),
+                          // CheckOutTile(
+                          //   title: 'Phone number:',
+                          //   discription: widget.order!.user!.number == null
+                          //       ? ''
+                          //       :' widget.order!.user!.number',
+                          // ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -100,7 +121,15 @@ class _OrderStatusState extends State<OrderStatus> {
                                 width: MediaQuery.of(context).size.width * 0.3,
                                 child: CheckOutTile(
                                   title: 'Time:',
-                                  discription: widget.order!.starttime,
+                                  discription:
+                                 widget.order!.servicetype! ==
+                                        'instant'
+                                    ? widget.order!.duration.toString() + ' min'
+                                    : widget.order!.servicetype == 'document'
+                                          ? docformattedTime
+                                          : sformattedTime! +
+                                              ' - ' +
+                                              eformattedTime!,
                                 ),
                               ),
                             ],

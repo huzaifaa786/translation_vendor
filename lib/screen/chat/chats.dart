@@ -107,16 +107,16 @@ class _Chats_screenState extends State<Chats_screen> {
                   child: ListView.builder(
                       itemCount: chatController.scontacts.length,
                       itemBuilder: (context, index) {
-                        DateTime currentTime = DateTime.now();
-                        String specificTimeString =
-                            chatController.scontacts[index].lastmessageTime!;
-                        DateTime specificTime =
-                            DateFormat('yyyy-MM-dd HH:mm:ss')
-                                .parse(specificTimeString);
-                        Duration difference =
-                            currentTime.difference(specificTime);
-                        String date =
-                            DateFormat('yyyy-MM-dd').format(specificTime);
+                        // DateTime currentTime = DateTime.now();
+                        // String specificTimeString =
+                        //     chatController.scontacts[index].lastmessageTime!;
+                        // DateTime specificTime =
+                        //     DateFormat('yyyy-MM-dd HH:mm:ss')
+                        //         .parse(specificTimeString);
+                        // Duration difference =
+                        //     currentTime.difference(specificTime);
+                        // String date =
+                        //     DateFormat('yyyy-MM-dd').format(specificTime);
                         return ChartCards(
                             onPressed: () {
                               Navigator.push(
@@ -133,18 +133,18 @@ class _Chats_screenState extends State<Chats_screen> {
                                     ),
                                   ));
                             },
-                            duration: difference.inSeconds < 60
-                                ? difference.inSeconds.toString() + ' sec ago'
-                                : difference.inMinutes < 60
-                                    ? difference.inMinutes.toString() +
-                                        ' min ago'
-                                    : difference.inHours < 24
-                                        ? difference.inHours.toString() +
-                                            ' hour ago'
-                                        : difference.inDays < 8
-                                            ? difference.inDays.toString() +
-                                                ' day ago'
-                                            : date,
+                            // duration: difference.inSeconds < 60
+                            //     ? difference.inSeconds.toString() + ' sec ago'
+                            //     : difference.inMinutes < 60
+                            //         ? difference.inMinutes.toString() +
+                            //             ' min ago'
+                            //         : difference.inHours < 24
+                            //             ? difference.inHours.toString() +
+                            //                 ' hour ago'
+                            //             : difference.inDays < 8
+                            //                 ? difference.inDays.toString() +
+                            //                     ' day ago'
+                            //                 : date,
                             msg: 'Tap here to view messages',
                             name: chatController.scontacts[index].username,
                             imgicon: chatController.scontacts[index].profilePic);

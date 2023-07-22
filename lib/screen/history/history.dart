@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:translation_vendor/screen/chat/chatdetails.dart';
@@ -65,6 +63,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                   DateFormat('HH:mm').format(stime);
                               String eformattedTime =
                                   DateFormat('HH:mm').format(etime);
+                              print(controller.orders[index].servicetype);
                               return HistoryCard(
                                 ontap: () {
                                   Get.to(OrderStatus(
@@ -95,17 +94,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                         ),
                                       ));
                                 },
-                                time: sformattedTime+
-                                            controller
-                                                .orders[index].servicetype! ==
-                                        'document'
-                                    ? Text('')
-                                    : '-' +
-                                                controller.orders[index]
-                                                    .servicetype! ==
+                                time: controller.orders[index].servicetype! ==
+                                        'instant'
+                                    ? controller.orders[index].duration.toString() + ' min'
+                                    : controller.orders[index].servicetype! ==
                                             'document'
-                                        ? Text('')
-                                        : eformattedTime,
+                                        ? sformattedTime
+                                        : sformattedTime + '-' + eformattedTime,
                                 date: controller.orders[index].date,
                                 servicetype:
                                     controller.orders[index].servicetype,

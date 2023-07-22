@@ -9,12 +9,12 @@ class CheckOutTile extends StatelessWidget {
       {super.key,
       this.title,
       this.discription,
-      this.image,
+      this.scheduletype,
       this.extra = false,
       this.services});
   final title;
   final discription;
-  final image;
+  final scheduletype;
   final bool extra;
   final Widget? services;
 

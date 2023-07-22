@@ -10,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:translation_vendor/screen/profile/edit_model.dart';
 import 'package:translation_vendor/screen/profile/profilecontroller.dart';
 import 'package:translation_vendor/static/button.dart';
+import 'package:translation_vendor/static/certificate.dart';
 import 'package:translation_vendor/static/dropdown.dart';
 import 'package:translation_vendor/static/heading.dart';
 import 'package:translation_vendor/static/image.dart';
@@ -368,60 +369,19 @@ class _ProfileState extends State<Profile> {
                                 profileController.openCertificateField();
                               },
                             ),
-                            profileController.certificateImage!.path == ''
-                                ? profileController.vendor!.certificate == ''
-                                    ? Padding(
-                                        padding: const EdgeInsets.only(top: 6),
-                                        child: Text(
-                                          'No! Certificate Avaliable. Upload your certicate so customer see this before order it may be helpful for you to get more orders.',
-                                          textAlign: TextAlign.justify,
-                                          style: TextStyle(
-                                              fontFamily: 'Poppins',
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.grey[400]),
-                                        ),
-                                      )
-                                    : Row(
-                                        children: [
-                                          SvgPicture.asset(
-                                            'assets/images/certificate.svg',
-                                            height: 24,
-                                            width: 24,
-                                          ),
-                                          Flexible(
-                                            child: Container(
-                                              padding: EdgeInsets.only(left: 6),
-                                              child: InkWell(
-                                                onTap: () {
-                                                  Get.to(
-                                                    () => FullScreenImagePage(
-                                                      imageUrl:
-                                                          profileController
-                                                              .vendor!
-                                                              .certificate!,
-                                                    ),
-                                                  );
-                                                },
-                                                child: Text(
-                                                  Uri.parse(profileController
-                                                          .vendor!.certificate!)
-                                                      .pathSegments
-                                                      .last,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: TextStyle(
-                                                      fontFamily: 'Poppins',
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      color: Colors.grey[600]),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      )
+                            profileController.vendor!.certificate == ''
+                                ? Padding(
+                                    padding: const EdgeInsets.only(top: 6),
+                                    child: Text(
+                                      'No! Certificate Avaliable. Upload your certicate so customer see this before order it may be helpful for you to get more orders.',
+                                      textAlign: TextAlign.justify,
+                                      style: TextStyle(
+                                          fontFamily: 'Poppins',
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.grey[400]),
+                                    ),
+                                  )
                                 : Row(
                                     children: [
                                       SvgPicture.asset(
@@ -432,24 +392,40 @@ class _ProfileState extends State<Profile> {
                                       Flexible(
                                         child: Container(
                                           padding: EdgeInsets.only(left: 6),
-                                          child: Text(
-                                            profileController
-                                                .certificateImage!.path,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                                fontFamily: 'Poppins',
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w400,
-                                                color: Colors.grey[600]),
+                                          child: InkWell(
+                                            onTap: () {
+                                              Get.to(
+                                                () => FullScreenImagePage(
+                                                  imageUrl: profileController
+                                                      .vendor!.certificate!,
+                                                ),
+                                              );
+                                            },
+                                            child: Text(
+                                              profileController.vendor!
+                                                          .certificate !=
+                                                      ''
+                                                  ? profileController
+                                                      .vendor!.certifcate_name!
+                                                  : '',
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                  fontFamily: 'Poppins',
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Colors.grey[600]),
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ],
                                   ),
                             profileController.showCertificateField == true.obs
-                                ? Imageinput(
-                                    labelText: 'Certificate',
-                                    imageIcon: 'assets/images/image.svg',
+                                ? Certificateinput(
+                                    controller:
+                                        profileController.certificateName,
+                                    labelText: 'Certificate (Optional)',
+                                    hint: 'Enter certificate name',
                                     onpressed: () {
                                       profileController
                                           .selectcertificateImage();

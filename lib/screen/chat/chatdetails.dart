@@ -81,7 +81,7 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                     : 'https://translation.klickwash.net/' + widget.contactPic!,
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(20, 25, 20, 0),
+                padding: const EdgeInsets.fromLTRB(8, 8, 8, 4),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -91,16 +91,16 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                         height: 1,
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Text(
-                        'Today',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: EdgeInsets.symmetric(horizontal: 10),
+                    //   child: Text(
+                    //     'Today',
+                    //     style: TextStyle(
+                    //       fontWeight: FontWeight.bold,
+                    //       color: Colors.grey,
+                    //     ),
+                    //   ),
+                    // ),
                     Expanded(
                       child: Divider(
                         color: Colors.grey,

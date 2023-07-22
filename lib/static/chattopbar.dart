@@ -99,18 +99,18 @@ class ChatTopBar extends StatelessWidget {
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 58.0),
-            child: PopupMenuButton(
-              itemBuilder: (BuildContext context) {
-                return [
-                  PopupMenuItem(child: Text('Option 1')),
-                  PopupMenuItem(child: Text('Option 2')),
-                  PopupMenuItem(child: Text('Option 3')),
-                ];
-              },
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 58.0),
+          //   child: PopupMenuButton(
+          //     itemBuilder: (BuildContext context) {
+          //       return [
+          //         PopupMenuItem(child: Text('Option 1')),
+          //         PopupMenuItem(child: Text('Option 2')),
+          //         PopupMenuItem(child: Text('Option 3')),
+          //       ];
+          //     },
+          //   ),
+          // ),
         ],
       ),
     ));

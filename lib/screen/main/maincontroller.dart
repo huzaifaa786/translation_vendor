@@ -62,6 +62,17 @@ class MainController extends GetxController {
     update();
     online();
   }
+  notoggle(index) {
+    if (index == 0) {
+      isOnline = true;
+      i = index;
+    } else {
+      isOnline = false;
+      i = index;
+    }
+    update();
+    // online();
+  }
 
   Vendor? vendor;
 

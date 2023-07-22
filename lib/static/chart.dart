@@ -71,14 +71,14 @@ class ChartCards extends StatelessWidget {
                           style: TextStyle(
                               fontWeight: FontWeight.w600, fontSize: 14.0),
                         ),
-                        Text(
-                          duration,
-                          style: TextStyle(
-                            color: Colors.black45,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
+                        // Text(
+                        //   duration,
+                        //   style: TextStyle(
+                        //     color: Colors.black45,
+                        //     fontSize: 12,
+                        //     fontWeight: FontWeight.w700,
+                        //   ),
+                        // ),
                       ],
                     ),
                     Padding(
