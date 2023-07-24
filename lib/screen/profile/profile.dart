@@ -312,57 +312,57 @@ class _ProfileState extends State<Profile> {
                                       ),
                                     ),
                                   ),
-                            EditPage(
-                              title: 'Mobile',
-                              onPressed: () {
-                                profileController.openNumberField();
-                              },
-                            ),
-                            profileController.showNumberField == false.obs
-                                ? profileController.vendor!.number == ''
-                                    ? Text(
-                                        'No! Mobile number avaliable.',
-                                        style: TextStyle(
-                                          fontFamily: 'Poppins',
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      )
-                                    : Row(
-                                        children: [
-                                          Text(
-                                            profileController.vendor!.number!,
-                                            style: TextStyle(
-                                                fontFamily: 'Poppins',
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w400,
-                                                color: Colors.grey[600]),
-                                          ),
-                                        ],
-                                      )
-                                : AutoSizeTextField(
-                                    controller:
-                                        profileController.userNumberController,
-                                    fullwidth: true,
-                                    style: TextStyle(fontSize: 18),
-                                    keyboardType: TextInputType.phone,
-                                    decoration: InputDecoration(
-                                      suffixIcon: InkWell(
-                                        onTap: () {
-                                          profileController.EditNumber();
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 8.0),
-                                          child: Icon(
-                                            Icons.check,
-                                            color: mainColor,
-                                            size: 18,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                            // EditPage(
+                            //   title: 'Mobile',
+                            //   onPressed: () {
+                            //     profileController.openNumberField();
+                            //   },
+                            // ),
+                            // profileController.showNumberField == false.obs
+                            //     ? profileController.vendor!.number == ''
+                            //         ? Text(
+                            //             'No! Mobile number avaliable.',
+                            //             style: TextStyle(
+                            //               fontFamily: 'Poppins',
+                            //               fontSize: 12,
+                            //               fontWeight: FontWeight.w400,
+                            //             ),
+                            //           )
+                            //         : Row(
+                            //             children: [
+                            //               Text(
+                            //                 profileController.vendor!.number!,
+                            //                 style: TextStyle(
+                            //                     fontFamily: 'Poppins',
+                            //                     fontSize: 15,
+                            //                     fontWeight: FontWeight.w400,
+                            //                     color: Colors.grey[600]),
+                            //               ),
+                            //             ],
+                            //           )
+                            //     : AutoSizeTextField(
+                            //         controller:
+                            //             profileController.userNumberController,
+                            //         fullwidth: true,
+                            //         style: TextStyle(fontSize: 18),
+                            //         keyboardType: TextInputType.phone,
+                            //         decoration: InputDecoration(
+                            //           suffixIcon: InkWell(
+                            //             onTap: () {
+                            //               profileController.EditNumber();
+                            //             },
+                            //             child: Padding(
+                            //               padding: const EdgeInsets.only(
+                            //                   bottom: 8.0),
+                            //               child: Icon(
+                            //                 Icons.check,
+                            //                 color: mainColor,
+                            //                 size: 18,
+                            //               ),
+                            //             ),
+                            //           ),
+                            //         ),
+                            //       ),
                             ProfileHeading(
                               title: 'Certificate',
                               onPressed: () {

@@ -116,7 +116,6 @@ class ProfileController extends GetxController {
             'about(Eng)': vendor!.aboutEng,
             'about(arabic)': vendor!.aboutArabic,
             'language': lang,
-            'number': vendor!.number,
             'certificate': certiimge,
             'certifcate_name': certificateName.text.toString(),
           };
@@ -155,7 +154,6 @@ class ProfileController extends GetxController {
           'about(Eng)': vendor!.aboutEng,
           'about(arabic)': vendor!.aboutArabic,
           'language': lang,
-          'number': vendor!.number,
         };
         var response = await Api.execute(url: url, data: data);
         if (!response['error']) {

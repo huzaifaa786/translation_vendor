@@ -84,6 +84,19 @@ class Validators {
       return null;
     }
   }
+
+    static String? phoneValidator({
+    required String? phone,
+  
+  }) {
+    if (phone == null) {
+      return null;
+    } else if (phone.isEmpty) {
+      return "phone can't be empty";
+    } else {
+      return null;
+    }
+  }
  static String? languageValidator(List<dynamic>? language) {
   if (language == null || language.length < 2) {
     return "*Select at least 2 languages";
