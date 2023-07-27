@@ -146,6 +146,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 ChatButton(
                   title: 'Chat',
+                  screen:'Chat' ,
                   count: chatController.unseen,
                   onPressed: () {
                     saleController.clearVariable();

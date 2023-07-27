@@ -14,6 +14,7 @@ class ChatButton extends StatelessWidget {
       this.icon,
       this.imgicon,
       this.iconTrue = true,
+      this.screen = '',
       this.screenRatio = 0.9,
       this.rounded = false,
       this.color = mainColor})
@@ -29,6 +30,7 @@ class ChatButton extends StatelessWidget {
   final textcolor;
   final icon;
   final rounded;
+  final screen;
 
   @override
   Widget build(BuildContext context) {
@@ -51,17 +53,21 @@ class ChatButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: SvgPicture.asset(
-                    imgicon,
-                    height: 27,
-                    width: 27,
-                  ),
-                ),
-              ),
+              screen == 'Chat'
+                  ? Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: Icon(Icons.chat))
+                  : Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: SvgPicture.asset(
+                          imgicon,
+                          height: 27,
+                          width: 27,
+                        ),
+                      ),
+                    ),
               Row(
                 children: [
                   Text(
@@ -74,11 +80,11 @@ class ChatButton extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left:4.0),
+                    padding: const EdgeInsets.only(left: 4.0),
                     child: count != null
                         ? count != '0'
                             ? Container(
-                              padding: EdgeInsets.all(6),
+                                padding: EdgeInsets.all(6),
                                 decoration: BoxDecoration(
                                     color: Colors.red,
                                     borderRadius: BorderRadius.circular(20)),

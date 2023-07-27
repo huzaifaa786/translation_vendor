@@ -8,6 +8,7 @@ import 'package:translation_vendor/screen/order_status/order_status.dart';
 import 'package:translation_vendor/static/notification.dart';
 import 'package:translation_vendor/static/titletopbar.dart';
 import 'package:translation_vendor/values/controllers.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -91,14 +92,27 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         height: MediaQuery.of(context).size.height * 0.9,
                         width: MediaQuery.of(context).size.width,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text("Empty Notification Scrren."),
+                            Container(
+                              height: MediaQuery.of(context).size.height * 0.75,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset("assets/images/smiley.svg"),
+                                  SizedBox(height: 20),
+                                  Text(
+                                    'No Notification Found',
+                                    style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                    ),
+                    )
             ],
           ),
         ),

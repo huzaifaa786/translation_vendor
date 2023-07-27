@@ -7,6 +7,7 @@ import 'package:translation_vendor/screen/order_status/order_status.dart';
 import 'package:translation_vendor/static/history.dart';
 import 'package:translation_vendor/static/titletopbar.dart';
 import 'package:translation_vendor/values/controllers.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
@@ -75,7 +76,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                 image:
                                     controller.orders[index].user!.profilePic,
                                 price: controller.orders[index].price,
-                                type: controller.orders[index].servicetype,
+                                type: controller.orders[index].servicetype ==
+                                        'instant' ? 'Instant video / audio meeting':controller.orders[index].servicetype ==
+                                        'document' ? 'Documents translation': controller.orders[index].servicetype == 'audio/video' ? 'Audio/Video': 'In person meeting' ,
                                 status: controller.orders[index].status,
                                 onmsgtap: () {
                                   Navigator.push(
@@ -108,19 +111,32 @@ class _HistoryScreenState extends State<HistoryScreen> {
                             }),
                       ),
                     )
-                  : Flexible(
-                      child: Container(
-                        height: MediaQuery.of(context).size.height * 0.85,
-                        width: MediaQuery.of(context).size.width,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text("No Order Found!"),
-                          ],
-                        ),
+                   : Flexible(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.85,
+                      width: MediaQuery.of(context).size.width,
+                      child: Column(
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.75,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset("assets/images/smiley.svg"),
+                                SizedBox(height: 20),
+                                Text(
+                                  'No Order history Found',
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                    )
+                    ),
+                  )
             ],
           ),
         ),
