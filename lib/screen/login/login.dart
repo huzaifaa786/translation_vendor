@@ -223,6 +223,17 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                             ),
                           ),
+                                Padding(
+                            padding: const EdgeInsets.only(top: 15),
+                            child: Imageinput(
+                              labelText: ' CV ',
+                              imageIcon: 'assets/images/image.svg',
+                              text: authController.CVImage!.name,
+                              onpressed: () {
+                                authController.selectCVImage();
+                              },
+                            ),
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(top: 15),
                             child: Certificateinput(
@@ -294,6 +305,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                       field, '*userame'),
                             ),
                           ),
+                            Padding(
+                            padding: const EdgeInsets.only(top: 25.0),
+                            child: IconInputFields(
+                              imageIcon: 'assets/images/email.svg',
+                              controller: authController.phone,
+                              hint: 'Phone',
+                              width: 12,
+                              borderColor: Colors.black,
+                              imageColor: Colors.black,
+                              validate: authController.validateSignUpForm,
+                              validator: (field) =>
+                                  Validators.emptyStringValidator(
+                                      field, '*phone'),
+                            ),
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(top: 12.0),
                             child: InputFieldPassword(
@@ -334,7 +360,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 setState(() {});
                                 authController.SignUp((success) {
                                   if (success) {
-                                    Get.offAll(() => LoginScreen());
+                                    Get.off(() => LoginScreen());
                                     vendorrequest(context);
                                   }
                                 });
