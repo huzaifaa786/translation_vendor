@@ -9,7 +9,6 @@ import 'package:translation_vendor/api/api.dart';
 import 'package:translation_vendor/helper/loading.dart';
 import 'package:translation_vendor/models/vendor.dart';
 import 'package:translation_vendor/screen/main/main.dart';
-import 'package:translation_vendor/screen/services/map.dart';
 import 'package:translation_vendor/values/Validator.dart';
 import 'package:translation_vendor/values/controllers.dart';
 import 'package:translation_vendor/values/string.dart';

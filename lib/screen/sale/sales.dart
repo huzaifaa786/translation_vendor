@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:translation_vendor/models/sale_model.dart';
 import 'package:translation_vendor/screen/sale/salecontroller.dart';
 import 'package:translation_vendor/static/titletopbar.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:translation_vendor/values/colors.dart';
 import 'package:translation_vendor/values/controllers.dart';
-import 'package:intl/intl.dart';
 
 class SalesScreen extends StatefulWidget {
   const SalesScreen({super.key, required this.id});
@@ -63,7 +61,11 @@ class _SalesScreenState extends State<SalesScreen> {
                                 firstDay: DateTime.utc(2023, 1, 1),
                                 lastDay: DateTime.now(),
                                 focusedDay: saleController.today,
-                                onDaySelected: saleController.onDaySelected,
+                                rangeStartDay: saleController.rangeStart,
+                                rangeEndDay: saleController.rangeEnd,
+                                rangeSelectionMode: RangeSelectionMode.enforced,
+                                // onDaySelected: saleController.onDaySelected,
+                                onRangeSelected: saleController.onRangeSelected,
                                 calendarStyle: CalendarStyle(
                                   todayDecoration: BoxDecoration(
                                       color: mainColor.withOpacity(0.5),
@@ -74,6 +76,11 @@ class _SalesScreenState extends State<SalesScreen> {
                                     color: Colors.black,
                                     borderRadius: BorderRadius.circular(10),
                                   ),
+                                  rangeStartDecoration: BoxDecoration(
+                                      color: mainColor, shape: BoxShape.circle),
+                                  rangeEndDecoration: BoxDecoration(
+                                      color: mainColor, shape: BoxShape.circle),
+                                  rangeHighlightColor: mainColor.withOpacity(0.5),
                                   isTodayHighlighted: true,
                                   outsideDaysVisible: false,
                                 ),

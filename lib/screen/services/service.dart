@@ -38,7 +38,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
 
   static CameraPosition? _kLake;
 
-    fetchservice() async {
+  fetchservice() async {
     await serviceController.getservice();
     setState(() {});
   }
@@ -166,7 +166,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                 suffixIcon: InkWell(
                                   onTap: () {
                                     serviceController
-                                        .EditOnlineAudioORvideoAbout();
+                                        .EditOnlineAudioORvideoPrice();
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(bottom: 8.0),
@@ -244,7 +244,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                               decoration: InputDecoration(
                                 suffixIcon: InkWell(
                                   onTap: () {
-                                    serviceController.EditaudioORvideoAbout();
+                                    serviceController.EditaudioORvideoPrice();
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(bottom: 8.0),
@@ -334,7 +334,8 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     title: 'Choose location',
                     icon: Icons.my_location_rounded,
                     onPressed: () {
-                      Get.to(() => VendorMapScreen(service : mainController.vendor!.service));
+                      Get.to(() => VendorMapScreen(
+                          service: mainController.vendor!.service));
                     }),
                 SizedBox(
                   height: 20,
@@ -812,7 +813,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
               serviceController.urgentdocument[index].maxpage = updatedMaxPage;
               serviceController.urgentdocument[index].day = updatedDay;
             }
-              serviceController.addservice();
+            serviceController.addservice();
             setState(() {});
             // Close the dialog
             Get.back();
@@ -862,37 +863,39 @@ class _ServiceScreenState extends State<ServiceScreen> {
           ],
         ),
         buttons: [
-         DialogButton(
-          color: mainColor,
-          onPressed: () {
-            // Retrieve the updated values from the text controllers
-            String updatedMinPage = minController.text;
-            String updatedMaxPage = maxController.text;
-            String updatedDay = totaldayController.text;
+          DialogButton(
+            color: mainColor,
+            onPressed: () {
+              // Retrieve the updated values from the text controllers
+              String updatedMinPage = minController.text;
+              String updatedMaxPage = maxController.text;
+              String updatedDay = totaldayController.text;
 
-            // Find the index of the item you want to update in the list
-            int index = serviceController.unurgentdocument.indexWhere(
-                (document) =>
-                    document.minpage == minpage &&
-                    document.maxpage == maxpage &&
-                    document.day == day);
+              // Find the index of the item you want to update in the list
+              int index = serviceController.unurgentdocument.indexWhere(
+                  (document) =>
+                      document.minpage == minpage &&
+                      document.maxpage == maxpage &&
+                      document.day == day);
 
-            if (index != -1) {
-              // Update the item at the found index
-              serviceController.unurgentdocument[index].minpage = updatedMinPage;
-              serviceController.unurgentdocument[index].maxpage = updatedMaxPage;
-              serviceController.unurgentdocument[index].day = updatedDay;
-            }
+              if (index != -1) {
+                // Update the item at the found index
+                serviceController.unurgentdocument[index].minpage =
+                    updatedMinPage;
+                serviceController.unurgentdocument[index].maxpage =
+                    updatedMaxPage;
+                serviceController.unurgentdocument[index].day = updatedDay;
+              }
               serviceController.addservice();
-            setState(() {});
-            // Close the dialog
-            Get.back();
-          },
-          child: Text(
-            "save",
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          ),
-        )
+              setState(() {});
+              // Close the dialog
+              Get.back();
+            },
+            child: Text(
+              "save",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          )
         ]).show();
   }
 }

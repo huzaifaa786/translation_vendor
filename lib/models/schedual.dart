@@ -1,4 +1,3 @@
-import 'dart:convert';
 class Schedual {
   String? day;
   String? startTime;

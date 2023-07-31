@@ -25,8 +25,8 @@ class OrderStatus extends StatefulWidget {
 class _OrderStatusState extends State<OrderStatus> {
   int status = 0;
   String? sformattedTime;
-  String? eformattedTime; 
-  String? docformattedTime; 
+  String? eformattedTime;
+  String? docformattedTime;
   @override
   void initState() {
     String stimeStr = widget.order!.starttime!;
@@ -97,9 +97,14 @@ class _OrderStatusState extends State<OrderStatus> {
                           ),
                           CheckOutTile(
                             title: 'Type of Service :',
-                            discription: widget.order!.servicetype ==
-                                        'instant' ? 'Instant video / audio meeting':widget.order!.servicetype ==
-                                        'document' ? 'Documents translation': widget.order!.scheduletype == 'audio/video' ? 'Audio/Video': 'In person meeting' ,
+                            discription: widget.order!.servicetype == 'instant'
+                                ? 'Instant video / audio meeting'
+                                : widget.order!.servicetype == 'document'
+                                    ? 'Documents translation'
+                                    : widget.order!.scheduletype ==
+                                            'audio/video'
+                                        ? 'Audio/Video'
+                                        : 'In person meeting',
                           ),
                           // CheckOutTile(
                           //   title: 'Phone number:',
@@ -121,11 +126,11 @@ class _OrderStatusState extends State<OrderStatus> {
                                 width: MediaQuery.of(context).size.width * 0.3,
                                 child: CheckOutTile(
                                   title: 'Time:',
-                                  discription:
-                                 widget.order!.servicetype! ==
-                                        'instant'
-                                    ? widget.order!.duration.toString() + ' min'
-                                    : widget.order!.servicetype == 'document'
+                                  discription: widget.order!.servicetype! ==
+                                          'instant'
+                                      ? widget.order!.duration.toString() +
+                                          ' min'
+                                      : widget.order!.servicetype == 'document'
                                           ? docformattedTime
                                           : sformattedTime! +
                                               ' - ' +

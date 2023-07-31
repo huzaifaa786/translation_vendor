@@ -12,6 +12,8 @@ class SaleController extends GetxController {
   var format1 = 'month';
   DateTime Ourdate = DateTime.now();
   DateTime today = DateTime.now();
+  DateTime? rangeStart;
+  DateTime? rangeEnd;
   int price = 0;
   List<SaleModal> orders = [];
   List<SaleModal> searchedorders = [];
@@ -26,7 +28,22 @@ class SaleController extends GetxController {
   void onDaySelected(DateTime day, DateTime foucsedDay) async {
     today = day;
     Ourdate = day;
+    rangeStart = null;
+    rangeEnd = null;
     daySale(today);
+    update();
+  }
+
+  void onRangeSelected(start, end, focusedDay) {
+    rangeStart = start;
+    rangeEnd = end;
+    today = focusedDay;
+    Ourdate = focusedDay;
+    if (end == null) {
+      daySale(today);
+    } else {
+      SaleByselctingRange(start, end);
+    }
     update();
   }
 
@@ -85,9 +102,32 @@ class SaleController extends GetxController {
     update();
   }
 
+  SaleByselctingRange(DateTime startDate, DateTime endDate) {
+    List<SaleModal> orderlist = searchedorders
+        .where((i) =>
+            i.date!.toLocal().isAfter(startDate.subtract(Duration(days: 1))) &&
+            i.date!.toLocal().isBefore(endDate.add(Duration(days: 1))))
+        .toList();
+
+    searchedorders = orders;
+    print(orderlist.length);
+    print(orderlist[0].price);
+    price = 0;
+    for (var i = 0; i < orderlist.length; i++) {
+      print(orderlist[i].price!);
+      price += orderlist[i].price!;
+    }
+    orderlist = [];
+
+    print(orderlist);
+    update();
+  }
+
   clearVariable() {
     today = DateTime.now();
     Ourdate = DateTime.now();
+    rangeStart = null;
+    rangeEnd = null;
     orders = [];
     searchedorders = [];
     update();

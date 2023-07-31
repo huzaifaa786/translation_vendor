@@ -1,12 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:translation_vendor/screen/profile/edit_model.dart';
 import 'package:translation_vendor/screen/profile/profilecontroller.dart';
 import 'package:translation_vendor/static/button.dart';
@@ -14,18 +10,14 @@ import 'package:translation_vendor/static/certificate.dart';
 import 'package:translation_vendor/static/dropdown.dart';
 import 'package:translation_vendor/static/heading.dart';
 import 'package:translation_vendor/static/image.dart';
-import 'package:translation_vendor/static/imageinput.dart';
 import 'package:translation_vendor/static/password.dart';
 import 'package:translation_vendor/static/titletopbar.dart';
 import 'package:translation_vendor/static/edit.dart';
-import 'package:translation_vendor/static/inputfield.dart';
 import 'package:translation_vendor/static/textbox.dart';
-import 'package:translation_vendor/static/addpage.dart';
 import 'package:translation_vendor/values/colors.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation_vendor/values/controllers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:auto_size_text_field/auto_size_text_field.dart';
 import 'package:translation_vendor/values/language.dart';
 

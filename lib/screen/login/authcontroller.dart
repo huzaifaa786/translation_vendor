@@ -347,6 +347,7 @@ class AuthController extends GetxController {
     print('object');
     GetStorage box = GetStorage();
     box.remove('api_token');
+    box.remove('vendor_id');
     Get.snackbar('Logout Successfully', '',
         colorText: Colors.white,
         backgroundColor: mainColor,

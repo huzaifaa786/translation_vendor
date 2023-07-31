@@ -64,9 +64,13 @@ class ServiceController extends GetxController {
     update();
   }
 
-  EditaudioORvideoAbout() {
+  EditaudioORvideoPrice() {
     showaudioORvideoPriceField = false.obs;
-    audioORvideo = audiovideoController.text;
+    if (audiovideoController.text == '') {
+      audioORvideo = null;
+    } else {
+      audioORvideo = audiovideoController.text;
+    }
     update();
   }
 
@@ -77,9 +81,13 @@ class ServiceController extends GetxController {
     update();
   }
 
-  EditOnlineAudioORvideoAbout() {
+  EditOnlineAudioORvideoPrice() {
     showOnlineAudioORvideoPriceField = false.obs;
-    onlineAudioORvideo = onlineAudiovideoController.text;
+    if (onlineAudiovideoController.text == '') {
+      onlineAudioORvideo = null;
+    } else {
+      onlineAudioORvideo = onlineAudiovideoController.text;
+    }
     update();
   }
 
@@ -154,8 +162,7 @@ class ServiceController extends GetxController {
                           'unurgent': unurgent,
                           'inperson': InPersonPrice,
                           'audiovideo': audioORvideo,
-                          'onlineaudiovideo':
-                              onlineAudioORvideo,
+                          'onlineaudiovideo': onlineAudioORvideo,
                           'urgentprice': urgentPrice,
                           'unurgentprice': UnurgentPrice,
                           'latitude': chnagePoint!.latitude.toString(),
@@ -170,12 +177,12 @@ class ServiceController extends GetxController {
                             colorText: Colors.white,
                             backgroundColor: Colors.green,
                             snackPosition: SnackPosition.BOTTOM);
-                          Get.to(()=> MainScreen());
+                        Get.to(() => MainScreen());
                         return response;
                       } else {
                         LoadingHelper.dismiss();
                         Get.snackbar('Error!',
-                            'Unurgetnt Per page price is not defined.',
+                            'Unurgent Per page price is not defined.',
                             colorText: Colors.white,
                             backgroundColor: Colors.red,
                             snackPosition: SnackPosition.BOTTOM);
@@ -300,7 +307,7 @@ class ServiceController extends GetxController {
     update();
   }
 
-    getservice() async {
+  getservice() async {
     LoadingHelper.show();
     var url = BASE_URL + 'service/get';
     GetStorage box = GetStorage();
