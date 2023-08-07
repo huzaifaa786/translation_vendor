@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:translation_vendor/models/contact.dart';
 import 'package:translation_vendor/static/badge.dart';
 import 'package:translation_vendor/values/colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -11,6 +10,7 @@ class HistoryCard extends StatelessWidget {
   const HistoryCard(
       {super.key,
       this.image,
+      this.page,
       this.id,
       this.servicetype,
       this.day,
@@ -33,6 +33,7 @@ class HistoryCard extends StatelessWidget {
   final day;
   final ontap;
   final price;
+  final page;
   final status;
 
   @override
@@ -91,13 +92,34 @@ class HistoryCard extends StatelessWidget {
                           SizedBox(
                             height: 4,
                           ),
-                          Text(
-                            type,
-                            style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: 'Mazzard'),
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            child: Text(
+                              type,
+                              maxLines: 2,
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: 'Mazzard'),
+                            ),
                           ),
+                          SizedBox(
+                            height: 4,
+                          ),
+                          servicetype == 'document'
+                              ? Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.4,
+                                  child: Text(
+                                    'Amount of pages: ' + page + ' pages',
+                                    maxLines: 2,
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: 'Mazzard'),
+                                  ),
+                                )
+                              : Container(),
                           SizedBox(
                             height: 4,
                           ),
@@ -110,10 +132,12 @@ class HistoryCard extends StatelessWidget {
                               SizedBox(
                                 width: 4,
                               ),
-                              Text(
-                                time + " | ",
-                                style: TextStyle(fontSize: 11),
-                              ),
+                              servicetype != 'document'
+                                  ? Text(
+                                      time + " | ",
+                                      style: TextStyle(fontSize: 11),
+                                    )
+                                  : Text(''),
                               Text(
                                 date,
                                 style: TextStyle(fontSize: 11),

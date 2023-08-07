@@ -27,6 +27,8 @@ class _OrderStatusState extends State<OrderStatus> {
   String? sformattedTime;
   String? eformattedTime;
   String? docformattedTime;
+  String? service;
+
   @override
   void initState() {
     String stimeStr = widget.order!.starttime!;
@@ -37,6 +39,23 @@ class _OrderStatusState extends State<OrderStatus> {
     sformattedTime = DateFormat('HH:mm').format(stime);
     eformattedTime = DateFormat('HH:mm').format(etime);
     docformattedTime = DateFormat('HH:mm').format(widget.order!.created_at!);
+    if (widget.order!.servicetype == 'instant') {
+      service = 'Instant video / audio meeting';
+      print(service);
+    } else if (widget.order!.servicetype == 'document') {
+      if (widget.order!.document!.documenttype == 'DocumentType.NotUrgent') {
+        service = 'Unurgent Documents translation';
+      } else {
+        service = 'Urgent Documents translation';
+      }
+      print(widget.order!.document!.documenttype);
+    } else {
+      if (widget.order!.scheduletype == 'audio/video') {
+        service = 'Audio/Video meeting';
+      } else {
+        service = 'In person meeting';
+      }
+    }
     super.initState();
   }
 
@@ -97,21 +116,17 @@ class _OrderStatusState extends State<OrderStatus> {
                           ),
                           CheckOutTile(
                             title: 'Type of Service :',
-                            discription: widget.order!.servicetype == 'instant'
-                                ? 'Instant video / audio meeting'
-                                : widget.order!.servicetype == 'document'
-                                    ? 'Documents translation'
-                                    : widget.order!.scheduletype ==
-                                            'audio/video'
-                                        ? 'Audio/Video'
-                                        : 'In person meeting',
+                            discription: service,
                           ),
-                          // CheckOutTile(
-                          //   title: 'Phone number:',
-                          //   discription: widget.order!.user!.number == null
-                          //       ? ''
-                          //       :' widget.order!.user!.number',
-                          // ),
+                          widget.order!.servicetype == 'document'
+                              ? CheckOutTile(
+                                  title: 'Amount of pages: ',
+                                  discription:
+                                      widget.order!.document!.pages == null
+                                          ? ''
+                                          : widget.order!.document!.pages! +
+                                              ' Pages')
+                              : Container(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [

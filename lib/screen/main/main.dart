@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -33,7 +34,6 @@ class _MainScreenState extends State<MainScreen> {
   msg() async {
     await chatController.unseenchat();
   }
-
 
   // String? greeting = '';
   void initState() {
@@ -185,7 +185,7 @@ class _MainScreenState extends State<MainScreen> {
                     padding: const EdgeInsets.only(top: 20),
                     child: InkWell(
                       onTap: () async {
-                        authController.logout();
+                        logout(context);
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -252,5 +252,56 @@ class _MainScreenState extends State<MainScreen> {
       ],
     ).show();
     return result ?? false;
+  }
+
+  logout(context) {
+    Alert(
+      style: AlertStyle(
+        titleStyle: TextStyle(fontSize: 21, fontWeight: FontWeight.w400),
+      ),
+      context: context,
+      image: Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: SvgPicture.asset('assets/images/logout.svg'),
+      ),
+      title: "Are you sure you want to logout?",
+      buttons: [
+        DialogButton(
+          height: 55,
+          radius: BorderRadius.circular(13),
+          child: Text(
+            "Yes",
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w600),
+          ),
+          onPressed: () {
+            authController.logout();
+          },
+          color: mainColor,
+        ),
+        DialogButton(
+          height: 55,
+          radius: BorderRadius.circular(13),
+          border: Border.all(
+            color: Colors.black54,
+          ),
+          child: Text(
+            "No",
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w600),
+          ),
+          onPressed: () {
+            Get.back();
+          },
+          color: Colors.black,
+        ),
+      ],
+    ).show();
   }
 }
