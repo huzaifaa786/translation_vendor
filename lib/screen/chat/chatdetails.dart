@@ -78,7 +78,7 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                 name: widget.contactname,
                 image: widget.screen == 'order'
                     ? widget.contactPic
-                    : 'https://translation.klickwash.net/' + widget.contactPic!,
+                    : 'https://translation.ezmoveportal.com/' + widget.contactPic!,
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(8, 8, 8, 4),

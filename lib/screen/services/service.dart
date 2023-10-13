@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation_vendor/models/documentlist.dart';
 import 'package:auto_size_text_field/auto_size_text_field.dart';
-import 'package:translation_vendor/models/vendor.dart';
 import 'package:translation_vendor/screen/services/map.dart';
 import 'package:translation_vendor/screen/services/schedule.dart';
 import 'package:translation_vendor/screen/services/servicecontroller.dart';
@@ -76,8 +75,12 @@ class _ServiceScreenState extends State<ServiceScreen> {
         serviceController.unurgentdocument =
             mainController.vendor!.service!.unurgent!;
         serviceController.chnagePoint = LatLng(
-            mainController.vendor!.service!.lat!,
-            mainController.vendor!.service!.lng!);
+            mainController.vendor!.service!.lat == 0
+                ? serviceController.locationData!.latitude!
+                : mainController.vendor!.service!.lat!,
+            mainController.vendor!.service!.lng! == 0
+                ? serviceController.locationData!.longitude!
+                : mainController.vendor!.service!.lng!);
         serviceController.radius = mainController.vendor!.service!.radius!;
         serviceController.workingHours =
             mainController.vendor!.service!.schedule!;
@@ -102,86 +105,329 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     Get.back();
                   },
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 15.0),
+                Align(
+                  alignment: Alignment.centerLeft,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SvgPicture.asset('assets/images/dart.svg'),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 6),
-                        child: Text(
-                          'Online Audio/Video',
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      )
+                      Checkbox(
+                        activeColor: mainColor,
+                        value: serviceController.iAudioOrVideo,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            serviceController.iAudioOrVideo = value!;
+                          });
+                        },
+                      ),
+                      Text('Audio / Video Interpretaion')
                     ],
                   ),
                 ),
-                SizedBox(height: 4),
-                InkWell(
-                  focusColor: White,
-                  onTap: () {
-                    serviceController.openOnlineAudioORvideoField();
-                  },
+                Align(
+                  alignment: Alignment.centerLeft,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        'Rate Per 30 mintus: ',
-                        style: TextStyle(
-                          color: hintColor,
-                          fontFamily: 'Poppins',
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                        ),
+                      Checkbox(
+                        activeColor: mainColor,
+                        value: serviceController.isInperson,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            serviceController.isInperson = value!;
+                          });
+                        },
                       ),
-                      serviceController.showOnlineAudioORvideoPriceField ==
-                              false.obs
-                          ? Text(
-                              serviceController.onlineAudioORvideo == null
-                                  ? '0' + ' AED'
-                                  : serviceController.onlineAudioORvideo! +
-                                      " AED",
-                              style: TextStyle(
-                                color: mainColor,
-                                fontFamily: 'Poppins',
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            )
-                          : AutoSizeTextField(
-                              controller:
-                                  serviceController.onlineAudiovideoController,
-                              fullwidth: false,
-                              keyboardType: TextInputType.number,
-                              maxLength: 10,
-                              style: TextStyle(fontSize: 18),
-                              minWidth: MediaQuery.of(context).size.width * 0.3,
-                              decoration: InputDecoration(
-                                suffixIcon: InkWell(
-                                  onTap: () {
-                                    serviceController
-                                        .EditOnlineAudioORvideoPrice();
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
-                                    child: Icon(Icons.check,
-                                        color: mainColor, size: 18),
+                      Text('Inperson Interpretaion')
+                    ],
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Row(
+                    children: [
+                      Checkbox(
+                        activeColor: mainColor,
+                        value: serviceController.isDocument,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            serviceController.isDocument = value!;
+                          });
+                        },
+                      ),
+                      Text('Document Translation')
+                    ],
+                  ),
+                ),
+                serviceController.iAudioOrVideo != false
+                    ? Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset('assets/images/dart.svg'),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 6),
+                                  child: Text(
+                                    'Online Audio/Video',
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          InkWell(
+                            focusColor: White,
+                            onTap: () {
+                              serviceController.openOnlineAudioORvideoField();
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Rate Per 30 mintus: ',
+                                  style: TextStyle(
+                                    color: hintColor,
+                                    fontFamily: 'Poppins',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                              ),
+                                serviceController
+                                            .showOnlineAudioORvideoPriceField ==
+                                        false.obs
+                                    ? Text(
+                                        serviceController.onlineAudioORvideo ==
+                                                null
+                                            ? '0' + ' AED'
+                                            : serviceController
+                                                    .onlineAudioORvideo! +
+                                                " AED",
+                                        style: TextStyle(
+                                          color: mainColor,
+                                          fontFamily: 'Poppins',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      )
+                                    : AutoSizeTextField(
+                                        controller: serviceController
+                                            .onlineAudiovideoController,
+                                        fullwidth: false,
+                                        keyboardType: TextInputType.number,
+                                        maxLength: 10,
+                                        style: TextStyle(fontSize: 18),
+                                        minWidth:
+                                            MediaQuery.of(context).size.width *
+                                                0.3,
+                                        decoration: InputDecoration(
+                                          suffixIcon: InkWell(
+                                            onTap: () {
+                                              serviceController
+                                                  .EditOnlineAudioORvideoPrice();
+                                            },
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 8.0),
+                                              child: Icon(Icons.check,
+                                                  color: mainColor, size: 18),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                              ],
                             ),
-                    ],
-                  ),
-                ),
+                          ),
+                        ],
+                      )
+                    : Container(),
                 SizedBox(
                   height: 23,
                 ),
+                serviceController.isDocument != false
+                    ? Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/images/document1.svg',
+                                color: mainColor,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Text(
+                                  'Document',
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          AddPage(
+                            title: 'Urgent Doucment :',
+                            onPressed: () {
+                              urgentdoc(context);
+                            },
+                          ),
+                          InkWell(
+                            focusColor: White,
+                            onTap: () {
+                              serviceController.openurgentField();
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Rate Per Page: ',
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                serviceController.showurgentPriceField ==
+                                        false.obs
+                                    ? Text(
+                                        serviceController.urgentPrice == null
+                                            ? '0 AED'
+                                            : serviceController.urgentPrice! +
+                                                '  AED',
+                                        style: TextStyle(
+                                          color: mainColor,
+                                          fontFamily: 'Poppins',
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      )
+                                    : AutoSizeTextField(
+                                        controller:
+                                            serviceController.urgentController,
+                                        fullwidth: false,
+                                        style: TextStyle(fontSize: 18),
+                                        // maxLines: null,
+                                        keyboardType: TextInputType.number,
+                                        maxLength: 10,
+                                        minWidth:
+                                            MediaQuery.of(context).size.width *
+                                                0.3,
+                                        decoration: InputDecoration(
+                                          suffixIcon: InkWell(
+                                            onTap: () {
+                                              serviceController
+                                                  .EditurgentPrice();
+                                            },
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 8.0),
+                                              child: Icon(Icons.check,
+                                                  color: mainColor, size: 18),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                              ],
+                            ),
+                          ),
+                          for (var document in serviceController.urgentdocument)
+                            InkWell(
+                              onTap: () {
+                                editurgentdoc(context, document.minpage,
+                                    document.maxpage, document.day);
+                              },
+                              child: PagePrice(
+                                minpage: document.minpage,
+                                maxpage: document.maxpage,
+                                days: document.day,
+                              ),
+                            ),
+                          AddPage(
+                            title: 'Un Urgent Doucment :',
+                            onPressed: () {
+                              addpage(context);
+                            },
+                          ),
+                          InkWell(
+                            focusColor: White,
+                            onTap: () {
+                              serviceController.openUnurgentField();
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Rate Per Page: ',
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                serviceController.showUnurgentPriceField ==
+                                        false.obs
+                                    ? Text(
+                                        serviceController.UnurgentPrice == null
+                                            ? '0 AED'
+                                            : serviceController.UnurgentPrice! +
+                                                '  AED',
+                                        style: TextStyle(
+                                          color: mainColor,
+                                          fontFamily: 'Poppins',
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      )
+                                    : AutoSizeTextField(
+                                        controller: serviceController
+                                            .UnurgentController,
+                                        fullwidth: false,
+                                        style: TextStyle(fontSize: 18),
+                                        // maxLines: null,
+                                        keyboardType: TextInputType.number,
+                                        maxLength: 10,
+                                        minWidth:
+                                            MediaQuery.of(context).size.width *
+                                                0.3,
+                                        decoration: InputDecoration(
+                                          suffixIcon: InkWell(
+                                            onTap: () {
+                                              serviceController
+                                                  .EditUnurgentPrice();
+                                            },
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 8.0),
+                                              child: Icon(Icons.check,
+                                                  color: mainColor, size: 18),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                              ],
+                            ),
+                          ),
+                          for (var document
+                              in serviceController.unurgentdocument)
+                            InkWell(
+                              onTap: () {
+                                editunurgentdoc(context, document.minpage,
+                                    document.maxpage, document.day);
+                              },
+                              child: PagePrice(
+                                minpage: document.minpage,
+                                maxpage: document.maxpage,
+                                days: document.day,
+                              ),
+                            ),
+                          SizedBox(height: 20)
+                        ],
+                      )
+                    : Container(),
                 Row(
                   children: [
                     Padding(
@@ -204,142 +450,166 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 SizedBox(
                   height: 23,
                 ),
-                InkWell(
-                  focusColor: White,
-                  onTap: () {
-                    serviceController.openaudioORvideoField();
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Audio/Video',
-                        style: TextStyle(
-                          color: hintColor,
-                          fontFamily: 'Mazzard',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      serviceController.showaudioORvideoPriceField == false.obs
-                          ? Text(
-                              serviceController.audioORvideo == null
-                                  ? '0' + ' AED'
-                                  : serviceController.audioORvideo! + " AED",
+                serviceController.iAudioOrVideo != false
+                    ? InkWell(
+                        focusColor: White,
+                        onTap: () {
+                          serviceController.openaudioORvideoField();
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Audio/Video',
                               style: TextStyle(
-                                color: mainColor,
+                                color: hintColor,
                                 fontFamily: 'Mazzard',
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w500,
                               ),
-                            )
-                          : AutoSizeTextField(
-                              controller:
-                                  serviceController.audiovideoController,
-                              fullwidth: false,
-                              keyboardType: TextInputType.number,
-                              maxLength: 10,
-                              style: TextStyle(fontSize: 18),
-                              minWidth: MediaQuery.of(context).size.width * 0.3,
-                              decoration: InputDecoration(
-                                suffixIcon: InkWell(
-                                  onTap: () {
-                                    serviceController.EditaudioORvideoPrice();
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
-                                    child: Icon(Icons.check,
-                                        color: mainColor, size: 18),
-                                  ),
-                                ),
-                              ),
                             ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 12,
-                ),
-                InkWell(
-                  focusColor: White,
-                  onTap: () {
-                    serviceController.openInPersonField();
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'In Person',
-                        style: TextStyle(
-                          color: hintColor,
-                          fontFamily: 'Mazzard',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
+                            serviceController.showaudioORvideoPriceField ==
+                                    false.obs
+                                ? Text(
+                                    serviceController.audioORvideo == null
+                                        ? '0' + ' AED'
+                                        : serviceController.audioORvideo! +
+                                            " AED",
+                                    style: TextStyle(
+                                      color: mainColor,
+                                      fontFamily: 'Mazzard',
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
+                                : AutoSizeTextField(
+                                    controller:
+                                        serviceController.audiovideoController,
+                                    fullwidth: false,
+                                    keyboardType: TextInputType.number,
+                                    maxLength: 10,
+                                    style: TextStyle(fontSize: 18),
+                                    minWidth:
+                                        MediaQuery.of(context).size.width * 0.3,
+                                    decoration: InputDecoration(
+                                      suffixIcon: InkWell(
+                                        onTap: () {
+                                          serviceController
+                                              .EditaudioORvideoPrice();
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 8.0),
+                                          child: Icon(Icons.check,
+                                              color: mainColor, size: 18),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                          ],
                         ),
-                      ),
-                      serviceController.showInPersonPriceField == false.obs
-                          ? Text(
-                              serviceController.InPersonPrice == null
-                                  ? '0' + ' AED'
-                                  : serviceController.InPersonPrice! + " AED",
+                      )
+                    : Container(),
+                serviceController.iAudioOrVideo != false
+                    ? SizedBox(
+                        height: 12,
+                      )
+                    : Container(),
+                serviceController.isInperson != false
+                    ? InkWell(
+                        focusColor: White,
+                        onTap: () {
+                          serviceController.openInPersonField();
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'In Person',
                               style: TextStyle(
-                                color: mainColor,
+                                color: hintColor,
                                 fontFamily: 'Mazzard',
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w500,
                               ),
-                            )
-                          : AutoSizeTextField(
-                              controller: serviceController.inpersionController,
-                              fullwidth: false,
-                              keyboardType: TextInputType.number,
-                              maxLength: 10,
-                              style: TextStyle(fontSize: 18),
-                              minWidth: MediaQuery.of(context).size.width * 0.3,
-                              decoration: InputDecoration(
-                                suffixIcon: InkWell(
-                                  onTap: () {
-                                    serviceController.EditInPersonPrice();
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
-                                    child: Icon(Icons.check,
-                                        color: mainColor, size: 18),
+                            ),
+                            serviceController.showInPersonPriceField ==
+                                    false.obs
+                                ? Text(
+                                    serviceController.InPersonPrice == null
+                                        ? '0' + ' AED'
+                                        : serviceController.InPersonPrice! +
+                                            " AED",
+                                    style: TextStyle(
+                                      color: mainColor,
+                                      fontFamily: 'Mazzard',
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
+                                : AutoSizeTextField(
+                                    controller:
+                                        serviceController.inpersionController,
+                                    fullwidth: false,
+                                    keyboardType: TextInputType.number,
+                                    maxLength: 10,
+                                    style: TextStyle(fontSize: 18),
+                                    minWidth:
+                                        MediaQuery.of(context).size.width * 0.3,
+                                    decoration: InputDecoration(
+                                      suffixIcon: InkWell(
+                                        onTap: () {
+                                          serviceController.EditInPersonPrice();
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 8.0),
+                                          child: Icon(Icons.check,
+                                              color: mainColor, size: 18),
+                                        ),
+                                      ),
+                                    ),
                                   ),
+                          ],
+                        ),
+                      )
+                    : Container(),
+                serviceController.isInperson != false
+                    ? SizedBox(height: 12)
+                    : Container(),
+                serviceController.isInperson != false
+                    ? Column(children: [
+                        Row(
+                          children: [
+                            SvgPicture.asset('assets/images/location.svg'),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 6.0),
+                              child: Text(
+                                ' Determine range of service',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
-                            ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 12),
-                Row(
-                  children: [
-                    SvgPicture.asset('assets/images/location.svg'),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 6.0),
-                      child: Text(
-                        ' Determine range of service',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
+                            )
+                          ],
                         ),
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(height: 12),
-                LocationButton(
-                    title: 'Choose location',
-                    icon: Icons.my_location_rounded,
-                    onPressed: () {
-                      Get.to(() => VendorMapScreen(
-                          service: mainController.vendor!.service));
-                    }),
-                SizedBox(
-                  height: 20,
-                ),
+                        SizedBox(height: 12),
+                        LocationButton(
+                            title: 'Choose location',
+                            icon: Icons.my_location_rounded,
+                            onPressed: () {
+                              Get.to(() => VendorMapScreen(
+                                  service: mainController.vendor!.service));
+                            }),
+                      ])
+                    : Container(),
+                serviceController.isInperson != false
+                    ? SizedBox(
+                        height: 20,
+                      )
+                    : Container(),
                 Schedule(
                     day: 'Monday',
                     startTime: mainController.vendor!.service == null
@@ -403,161 +673,6 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     endTime: mainController.vendor!.service == null
                         ? '17:00'
                         : mainController.vendor!.service!.schedule![6].endTime),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SvgPicture.asset('assets/images/document.svg'),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: Text(
-                        'Document',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                AddPage(
-                  title: 'Urgent Doucment :',
-                  onPressed: () {
-                    urgentdoc(context);
-                  },
-                ),
-                InkWell(
-                  focusColor: White,
-                  onTap: () {
-                    serviceController.openurgentField();
-                  },
-                  child: Row(
-                    children: [
-                      Text(
-                        'Rate Per Page: ',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      serviceController.showurgentPriceField == false.obs
-                          ? Text(
-                              serviceController.urgentPrice == null
-                                  ? '0 AED'
-                                  : serviceController.urgentPrice! + '  AED',
-                              style: TextStyle(
-                                color: mainColor,
-                                fontFamily: 'Poppins',
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            )
-                          : AutoSizeTextField(
-                              controller: serviceController.urgentController,
-                              fullwidth: false,
-                              style: TextStyle(fontSize: 18),
-                              // maxLines: null,
-                              keyboardType: TextInputType.number,
-                              maxLength: 10,
-                              minWidth: MediaQuery.of(context).size.width * 0.3,
-                              decoration: InputDecoration(
-                                suffixIcon: InkWell(
-                                  onTap: () {
-                                    serviceController.EditurgentPrice();
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
-                                    child: Icon(Icons.check,
-                                        color: mainColor, size: 18),
-                                  ),
-                                ),
-                              ),
-                            ),
-                    ],
-                  ),
-                ),
-                for (var document in serviceController.urgentdocument)
-                  InkWell(
-                    onTap: () {
-                      editurgentdoc(context, document.minpage, document.maxpage,
-                          document.day);
-                    },
-                    child: PagePrice(
-                      minpage: document.minpage,
-                      maxpage: document.maxpage,
-                      days: document.day,
-                    ),
-                  ),
-                AddPage(
-                  title: 'Un Urgent Doucment :',
-                  onPressed: () {
-                    addpage(context);
-                  },
-                ),
-                InkWell(
-                  focusColor: White,
-                  onTap: () {
-                    serviceController.openUnurgentField();
-                  },
-                  child: Row(
-                    children: [
-                      Text(
-                        'Rate Per Page: ',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      serviceController.showUnurgentPriceField == false.obs
-                          ? Text(
-                              serviceController.UnurgentPrice == null
-                                  ? '0 AED'
-                                  : serviceController.UnurgentPrice! + '  AED',
-                              style: TextStyle(
-                                color: mainColor,
-                                fontFamily: 'Poppins',
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            )
-                          : AutoSizeTextField(
-                              controller: serviceController.UnurgentController,
-                              fullwidth: false,
-                              style: TextStyle(fontSize: 18),
-                              // maxLines: null,
-                              keyboardType: TextInputType.number,
-                              maxLength: 10,
-                              minWidth: MediaQuery.of(context).size.width * 0.3,
-                              decoration: InputDecoration(
-                                suffixIcon: InkWell(
-                                  onTap: () {
-                                    serviceController.EditUnurgentPrice();
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
-                                    child: Icon(Icons.check,
-                                        color: mainColor, size: 18),
-                                  ),
-                                ),
-                              ),
-                            ),
-                    ],
-                  ),
-                ),
-                for (var document in serviceController.unurgentdocument)
-                  InkWell(
-                    onTap: () {
-                      editunurgentdoc(context, document.minpage,
-                          document.maxpage, document.day);
-                    },
-                    child: PagePrice(
-                      minpage: document.minpage,
-                      maxpage: document.maxpage,
-                      days: document.day,
-                    ),
-                  ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20, bottom: 20),
                   child: LargeButton(

@@ -16,6 +16,9 @@ class VendorService {
   double? radius;
   double? lat;
   double? lng;
+  bool? isInperson;
+  bool? isAudioVideo;
+  bool? isdocument;
 
   VendorService(service) {
     id = service['id'];
@@ -25,11 +28,21 @@ class VendorService {
     onlineaudiovideoPrice = service['onlineaudiovideo'];
     urgentprice = service['urgentprice'];
     unurgentprice = service['unurgentprice'];
-    radius = double.parse(service['radius'].toString());
-    lat = double.parse(service['latitude'].toString());
-    lng = double.parse(service['longitude'].toString());
-    urgent = documentlist(jsonDecode(service['urgent']));
-    unurgent = undocumentlist(jsonDecode(service['unurgent']));
+    radius = service['radius'] != null
+        ? double.parse(service['radius'].toString())
+        : 0.0;
+    lat = service['latitude'] != null
+        ? double.parse(service['latitude'].toString())
+        : 0;
+    lng = service['longitude'] != null
+        ? double.parse(service['longitude'].toString())
+        : 0;
+    urgent = service['urgent'] != []
+        ? documentlist(jsonDecode(service['urgent']))
+        : [];
+    unurgent = service['unurgent'] != []
+        ? undocumentlist(jsonDecode(service['unurgent']))
+        : [];
     schedule = schedulelist(jsonDecode(service['schedual']));
   }
 

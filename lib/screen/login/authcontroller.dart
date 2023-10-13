@@ -161,7 +161,7 @@ class AuthController extends GetxController {
                         'password': password.text.toString(),
                         'passport': passport,
                         'language': lang,
-                        'number':phone.text.toString(),
+                        'number': phone.text.toString(),
                         'firebase_token': token,
                         'cvImage': cv,
                       };
@@ -174,6 +174,7 @@ class AuthController extends GetxController {
 
                       if (!response['error']) {
                         LoadingHelper.dismiss();
+                        Get.offAll(() => LoginScreen());
                         Vendor vendor = Vendor(response['Vendor']);
                         print(vendor);
                         ClearSignupVariables();
@@ -221,11 +222,12 @@ class AuthController extends GetxController {
                           'certifcate_name': certificateName.text.toString(),
                           'language': lang,
                           'cvImage': cv,
-                          'number':phone.text.toString(),
+                          'number': phone.text.toString(),
                           'firebase_token': token
                         };
                         var response = await Api.execute(url: url, data: data);
                         if (!response['error']) {
+                          Get.offAll(() => LoginScreen());
                           Vendor vendor = Vendor(response['Vendor']);
                           print(vendor);
                           ClearSignupVariables();

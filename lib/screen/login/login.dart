@@ -221,7 +221,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                             ),
                           ),
-                                Padding(
+                          Padding(
                             padding: const EdgeInsets.only(top: 15),
                             child: Imageinput(
                               labelText: ' CV ',
@@ -303,7 +303,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       field, '*userame'),
                             ),
                           ),
-                            Padding(
+                          Padding(
                             padding: const EdgeInsets.only(top: 25.0),
                             child: IconInputFields(
                               imageIcon: 'assets/images/email.svg',
@@ -356,9 +356,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               textcolor: White,
                               onPressed: () {
                                 setState(() {});
-                                authController.SignUp((success) {
+                                authController.SignUp((success) async {
+                                  
                                   if (success) {
-                                    Get.off(() => LoginScreen());
+                                    // await 
                                     vendorrequest(context);
                                   }
                                 });

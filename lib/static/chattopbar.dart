@@ -46,7 +46,7 @@ class ChatTopBar extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(22),
-                  child: image == 'https://translation.klickwash.net/'
+                  child: image == 'https://translation.ezmoveportal.com/'
                       ? Image(
                           image: AssetImage('assets/images/5907.jpg'),
                           height: 64,

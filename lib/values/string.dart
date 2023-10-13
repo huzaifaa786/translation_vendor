@@ -1,2 +1,2 @@
-const BASE_URL = "https://translation.klickwash.net/api/";
-const Msg_Storage_Url = "https://translation.klickwash.net/storage/attachments/";
+const BASE_URL = "https://translation.ezmoveportal.com/api/";
+const Msg_Storage_Url = "https://translation.ezmoveportal.com/storage/attachments/";
