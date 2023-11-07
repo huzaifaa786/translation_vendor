@@ -106,7 +106,7 @@ class HistoryCard extends StatelessWidget {
                           SizedBox(
                             height: 4,
                           ),
-                          servicetype == 'document'
+                          type == 'document'
                               ? Container(
                                   width:
                                       MediaQuery.of(context).size.width * 0.4,

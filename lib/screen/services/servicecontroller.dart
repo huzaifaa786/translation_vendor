@@ -840,6 +840,7 @@ class ServiceController extends GetxController {
 
     LoadingHelper.dismiss();
     update();
+    return 'latitude: ${locationData!.latitude}, longitude: ${locationData!.longitude}';
   }
 
 /////////////////////////////////////////////Clear Varaible//////////////////////////////////////////

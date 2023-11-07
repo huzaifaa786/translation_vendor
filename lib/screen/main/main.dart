@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:translation_vendor/helper/loading.dart';
 import 'package:translation_vendor/screen/chat/chatcontroller.dart';
 import 'package:translation_vendor/screen/chat/chats.dart';
 import 'package:translation_vendor/screen/history/history.dart';
@@ -105,9 +106,19 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   IconsButton(
                     title: 'Services',
-                    onPressed: () {
-                      serviceController.clearServiceScreen();
-                      Get.to(() => ServiceScreen());
+                    onPressed: () async {
+                      var i = await serviceController.getlocation();
+                      if (i != null) {
+                        serviceController.clearServiceScreen();
+                        Get.to(() => ServiceScreen());
+                      } else {
+                        Get.snackbar(
+                            "Please Enable Location Permissions To Proceed", '',
+                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: Colors.red,
+                            colorText: Colors.white);
+                        LoadingHelper.dismiss();
+                      }
                     },
                     imgicon: 'assets/images/headphone.svg',
                   ),
