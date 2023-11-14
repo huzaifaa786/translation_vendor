@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:translation_vendor/screen/forgot.dart/forgotAccount.dart';
 import 'package:translation_vendor/screen/login/authcontroller.dart';
 import 'package:translation_vendor/screen/main/main.dart';
 import 'package:translation_vendor/static/button.dart';
@@ -304,7 +305,21 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 25.0),
+                            padding: const EdgeInsets.only(top: 12.0),
+                            child: IconInputFields(
+                              imageIcon: 'assets/images/emailIcon.svg',
+                              controller: authController.email,
+                              hint: 'Email',
+                              width: 12,
+                              borderColor: Colors.black,
+                              imageColor: Colors.black,
+                              validate: authController.validateSignUpForm,
+                              validator: (field) =>
+                                  Validators.emailValidator(field),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 12.0),
                             child: IconInputFields(
                               imageIcon: 'assets/images/email.svg',
                               controller: authController.phone,
@@ -357,9 +372,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               onPressed: () {
                                 setState(() {});
                                 authController.SignUp((success) async {
-                                  
                                   if (success) {
-                                    // await 
+                                    // await
                                     vendorrequest(context);
                                   }
                                 });
@@ -373,13 +387,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           Padding(
                             padding: const EdgeInsets.only(top: 40.0),
                             child: IconInputFields(
-                              imageIcon: 'assets/images/email.svg',
-                              hint: 'Username',
-                              controller: authController.userName,
+                              imageIcon: 'assets/images/emailIcon.svg',
+                              hint: 'Email',
+                              controller: authController.email,
                               validate: authController.validateSignInForm,
                               validator: (field) =>
-                                  Validators.emptyStringValidator(
-                                      field, '*username'),
+                                  Validators.emailValidator(
+                                      field),
                             ),
                           ),
                           Padding(
@@ -395,6 +409,32 @@ class _LoginScreenState extends State<LoginScreen> {
                               //     Validators.passwordValidator(password),
                             ),
                           ),
+                          Padding(
+                                                padding: EdgeInsets.only(
+                                                    top: 12, bottom: 16),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: () {
+                                                        Get.to(() =>
+                                                            ForgotScreen());
+                                                      },
+                                                      child: Text(
+                                                        "Forgot Password?",
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color:
+                                                                Colors.black54,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
                           Padding(
                             padding:
                                 const EdgeInsets.only(top: 25.0, bottom: 30),
@@ -435,7 +475,7 @@ class _LoginScreenState extends State<LoginScreen> {
         'assets/images/tick.svg',
       ),
       title:
-          "You have Successfully Submitted  your application and you will notified within24 hours.",
+          "You have Successfully Submitted  your application and you will notified within 24 hours.",
       buttons: [
         DialogButton(
           color: mainColor,

@@ -61,6 +61,7 @@ dependencies:
   photo_view: ^0.14.0
   flutter_file_downloader: ^1.1.2
   file_picker: ^5.3.1
+  flutter_otp_text_field: ^1.1.1
 
  
 

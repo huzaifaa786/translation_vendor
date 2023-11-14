@@ -17,13 +17,18 @@ class AuthController extends GetxController {
   static AuthController instance = Get.find();
 
 //////////////////////////  Auth Variable   ///////////////////////////////////
-
+  TextEditingController forgotemail = TextEditingController();
+  TextEditingController resetPassword = TextEditingController();
+  var otp;
+  RxBool verify = true.obs;
+  RxBool validateForgotForm = false.obs;
   RxBool validateSignUpForm = false.obs;
   RxBool validateSignInForm = false.obs;
   RxBool success = new RxBool(true);
   TextEditingController vendorName = TextEditingController();
   TextEditingController certificateName = TextEditingController();
   TextEditingController userName = TextEditingController();
+  TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController phone = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
@@ -53,6 +58,7 @@ class AuthController extends GetxController {
   ClearSignupVariables() {
     vendorName.clear();
     userName.clear();
+    email.clear();
     password.clear();
     confirmPassword.clear();
     languageController.clear();
@@ -126,7 +132,8 @@ class AuthController extends GetxController {
         Validators.emptyStringValidator(vendorName.text, '') == null &&
         Validators.emptyStringValidator(userName.text, '') == null &&
         Validators.emptyStringValidator(password.text, '') == null &&
-        Validators.emptyStringValidator(confirmPassword.text, '') == null;
+        Validators.emptyStringValidator(confirmPassword.text, '') == null &&
+        Validators.emailValidator(email.text) == null;
     if (isFormValid) {
       if (year == '') {
         LoadingHelper.dismiss();
@@ -157,6 +164,7 @@ class AuthController extends GetxController {
                       data = {
                         'name': vendorName.text.toString(),
                         'username': userName.text.toString(),
+                        'email': email.text.toString(),
                         'DOB': date.toString(),
                         'password': password.text.toString(),
                         'passport': passport,
@@ -215,6 +223,7 @@ class AuthController extends GetxController {
                         data = {
                           'name': vendorName.text.toString(),
                           'username': userName.text.toString(),
+                          'email': email.text.toString(),
                           'DOB': date.toString(),
                           'password': password.text.toString(),
                           'passport': passport,
@@ -308,16 +317,15 @@ class AuthController extends GetxController {
 
   void login(void Function(bool) callback) async {
     LoadingHelper.show();
-    final bool isFormValid =
-        Validators.emptyStringValidator(userName.text, '') == null &&
-            Validators.emptyStringValidator(password.text, '') == null;
+    final bool isFormValid = Validators.emailValidator(email.text) == null &&
+        Validators.emptyStringValidator(password.text, '') == null;
     if (isFormValid) {
       var token = await FirebaseMessaging.instance.getToken();
       var url = BASE_URL + 'vendor/login';
       var data = {
-        'username': userName.text,
-        'password': password.text,
-        'firebase_token': token,
+        'email': email.text.toString(),
+        'password': password.text.toString(),
+        'firebase_token': token.toString(),
       };
 
       var response = await Api.execute(url: url, data: data);
@@ -356,5 +364,76 @@ class AuthController extends GetxController {
         snackPosition: SnackPosition.BOTTOM);
     Get.offAll(() => LoginScreen());
     LoadingHelper.dismiss();
+  }
+
+  ////////////////////////////////// Fetch User AND Send Otp to Mail if user exit ////////////////////////////////
+
+  getOTPusingEmail(void Function(bool) callback) async {
+    LoadingHelper.show();
+    print(forgotemail.text);
+    if (forgotemail.text.isNotEmpty) {
+      var url = BASE_URL + 'forgetvendorpassword';
+      var data = {'email': forgotemail.text.toString()};
+
+      var response = await Api.execute(url: url, data: data);
+      LoadingHelper.dismiss();
+      if (!response['error']) {
+        otp = response['otp'];
+        Get.snackbar('OTP sent successfully!',
+            'We have sent a One-Time Password (OTP) to your registered email address.',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: mainColor,
+            colorText: Colors.white);
+        return callback(true);
+      } else {
+        LoadingHelper.dismiss();
+        print(response['error_data']);
+        Get.snackbar('ERROR!', response['error_data'],
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red,
+            colorText: Colors.white);
+        return callback(false);
+      }
+    } else {
+      LoadingHelper.dismiss();
+    }
+  }
+
+  //////////////////// Call This function after otp Successfully placed to reset Password ////////////////////
+
+  ResetPassword(void Function(bool) callback) async {
+    print(resetPassword.text);
+    final bool isFormValid =
+        Validators.passwordValidator(resetPassword.text) == null;
+    if (!isFormValid) {
+      return callback(false);
+    } else {
+      LoadingHelper.show();
+      var url = BASE_URL + 'vendorforgetchangepassword';
+      var data = {
+        'email': forgotemail.text.toString(),
+        'password': resetPassword.text.toString()
+      };
+      var response = await Api.execute(url: url, data: data);
+      print(response);
+      if (!response['error']) {
+        LoadingHelper.dismiss();
+        // GetStorage box = GetStorage();
+        // box.write('api_token', response['update']['api_token']);
+        ClearForgotVariable();
+        return callback(true);
+      } else {
+        LoadingHelper.dismiss();
+        return callback(false);
+      }
+    }
+  }
+
+////////////////////////////////// Clear Forgot Screen Variables //////////////////////////////////////////////
+
+  ClearForgotVariable() {
+    forgotemail.clear();
+    resetPassword.clear();
+    update();
   }
 }
