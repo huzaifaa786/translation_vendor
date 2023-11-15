@@ -4,6 +4,7 @@ import 'package:translation_vendor/static/button.dart';
 import 'package:translation_vendor/values/colors.dart';
 import 'package:translation_vendor/values/controllers.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:translation_vendor/screen/forgot.dart/resetPassword.dart';
 
 class EmailOtpVerifyScreen extends StatefulWidget {
   const EmailOtpVerifyScreen({super.key});
@@ -130,7 +131,7 @@ class _EmailOtpVerifyScreenState extends State<EmailOtpVerifyScreen> {
                           snackPosition: SnackPosition.BOTTOM,
                           backgroundColor: mainColor,
                           colorText: Colors.white);
-                      // Get.to(() => ResetPasswordScreen());
+                      Get.to(() => ResetPasswordScreen());
                     } else {
                       Get.snackbar('ERROR!',
                           "Entered Otp is incorrect. Please enter correct Otp to proceed Further.",

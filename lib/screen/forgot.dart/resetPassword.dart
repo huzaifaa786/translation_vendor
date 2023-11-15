@@ -74,7 +74,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                         top: 20, bottom: 20),
                                     child: InputField1(
                                       hint: 'Enter New Password',
-                                      icon: 'assets/images/lock.svg',
+                                      icon: 'assets/images/password.svg',
                                       controller: authController.resetPassword,
                                       obscure: true,
                                       validate:

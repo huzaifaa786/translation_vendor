@@ -65,6 +65,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    int currentYear = DateTime.now().year;
+    int endYear = currentYear - 10;
+    int startYear = currentYear - 80;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -197,8 +201,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 )),
                             isDropdownHideUnderline: true,
                             isFormValidator: true,
-                            startYear: 1950,
-                            endYear: 2010,
+                            startYear: startYear,
+                            endYear: endYear,
                             width: 10,
                             onChangedDay: (value) =>
                                 authController.day = value!,
@@ -392,8 +396,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               controller: authController.email,
                               validate: authController.validateSignInForm,
                               validator: (field) =>
-                                  Validators.emailValidator(
-                                      field),
+                                  Validators.emailValidator(field),
                             ),
                           ),
                           Padding(
@@ -410,31 +413,25 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           Padding(
-                                                padding: EdgeInsets.only(
-                                                    top: 12, bottom: 16),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    InkWell(
-                                                      onTap: () {
-                                                        Get.to(() =>
-                                                            ForgotScreen());
-                                                      },
-                                                      child: Text(
-                                                        "Forgot Password?",
-                                                        style: TextStyle(
-                                                            fontSize: 18,
-                                                            color:
-                                                                Colors.black54,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w600),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
+                            padding: EdgeInsets.only(top: 12, bottom: 16),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Get.to(() => ForgotScreen());
+                                  },
+                                  child: Text(
+                                    "Forgot Password?",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.black54,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
                           Padding(
                             padding:
                                 const EdgeInsets.only(top: 25.0, bottom: 30),
