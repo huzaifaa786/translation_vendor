@@ -75,8 +75,7 @@ class LanguageAdd extends StatelessWidget {
                   children: [
                     Container(
                         padding: const EdgeInsets.all(8),
-                        width: MediaQuery.of(context).size.width * .7,
-                        
+                        width: MediaQuery.of(context).size.width * .7,    
                         child: Text(
                           text,
                           maxLines: 2,

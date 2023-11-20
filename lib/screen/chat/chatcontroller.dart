@@ -167,7 +167,8 @@ class ChatController extends GetxController {
     );
     if (result != null) {
       file = await File(result.files.single.path!);
-      sendMassage();
+      await sendMassage();
+      file = null;
     } else {
       // User canceled the picker
     }

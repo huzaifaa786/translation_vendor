@@ -495,7 +495,21 @@ class _ProfileState extends State<Profile> {
                               child: LargeButton(
                                 title: "Update",
                                 onPressed: () {
-                                  profileController.editprofile();
+                                  if (profileController.vendor!.aboutEng !=
+                                      '') {
+                                    if (profileController.vendor!.aboutArabic !=
+                                        '') {
+                                      profileController.editprofile();
+                                    } else {
+                                      Get.snackbar(
+                                          'Please fill up all the information',
+                                          '');
+                                    }
+                                  } else {
+                                    Get.snackbar(
+                                        'Please fill up all the information',
+                                        '');
+                                  }
                                 },
                                 textcolor: White,
                               ),

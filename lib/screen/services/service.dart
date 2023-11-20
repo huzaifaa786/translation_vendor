@@ -156,95 +156,95 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     ],
                   ),
                 ),
-                serviceController.iAudioOrVideo != false
-                    ? Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 15.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset('assets/images/dart.svg'),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 6),
-                                  child: Text(
-                                    'Online Audio/Video',
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          InkWell(
-                            focusColor: White,
-                            onTap: () {
-                              serviceController.openOnlineAudioORvideoField();
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Rate Per 30 mintus: ',
-                                  style: TextStyle(
-                                    color: hintColor,
-                                    fontFamily: 'Poppins',
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                serviceController
-                                            .showOnlineAudioORvideoPriceField ==
-                                        false.obs
-                                    ? Text(
-                                        serviceController.onlineAudioORvideo ==
-                                                null
-                                            ? '0' + ' AED'
-                                            : serviceController
-                                                    .onlineAudioORvideo! +
-                                                " AED",
-                                        style: TextStyle(
-                                          color: mainColor,
-                                          fontFamily: 'Poppins',
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      )
-                                    : AutoSizeTextField(
-                                        controller: serviceController
-                                            .onlineAudiovideoController,
-                                        fullwidth: false,
-                                        keyboardType: TextInputType.number,
-                                        maxLength: 10,
-                                        style: TextStyle(fontSize: 18),
-                                        minWidth:
-                                            MediaQuery.of(context).size.width *
-                                                0.3,
-                                        decoration: InputDecoration(
-                                          suffixIcon: InkWell(
-                                            onTap: () {
-                                              serviceController
-                                                  .EditOnlineAudioORvideoPrice();
-                                            },
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 8.0),
-                                              child: Icon(Icons.check,
-                                                  color: mainColor, size: 18),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      )
-                    : Container(),
+                // serviceController.iAudioOrVideo != false
+                //     ? Column(
+                //         children: [
+                //           Padding(
+                //             padding: const EdgeInsets.only(top: 15.0),
+                //             child: Row(
+                //               mainAxisAlignment: MainAxisAlignment.center,
+                //               children: [
+                //                 SvgPicture.asset('assets/images/dart.svg'),
+                //                 Padding(
+                //                   padding: const EdgeInsets.only(left: 6),
+                //                   child: Text(
+                //                     'Online Audio/Video',
+                //                     style: TextStyle(
+                //                       fontFamily: 'Poppins',
+                //                       fontSize: 18,
+                //                       fontWeight: FontWeight.w600,
+                //                     ),
+                //                   ),
+                //                 )
+                //               ],
+                //             ),
+                //           ),
+                //           SizedBox(height: 4),
+                //           InkWell(
+                //             focusColor: White,
+                //             onTap: () {
+                //               serviceController.openOnlineAudioORvideoField();
+                //             },
+                //             child: Row(
+                //               mainAxisAlignment: MainAxisAlignment.center,
+                //               children: [
+                //                 Text(
+                //                   'Rate Per 30 mintus: ',
+                //                   style: TextStyle(
+                //                     color: hintColor,
+                //                     fontFamily: 'Poppins',
+                //                     fontSize: 15,
+                //                     fontWeight: FontWeight.w400,
+                //                   ),
+                //                 ),
+                //                 serviceController
+                //                             .showOnlineAudioORvideoPriceField ==
+                //                         false.obs
+                //                     ? Text(
+                //                         serviceController.onlineAudioORvideo ==
+                //                                 null
+                //                             ? '0' + ' AED'
+                //                             : serviceController
+                //                                     .onlineAudioORvideo! +
+                //                                 " AED",
+                //                         style: TextStyle(
+                //                           color: mainColor,
+                //                           fontFamily: 'Poppins',
+                //                           fontSize: 16,
+                //                           fontWeight: FontWeight.w600,
+                //                         ),
+                //                       )
+                //                     : AutoSizeTextField(
+                //                         controller: serviceController
+                //                             .onlineAudiovideoController,
+                //                         fullwidth: false,
+                //                         keyboardType: TextInputType.number,
+                //                         maxLength: 10,
+                //                         style: TextStyle(fontSize: 18),
+                //                         minWidth:
+                //                             MediaQuery.of(context).size.width *
+                //                                 0.3,
+                //                         decoration: InputDecoration(
+                //                           suffixIcon: InkWell(
+                //                             onTap: () {
+                //                               serviceController
+                //                                   .EditOnlineAudioORvideoPrice();
+                //                             },
+                //                             child: Padding(
+                //                               padding: const EdgeInsets.only(
+                //                                   bottom: 8.0),
+                //                               child: Icon(Icons.check,
+                //                                   color: mainColor, size: 18),
+                //                             ),
+                //                           ),
+                //                         ),
+                //                       ),
+                //               ],
+                //             ),
+                //           ),
+                //         ],
+                //       )
+                //     : Container(),
                 SizedBox(
                   height: 23,
                 ),
@@ -444,7 +444,16 @@ class _ServiceScreenState extends State<ServiceScreen> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                    )
+                    ),
+                    Text(
+                      '  (Rate Per 30 minutes)',
+                      style: TextStyle(
+                        color: hintColor,
+                        fontFamily: 'Poppins',
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
                   ],
                 ),
                 SizedBox(
@@ -610,6 +619,20 @@ class _ServiceScreenState extends State<ServiceScreen> {
                         height: 20,
                       )
                     : Container(),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Row(
+                    children: [
+                      Text(
+                        '(' +
+                            "Gulf Standard Time United Arab Emirates Time".tr +
+                            ')',
+                        style: TextStyle(
+                            fontSize: 10, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
                 Schedule(
                     day: 'Monday',
                     startTime: mainController.vendor!.service == null

@@ -149,51 +149,52 @@ class _MainScreenState extends State<MainScreen> {
                     },
                     imgicon: 'assets/images/sale.svg',
                   ),
+                  SizedBox(height: 50),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(top: 30),
+                  //   child: ToggleSwitch(
+                  //     cornerRadius: 20,
+                  //     inactiveBgColor: Colors.white,
+                  //     borderWidth: 9,
+                  //     radiusStyle: true,
+                  //     fontSize: 15,
+                  //     minWidth: 130,
+                  //     minHeight: 40,
+                  //     changeOnTap: true,
+                  //     activeBgColor: [mainColor],
+                  //     activeBorders: [
+                  //       Border.all(
+                  //         color: mainColor,
+                  //         width: 3.0,
+                  //       ),
+                  //       Border.all(
+                  //         color: mainColor,
+                  //         width: 3.0,
+                  //       ),
+                  //     ],
+                  //     initialLabelIndex: mainController.i,
+                  //     totalSwitches: 2,
+                  //     labels: ['Online', 'Offline'],
+                  //     onToggle: (index) async {
+                  //       if (index == mainController.i) {
+                  //       } else {
+                  //         mainController.notoggle(mainController.i);
+                  //         var i = await updateStatus(context);
+                  //         print(i);
+                  //         i == true ? mainController.toggleonline(index) : null;
+                  //         print(index);
+                  //         setState(() {});
+                  //       }
+                  //     },
+                  //     customIcons: [
+                  //       Icon(Icons.radio_button_on_outlined,
+                  //           color: Colors.green, size: 12),
+                  //       Icon(Icons.radio_button_on_outlined, size: 12),
+                  //     ],
+                  //   ),
+                  // ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 30),
-                    child: ToggleSwitch(
-                      cornerRadius: 20,
-                      inactiveBgColor: Colors.white,
-                      borderWidth: 9,
-                      radiusStyle: true,
-                      fontSize: 15,
-                      minWidth: 130,
-                      minHeight: 40,
-                      changeOnTap: true,
-                      activeBgColor: [mainColor],
-                      activeBorders: [
-                        Border.all(
-                          color: mainColor,
-                          width: 3.0,
-                        ),
-                        Border.all(
-                          color: mainColor,
-                          width: 3.0,
-                        ),
-                      ],
-                      initialLabelIndex: mainController.i,
-                      totalSwitches: 2,
-                      labels: ['Online', 'Offline'],
-                      onToggle: (index) async {
-                        if (index == mainController.i) {
-                        } else {
-                          mainController.notoggle(mainController.i);
-                          var i = await updateStatus(context);
-                          print(i);
-                          i == true ? mainController.toggleonline(index) : null;
-                          print(index);
-                          setState(() {});
-                        }
-                      },
-                      customIcons: [
-                        Icon(Icons.radio_button_on_outlined,
-                            color: Colors.green, size: 12),
-                        Icon(Icons.radio_button_on_outlined, size: 12),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.only(top: 20,bottom: 20),
                     child: InkWell(
                       onTap: () async {
                         logout(context);
