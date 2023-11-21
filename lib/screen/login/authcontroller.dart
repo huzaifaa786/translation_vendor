@@ -124,6 +124,10 @@ class AuthController extends GetxController {
     selectedLanguage = null;
   }
 
+  // deleteLang() {
+   
+  // }
+
 //////////////////////////  Register Functions   ///////////////////////////////////
 
   void SignUp(void Function(bool) callback) async {

@@ -27,10 +27,12 @@ class LanguageAdd extends StatelessWidget {
       this.type = TextInputType.text,
       this.fontSize = 14.0,
       this.width = 0.98,
-      this.onpressed})
+      this.onpressed,
+      this.ondeltap})
       : super(key: key);
 
   final controller;
+  final ondeltap;
   final validator;
   final RxBool? validate;
   final labelText;
@@ -54,7 +56,6 @@ class LanguageAdd extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-  
         Stack(
           children: [
             Padding(
@@ -62,9 +63,8 @@ class LanguageAdd extends StatelessWidget {
               child: Container(
                 height: 60,
                 // width: MediaQuery.of(context).size.width * 10,
-                
+
                 decoration: BoxDecoration(
-                  
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.all(
                     Radius.circular(12),
@@ -75,7 +75,7 @@ class LanguageAdd extends StatelessWidget {
                   children: [
                     Container(
                         padding: const EdgeInsets.all(8),
-                        width: MediaQuery.of(context).size.width * .7,    
+                        width: MediaQuery.of(context).size.width * .6,
                         child: Text(
                           text,
                           maxLines: 2,
@@ -86,20 +86,39 @@ class LanguageAdd extends StatelessWidget {
                               fontSize: 12,
                               color: Colors.black),
                         )),
-                    InkWell(
-                      onTap: onpressed,
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: SvgPicture.asset(
-                            imageIcon,
-                            height: 29,
-                            width: 29,
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: ondeltap,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              // padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(45),border: Border.all(color: Colors.red,width: 2)),
+                              child: Icon(
+                                Icons.remove,
+                                size: 23,
+                                color: Colors.red,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
+                        InkWell(
+                          onTap: onpressed,
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: SvgPicture.asset(
+                                imageIcon,
+                                height: 29,
+                                width: 29,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),

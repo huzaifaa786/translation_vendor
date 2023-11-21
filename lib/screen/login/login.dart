@@ -270,6 +270,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                     print(showCreate);
                                   });
                                 },
+                                ondeltap: () {
+                                  if (authController.languege!.isNotEmpty) {
+                                    authController.languege!.removeLast();
+                                    setState(() {});
+                                  }
+                                },
                               )),
                           showCreate == true
                               ? DropdownField(
