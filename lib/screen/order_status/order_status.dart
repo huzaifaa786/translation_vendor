@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:translation_vendor/helper/loading.dart';
 import 'package:translation_vendor/models/order.dart';
 import 'package:translation_vendor/screen/history/historycontroller.dart';
+import 'package:translation_vendor/screen/history/inperson_metting_loaction.dart';
 import 'package:translation_vendor/screen/order_status/statuscontroller.dart';
 import 'package:translation_vendor/static/button.dart';
 import 'package:translation_vendor/static/statustitle.dart';
@@ -284,7 +286,165 @@ class _OrderStatusState extends State<OrderStatus> {
                                       )
                           ],
                         )
-                      : Container(),
+                      : service == 'In person meeting'
+                          ? Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 12),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Location',
+                                        style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 14),
+                                      ),
+                                      InkWell(
+                                        onTap: () async {
+                                          var i = await serviceController
+                                              .getlocation();
+                                          if (i != null) {
+                                            Get.to(() =>
+                                                InPersonMeetingLocationScreen(
+                                                  latitude: double.parse(widget
+                                                      .order!.lat
+                                                      .toString()),
+                                                  longitude: double.parse(widget
+                                                      .order!.lng
+                                                      .toString()),
+                                                ));
+                                            // serviceController.clearServiceScreen();
+                                            // Get.to(() => ServiceScreen());
+                                          } else {
+                                            Get.snackbar(
+                                                "Please Enable Location Permissions To Proceed",
+                                                '',
+                                                snackPosition:
+                                                    SnackPosition.BOTTOM,
+                                                backgroundColor: Colors.red,
+                                                colorText: Colors.white);
+                                            LoadingHelper.dismiss();
+                                          }
+                                        },
+                                        child: Text(
+                                          "Show Location",
+                                          style: TextStyle(
+                                              color: mainColor,
+                                              decoration:
+                                                  TextDecoration.underline,
+                                              fontSize: 14),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                // Padding(
+                                //   padding: const EdgeInsets.only(top: 12),
+                                //   child: Row(
+                                //     mainAxisAlignment:
+                                //         MainAxisAlignment.spaceBetween,
+                                //     children: [
+                                      // Row(
+                                      //   children: [
+                                      //     Container(
+                                      //       padding: EdgeInsets.all(8),
+                                      //       decoration: BoxDecoration(
+                                      //         color: mainColor.withOpacity(0.1),
+                                      //         borderRadius: BorderRadius.all(
+                                      //           Radius.circular(45),
+                                      //         ),
+                                      //       ),
+                                      //       child: SvgPicture.asset(
+                                      //         'assets/images/page.svg',
+                                      //         color: mainColor,
+                                      //         height: 12,
+                                      //         width: 12,
+                                      //       ),
+                                      //     ),
+                                      //     Padding(
+                                      //       padding:
+                                      //           const EdgeInsets.only(left: 5),
+                                      //       child: Text(
+                                      //         'Document',
+                                      //         style: TextStyle(
+                                      //             color: Colors.black,
+                                      //             fontSize: 14),
+                                      //       ),
+                                      //     ),
+                                      //   ],
+                                      // ),
+                                      // InkWell(
+                                      //   onTap: () async {
+                                      //     var i = await serviceController
+                                      //         .getlocation();
+                                      //     if (i != null) {
+                                      //       Get.to(() =>
+                                      //           InPersonMeetingLocationScreen(
+                                      //             latitude: double.parse(widget
+                                      //                 .order!.lat
+                                      //                 .toString()),
+                                      //             longitude: double.parse(widget
+                                      //                 .order!.lng
+                                      //                 .toString()),
+                                      //           ));
+                                      //       // serviceController.clearServiceScreen();
+                                      //       // Get.to(() => ServiceScreen());
+                                      //     } else {
+                                      //       Get.snackbar(
+                                      //           "Please Enable Location Permissions To Proceed",
+                                      //           '',
+                                      //           snackPosition:
+                                      //               SnackPosition.BOTTOM,
+                                      //           backgroundColor: Colors.red,
+                                      //           colorText: Colors.white);
+                                      //       LoadingHelper.dismiss();
+                                      //     }
+                                      //   },
+                                      //   child: Text(
+                                      //     "Show Location",
+                                      //     style: TextStyle(
+                                      //         color: mainColor,
+                                      //         decoration:
+                                      //             TextDecoration.underline,
+                                      //         fontSize: 14),
+                                      //   ),
+                                      // ),
+                                //     ],
+                                //   ),
+                                // ),
+                                widget.order!.status! == "0"
+                                    ? Container()
+                                    : widget.order!.status! == "2"
+                                        ? Container()
+                                        : Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 8.0),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Message',
+                                                      style: TextStyle(
+                                                          fontFamily: 'Poppins',
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 14),
+                                                    ),
+                                                    Text(widget.order!.document!
+                                                        .discription!),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                              ],
+                            )
+                          : Container(),
                   widget.order!.status! == "0"
                       ? Padding(
                           padding: const EdgeInsets.only(top: 40),

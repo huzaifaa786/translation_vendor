@@ -14,6 +14,8 @@ class Order {
   String? servicetype;
   String? scheduletype;
   String? status;
+  String? lat;
+  String? lng;
   DateTime? created_at;
   User? user;
   Vendor? vendor;
@@ -28,6 +30,8 @@ class Order {
     starttime = order['starttime'];
     endtime = order['endtime'];
     date = order['date'];
+    lat = order['latitude'] ?? '0';
+    lng = order['longitude'] ?? '0';
     status = order['status'];
     vendor_id = order['vendor_id'];
     user_id = order['user_id'];
