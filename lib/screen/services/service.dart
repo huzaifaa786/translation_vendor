@@ -317,6 +317,9 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                         minWidth:
                                             MediaQuery.of(context).size.width *
                                                 0.3,
+                                        onSubmitted: (value) {
+                                          serviceController.EditurgentPrice();
+                                        },
                                         decoration: InputDecoration(
                                           suffixIcon: InkWell(
                                             onTap: () {
@@ -393,6 +396,9 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                         minWidth:
                                             MediaQuery.of(context).size.width *
                                                 0.3,
+                                        onSubmitted: (value) {
+                                          serviceController.EditUnurgentPrice();
+                                        },
                                         decoration: InputDecoration(
                                           suffixIcon: InkWell(
                                             onTap: () {
@@ -498,6 +504,9 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                     keyboardType: TextInputType.number,
                                     maxLength: 10,
                                     style: TextStyle(fontSize: 18),
+                                    onSubmitted: (value) {
+                                      serviceController.EditaudioORvideoPrice();
+                                    },
                                     minWidth:
                                         MediaQuery.of(context).size.width * 0.3,
                                     decoration: InputDecoration(
@@ -565,6 +574,9 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                     style: TextStyle(fontSize: 18),
                                     minWidth:
                                         MediaQuery.of(context).size.width * 0.3,
+                                    onSubmitted: (value) {
+                                      serviceController.EditInPersonPrice();
+                                    },
                                     decoration: InputDecoration(
                                       suffixIcon: InkWell(
                                         onTap: () {

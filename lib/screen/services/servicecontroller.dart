@@ -138,73 +138,72 @@ class ServiceController extends GetxController {
   void addservice() async {
     LoadingHelper.show();
     if (iAudioOrVideo && !isInperson && !isDocument) {
-      if (onlineAudioORvideo != null) {
-        if (audioORvideo != null) {
-          if (workingHours.length != 0) {
-            List<Map<String, dynamic>> jsonList =
-                workingHours.map((wh) => wh.toJson()).toList();
-            String workinghours = jsonEncode(jsonList);
-            List<Map<String, dynamic>> jsonList1 =
-                urgentdocument.map((wh) => wh.toJson()).toList();
-            String urgent = jsonEncode(jsonList1);
-            List<Map<String, dynamic>> jsonList2 =
-                unurgentdocument.map((wh) => wh.toJson()).toList();
-            String unurgent = jsonEncode(jsonList2);
-            var url = BASE_URL + 'service/store';
-            GetStorage box = GetStorage();
-            String id = box.read('vender_id');
-            String? api_token = box.read('api_token');
-            print('object**********************************');
-            print(iAudioOrVideo);
-            var data = {
-              'vendor_id': id,
-              'api_token': api_token,
-              'schedual': workinghours,
-              'urgent': urgent,
-              'unurgent': unurgent,
-              'inperson': InPersonPrice,
-              'audiovideo': audioORvideo,
-              'onlineaudiovideo': onlineAudioORvideo,
-              'urgentprice': urgentPrice,
-              'unurgentprice': UnurgentPrice,
-              // 'latitude': chnagePoint!.latitude.toString(),
-              // 'longitude': chnagePoint!.longitude.toString(),
-              // 'radius': radius.toString(),
-              'isInperson': isInperson,
-              'isAudioVideo': iAudioOrVideo,
-              'isdocument': isDocument
-            };
-            var response = await Api.execute(url: url, data: data);
-            print(response);
-            LoadingHelper.dismiss();
-            Get.snackbar(
-                'Successfully.', 'Service has been added successfully.',
-                colorText: Colors.white,
-                backgroundColor: Colors.green,
-                snackPosition: SnackPosition.BOTTOM);
-            Get.to(() => MainScreen());
-            return response;
-          } else {
-            LoadingHelper.dismiss();
-            Get.snackbar('Error!', 'Working hours not defined.',
-                colorText: Colors.white,
-                backgroundColor: Colors.red,
-                snackPosition: SnackPosition.BOTTOM);
-          }
+      // if (onlineAudioORvideo != null) {
+      if (audioORvideo != null) {
+        if (workingHours.length != 0) {
+          List<Map<String, dynamic>> jsonList =
+              workingHours.map((wh) => wh.toJson()).toList();
+          String workinghours = jsonEncode(jsonList);
+          List<Map<String, dynamic>> jsonList1 =
+              urgentdocument.map((wh) => wh.toJson()).toList();
+          String urgent = jsonEncode(jsonList1);
+          List<Map<String, dynamic>> jsonList2 =
+              unurgentdocument.map((wh) => wh.toJson()).toList();
+          String unurgent = jsonEncode(jsonList2);
+          var url = BASE_URL + 'service/store';
+          GetStorage box = GetStorage();
+          String id = box.read('vender_id');
+          String? api_token = box.read('api_token');
+          print('object**********************************');
+          print(iAudioOrVideo);
+          var data = {
+            'vendor_id': id,
+            'api_token': api_token,
+            'schedual': workinghours,
+            'urgent': urgent,
+            'unurgent': unurgent,
+            'inperson': InPersonPrice,
+            'audiovideo': audioORvideo,
+            'onlineaudiovideo': onlineAudioORvideo,
+            'urgentprice': urgentPrice,
+            'unurgentprice': UnurgentPrice,
+            // 'latitude': chnagePoint!.latitude.toString(),
+            // 'longitude': chnagePoint!.longitude.toString(),
+            // 'radius': radius.toString(),
+            'isInperson': isInperson,
+            'isAudioVideo': iAudioOrVideo,
+            'isdocument': isDocument
+          };
+          var response = await Api.execute(url: url, data: data);
+          print(response);
+          LoadingHelper.dismiss();
+          Get.snackbar('Successfully.', 'Service has been added successfully.',
+              colorText: Colors.white,
+              backgroundColor: Colors.green,
+              snackPosition: SnackPosition.BOTTOM);
+          Get.to(() => MainScreen());
+          return response;
         } else {
           LoadingHelper.dismiss();
-          Get.snackbar('Error!', 'Audio/Video price is not defined.',
+          Get.snackbar('Error!', 'Working hours not defined.',
               colorText: Colors.white,
               backgroundColor: Colors.red,
               snackPosition: SnackPosition.BOTTOM);
         }
       } else {
         LoadingHelper.dismiss();
-        Get.snackbar('Error!', 'Online Audio/Video price is not defined.',
+        Get.snackbar('Error!', 'Audio/Video price is not defined.',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             snackPosition: SnackPosition.BOTTOM);
       }
+      // } else {
+      //   LoadingHelper.dismiss();
+      //   Get.snackbar('Error!', 'Online Audio/Video price is not defined.',
+      //       colorText: Colors.white,
+      //       backgroundColor: Colors.red,
+      //       snackPosition: SnackPosition.BOTTOM);
+      // }
     } else if (!iAudioOrVideo && isInperson && !isDocument) {
       if (chnagePoint != null) {
         if (radius != null) {
@@ -366,10 +365,102 @@ class ServiceController extends GetxController {
     } else if (iAudioOrVideo && isInperson && !isDocument) {
       if (chnagePoint != null) {
         if (radius != null) {
-          if (onlineAudioORvideo != null) {
-            if (audioORvideo != null) {
-              if (InPersonPrice != null) {
-                if (workingHours.length != 0) {
+          // if (onlineAudioORvideo != null) {
+          if (audioORvideo != null) {
+            if (InPersonPrice != null) {
+              if (workingHours.length != 0) {
+                List<Map<String, dynamic>> jsonList =
+                    workingHours.map((wh) => wh.toJson()).toList();
+                String workinghours = jsonEncode(jsonList);
+                List<Map<String, dynamic>> jsonList1 =
+                    urgentdocument.map((wh) => wh.toJson()).toList();
+                String urgent = jsonEncode(jsonList1);
+                List<Map<String, dynamic>> jsonList2 =
+                    unurgentdocument.map((wh) => wh.toJson()).toList();
+                String unurgent = jsonEncode(jsonList2);
+                var url = BASE_URL + 'service/store';
+                GetStorage box = GetStorage();
+                String id = box.read('vender_id');
+                String? api_token = box.read('api_token');
+                var data = {
+                  'vendor_id': id,
+                  'api_token': api_token,
+                  'schedual': workinghours,
+                  'urgent': urgent,
+                  'unurgent': unurgent,
+                  'inperson': InPersonPrice,
+                  'audiovideo': audioORvideo,
+                  'onlineaudiovideo': onlineAudioORvideo,
+                  'urgentprice': urgentPrice,
+                  'unurgentprice': UnurgentPrice,
+                  'latitude': chnagePoint!.latitude.toString(),
+                  'longitude': chnagePoint!.longitude.toString(),
+                  'radius': radius.toString(),
+                  'isInperson': isInperson,
+                  'isAudioVideo': iAudioOrVideo,
+                  'isdocument': isDocument
+                };
+                var response = await Api.execute(url: url, data: data);
+                print(response);
+                LoadingHelper.dismiss();
+                Get.snackbar(
+                    'Successfully.', 'Service has been added successfully.',
+                    colorText: Colors.white,
+                    backgroundColor: Colors.green,
+                    snackPosition: SnackPosition.BOTTOM);
+                Get.to(() => MainScreen());
+                return response;
+              } else {
+                LoadingHelper.dismiss();
+                Get.snackbar('Error!', 'Working hours not defined.',
+                    colorText: Colors.white,
+                    backgroundColor: Colors.red,
+                    snackPosition: SnackPosition.BOTTOM);
+              }
+            } else {
+              LoadingHelper.dismiss();
+              Get.snackbar('Error!', 'Inperson price is not defined.',
+                  colorText: Colors.white,
+                  backgroundColor: Colors.red,
+                  snackPosition: SnackPosition.BOTTOM);
+            }
+          } else {
+            LoadingHelper.dismiss();
+            Get.snackbar('Error!', 'Audio/Video price is not defined.',
+                colorText: Colors.white,
+                backgroundColor: Colors.red,
+                snackPosition: SnackPosition.BOTTOM);
+          }
+          // } else {
+          //   LoadingHelper.dismiss();
+          //   Get.snackbar('Error!', 'Online Audio/Video price is not defined.',
+          //       colorText: Colors.white,
+          //       backgroundColor: Colors.red,
+          //       snackPosition: SnackPosition.BOTTOM);
+          // }
+        } else {
+          LoadingHelper.dismiss();
+          Get.snackbar(
+              'Error!', 'Select Location And save before procede next.',
+              colorText: Colors.white,
+              backgroundColor: Colors.red,
+              snackPosition: SnackPosition.BOTTOM);
+        }
+      } else {
+        LoadingHelper.dismiss();
+        Get.snackbar('Error!', 'Select Location And save before procede next.',
+            colorText: Colors.white,
+            backgroundColor: Colors.red,
+            snackPosition: SnackPosition.BOTTOM);
+      }
+    } else if (iAudioOrVideo && !isInperson && isDocument) {
+      // if (onlineAudioORvideo != null) {
+      if (audioORvideo != null) {
+        if (workingHours.length != 0) {
+          if (urgentdocument.length != 0) {
+            if (unurgentdocument.length != 0) {
+              if (urgentPrice != null) {
+                if (UnurgentPrice != null) {
                   List<Map<String, dynamic>> jsonList =
                       workingHours.map((wh) => wh.toJson()).toList();
                   String workinghours = jsonEncode(jsonList);
@@ -394,9 +485,9 @@ class ServiceController extends GetxController {
                     'onlineaudiovideo': onlineAudioORvideo,
                     'urgentprice': urgentPrice,
                     'unurgentprice': UnurgentPrice,
-                    'latitude': chnagePoint!.latitude.toString(),
-                    'longitude': chnagePoint!.longitude.toString(),
-                    'radius': radius.toString(),
+                    // 'latitude': chnagePoint!.latitude.toString(),
+                    // 'longitude': chnagePoint!.longitude.toString(),
+                    // 'radius': radius.toString(),
                     'isInperson': isInperson,
                     'isAudioVideo': iAudioOrVideo,
                     'isdocument': isDocument
@@ -413,32 +504,156 @@ class ServiceController extends GetxController {
                   return response;
                 } else {
                   LoadingHelper.dismiss();
-                  Get.snackbar('Error!', 'Working hours not defined.',
+                  Get.snackbar(
+                      'Error!', 'Unurgent Per page price is not defined.',
                       colorText: Colors.white,
                       backgroundColor: Colors.red,
                       snackPosition: SnackPosition.BOTTOM);
                 }
               } else {
                 LoadingHelper.dismiss();
-                Get.snackbar('Error!', 'Inperson price is not defined.',
+                Get.snackbar('Error!', 'urgetnt Per page price is not defined.',
                     colorText: Colors.white,
                     backgroundColor: Colors.red,
                     snackPosition: SnackPosition.BOTTOM);
               }
             } else {
               LoadingHelper.dismiss();
-              Get.snackbar('Error!', 'Audio/Video price is not defined.',
+              Get.snackbar('Error!', 'Unurgent document data is missing.',
                   colorText: Colors.white,
                   backgroundColor: Colors.red,
                   snackPosition: SnackPosition.BOTTOM);
             }
           } else {
             LoadingHelper.dismiss();
-            Get.snackbar('Error!', 'Online Audio/Video price is not defined.',
+            Get.snackbar('Error!', 'Urgent document data is missing.',
                 colorText: Colors.white,
                 backgroundColor: Colors.red,
                 snackPosition: SnackPosition.BOTTOM);
           }
+        } else {
+          LoadingHelper.dismiss();
+          Get.snackbar('Error!', 'Working hours not defined.',
+              colorText: Colors.white,
+              backgroundColor: Colors.red,
+              snackPosition: SnackPosition.BOTTOM);
+        }
+      } else {
+        LoadingHelper.dismiss();
+        Get.snackbar('Error!', 'Audio/Video price is not defined.',
+            colorText: Colors.white,
+            backgroundColor: Colors.red,
+            snackPosition: SnackPosition.BOTTOM);
+      }
+      // } else {
+      //   LoadingHelper.dismiss();
+      //   Get.snackbar('Error!', 'Online Audio/Video price is not defined.',
+      //       colorText: Colors.white,
+      //       backgroundColor: Colors.red,
+      //       snackPosition: SnackPosition.BOTTOM);
+      // }
+    } else if (!iAudioOrVideo && isInperson && isDocument) {
+      if (chnagePoint != null) {
+        if (radius != null) {
+          // if (onlineAudioORvideo != null) {
+          if (InPersonPrice != null) {
+            if (workingHours.length != 0) {
+              if (urgentdocument.length != 0) {
+                if (unurgentdocument.length != 0) {
+                  if (urgentPrice != null) {
+                    if (UnurgentPrice != null) {
+                      List<Map<String, dynamic>> jsonList =
+                          workingHours.map((wh) => wh.toJson()).toList();
+                      String workinghours = jsonEncode(jsonList);
+                      List<Map<String, dynamic>> jsonList1 =
+                          urgentdocument.map((wh) => wh.toJson()).toList();
+                      String urgent = jsonEncode(jsonList1);
+                      List<Map<String, dynamic>> jsonList2 =
+                          unurgentdocument.map((wh) => wh.toJson()).toList();
+                      String unurgent = jsonEncode(jsonList2);
+                      var url = BASE_URL + 'service/store';
+                      GetStorage box = GetStorage();
+                      String id = box.read('vender_id');
+                      String? api_token = box.read('api_token');
+                      var data = {
+                        'vendor_id': id,
+                        'api_token': api_token,
+                        'schedual': workinghours,
+                        'urgent': urgent,
+                        'unurgent': unurgent,
+                        'inperson': InPersonPrice,
+                        'audiovideo': audioORvideo,
+                        'onlineaudiovideo': onlineAudioORvideo,
+                        'urgentprice': urgentPrice,
+                        'unurgentprice': UnurgentPrice,
+                        'latitude': chnagePoint!.latitude.toString(),
+                        'longitude': chnagePoint!.longitude.toString(),
+                        'radius': radius.toString(),
+                        'isInperson': isInperson,
+                        'isAudioVideo': iAudioOrVideo,
+                        'isdocument': isDocument
+                      };
+                      var response = await Api.execute(url: url, data: data);
+                      print(response);
+                      LoadingHelper.dismiss();
+                      Get.snackbar('Successfully.',
+                          'Service has been added successfully.',
+                          colorText: Colors.white,
+                          backgroundColor: Colors.green,
+                          snackPosition: SnackPosition.BOTTOM);
+                      Get.to(() => MainScreen());
+                      return response;
+                    } else {
+                      LoadingHelper.dismiss();
+                      Get.snackbar(
+                          'Error!', 'Unurgent Per page price is not defined.',
+                          colorText: Colors.white,
+                          backgroundColor: Colors.red,
+                          snackPosition: SnackPosition.BOTTOM);
+                    }
+                  } else {
+                    LoadingHelper.dismiss();
+                    Get.snackbar(
+                        'Error!', 'urgetnt Per page price is not defined.',
+                        colorText: Colors.white,
+                        backgroundColor: Colors.red,
+                        snackPosition: SnackPosition.BOTTOM);
+                  }
+                } else {
+                  LoadingHelper.dismiss();
+                  Get.snackbar('Error!', 'Unurgent document data is missing.',
+                      colorText: Colors.white,
+                      backgroundColor: Colors.red,
+                      snackPosition: SnackPosition.BOTTOM);
+                }
+              } else {
+                LoadingHelper.dismiss();
+                Get.snackbar('Error!', 'Urgent document data is missing.',
+                    colorText: Colors.white,
+                    backgroundColor: Colors.red,
+                    snackPosition: SnackPosition.BOTTOM);
+              }
+            } else {
+              LoadingHelper.dismiss();
+              Get.snackbar('Error!', 'Working hours not defined.',
+                  colorText: Colors.white,
+                  backgroundColor: Colors.red,
+                  snackPosition: SnackPosition.BOTTOM);
+            }
+          } else {
+            LoadingHelper.dismiss();
+            Get.snackbar('Error!', 'Inperson price is not defined.',
+                colorText: Colors.white,
+                backgroundColor: Colors.red,
+                snackPosition: SnackPosition.BOTTOM);
+          }
+          // } else {
+          //   LoadingHelper.dismiss();
+          //   Get.snackbar('Error!', 'Online Audio/Video price is not defined.',
+          //       colorText: Colors.white,
+          //       backgroundColor: Colors.red,
+          //       snackPosition: SnackPosition.BOTTOM);
+          // }
         } else {
           LoadingHelper.dismiss();
           Get.snackbar(
@@ -454,110 +669,11 @@ class ServiceController extends GetxController {
             backgroundColor: Colors.red,
             snackPosition: SnackPosition.BOTTOM);
       }
-    } else if (iAudioOrVideo && !isInperson && isDocument) {
-      if (onlineAudioORvideo != null) {
-        if (audioORvideo != null) {
-          if (workingHours.length != 0) {
-            if (urgentdocument.length != 0) {
-              if (unurgentdocument.length != 0) {
-                if (urgentPrice != null) {
-                  if (UnurgentPrice != null) {
-                    List<Map<String, dynamic>> jsonList =
-                        workingHours.map((wh) => wh.toJson()).toList();
-                    String workinghours = jsonEncode(jsonList);
-                    List<Map<String, dynamic>> jsonList1 =
-                        urgentdocument.map((wh) => wh.toJson()).toList();
-                    String urgent = jsonEncode(jsonList1);
-                    List<Map<String, dynamic>> jsonList2 =
-                        unurgentdocument.map((wh) => wh.toJson()).toList();
-                    String unurgent = jsonEncode(jsonList2);
-                    var url = BASE_URL + 'service/store';
-                    GetStorage box = GetStorage();
-                    String id = box.read('vender_id');
-                    String? api_token = box.read('api_token');
-                    var data = {
-                      'vendor_id': id,
-                      'api_token': api_token,
-                      'schedual': workinghours,
-                      'urgent': urgent,
-                      'unurgent': unurgent,
-                      'inperson': InPersonPrice,
-                      'audiovideo': audioORvideo,
-                      'onlineaudiovideo': onlineAudioORvideo,
-                      'urgentprice': urgentPrice,
-                      'unurgentprice': UnurgentPrice,
-                      // 'latitude': chnagePoint!.latitude.toString(),
-                      // 'longitude': chnagePoint!.longitude.toString(),
-                      // 'radius': radius.toString(),
-                      'isInperson': isInperson,
-                      'isAudioVideo': iAudioOrVideo,
-                      'isdocument': isDocument
-                    };
-                    var response = await Api.execute(url: url, data: data);
-                    print(response);
-                    LoadingHelper.dismiss();
-                    Get.snackbar(
-                        'Successfully.', 'Service has been added successfully.',
-                        colorText: Colors.white,
-                        backgroundColor: Colors.green,
-                        snackPosition: SnackPosition.BOTTOM);
-                    Get.to(() => MainScreen());
-                    return response;
-                  } else {
-                    LoadingHelper.dismiss();
-                    Get.snackbar(
-                        'Error!', 'Unurgent Per page price is not defined.',
-                        colorText: Colors.white,
-                        backgroundColor: Colors.red,
-                        snackPosition: SnackPosition.BOTTOM);
-                  }
-                } else {
-                  LoadingHelper.dismiss();
-                  Get.snackbar(
-                      'Error!', 'urgetnt Per page price is not defined.',
-                      colorText: Colors.white,
-                      backgroundColor: Colors.red,
-                      snackPosition: SnackPosition.BOTTOM);
-                }
-              } else {
-                LoadingHelper.dismiss();
-                Get.snackbar('Error!', 'Unurgent document data is missing.',
-                    colorText: Colors.white,
-                    backgroundColor: Colors.red,
-                    snackPosition: SnackPosition.BOTTOM);
-              }
-            } else {
-              LoadingHelper.dismiss();
-              Get.snackbar('Error!', 'Urgent document data is missing.',
-                  colorText: Colors.white,
-                  backgroundColor: Colors.red,
-                  snackPosition: SnackPosition.BOTTOM);
-            }
-          } else {
-            LoadingHelper.dismiss();
-            Get.snackbar('Error!', 'Working hours not defined.',
-                colorText: Colors.white,
-                backgroundColor: Colors.red,
-                snackPosition: SnackPosition.BOTTOM);
-          }
-        } else {
-          LoadingHelper.dismiss();
-          Get.snackbar('Error!', 'Audio/Video price is not defined.',
-              colorText: Colors.white,
-              backgroundColor: Colors.red,
-              snackPosition: SnackPosition.BOTTOM);
-        }
-      } else {
-        LoadingHelper.dismiss();
-        Get.snackbar('Error!', 'Online Audio/Video price is not defined.',
-            colorText: Colors.white,
-            backgroundColor: Colors.red,
-            snackPosition: SnackPosition.BOTTOM);
-      }
-    } else if (!iAudioOrVideo && isInperson && isDocument) {
+    } else if (iAudioOrVideo && isInperson && isDocument) {
       if (chnagePoint != null) {
         if (radius != null) {
-          if (onlineAudioORvideo != null) {
+          // if (onlineAudioORvideo != null) {
+          if (audioORvideo != null) {
             if (InPersonPrice != null) {
               if (workingHours.length != 0) {
                 if (urgentdocument.length != 0) {
@@ -651,140 +767,18 @@ class ServiceController extends GetxController {
             }
           } else {
             LoadingHelper.dismiss();
-            Get.snackbar('Error!', 'Online Audio/Video price is not defined.',
+            Get.snackbar('Error!', 'Audio/Video price is not defined.',
                 colorText: Colors.white,
                 backgroundColor: Colors.red,
                 snackPosition: SnackPosition.BOTTOM);
           }
-        } else {
-          LoadingHelper.dismiss();
-          Get.snackbar(
-              'Error!', 'Select Location And save before procede next.',
-              colorText: Colors.white,
-              backgroundColor: Colors.red,
-              snackPosition: SnackPosition.BOTTOM);
-        }
-      } else {
-        LoadingHelper.dismiss();
-        Get.snackbar('Error!', 'Select Location And save before procede next.',
-            colorText: Colors.white,
-            backgroundColor: Colors.red,
-            snackPosition: SnackPosition.BOTTOM);
-      }
-    } else if (iAudioOrVideo && isInperson && isDocument) {
-      if (chnagePoint != null) {
-        if (radius != null) {
-          if (onlineAudioORvideo != null) {
-            if (audioORvideo != null) {
-              if (InPersonPrice != null) {
-                if (workingHours.length != 0) {
-                  if (urgentdocument.length != 0) {
-                    if (unurgentdocument.length != 0) {
-                      if (urgentPrice != null) {
-                        if (UnurgentPrice != null) {
-                          List<Map<String, dynamic>> jsonList =
-                              workingHours.map((wh) => wh.toJson()).toList();
-                          String workinghours = jsonEncode(jsonList);
-                          List<Map<String, dynamic>> jsonList1 =
-                              urgentdocument.map((wh) => wh.toJson()).toList();
-                          String urgent = jsonEncode(jsonList1);
-                          List<Map<String, dynamic>> jsonList2 =
-                              unurgentdocument
-                                  .map((wh) => wh.toJson())
-                                  .toList();
-                          String unurgent = jsonEncode(jsonList2);
-                          var url = BASE_URL + 'service/store';
-                          GetStorage box = GetStorage();
-                          String id = box.read('vender_id');
-                          String? api_token = box.read('api_token');
-                          var data = {
-                            'vendor_id': id,
-                            'api_token': api_token,
-                            'schedual': workinghours,
-                            'urgent': urgent,
-                            'unurgent': unurgent,
-                            'inperson': InPersonPrice,
-                            'audiovideo': audioORvideo,
-                            'onlineaudiovideo': onlineAudioORvideo,
-                            'urgentprice': urgentPrice,
-                            'unurgentprice': UnurgentPrice,
-                            'latitude': chnagePoint!.latitude.toString(),
-                            'longitude': chnagePoint!.longitude.toString(),
-                            'radius': radius.toString(),
-                            'isInperson': isInperson,
-                            'isAudioVideo': iAudioOrVideo,
-                            'isdocument': isDocument
-                          };
-                          var response =
-                              await Api.execute(url: url, data: data);
-                          print(response);
-                          LoadingHelper.dismiss();
-                          Get.snackbar('Successfully.',
-                              'Service has been added successfully.',
-                              colorText: Colors.white,
-                              backgroundColor: Colors.green,
-                              snackPosition: SnackPosition.BOTTOM);
-                          Get.to(() => MainScreen());
-                          return response;
-                        } else {
-                          LoadingHelper.dismiss();
-                          Get.snackbar('Error!',
-                              'Unurgent Per page price is not defined.',
-                              colorText: Colors.white,
-                              backgroundColor: Colors.red,
-                              snackPosition: SnackPosition.BOTTOM);
-                        }
-                      } else {
-                        LoadingHelper.dismiss();
-                        Get.snackbar(
-                            'Error!', 'urgetnt Per page price is not defined.',
-                            colorText: Colors.white,
-                            backgroundColor: Colors.red,
-                            snackPosition: SnackPosition.BOTTOM);
-                      }
-                    } else {
-                      LoadingHelper.dismiss();
-                      Get.snackbar(
-                          'Error!', 'Unurgent document data is missing.',
-                          colorText: Colors.white,
-                          backgroundColor: Colors.red,
-                          snackPosition: SnackPosition.BOTTOM);
-                    }
-                  } else {
-                    LoadingHelper.dismiss();
-                    Get.snackbar('Error!', 'Urgent document data is missing.',
-                        colorText: Colors.white,
-                        backgroundColor: Colors.red,
-                        snackPosition: SnackPosition.BOTTOM);
-                  }
-                } else {
-                  LoadingHelper.dismiss();
-                  Get.snackbar('Error!', 'Working hours not defined.',
-                      colorText: Colors.white,
-                      backgroundColor: Colors.red,
-                      snackPosition: SnackPosition.BOTTOM);
-                }
-              } else {
-                LoadingHelper.dismiss();
-                Get.snackbar('Error!', 'Inperson price is not defined.',
-                    colorText: Colors.white,
-                    backgroundColor: Colors.red,
-                    snackPosition: SnackPosition.BOTTOM);
-              }
-            } else {
-              LoadingHelper.dismiss();
-              Get.snackbar('Error!', 'Audio/Video price is not defined.',
-                  colorText: Colors.white,
-                  backgroundColor: Colors.red,
-                  snackPosition: SnackPosition.BOTTOM);
-            }
-          } else {
-            LoadingHelper.dismiss();
-            Get.snackbar('Error!', 'Online Audio/Video price is not defined.',
-                colorText: Colors.white,
-                backgroundColor: Colors.red,
-                snackPosition: SnackPosition.BOTTOM);
-          }
+          // } else {
+          //   LoadingHelper.dismiss();
+          //   Get.snackbar('Error!', 'Online Audio/Video price is not defined.',
+          //       colorText: Colors.white,
+          //       backgroundColor: Colors.red,
+          //       snackPosition: SnackPosition.BOTTOM);
+          // }
         } else {
           LoadingHelper.dismiss();
           Get.snackbar(

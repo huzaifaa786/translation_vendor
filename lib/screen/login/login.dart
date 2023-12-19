@@ -241,7 +241,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             padding: const EdgeInsets.only(top: 15),
                             child: Certificateinput(
                               controller: authController.certificateName,
-                              labelText: 'Certificate (Optional)',
+                              labelText: 'Certificate',
                               hint: 'Enter certificate name',
                               onpressed: () {
                                 authController.selectCertificateImage();
