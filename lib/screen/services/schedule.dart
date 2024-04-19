@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -10,7 +12,8 @@ import 'package:translation_vendor/values/colors.dart';
 import 'package:translation_vendor/values/controllers.dart';
 
 class Schedule extends StatefulWidget {
- Schedule({super.key, this.day, this.startTime = '09:00',this.endTime = '17:00'});
+  Schedule(
+      {super.key, this.day, this.startTime = '09:00', this.endTime = '17:00'});
   final String? day;
   String? startTime;
   String? endTime;
@@ -21,8 +24,8 @@ class Schedule extends StatefulWidget {
 
 class _ScheduleState extends State<Schedule> {
   void initState() {
-    WorkingHour workingHour =
-        WorkingHour(day: widget.day!, startTime:widget.startTime, endTime: widget.endTime);
+    WorkingHour workingHour = WorkingHour(
+        day: widget.day!, startTime: widget.startTime, endTime: widget.endTime);
     int index = serviceController.workingHours
         .indexWhere((hour) => hour.day == widget.day!);
     if (index != 0) {}
@@ -52,11 +55,60 @@ class _ScheduleState extends State<Schedule> {
               widget.day! + ' Working Hours',
               style: TextStyle(
                 fontFamily: 'Poppins',
-                fontSize: 16,
+                fontSize: 12,
                 fontWeight: FontWeight.w500,
               ),
             ),
           ],
+        ),
+        Gap(12),
+        Padding(
+          padding: const EdgeInsets.only(
+            left: 9,
+            right: 56,
+            bottom: 0.2,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  SvgPicture.asset(
+                    "assets/images/hourglass.svg",
+                    color: greenish,
+                    height: 13,
+                    width: 13,
+                  ),
+                  Text(
+                    "Start Time ",
+                    style: TextStyle(
+                        color: greenish,
+                        fontFamily: "Poppins",
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  SvgPicture.asset(
+                    "assets/images/hourglass.svg",
+                    color: greenish,
+                    height: 11,
+                    width: 11,
+                  ),
+                  Text(
+                    "End Time",
+                    style: TextStyle(
+                        color: greenish,
+                        fontFamily: "Poppins",
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,19 +123,23 @@ class _ScheduleState extends State<Schedule> {
                   widget.startTime = time.toString();
                   int index = serviceController.workingHours
                       .indexWhere((hour) => hour.day == widget.day!);
-                  serviceController.workingHours[index].startTime = widget.startTime;
+                  serviceController.workingHours[index].startTime =
+                      widget.startTime;
                 }, currentTime: DateTime.now());
               },
               hint: '9:00',
               controller: startTimeController,
               fontSize: 18.0,
             ),
-            Text(
-              'To',
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: Text(
+                'To',
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
             Scheduleinput(
@@ -97,7 +153,8 @@ class _ScheduleState extends State<Schedule> {
 
                   int index = serviceController.workingHours
                       .indexWhere((hour) => hour.day == widget.day!);
-                  serviceController.workingHours[index].endTime = widget.endTime;
+                  serviceController.workingHours[index].endTime =
+                      widget.endTime;
                 }, currentTime: DateTime.now());
               },
               hint: '17:00',
@@ -157,12 +214,18 @@ class _ScheduleState extends State<Schedule> {
         serviceController.workingHours
                 .any((hour) => hour.day == widget.day! && hour.isFrozen)
             ? Padding(
-                padding: const EdgeInsets.only(bottom: 12),
-                child: Text('This day is frozen'),
+                padding: const EdgeInsets.only(bottom: 12, top: 10),
+                child: Text(
+                  'This day is frozen',
+                  textAlign: TextAlign.center,
+                ),
               )
             : Padding(
-                padding: const EdgeInsets.only(bottom: 12),
-                child: Text('This day is unfrozen'),
+                padding: const EdgeInsets.only(bottom: 12, top: 10),
+                child: Text(
+                  'This day is unfrozen',
+                  textAlign: TextAlign.center,
+                ),
               ),
       ],
     );

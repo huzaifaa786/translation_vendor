@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation_vendor/models/documentlist.dart';
@@ -139,7 +140,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                           fontWeight: FontWeight.w400),
                     ),
                     Container(
-                      // padding: EdgeInsets.all(5.0),
+                      padding: EdgeInsets.only(left: 12, right: 12),
                       margin: EdgeInsets.only(
                         top: 26,
                         left: 10,
@@ -558,16 +559,26 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                   },
                                   child: Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Text(
-                                        'Audio/Video',
-                                        style: TextStyle(
-                                          color: hintColor,
-                                          fontFamily: 'Mazzard',
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500,
-                                        ),
+                                      Row(
+                                        children: [
+                                          Image.asset(
+                                            "assets/images/audio-vedio.png",
+                                            // height: 15,
+                                            // width: 15,
+                                            color: greenish,
+                                          ),
+                                          Text(
+                                            'Audio/Video Meeting',
+                                            style: TextStyle(
+                                              color: hintColor,
+                                              fontFamily: 'Mazzard',
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                       serviceController
                                                   .showaudioORvideoPriceField ==
@@ -582,7 +593,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                               style: TextStyle(
                                                 color: mainColor,
                                                 fontFamily: 'Mazzard',
-                                                fontSize: 20,
+                                                fontSize: 12,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             )
@@ -636,16 +647,27 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                   },
                                   child: Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Text(
-                                        'In Person',
-                                        style: TextStyle(
-                                          color: hintColor,
-                                          fontFamily: 'Mazzard',
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500,
-                                        ),
+                                      Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                            "assets/images/meeting.svg",
+                                            color: greenish,
+                                            height: 26,
+                                            width: 26,
+                                          ),
+                                          Gap(5),
+                                          Text(
+                                            'In Person',
+                                            style: TextStyle(
+                                              color: hintColor,
+                                              fontFamily: 'Mazzard',
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                       serviceController
                                                   .showInPersonPriceField ==
@@ -660,7 +682,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                               style: TextStyle(
                                                 color: mainColor,
                                                 fontFamily: 'Mazzard',
-                                                fontSize: 20,
+                                                fontSize: 12,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             )
@@ -707,19 +729,17 @@ class _ServiceScreenState extends State<ServiceScreen> {
                           serviceController.isInperson != false
                               ? Column(children: [
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      SvgPicture.asset(
-                                          'assets/images/location.svg'),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 6.0),
-                                        child: Text(
-                                          ' Determine range of service',
-                                          style: TextStyle(
-                                            fontFamily: 'Poppins',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                      // SvgPicture.asset(
+                                      //     'assets/images/location.svg'),
+                                      Text(
+                                        ' Determine range of service',
+                                        style: TextStyle(
+                                          color: greenish,
+                                          fontFamily: 'Poppins',
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
                                         ),
                                       )
                                     ],
@@ -742,12 +762,30 @@ class _ServiceScreenState extends State<ServiceScreen> {
                               : Container(),
                           Padding(
                             padding: const EdgeInsets.only(bottom: 10),
-                            child: Row(
+                            child: Column(
                               children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      "assets/images/alarm-on.svg",
+                                      color: greenish,
+                                      height: 20,
+                                      width: 20,
+                                    ),
+                                    Text(
+                                      " Working Hours".tr,
+                                      style: TextStyle(
+                                        color: greenish,
+                                        fontWeight: FontWeight.bold,
+                                        // fontSize: 10,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                                 Text(
                                   '(' +
-                                      "Gulf Standard Time United Arab Emirates Time"
-                                          .tr +
+                                      "United Arab Emirates Time Zone".tr +
                                       ')',
                                   style: TextStyle(
                                       fontSize: 10,
@@ -827,13 +865,20 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                   : mainController
                                       .vendor!.service!.schedule![6].endTime),
                           Padding(
-                            padding: const EdgeInsets.only(top: 20, bottom: 20),
-                            child: LargeButton(
-                                title: 'Submit',
-                                textcolor: White,
-                                onPressed: () {
-                                  serviceController.addservice();
-                                }),
+                            padding: const EdgeInsets.only(
+                              top: 20,
+                              bottom: 20,
+                            ),
+                            child: SizedBox(
+                              height: 50,
+                              width: 110,
+                              child: LargeButton(
+                                  title: 'Submit',
+                                  textcolor: White,
+                                  onPressed: () {
+                                    serviceController.addservice();
+                                  }),
+                            ),
                           )
                         ],
                       ),

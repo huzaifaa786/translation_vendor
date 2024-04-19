@@ -45,35 +45,58 @@ class Scheduleinput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 12),
+      padding: const EdgeInsets.only(top: 0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           SizedBox(
-            height: 60,
-            width: MediaQuery.of(context).size.width * 0.3,
+            height: MediaQuery.of(context).size.width * 0.2 / 2.3,
+            width: MediaQuery.of(context).size.width * 0.3 / 1.3,
             child: TextFormField(
+              textAlign: TextAlign.center,
               readOnly: true,
-              onTap: onpressed,
+              // onTap: onpressed,
               enabled: enabled,
+
               obscureText: obscure,
               controller: controller,
-              style: TextStyle(fontSize: fontSize, color: mainColor),
+              style: TextStyle(fontSize: fontSize, color: White),
               keyboardType: type,
               validator: validator,
               decoration: InputDecoration(
+                suffix: InkWell(
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 0),
+                    child: Container(
+                      padding: EdgeInsets.only(
+                        right: 10,
+                      ),
+                      child: SvgPicture.asset(
+                        "assets/images/chevron-down.svg",
+                        height: 20,
+                        width: 20,
+                        color: White,
+                      ),
+                    ),
+                  ),
+                  onTap: onpressed,
+                ),
+                suffixIconColor: White,
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: greenish,
                 hintText: hint,
-                contentPadding: const EdgeInsets.only(left: 12.0, right: 12,top: 12,bottom:16 ),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 2.0, horizontal: 2.0),
+                // contentPadding: const EdgeInsets.only(
+                //     left: 12.0, right: 12, top: 12, bottom: 16),
                 hintStyle: TextStyle(color: hintColor),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 1, color: Colors.grey[500]!),
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  borderSide: BorderSide(color: greenish),
+                  borderRadius: BorderRadius.all(Radius.circular(70)),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 1, color: Colors.grey[500]!),
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  borderSide: BorderSide(color: greenish),
+                  borderRadius: BorderRadius.all(Radius.circular(70)),
                 ),
               ),
               cursorColor: Colors.black,
