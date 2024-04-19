@@ -73,120 +73,161 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: Colors.white,
       body: SafeArea(
           child: GetBuilder<AuthController>(
-        builder: (controller) => Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 40),
-                  child: Row(
+        builder: (controller) => SingleChildScrollView(
+          child: Stack(
+            children: [
+              Container(
+                height: Get.height * 0.5 / 2,
+                width: Get.width,
+                decoration: BoxDecoration(
+                  gradient: greenishgradient,
+                ),
+              ),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/images/logo.svg',
+                          height: MediaQuery.of(context).size.height * 0.14,
+                          width: 110,
+                          color: White,
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 250, 250, 250),
+                        borderRadius: BorderRadius.only(
+                            // topRight: Radius.circular(30),
+                            // topLeft: Radius.circular(30),
+                            )),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(40),
+                              ),
+                            ),
+                            child: Text(
+                              'WELCOME',
+                              style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w500,
+                                  color: greenish),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SvgPicture.asset(
-                        'assets/images/logo.svg',
-                        height: MediaQuery.of(context).size.height * 0.14,
-                        width: 110,
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: Text(
-                    'Vendor',
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(300),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey.withOpacity(0.2),
-                                spreadRadius: 5,
-                                blurRadius: 7,
-                                offset: const Offset(0, 3))
-                          ],
-                        ),
-                        child: ToggleSwitch(
-                          initialLabelIndex: index,
-                          labels: const [
-                            'New',
-                            'Existing',
-                          ],
-                          totalSwitches: 2,
-                          onToggle: (index) {
-                            getindex(index);
-                          },
-                          borderWidth: 1,
-                          radiusStyle: true,
-                          fontSize: 15,
-                          minWidth: 110,
-                          minHeight: MediaQuery.of(context).size.height * 0.06,
-                          cornerRadius: 40,
-                          inactiveFgColor: const Color.fromARGB(255, 9, 9, 9),
-                          activeFgColor:
-                              const Color.fromARGB(255, 255, 255, 255),
-                          inactiveBgColor:
-                              const Color.fromARGB(255, 255, 255, 255),
-                          activeBgColor: const [mainColor],
-                          activeBorders: [
-                            Border.all(
-                              color: White,
-                              width: 3.5,
-                            ),
-                            Border.all(
-                              color: White,
-                              width: 3.5,
-                            ),
-                          ],
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(300),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey.withOpacity(0.2),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: const Offset(0, 3))
+                            ],
+                          ),
+                          child: ToggleSwitch(
+                            initialLabelIndex: index,
+                            labels: const [
+                              'New',
+                              'Existing',
+                            ],
+                            totalSwitches: 2,
+                            onToggle: (index) {
+                              getindex(index);
+                            },
+                            borderWidth: 1,
+                            radiusStyle: true,
+                            fontSize: 15,
+                            minWidth: 110,
+                            minHeight:
+                                MediaQuery.of(context).size.height * 0.06,
+                            cornerRadius: 40,
+                            inactiveFgColor: const Color.fromARGB(255, 9, 9, 9),
+                            activeFgColor:
+                                const Color.fromARGB(255, 255, 255, 255),
+                            inactiveBgColor:
+                                const Color.fromARGB(255, 255, 255, 255),
+                            activeBgColor: const [greenish],
+                            activeBorders: [
+                              Border.all(
+                                color: White,
+                                width: 3.5,
+                              ),
+                              Border.all(
+                                color: White,
+                                width: 3.5,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                index == 0
-                    ? Padding(
-                        padding: const EdgeInsets.only(top: 13.0, bottom: 13),
-                        child: Column(children: [
-                          Stackinput(
-                            controller: authController.vendorName,
-                            labelText: 'Vendor Name',
-                            hint: '',
-                            validate: authController.validateSignUpForm,
-                            validator: (field) =>
-                                Validators.emptyStringValidator(
-                                    field, '*Vendor name '),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 18, left: 4, bottom: 8),
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Date Of Birth',
-                                  style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 13,
-                                      color: Colors.black),
-                                ),
-                              ],
+                    ],
+                  ),
+                  index == 0
+                      ? Padding(
+                          padding: const EdgeInsets.only(
+                              top: 13.0, bottom: 13, left: 20, right: 20),
+                          child: Column(children: [
+                            Image.asset(
+                              "assets/images/Male User (1).png",
                             ),
-                          ),
-                          DropdownDatePicker(
-                            inputDecoration: InputDecoration(
+                            Stackinput(
+                              icon: "assets/images/Male User (1).png",
+                              controller: authController.vendorName,
+                              labelText: 'Vendor Name',
+                              hint: '',
+                              validate: authController.validateSignUpForm,
+                              validator: (field) =>
+                                  Validators.emptyStringValidator(
+                                      field, '*Vendor name '),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 18, left: 4, bottom: 8),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Date Of Birth',
+                                    style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 13,
+                                        color: Colors.black),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            DropdownDatePicker(
+                              inputDecoration: InputDecoration(
+                                // label: Text(
+                                //   'Date Of Birth',
+                                //   style: TextStyle(
+                                //       fontFamily: 'Montserrat',
+                                //       fontWeight: FontWeight.w600,
+                                //       fontSize: 13,
+                                //       color: Colors.black),
+                                // ),
+
                                 contentPadding: EdgeInsets.only(
                                     left: 2, right: 2, top: 16, bottom: 16),
                                 enabledBorder: const OutlineInputBorder(
@@ -198,270 +239,289 @@ class _LoginScreenState extends State<LoginScreen> {
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.grey),
                                   borderRadius: BorderRadius.circular(10),
-                                )),
-                            isDropdownHideUnderline: true,
-                            isFormValidator: true,
-                            startYear: startYear,
-                            endYear: endYear,
-                            width: 10,
-                            onChangedDay: (value) =>
-                                authController.day = value!,
-                            onChangedMonth: (value) =>
-                                authController.month = value!,
-                            onChangedYear: (value) =>
-                                authController.year = value!,
-                            dayFlex: 2,
-                            textStyle: TextStyle(fontSize: 12),
-                            hintTextStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 15),
-                            child: Imageinput(
-                              labelText: ' Passport ',
-                              imageIcon: 'assets/images/image.svg',
-                              text: authController.passportImage!.name,
-                              onpressed: () {
-                                authController.selectPassportImage();
-                              },
+                                ),
+                                // labelText: "Date Of Birth",
+                                // labelStyle: TextStyle(
+                                //     fontFamily: 'Montserrat',
+                                //     fontWeight: FontWeight.w600,
+                                //     fontSize: 13,
+                                //     color: Colors.black),
+                              ),
+                              isDropdownHideUnderline: true,
+                              isFormValidator: true,
+                              startYear: startYear,
+                              endYear: endYear,
+                              width: 10,
+                              onChangedDay: (value) =>
+                                  authController.day = value!,
+                              onChangedMonth: (value) =>
+                                  authController.month = value!,
+                              onChangedYear: (value) =>
+                                  authController.year = value!,
+                              dayFlex: 2,
+                              textStyle: TextStyle(fontSize: 12),
+                              hintTextStyle:
+                                  TextStyle(color: Colors.grey, fontSize: 12),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 15),
-                            child: Imageinput(
-                              labelText: ' CV ',
-                              imageIcon: 'assets/images/image.svg',
-                              text: authController.CVImage!.name,
-                              onpressed: () {
-                                authController.selectCVImage();
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 15),
-                            child: Certificateinput(
-                              controller: authController.certificateName,
-                              labelText: 'Certificate',
-                              hint: 'Enter certificate name',
-                              onpressed: () {
-                                authController.selectCertificateImage();
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Text(
-                              'select atleast 2 languages',
-                              style: TextStyle(color: Colors.red),
-                            ),
-                          ),
-                          Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: LanguageAdd(
-                                labelText: ' Language',
-                                text: authController.languege!.join(',  '),
-                                validate: authController.validateSignUpForm,
-                                validator: (language) =>
-                                    Validators.languageValidator(language),
-                                imageIcon: 'assets/images/add.svg',
+                            Padding(
+                              padding: const EdgeInsets.only(top: 15),
+                              child: Imageinput(
+                                labelText: ' Passport ',
+                                imageIcon: 'assets/images/passport.svg',
+                                simageIcon: 'assets/images/upload.svg',
+                                text: authController.passportImage!.name,
                                 onpressed: () {
-                                  setState(() {
-                                    showCreate = !showCreate;
-                                    print(showCreate);
-                                  });
+                                  authController.selectPassportImage();
                                 },
-                                ondeltap: () {
-                                  if (authController.languege!.isNotEmpty) {
-                                    authController.languege!.removeLast();
-                                    setState(() {});
-                                  }
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 15),
+                              child: Imageinput(
+                                labelText: ' CV ',
+                                imageIcon: 'assets/images/cv.svg',
+                                simageIcon: 'assets/images/upload.svg',
+                                text: authController.CVImage!.name,
+                                onpressed: () {
+                                  authController.selectCVImage();
                                 },
-                              )),
-                          showCreate == true
-                              ? DropdownField(
-                                  items: Languages(),
-                                  text: 'Add Language',
-                                  selectedvalue:
-                                      authController.selectedLanguage,
-                                  icon: ImageIcon(AssetImage(
-                                      'assets/images/drop_arrow.png')),
-                                  onChange: switchfromlang)
-                              //  InputFields(
-                              //     hint: 'Add language',
-                              //     controller: authController.languageController,
-                              //     showSuffix: true,
-                              //     suffix: 'ADD',
-                              //     onpressed: () {
-                              //       if (authController
-                              //           .languageController.text.isNotEmpty) {
-                              //         authController.storeLanguageList();
-                              //       }
-                              //     },
-                              //   )
-                              : Container(),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 25.0),
-                            child: IconInputFields(
-                              imageIcon: 'assets/images/email.svg',
-                              controller: authController.userName,
-                              hint: 'Username',
-                              width: 12,
-                              borderColor: Colors.black,
-                              imageColor: Colors.black,
-                              validate: authController.validateSignUpForm,
-                              validator: (field) =>
-                                  Validators.emptyStringValidator(
-                                      field, '*userame'),
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 12.0),
-                            child: IconInputFields(
-                              imageIcon: 'assets/images/emailIcon.svg',
-                              controller: authController.email,
-                              hint: 'Email',
-                              width: 12,
-                              borderColor: Colors.black,
-                              imageColor: Colors.black,
-                              validate: authController.validateSignUpForm,
-                              validator: (field) =>
-                                  Validators.emailValidator(field),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 15),
+                              child: Certificateinput(
+                                controller: authController.certificateName,
+                                labelText: 'Certificate',
+                                hint: 'Enter certificate name',
+                                onpressed: () {
+                                  authController.selectCertificateImage();
+                                },
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 12.0),
-                            child: IconInputFields(
-                              imageIcon: 'assets/images/email.svg',
-                              controller: authController.phone,
-                              hint: 'Phone',
-                              width: 12,
-                              borderColor: Colors.black,
-                              imageColor: Colors.black,
-                              validate: authController.validateSignUpForm,
-                              validator: (field) =>
-                                  Validators.emptyStringValidator(
-                                      field, '*phone'),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: Text(
+                                'select atleast 2 languages',
+                                style: TextStyle(color: Colors.red),
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 12.0),
-                            child: InputFieldPassword(
-                              controller: authController.password,
-                              imageIcon: 'assets/images/password.svg',
-                              hint: 'Password',
-                              borderColor: Colors.black,
-                              imageColor: Colors.black,
-                              toggle: _toggle,
-                              obscure: _obscureText,
-                              validate: authController.validateSignUpForm,
-                              validator: (password) =>
-                                  Validators.passwordValidator(password),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 12.0),
-                            child: InputFieldPassword(
-                              controller: authController.confirmPassword,
-                              imageIcon: 'assets/images/password.svg',
-                              hint: 'Confirm Password',
-                              borderColor: Colors.black,
-                              imageColor: Colors.black,
-                              toggle: _toggle1,
-                              obscure: _obscureText1,
-                              validate: authController.validateSignUpForm,
-                              validator: (password) =>
-                                  Validators.passwordValidator(password),
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(top: 25.0, bottom: 30),
-                            child: LargeButton(
-                              title: 'Submit',
-                              textcolor: White,
-                              onPressed: () {
-                                setState(() {});
-                                authController.SignUp((success) async {
-                                  if (success) {
-                                    // await
-                                    vendorrequest(context);
-                                  }
-                                });
-                              },
-                            ),
-                          ),
-                        ]),
-                      )
-                    : Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 40.0),
-                            child: IconInputFields(
-                              imageIcon: 'assets/images/emailIcon.svg',
-                              hint: 'Email',
-                              controller: authController.email,
-                              validate: authController.validateSignInForm,
-                              validator: (field) =>
-                                  Validators.emailValidator(field),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 12.0),
-                            child: InputFieldPassword(
-                              imageIcon: 'assets/images/password.svg',
-                              hint: 'Password',
-                              toggle: _toggle,
-                              obscure: _obscureText,
-                              controller: authController.password,
-                              // validate: authController.validateSignInForm,
-                              // validator: (password) =>
-                              //     Validators.passwordValidator(password),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 12, bottom: 16),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    Get.to(() => ForgotScreen());
+                            Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: LanguageAdd(
+                                  svgimage: "assets/images/earth.svg",
+                                  labelText: ' Language',
+                                  text: authController.languege!.join(',  '),
+                                  validate: authController.validateSignUpForm,
+                                  validator: (language) =>
+                                      Validators.languageValidator(language),
+                                  imageIcon: 'assets/images/add.svg',
+                                  onpressed: () {
+                                    setState(() {
+                                      showCreate = !showCreate;
+                                      print(showCreate);
+                                    });
                                   },
-                                  child: Text(
-                                    "Forgot Password?",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.black54,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                )
-                              ],
+                                  ondeltap: () {
+                                    if (authController.languege!.isNotEmpty) {
+                                      authController.languege!.removeLast();
+                                      setState(() {});
+                                    }
+                                  },
+                                )),
+                            showCreate == true
+                                ? DropdownField(
+                                    items: Languages(),
+                                    text: 'Add Language',
+                                    selectedvalue:
+                                        authController.selectedLanguage,
+                                    icon: ImageIcon(AssetImage(
+                                        'assets/images/drop_arrow.png')),
+                                    onChange: switchfromlang)
+                                //  InputFields(
+                                //     hint: 'Add language',
+                                //     controller: authController.languageController,
+                                //     showSuffix: true,
+                                //     suffix: 'ADD',
+                                //     onpressed: () {
+                                //       if (authController
+                                //           .languageController.text.isNotEmpty) {
+                                //         authController.storeLanguageList();
+                                //       }
+                                //     },
+                                //   )
+                                : Container(),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 25.0,
+                              ),
+                              child: IconInputFields(
+                                imageIcon: 'assets/images/userprofile.svg',
+                                controller: authController.userName,
+                                hint: 'Username',
+                                width: 12,
+                                borderColor: Colors.black,
+                                imageColor: Colors.black,
+                                validate: authController.validateSignUpForm,
+                                validator: (field) =>
+                                    Validators.emptyStringValidator(
+                                        field, '*userame'),
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(top: 25.0, bottom: 30),
-                            child: LargeButton(
-                              title: 'Login',
-                              textcolor: White,
-                              onPressed: () {
-                                setState(() {
-                                  showCreate = false;
-                                  print(showCreate);
-                                });
-                                authController.login((success) {
-                                  if (success) {
-                                    authController.ClearSignupVariables();
-                                    Get.offAll(MainScreen());
-                                  }
-                                });
-                              },
+                            Padding(
+                              padding: const EdgeInsets.only(top: 12.0),
+                              child: IconInputFields(
+                                imageIcon: 'assets/images/emailicon.svg',
+                                controller: authController.email,
+                                hint: 'Email',
+                                width: 12,
+                                borderColor: Colors.black,
+                                imageColor: Colors.black,
+                                validate: authController.validateSignUpForm,
+                                validator: (field) =>
+                                    Validators.emailValidator(field),
+                              ),
                             ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 12.0),
+                              child: IconInputFields(
+                                imageIcon: 'assets/images/phone (2).svg',
+                                controller: authController.phone,
+                                hint: 'Phone',
+                                width: 12,
+                                borderColor: Colors.black,
+                                imageColor: Colors.black,
+                                validate: authController.validateSignUpForm,
+                                validator: (field) =>
+                                    Validators.emptyStringValidator(
+                                        field, '*phone'),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 12.0),
+                              child: InputFieldPassword(
+                                controller: authController.password,
+                                imageIcon: 'assets/images/lock (2).svg',
+                                hint: 'Password',
+                                borderColor: Colors.black,
+                                imageColor: Colors.black,
+                                toggle: _toggle,
+                                obscure: _obscureText,
+                                validate: authController.validateSignUpForm,
+                                validator: (password) =>
+                                    Validators.passwordValidator(password),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 12.0),
+                              child: InputFieldPassword(
+                                controller: authController.confirmPassword,
+                                imageIcon: 'assets/images/lock (2).svg',
+                                hint: 'Confirm Password',
+                                borderColor: Colors.black,
+                                imageColor: Colors.black,
+                                toggle: _toggle1,
+                                obscure: _obscureText1,
+                                validate: authController.validateSignUpForm,
+                                validator: (password) =>
+                                    Validators.passwordValidator(password),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 26.0, bottom: 33, left: 60, right: 60),
+                              child: SizedBox(
+                                child: LargeButton(
+                                  rounded: 60,
+                                  title: 'Submit',
+                                  textcolor: White,
+                                  onPressed: () {
+                                    setState(() {});
+                                    authController.SignUp((success) async {
+                                      if (success) {
+                                        // await
+                                        vendorrequest(context);
+                                      }
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ]),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 40.0),
+                                child: IconInputFields(
+                                  imageIcon: 'assets/images/emailicon.svg',
+                                  hint: 'Email',
+                                  controller: authController.email,
+                                  validate: authController.validateSignInForm,
+                                  validator: (field) =>
+                                      Validators.emailValidator(field),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 12.0),
+                                child: InputFieldPassword(
+                                  imageIcon: 'assets/images/lock (2).svg',
+                                  hint: 'Password',
+                                  toggle: _toggle,
+                                  obscure: _obscureText,
+                                  controller: authController.password,
+                                  // validate: authController.validateSignInForm,
+                                  // validator: (password) =>
+                                  //     Validators.passwordValidator(password),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 12, bottom: 16),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        Get.to(() => ForgotScreen());
+                                      },
+                                      child: Text(
+                                        "Forgot Password?",
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.black54,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 25.0, bottom: 30),
+                                child: LargeButton(
+                                  title: 'Login',
+                                  textcolor: White,
+                                  onPressed: () {
+                                    setState(() {
+                                      showCreate = false;
+                                      print(showCreate);
+                                    });
+                                    authController.login((success) {
+                                      if (success) {
+                                        authController.ClearSignupVariables();
+                                        Get.offAll(MainScreen());
+                                      }
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      )
-              ],
-            ),
+                        )
+                ],
+              ),
+            ],
           ),
         ),
       )),

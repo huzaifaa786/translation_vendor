@@ -55,20 +55,33 @@ class Stackinput extends StatelessWidget {
             child: TextFormField(
               controller: controller,
               validator: validator,
-      autovalidateMode: autovalidateMode ??
-          (validate == true.obs
-              ? AutovalidateMode.always
-              : AutovalidateMode.onUserInteraction),
+              autovalidateMode: autovalidateMode ??
+                  (validate == true.obs
+                      ? AutovalidateMode.always
+                      : AutovalidateMode.onUserInteraction),
               decoration: InputDecoration(
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Image.asset(
+                    icon,
+                    width: 40,
+                    height: 40,
+                  ),
+                ),
                 fillColor: Colors.grey,
                 floatingLabelBehavior: FloatingLabelBehavior.always,
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(12),),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 contentPadding: EdgeInsets.only(left: 20, top: 20, bottom: 20),
                 hoverColor: Colors.grey,
                 focusColor: Colors.grey,
                 labelText: labelText,
-                labelStyle: TextStyle(fontFamily: 'Montserrat',fontWeight: FontWeight.w600,fontSize: 14,color: Colors.black),
+                labelStyle: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                    color: Colors.black),
                 hintText: hint,
               ),
             )),

@@ -64,6 +64,12 @@ class Certificateinput extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     fontSize: 14,
                     color: Colors.black),
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SvgPicture.asset(
+                    "assets/images/certificate.svg",
+                  ),
+                ),
                 hintText: hint,
                 hintStyle: TextStyle(
                     fontFamily: 'Montserrat',
@@ -74,7 +80,7 @@ class Certificateinput extends StatelessWidget {
                   child: FittedBox(
                     fit: BoxFit.scaleDown,
                     child: SvgPicture.asset(
-                      'assets/images/image.svg',
+                      'assets/images/upload.svg',
                       height: 17,
                       width: 17,
                     ),

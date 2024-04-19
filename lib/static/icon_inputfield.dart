@@ -75,21 +75,18 @@ class IconInputFields extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  border: Border.all(
-                    color: borderColor,
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(30),
-                  ),
-                ),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: SvgPicture.asset(
-                    imageIcon,
-                    height: 17,
-                    width: 17,
-                    color: imageColor,
-                  ),
+                    // border: Border.all(
+                    //   color: borderColor,
+                    // ),
+                    // // borderRadius: BorderRadius.all(
+                    //   Radius.circular(30),
+                    // ),
+                    ),
+                child: SvgPicture.asset(
+                  imageIcon,
+                  height: 17,
+                  width: 17,
+                  color: greenish,
                 ),
               ),
             ),

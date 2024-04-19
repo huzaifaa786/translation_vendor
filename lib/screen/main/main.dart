@@ -53,169 +53,225 @@ class _MainScreenState extends State<MainScreen> {
           child: GetBuilder<ChatController>(
         builder: (chatcontroller) => GetBuilder<MainController>(
           builder: (controller) => Container(
-            padding: const EdgeInsets.only(left: 20, right: 20),
+            // padding: const EdgeInsets.only(left: 20, right: 20),
             height: MediaQuery.of(context).size.height,
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Topbar(),
-                  mainController.vendor != null
-                      ? Padding(
-                          padding: const EdgeInsets.only(top: 30),
-                          child: Row(
+                  Stack(
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            height: Get.height * 0.2,
+                            decoration: BoxDecoration(
+                                color: greenish,
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(14),
+                                    bottomRight: Radius.circular(14))),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Topbar(),
+                                mainController.vendor != null
+                                    ? Padding(
+                                        padding: const EdgeInsets.only(
+                                          top: 0,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.8,
+                                              child: Text(
+                                                'Hello' +
+                                                    ', ' +
+                                                    mainController
+                                                        .vendor!.name!,
+                                                style: TextStyle(
+                                                    fontSize: 30,
+                                                    color: White,
+                                                    fontWeight: FontWeight.w700,
+                                                    fontFamily: 'Poppins'),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    : Padding(
+                                        padding: const EdgeInsets.only(
+                                          top: 0,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              'Hello' + '',
+                                              style: TextStyle(
+                                                  fontSize: 30,
+                                                  color: White,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontFamily: 'Poppins'),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: Get.height,
+                            width: Get.width,
+                            color: White,
+                          ),
+                        ],
+                      ),
+                      Positioned(
+                        top: 110,
+                        right: 18,
+                        left: 18,
+                        child: Container(
+                          height: Get.height * 0.7,
+                          decoration: BoxDecoration(
+                              color: Colors.grey.shade100,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Column(
                             children: [
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.8,
-                                child: Text(
-                                  'Hello' + ', ' + mainController.vendor!.name!,
-                                  style: TextStyle(
-                                      fontSize: 30,
-                                      color: mainColor,
-                                      fontWeight: FontWeight.w700,
-                                      fontFamily: 'Poppins'),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: IconsButton(
+                                  title: 'Profile',
+                                  onPressed: () {
+                                    profileController.clearVariables();
+                                    Get.to(() => Profile());
+                                  },
+                                  imgicon: 'assets/images/userprofile.svg',
                                 ),
                               ),
-                            ],
-                          ),
-                        )
-                      : Padding(
-                          padding: const EdgeInsets.only(top: 30),
-                          child: Row(
-                            children: [
-                              Text(
-                                'Hello' + '',
-                                style: TextStyle(
-                                    fontSize: 30,
-                                    color: mainColor,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: 'Poppins'),
+                              IconsButton(
+                                title: 'Services',
+                                onPressed: () async {
+                                  var i = await serviceController.getlocation();
+                                  if (i != null) {
+                                    serviceController.clearServiceScreen();
+                                    Get.to(() => ServiceScreen());
+                                  } else {
+                                    Get.snackbar(
+                                        "Please Enable Location Permissions To Proceed",
+                                        '',
+                                        snackPosition: SnackPosition.BOTTOM,
+                                        backgroundColor: Colors.red,
+                                        colorText: Colors.white);
+                                    LoadingHelper.dismiss();
+                                  }
+                                },
+                                imgicon: 'assets/images/headphone.svg',
                               ),
+                              IconsButton(
+                                title: 'Order History',
+                                onPressed: () {
+                                  Get.to(() => HistoryScreen());
+                                },
+                                imgicon: 'assets/images/page.svg',
+                              ),
+                              IconsButton(
+                                title: 'Sales',
+                                onPressed: () {
+                                  saleController.clearVariable();
+                                  Get.to(() => SalesScreen(
+                                        id: mainController.vendor!.id
+                                            .toString(),
+                                      ));
+                                },
+                                imgicon: 'assets/images/sale.svg',
+                              ),
+                              ChatButton(
+                                title: 'Chat',
+                                screen: 'Chat',
+                                count: chatController.unseen,
+                                onPressed: () {
+                                  saleController.clearVariable();
+                                  Get.to(() => Chats_screen());
+                                },
+                                imgicon: 'assets/images/chat.svg',
+                              ),
+                              SizedBox(height: 20),
+                              // Padding(
+                              //   padding: const EdgeInsets.only(top: 30),
+                              //   child: ToggleSwitch(
+                              //     cornerRadius: 20,
+                              //     inactiveBgColor: Colors.white,
+                              //     borderWidth: 9,
+                              //     radiusStyle: true,
+                              //     fontSize: 15,
+                              //     minWidth: 130,
+                              //     minHeight: 40,
+                              //     changeOnTap: true,
+                              //     activeBgColor: [mainColor],
+                              //     activeBorders: [
+                              //       Border.all(
+                              //         color: mainColor,
+                              //         width: 3.0,
+                              //       ),
+                              //       Border.all(
+                              //         color: mainColor,
+                              //         width: 3.0,
+                              //       ),
+                              //     ],
+                              //     initialLabelIndex: mainController.i,
+                              //     totalSwitches: 2,
+                              //     labels: ['Online', 'Offline'],
+                              //     onToggle: (index) async {
+                              //       if (index == mainController.i) {
+                              //       } else {
+                              //         mainController.notoggle(mainController.i);
+                              //         var i = await updateStatus(context);
+                              //         print(i);
+                              //         i == true ? mainController.toggleonline(index) : null;
+                              //         print(index);
+                              //         setState(() {});
+                              //       }
+                              //     },
+                              //     customIcons: [
+                              //       Icon(Icons.radio_button_on_outlined,
+                              //           color: Colors.green, size: 12),
+                              //       Icon(Icons.radio_button_on_outlined, size: 12),
+                              //     ],
+                              //   ),
+                              // ),
+                              // Padding(
+                              //   padding:
+                              //       const EdgeInsets.only(top: 20, bottom: 20),
+                              //   child: InkWell(
+                              //     onTap: () async {
+                              //       logout(context);
+                              //     },
+                              //     child: Row(
+                              //       mainAxisAlignment: MainAxisAlignment.center,
+                              //       children: [
+                              //         Text(
+                              //           'Log Out',
+                              //           style: TextStyle(
+                              //             color: Colors.red,
+                              //             fontFamily: 'Poppins',
+                              //             fontSize: 19,
+                              //             fontWeight: FontWeight.w500,
+                              //           ),
+                              //         ),
+                              //         Image(
+                              //             image: AssetImage(
+                              //                 'assets/images/Arrow 1.png')),
+                              //       ],
+                              //     ),
+                              //   ),
+                              // )
                             ],
                           ),
                         ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 15),
-                    child: IconsButton(
-                      title: 'Profile',
-                      onPressed: () {
-                        profileController.clearVariables();
-                        Get.to(() => Profile());
-                      },
-                      imgicon: 'assets/images/person.svg',
-                    ),
-                  ),
-                  IconsButton(
-                    title: 'Services',
-                    onPressed: () async {
-                      var i = await serviceController.getlocation();
-                      if (i != null) {
-                        serviceController.clearServiceScreen();
-                        Get.to(() => ServiceScreen());
-                      } else {
-                        Get.snackbar(
-                            "Please Enable Location Permissions To Proceed", '',
-                            snackPosition: SnackPosition.BOTTOM,
-                            backgroundColor: Colors.red,
-                            colorText: Colors.white);
-                        LoadingHelper.dismiss();
-                      }
-                    },
-                    imgicon: 'assets/images/headphone.svg',
-                  ),
-                  IconsButton(
-                    title: 'Order History',
-                    onPressed: () {
-                      Get.to(() => HistoryScreen());
-                    },
-                    imgicon: 'assets/images/page.svg',
-                  ),
-                  IconsButton(
-                    title: 'Sales',
-                    onPressed: () {
-                      saleController.clearVariable();
-                      Get.to(() => SalesScreen(
-                            id: mainController.vendor!.id.toString(),
-                          ));
-                    },
-                    imgicon: 'assets/images/sale.svg',
-                  ),
-                  ChatButton(
-                    title: 'Chat',
-                    screen: 'Chat',
-                    count: chatController.unseen,
-                    onPressed: () {
-                      saleController.clearVariable();
-                      Get.to(() => Chats_screen());
-                    },
-                    imgicon: 'assets/images/sale.svg',
-                  ),
-                  SizedBox(height: 50),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(top: 30),
-                  //   child: ToggleSwitch(
-                  //     cornerRadius: 20,
-                  //     inactiveBgColor: Colors.white,
-                  //     borderWidth: 9,
-                  //     radiusStyle: true,
-                  //     fontSize: 15,
-                  //     minWidth: 130,
-                  //     minHeight: 40,
-                  //     changeOnTap: true,
-                  //     activeBgColor: [mainColor],
-                  //     activeBorders: [
-                  //       Border.all(
-                  //         color: mainColor,
-                  //         width: 3.0,
-                  //       ),
-                  //       Border.all(
-                  //         color: mainColor,
-                  //         width: 3.0,
-                  //       ),
-                  //     ],
-                  //     initialLabelIndex: mainController.i,
-                  //     totalSwitches: 2,
-                  //     labels: ['Online', 'Offline'],
-                  //     onToggle: (index) async {
-                  //       if (index == mainController.i) {
-                  //       } else {
-                  //         mainController.notoggle(mainController.i);
-                  //         var i = await updateStatus(context);
-                  //         print(i);
-                  //         i == true ? mainController.toggleonline(index) : null;
-                  //         print(index);
-                  //         setState(() {});
-                  //       }
-                  //     },
-                  //     customIcons: [
-                  //       Icon(Icons.radio_button_on_outlined,
-                  //           color: Colors.green, size: 12),
-                  //       Icon(Icons.radio_button_on_outlined, size: 12),
-                  //     ],
-                  //   ),
-                  // ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20,bottom: 20),
-                    child: InkWell(
-                      onTap: () async {
-                        logout(context);
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Log Out',
-                            style: TextStyle(
-                              color: Colors.red,
-                              fontFamily: 'Poppins',
-                              fontSize: 19,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          Image(image: AssetImage('assets/images/Arrow 1.png')),
-                        ],
                       ),
-                    ),
-                  )
+                    ],
+                  ),
                 ],
               ),
             ),

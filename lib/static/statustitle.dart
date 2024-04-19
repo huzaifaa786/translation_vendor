@@ -7,6 +7,7 @@ import 'package:translation_vendor/values/colors.dart';
 class CheckOutTile extends StatelessWidget {
   const CheckOutTile(
       {super.key,
+      this.titleimage,
       this.title,
       this.discription,
       this.scheduletype,
@@ -17,6 +18,7 @@ class CheckOutTile extends StatelessWidget {
   final scheduletype;
   final bool extra;
   final Widget? services;
+  final titleimage;
 
   @override
   Widget build(BuildContext context) {
@@ -24,17 +26,29 @@ class CheckOutTile extends StatelessWidget {
       padding: const EdgeInsets.only(top: 20),
       child: discription != ''
           ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          color: Colors.black),
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          titleimage,
+                          color: greenish,
+                          height: 20,
+                          width: 20,
+                        ),
+                        Text(
+                          title,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                              color: greenish),
+                        ),
+                      ],
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 8),

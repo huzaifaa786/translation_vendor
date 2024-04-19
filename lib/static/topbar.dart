@@ -41,14 +41,11 @@ class _TopbarState extends State<Topbar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 5.0, right: 5, top: 24),
+      padding: const EdgeInsets.only(left: 5.0, right: 5, top: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-              height: 32,
-              width: 30,
-              child: SvgPicture.asset('assets/images/logo.svg')),
+          Container(height: 32, width: 30, child: Text("      ")),
           Row(
             children: [
               Stack(
@@ -59,7 +56,12 @@ class _TopbarState extends State<Topbar> {
                         checkNotifications();
                       });
                     },
-                    child: SvgPicture.asset('assets/images/bell.svg'),
+                    child: SvgPicture.asset(
+                      'assets/images/bell.svg',
+                      color: White,
+                      height: 30,
+                      width: 30,
+                    ),
                   ),
                   checkNoti != false
                       ? Positioned(

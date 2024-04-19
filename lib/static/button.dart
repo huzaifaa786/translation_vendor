@@ -10,10 +10,11 @@ class LargeButton extends StatelessWidget {
       @required this.onPressed,
       this.textcolor,
       this.icon,
-      this.buttonWidth = 0.8,
+      this.height = 0.2 / 2.1,
+      this.buttonWidth = 0.9,
       this.screenRatio = 0.9,
       this.rounded = false,
-      this.color = mainColor})
+      this.color = greenish})
       : super(key: key);
 
   final title;
@@ -24,17 +25,18 @@ class LargeButton extends StatelessWidget {
   final icon;
   final rounded;
   final buttonWidth;
+  final height;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onPressed,
       child: SizedBox(
-        width: MediaQuery.of(context).size.width * screenRatio,
-        height: 60,
         child: Container(
+          width: MediaQuery.of(context).size.width * screenRatio,
+          height: MediaQuery.of(context).size.height * height,
           decoration: BoxDecoration(
-              color: color,
-              borderRadius: BorderRadius.all(Radius.circular(12))),
+              color: color, borderRadius: BorderRadius.circular(50)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

@@ -67,431 +67,537 @@ class _OrderStatusState extends State<OrderStatus> {
       body: SafeArea(
           child: GetBuilder<HistoryController>(
         builder: (controller) => GetBuilder<StatusController>(
-          builder: (controller) => Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  TitleTopbar(
-                    text: 'Order Details',
-                    ontap: () {
-                      Get.back();
-                    },
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30),
-                    child: Text(
-                      'Order ID ' + widget.order!.id!.toString(),
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                      ),
+          builder: (controller) => SingleChildScrollView(
+            child: Column(
+              children: [
+                Stack(
+                  children: [
+                    TitleTopbar(
+                      text: 'Order Details',
+                      ontap: () {
+                        Get.back();
+                      },
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 19),
-                    child: Container(
-                      padding: const EdgeInsets.only(
-                          right: 16, left: 16, bottom: 20),
+                    Container(
+                      margin: EdgeInsets.only(top: 88, left: 20, right: 20),
                       decoration: BoxDecoration(
-                        color: mainColor.withOpacity(0.1),
+                        color: Colors.grey.shade200,
                         borderRadius: BorderRadius.all(Radius.circular(12)),
                       ),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CheckOutTile(
-                                title: 'Name :',
-                                discription: '' + widget.order!.user!.username!,
-                              ),
-                              Text(
-                                widget.order!.price!.toString() + ' AED',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 20,
-                                    color: mainColor),
-                              )
-                            ],
-                          ),
-                          CheckOutTile(
-                            title: 'Type of Service :',
-                            discription: service,
-                          ),
-                          widget.order!.servicetype == 'document'
-                              ? CheckOutTile(
-                                  title: 'Amount of pages: ',
-                                  discription:
-                                      widget.order!.document!.pages == null
-                                          ? ''
-                                          : widget.order!.document!.pages! +
-                                              ' Pages')
-                              : Container(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width * 0.5,
-                                child: CheckOutTile(
-                                  title: 'Date:',
-                                  discription: widget.order!.date,
-                                ),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width * 0.3,
-                                child: CheckOutTile(
-                                  title: 'Time:',
-                                  discription: widget.order!.servicetype! ==
-                                          'instant'
-                                      ? widget.order!.duration.toString() +
-                                          ' min'
-                                      : widget.order!.servicetype == 'document'
-                                          ? docformattedTime
-                                          : sformattedTime! +
-                                              ' - ' +
-                                              eformattedTime!,
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  widget.order!.servicetype! == "document"
-                      ? Column(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 19),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 12),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'Document',
-                                    style: TextStyle(
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 14),
-                                  )
-                                ],
-                              ),
+                            Text(
+                              'Order No. ' + widget.order!.id!.toString(),
+                              style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.w600,
+                                  color: greenish),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 12),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.all(8),
-                                        decoration: BoxDecoration(
-                                          color: mainColor.withOpacity(0.1),
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(45),
+                            Divider(
+                              // thickness: 1,
+                              color: Color.fromARGB(104, 0, 0, 0),
+                              indent: 100,
+                              endIndent: 100,
+                            ),
+                            Container(
+                              padding: const EdgeInsets.only(
+                                  right: 16, left: 16, bottom: 20),
+                              // decoration: BoxDecoration(
+                              //   color: mainColor.withOpacity(0.1),
+                              //   borderRadius: BorderRadius.all(Radius.circular(12)),
+                              // ),
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        CheckOutTile(
+                                          titleimage:
+                                              "assets/images/userprofile.svg",
+                                          title: 'Customer:',
+                                          discription: '' +
+                                              widget.order!.user!.username!,
+                                        ),
+                                      ],
+                                    ),
+
+                                    // Text(
+                                    //   widget.order!.price!.toString() + ' AED',
+                                    //   style: TextStyle(
+                                    //       fontWeight: FontWeight.w700,
+                                    //       fontSize: 20,
+                                    //       color: mainColor),
+                                    // ),
+                                    CheckOutTile(
+                                      titleimage: "assets/images/services.svg",
+                                      title: 'Type of Service :',
+                                      discription: service,
+                                    ),
+                                    CheckOutTile(
+                                      titleimage: "assets/images/money.svg",
+                                      title: 'Amount Paid: ',
+                                      discription: '' +
+                                          widget.order!.price!.toString() +
+                                          ' AED',
+                                    ),
+                                    widget.order!.servicetype == 'document'
+                                        ? Center(
+                                            child: CheckOutTile(
+                                                titleimage:
+                                                    "assets/images/pages.svg",
+                                                title: 'Amount of pages: ',
+                                                discription: widget.order!
+                                                            .document!.pages ==
+                                                        null
+                                                    ? ''
+                                                    : widget.order!.document!
+                                                            .pages! +
+                                                        ' Pages'),
+                                          )
+                                        : Container(),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.5,
+                                          child: CheckOutTile(
+                                            titleimage:
+                                                "assets/images/calendar.svg",
+                                            title: 'Date:',
+                                            discription: widget.order!.date,
                                           ),
                                         ),
-                                        child: SvgPicture.asset(
-                                          'assets/images/page.svg',
-                                          color: mainColor,
-                                          height: 12,
-                                          width: 12,
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.3,
+                                          child: CheckOutTile(
+                                            titleimage:
+                                                "assets/images/time.svg",
+                                            title: 'Time:',
+                                            discription: widget
+                                                        .order!.servicetype! ==
+                                                    'instant'
+                                                ? widget.order!.duration
+                                                        .toString() +
+                                                    ' min'
+                                                : widget.order!.servicetype ==
+                                                        'document'
+                                                    ? docformattedTime
+                                                    : sformattedTime! +
+                                                        ' - ' +
+                                                        eformattedTime!,
+                                          ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 5),
-                                        child: Text(
-                                          'Document',
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 14),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      FileDownloader.downloadFile(
-                                        url: widget.order!.document!.file!,
-                                        name: 'File',
-                                        onProgress: (fileName, progress) {
-                                          Get.snackbar(
-                                              'Downloading ' + fileName!,
-                                              'Downloaded ' +
-                                                  progress.toString() +
-                                                  '%',
-                                              snackPosition:
-                                                  SnackPosition.BOTTOM,
-                                              backgroundColor: Colors.green,
-                                              colorText: Colors.white);
-                                        },
-                                        onDownloadCompleted: (path) async {
-                                          Get.snackbar(
-                                              'File downloaded successfully.',
-                                              '',
-                                              snackPosition:
-                                                  SnackPosition.BOTTOM,
-                                              backgroundColor: Colors.green,
-                                              colorText: Colors.white);
-                                        },
-                                        onDownloadError: (errorMessage) {
-                                          Get.snackbar('Error!', errorMessage,
-                                              snackPosition:
-                                                  SnackPosition.BOTTOM,
-                                              backgroundColor: Colors.red,
-                                              colorText: Colors.white);
-                                        },
-                                      );
-                                    },
-                                    child: Text(
-                                      "Download Document",
-                                      style: TextStyle(
-                                          color: mainColor,
-                                          decoration: TextDecoration.underline,
-                                          fontSize: 14),
+                                      ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            widget.order!.status! == "0"
-                                ? Container()
-                                : widget.order!.status! == "2"
-                                    ? Container()
-                                    : Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 8.0),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Message',
-                                                  style: TextStyle(
-                                                      fontFamily: 'Poppins',
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 14),
-                                                ),
-                                                Text(widget.order!.document!
-                                                    .discription!),
-                                              ],
+                                    widget.order!.status! == "1"
+                                        ? Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 40, bottom: 20),
+                                            child: Text(
+                                              'Order In Progress',
+                                              style: TextStyle(
+                                                  color: Colors.green,
+                                                  fontSize: 21,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: 'Poppins'),
                                             ),
-                                          ],
-                                        ),
-                                      )
+                                          )
+                                        : widget.order!.status! == "2"
+                                            ? Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 60),
+                                                child: Text('Rejected',
+                                                    style: TextStyle(
+                                                        color: Colors.red,
+                                                        fontSize: 21,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily: 'Poppins')),
+                                              )
+                                            : widget.order!.status! == "3"
+                                                ? Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 60),
+                                                    child: Text(
+                                                      'Completed',
+                                                      style: TextStyle(
+                                                          color: Colors.green,
+                                                          fontSize: 21,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontFamily:
+                                                              'Poppins'),
+                                                    ))
+                                                : Text(""),
+                                  ]),
+                            ),
                           ],
-                        )
-                      : service == 'In person meeting'
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 25, right: 25),
+                  child: Column(
+                    children: [
+                      widget.order!.servicetype! == "document"
                           ? Column(
                               children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 12),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Document',
+                                        style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 14),
+                                      )
+                                    ],
+                                  ),
+                                ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 12),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        'Location',
-                                        style: TextStyle(
-                                            fontFamily: 'Poppins',
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 14),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.all(8),
+                                            decoration: BoxDecoration(
+                                              color: mainColor.withOpacity(0.1),
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(45),
+                                              ),
+                                            ),
+                                            child: SvgPicture.asset(
+                                              'assets/images/page.svg',
+                                              color: mainColor,
+                                              height: 12,
+                                              width: 12,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 5),
+                                            child: Text(
+                                              'Document',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 14),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                       InkWell(
-                                        onTap: () async {
-                                          var i = await serviceController
-                                              .getlocation();
-                                          if (i != null) {
-                                            Get.to(() =>
-                                                InPersonMeetingLocationScreen(
-                                                  latitude: double.parse(widget
-                                                      .order!.lat
-                                                      .toString()),
-                                                  longitude: double.parse(widget
-                                                      .order!.lng
-                                                      .toString()),
-                                                ));
-                                            // serviceController.clearServiceScreen();
-                                            // Get.to(() => ServiceScreen());
-                                          } else {
-                                            Get.snackbar(
-                                                "Please Enable Location Permissions To Proceed",
-                                                '',
-                                                snackPosition:
-                                                    SnackPosition.BOTTOM,
-                                                backgroundColor: Colors.red,
-                                                colorText: Colors.white);
-                                            LoadingHelper.dismiss();
-                                          }
+                                        onTap: () {
+                                          FileDownloader.downloadFile(
+                                            url: widget.order!.document!.file!,
+                                            name: 'File',
+                                            onProgress: (fileName, progress) {
+                                              Get.snackbar(
+                                                  'Downloading ' + fileName!,
+                                                  'Downloaded ' +
+                                                      progress.toString() +
+                                                      '%',
+                                                  snackPosition:
+                                                      SnackPosition.BOTTOM,
+                                                  backgroundColor: Colors.green,
+                                                  colorText: Colors.white);
+                                            },
+                                            onDownloadCompleted: (path) async {
+                                              Get.snackbar(
+                                                  'File downloaded successfully.',
+                                                  '',
+                                                  snackPosition:
+                                                      SnackPosition.BOTTOM,
+                                                  backgroundColor: Colors.green,
+                                                  colorText: Colors.white);
+                                            },
+                                            onDownloadError: (errorMessage) {
+                                              Get.snackbar(
+                                                  'Error!', errorMessage,
+                                                  snackPosition:
+                                                      SnackPosition.BOTTOM,
+                                                  backgroundColor: Colors.red,
+                                                  colorText: Colors.white);
+                                            },
+                                          );
                                         },
                                         child: Text(
-                                          "Show Location",
+                                          "Download Document",
                                           style: TextStyle(
                                               color: mainColor,
                                               decoration:
                                                   TextDecoration.underline,
                                               fontSize: 14),
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ),
-                                // Padding(
-                                //   padding: const EdgeInsets.only(top: 12),
-                                //   child: Row(
-                                //     mainAxisAlignment:
-                                //         MainAxisAlignment.spaceBetween,
-                                //     children: [
-                                // Row(
-                                //   children: [
-                                //     Container(
-                                //       padding: EdgeInsets.all(8),
-                                //       decoration: BoxDecoration(
-                                //         color: mainColor.withOpacity(0.1),
-                                //         borderRadius: BorderRadius.all(
-                                //           Radius.circular(45),
-                                //         ),
-                                //       ),
-                                //       child: SvgPicture.asset(
-                                //         'assets/images/page.svg',
-                                //         color: mainColor,
-                                //         height: 12,
-                                //         width: 12,
-                                //       ),
-                                //     ),
-                                //     Padding(
-                                //       padding:
-                                //           const EdgeInsets.only(left: 5),
-                                //       child: Text(
-                                //         'Document',
-                                //         style: TextStyle(
-                                //             color: Colors.black,
-                                //             fontSize: 14),
-                                //       ),
-                                //     ),
-                                //   ],
-                                // ),
-                                // InkWell(
-                                //   onTap: () async {
-                                //     var i = await serviceController
-                                //         .getlocation();
-                                //     if (i != null) {
-                                //       Get.to(() =>
-                                //           InPersonMeetingLocationScreen(
-                                //             latitude: double.parse(widget
-                                //                 .order!.lat
-                                //                 .toString()),
-                                //             longitude: double.parse(widget
-                                //                 .order!.lng
-                                //                 .toString()),
-                                //           ));
-                                //       // serviceController.clearServiceScreen();
-                                //       // Get.to(() => ServiceScreen());
-                                //     } else {
-                                //       Get.snackbar(
-                                //           "Please Enable Location Permissions To Proceed",
-                                //           '',
-                                //           snackPosition:
-                                //               SnackPosition.BOTTOM,
-                                //           backgroundColor: Colors.red,
-                                //           colorText: Colors.white);
-                                //       LoadingHelper.dismiss();
-                                //     }
-                                //   },
-                                //   child: Text(
-                                //     "Show Location",
-                                //     style: TextStyle(
-                                //         color: mainColor,
-                                //         decoration:
-                                //             TextDecoration.underline,
-                                //         fontSize: 14),
-                                //   ),
-                                // ),
-                                //     ],
-                                //   ),
-                                // ),
+                                widget.order!.status! == "0"
+                                    ? Container()
+                                    : widget.order!.status! == "2"
+                                        ? Container()
+                                        : Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 8.0),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Message',
+                                                      style: TextStyle(
+                                                          fontFamily: 'Poppins',
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 14),
+                                                    ),
+                                                    Text(widget.order!.document!
+                                                        .discription!),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          )
                               ],
                             )
-                          : Container(),
-                  widget.order!.status! == "0"
-                      ? Padding(
-                          padding: const EdgeInsets.only(top: 40),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              LargeButton(
-                                title: 'Accept',
-                                textcolor: White,
-                                screenRatio: 0.4,
-                                rounded: true,
-                                onPressed: () {
-                                  statusController.orderaccept(widget.order!);
-                                },
-                              ),
-                              LargeButton(
-                                onPressed: () {
-                                  statusController.orderreject(widget.order!);
-                                },
-                                title: 'Reject',
-                                textcolor: White,
-                                screenRatio: 0.4,
-                                rounded: true,
-                                color: Colors.red,
-                              ),
-                            ],
-                          ),
-                        )
-                      : widget.order!.status! == "1"
-                          ? Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 40, bottom: 20),
-                                  child: Text(
-                                    'Order In Progress',
-                                    style: TextStyle(
-                                        color: Colors.green,
-                                        fontSize: 21,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Poppins'),
-                                  ),
-                                ),
-                                LargeButton(
-                                    title: "Mark as Completed",
+                          : service == 'In person meeting'
+                              ? Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 12),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Location',
+                                            style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 14),
+                                          ),
+                                          InkWell(
+                                            onTap: () async {
+                                              var i = await serviceController
+                                                  .getlocation();
+                                              if (i != null) {
+                                                Get.to(() =>
+                                                    InPersonMeetingLocationScreen(
+                                                      latitude: double.parse(
+                                                          widget.order!.lat
+                                                              .toString()),
+                                                      longitude: double.parse(
+                                                          widget.order!.lng
+                                                              .toString()),
+                                                    ));
+                                                // serviceController.clearServiceScreen();
+                                                // Get.to(() => ServiceScreen());
+                                              } else {
+                                                Get.snackbar(
+                                                    "Please Enable Location Permissions To Proceed",
+                                                    '',
+                                                    snackPosition:
+                                                        SnackPosition.BOTTOM,
+                                                    backgroundColor: Colors.red,
+                                                    colorText: Colors.white);
+                                                LoadingHelper.dismiss();
+                                              }
+                                            },
+                                            child: Text(
+                                              "Show Location",
+                                              style: TextStyle(
+                                                  color: mainColor,
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                  fontSize: 14),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    // Padding(
+                                    //   padding: const EdgeInsets.only(top: 12),
+                                    //   child: Row(
+                                    //     mainAxisAlignment:
+                                    //         MainAxisAlignment.spaceBetween,
+                                    //     children: [
+                                    // Row(
+                                    //   children: [
+                                    //     Container(
+                                    //       padding: EdgeInsets.all(8),
+                                    //       decoration: BoxDecoration(
+                                    //         color: mainColor.withOpacity(0.1),
+                                    //         borderRadius: BorderRadius.all(
+                                    //           Radius.circular(45),
+                                    //         ),
+                                    //       ),
+                                    //       child: SvgPicture.asset(
+                                    //         'assets/images/page.svg',
+                                    //         color: mainColor,
+                                    //         height: 12,
+                                    //         width: 12,
+                                    //       ),
+                                    //     ),
+                                    //     Padding(
+                                    //       padding:
+                                    //           const EdgeInsets.only(left: 5),
+                                    //       child: Text(
+                                    //         'Document',
+                                    //         style: TextStyle(
+                                    //             color: Colors.black,
+                                    //             fontSize: 14),
+                                    //       ),
+                                    //     ),
+                                    //   ],
+                                    // ),
+                                    // InkWell(
+                                    //   onTap: () async {
+                                    //     var i = await serviceController
+                                    //         .getlocation();
+                                    //     if (i != null) {
+                                    //       Get.to(() =>
+                                    //           InPersonMeetingLocationScreen(
+                                    //             latitude: double.parse(widget
+                                    //                 .order!.lat
+                                    //                 .toString()),
+                                    //             longitude: double.parse(widget
+                                    //                 .order!.lng
+                                    //                 .toString()),
+                                    //           ));
+                                    //       // serviceController.clearServiceScreen();
+                                    //       // Get.to(() => ServiceScreen());
+                                    //     } else {
+                                    //       Get.snackbar(
+                                    //           "Please Enable Location Permissions To Proceed",
+                                    //           '',
+                                    //           snackPosition:
+                                    //               SnackPosition.BOTTOM,
+                                    //           backgroundColor: Colors.red,
+                                    //           colorText: Colors.white);
+                                    //       LoadingHelper.dismiss();
+                                    //     }
+                                    //   },
+                                    //   child: Text(
+                                    //     "Show Location",
+                                    //     style: TextStyle(
+                                    //         color: mainColor,
+                                    //         decoration:
+                                    //             TextDecoration.underline,
+                                    //         fontSize: 14),
+                                    //   ),
+                                    // ),
+                                    //     ],
+                                    //   ),
+                                    // ),
+                                  ],
+                                )
+                              : Container(),
+                      widget.order!.status! == "0"
+                          ? Padding(
+                              padding: const EdgeInsets.only(top: 40),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  LargeButton(
+                                    title: 'Accept',
                                     textcolor: White,
+                                    screenRatio: 0.4,
+                                    rounded: true,
                                     onPressed: () {
-                                      completeorder(context, widget.order);
-                                    })
-                              ],
-                            )
-                          : widget.order!.status! == "2"
-                              ? Padding(
-                                  padding: const EdgeInsets.only(top: 60),
-                                  child: Text('Rejected',
-                                      style: TextStyle(
-                                          color: Colors.red,
-                                          fontSize: 21,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: 'Poppins')),
-                                )
-                              : Padding(
-                                  padding: const EdgeInsets.only(top: 60),
-                                  child: Text(
-                                    'Completed',
-                                    style: TextStyle(
-                                        color: Colors.green,
-                                        fontSize: 21,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Poppins'),
+                                      statusController
+                                          .orderaccept(widget.order!);
+                                    },
                                   ),
+                                  LargeButton(
+                                    onPressed: () {
+                                      statusController
+                                          .orderreject(widget.order!);
+                                    },
+                                    title: 'Reject',
+                                    textcolor: White,
+                                    screenRatio: 0.4,
+                                    rounded: true,
+                                    color: Colors.red,
+                                  ),
+                                ],
+                              ),
+                            )
+                          : widget.order!.status! == "1"
+                              ? Column(
+                                  children: [
+                                    // Padding(
+                                    //   padding: const EdgeInsets.only(
+                                    //       top: 40, bottom: 20),
+                                    //   child: Text(
+                                    //     'Order In Progress',
+                                    //     style: TextStyle(
+                                    //         color: Colors.green,
+                                    //         fontSize: 21,
+                                    //         fontWeight: FontWeight.w500,
+                                    //         fontFamily: 'Poppins'),
+                                    //   ),
+                                    // ),
+                                    LargeButton(
+                                        title: "Mark as Completed",
+                                        textcolor: White,
+                                        onPressed: () {
+                                          completeorder(context, widget.order);
+                                        })
+                                  ],
                                 )
-                ],
-              ),
+                              : Text(""),
+                      // : widget.order!.status! == "2"
+                      //     ? Padding(
+                      //         padding: const EdgeInsets.only(top: 60),
+                      //         child: Text('Rejected',
+                      //             style: TextStyle(
+                      //                 color: Colors.red,
+                      //                 fontSize: 21,
+                      //                 fontWeight: FontWeight.w500,
+                      //                 fontFamily: 'Poppins')),
+                      //       )
+                      //     : Padding(
+                      //         padding: const EdgeInsets.only(top: 60),
+                      //         child: Text(
+                      //           'Completed',
+                      //           style: TextStyle(
+                      //               color: Colors.green,
+                      //               fontSize: 21,
+                      //               fontWeight: FontWeight.w500,
+                      //               fontFamily: 'Poppins'),
+                      //         ),
+                      //       ),
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
         ),

@@ -28,9 +28,19 @@ class ProfileHeading extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
+            ".............",
+            style: TextStyle(
+                color: White,
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+                fontFamily: "Poppins"),
+          ),
+          Text(
             title,
             style: TextStyle(
-                fontWeight: FontWeight.w600, fontSize: 16,fontFamily: "Poppins"),
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+                fontFamily: "Poppins"),
           ),
           InkWell(
               onTap: onPressed,

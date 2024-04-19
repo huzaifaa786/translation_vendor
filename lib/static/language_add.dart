@@ -28,7 +28,8 @@ class LanguageAdd extends StatelessWidget {
       this.fontSize = 14.0,
       this.width = 0.98,
       this.onpressed,
-      this.ondeltap})
+      this.ondeltap,
+      this.svgimage})
       : super(key: key);
 
   final controller;
@@ -51,6 +52,7 @@ class LanguageAdd extends StatelessWidget {
   final fontSize;
   final enabled;
   final readOnly;
+  final svgimage;
 
   @override
   Widget build(BuildContext context) {
@@ -74,8 +76,14 @@ class LanguageAdd extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                        padding: const EdgeInsets.all(8),
-                        width: MediaQuery.of(context).size.width * .6,
+                      padding: const EdgeInsets.all(8),
+                      child: SvgPicture.asset(
+                        svgimage,
+                      ),
+                    ),
+                    Container(
+                        padding: const EdgeInsets.all(7),
+                        width: MediaQuery.of(context).size.width * .50,
                         child: Text(
                           text,
                           maxLines: 2,
@@ -94,7 +102,10 @@ class LanguageAdd extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
                               // padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(45),border: Border.all(color: Colors.red,width: 2)),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(45),
+                                  border:
+                                      Border.all(color: Colors.red, width: 2)),
                               child: Icon(
                                 Icons.remove,
                                 size: 23,

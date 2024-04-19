@@ -28,7 +28,7 @@ class PagePrice extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 12),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Row(
             children: [
@@ -36,7 +36,7 @@ class PagePrice extends StatelessWidget {
                 minpage == null ? '' : minpage,
                 style: TextStyle(
                     fontFamily: 'Poppins',
-                    fontSize: 16,
+                    fontSize: 12,
                     fontWeight: FontWeight.w500,
                     color: mainColor),
               ),
@@ -45,16 +45,16 @@ class PagePrice extends StatelessWidget {
                 maxpage == null ? '' : maxpage,
                 style: TextStyle(
                     fontFamily: 'Poppins',
-                    fontSize: 16,
+                    fontSize: 12,
                     fontWeight: FontWeight.w500,
                     color: mainColor),
               ),
               Text(
-                '  Pages.',
+                '  Pages:',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontFamily: 'Poppins',
-                    fontSize: 16,
+                    fontSize: 12,
                     fontWeight: FontWeight.w400,
                     color: Colors.black),
               ),
@@ -62,20 +62,20 @@ class PagePrice extends StatelessWidget {
           ),
           Row(
             children: [
-              Text(
-                'In ',
-                style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black),
-              ),
+              // Text(
+              //   'In ',
+              //   style: TextStyle(
+              //       fontFamily: 'Poppins',
+              //       fontSize: 12,
+              //       fontWeight: FontWeight.w400,
+              //       color: Colors.black),
+              // ),
               Text(
                 days.toString(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontFamily: 'Poppins',
-                    fontSize: 16,
+                    fontSize: 12,
                     fontWeight: FontWeight.w500,
                     color: mainColor),
               ),
@@ -83,7 +83,7 @@ class PagePrice extends StatelessWidget {
                 '  days',
                 style: TextStyle(
                     fontFamily: 'Poppins',
-                    fontSize: 16,
+                    fontSize: 12,
                     fontWeight: FontWeight.w400,
                     color: Colors.black),
               )

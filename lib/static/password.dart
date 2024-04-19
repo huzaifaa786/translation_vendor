@@ -25,34 +25,37 @@ class ChangePassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only( top: 25,bottom: 15),
+      padding: const EdgeInsets.only(top: 25, bottom: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: TextStyle(
-                fontWeight: FontWeight.w600, fontSize: 16,fontFamily: "Poppins"),
-          ),
-       GestureDetector(
-              onTap: onPressed,
-              child: Container(
+          GestureDetector(
+            onTap: onPressed,
+            child: Container(
+                width: MediaQuery.of(context).size.width * 0.8,
                 padding: EdgeInsets.all(4),
                 decoration: BoxDecoration(
-                 border: Border.all(
-                      color: Colors.grey,
-                    ),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(60),
-                    ),
+                  border: Border.all(
+                    color: Colors.grey,
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(15),
+                  ),
                 ),
-                child: Icon(
-                  
-                  Icons.keyboard_arrow_right_outlined,
-                  
-                ),
-              ),
-            ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset("assets/images/Private Lock.png"),
+                    Text(
+                      title,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                          fontFamily: "Poppins"),
+                    ),
+                  ],
+                )),
+          ),
         ],
       ),
     );

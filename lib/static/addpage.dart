@@ -25,16 +25,24 @@ class AddPage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             title,
             style: TextStyle(
-                fontWeight: FontWeight.w600, fontSize: 15, fontFamily: 'Poppins',color: mainColor),
+                fontWeight: FontWeight.w600,
+                fontSize: 12,
+                fontFamily: 'Poppins',
+                color: mainColor),
           ),
           InkWell(
               onTap: onPressed,
-              child: SvgPicture.asset('assets/images/add.svg'))
+              child: SvgPicture.asset(
+                'assets/images/add.svg',
+                height: 14,
+                width: 14,
+              ))
         ],
       ),
     );

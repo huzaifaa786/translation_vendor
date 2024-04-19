@@ -25,7 +25,7 @@ class NotificationTile extends StatelessWidget {
       onTap: ontap,
       child: Card(
         shadowColor: Colors.grey,
-        elevation: 3,
+        elevation: 1,
         color: Colors.white,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(6, 10, 6, 10),
@@ -40,7 +40,8 @@ class NotificationTile extends StatelessWidget {
                         borderRadius: BorderRadius.circular(45),
                         child: image == ''
                             ? Image(
-                                image: AssetImage('assets/images/5907.jpg'),
+                                image: AssetImage(
+                                    'assets/images/Male User (1).png'),
                                 height: 65,
                                 width: 65,
                               )
@@ -52,7 +53,7 @@ class NotificationTile extends StatelessWidget {
                       ),
                       Container(
                           padding: const EdgeInsets.only(left: 12),
-                          width: MediaQuery.of(context).size.width * 0.7,
+                          width: MediaQuery.of(context).size.width * 0.6,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -75,17 +76,19 @@ class NotificationTile extends StatelessWidget {
                                         color: notiNameCOlor,
                                         fontWeight: FontWeight.w500),
                                   ),
-                                  price != ''?
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 4),
-                                    child: Text(
-                                      'AED ' + price,
-                                      style: TextStyle(
-                                          fontSize: 13,
-                                          color: mainColor,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ): Container(),
+                                  price != ''
+                                      ? Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 4),
+                                          child: Text(
+                                            'AED ' + price,
+                                            style: TextStyle(
+                                                fontSize: 13,
+                                                color: mainColor,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        )
+                                      : Container(),
                                 ],
                               ),
                               Padding(

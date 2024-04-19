@@ -5,29 +5,30 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation_vendor/values/colors.dart';
 
 class Imageinput extends StatelessWidget {
-  const Imageinput(
-      {Key? key,
-      this.controller,
-      this.labelText,
-      this.text = '',
-      this.maxlines = false,
-      this.enabled = true,
-      this.readOnly = false,
-      this.rounded = false,
-      this.onChange,
-      this.imageIcon,
-      this.hint,
-      this.validator,
-      this.autovalidateMode,
-      this.validate,
-      this.icon,
-      this.height,
-      this.type = TextInputType.text,
-      this.optionalText = '',
-      this.fontSize = 14.0,
-      this.width = 0.98,
-      this.onpressed})
-      : super(key: key);
+  const Imageinput({
+    Key? key,
+    this.controller,
+    this.labelText,
+    this.text = '',
+    this.maxlines = false,
+    this.enabled = true,
+    this.readOnly = false,
+    this.rounded = false,
+    this.onChange,
+    this.imageIcon,
+    this.simageIcon,
+    this.hint,
+    this.validator,
+    this.autovalidateMode,
+    this.validate,
+    this.icon,
+    this.height,
+    this.type = TextInputType.text,
+    this.optionalText = '',
+    this.fontSize = 14.0,
+    this.width = 0.98,
+    this.onpressed,
+  }) : super(key: key);
 
   final controller;
   final validator;
@@ -49,6 +50,7 @@ class Imageinput extends StatelessWidget {
   final fontSize;
   final enabled;
   final readOnly;
+  final simageIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -76,14 +78,24 @@ class Imageinput extends StatelessWidget {
                       children: [
                         Container(
                           padding: const EdgeInsets.all(8),
-                          child: Text(text.toString())
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: SvgPicture.asset(
+                              imageIcon,
+                              height: 17,
+                              width: 17,
+                            ),
+                          ),
                         ),
+                        Container(
+                            padding: const EdgeInsets.all(8),
+                            child: Text(text.toString())),
                         Container(
                           padding: const EdgeInsets.all(8),
                           child: FittedBox(
                             fit: BoxFit.scaleDown,
                             child: SvgPicture.asset(
-                              imageIcon,
+                              simageIcon,
                               height: 17,
                               width: 17,
                             ),

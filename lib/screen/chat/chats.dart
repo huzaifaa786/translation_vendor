@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:translation_vendor/screen/chat/chatdetails.dart';
 import 'package:translation_vendor/static/chart.dart';
+import 'package:translation_vendor/values/colors.dart';
 
 import 'package:translation_vendor/values/controllers.dart';
 
@@ -33,17 +34,16 @@ class _Chats_screenState extends State<Chats_screen> {
               children: [
                 Container(
                   width: double.infinity,
-                  height: 141,
+                  height: 115,
                   decoration: BoxDecoration(
-                    color: Color(0xFF34607B),
-                    borderRadius: BorderRadius.circular(25),
+                    color: greenish,
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(38, 68, 0, 0),
+                  child: Center(
                     child: Text(
-                      "Chats",
+                      "Messages",
                       style: TextStyle(
-                        fontFamily: 'Mazzard',
+                        fontFamily: 'Poppins',
                         fontWeight: FontWeight.w600,
                         fontSize: 25,
                         height: 1.5,
@@ -147,7 +147,8 @@ class _Chats_screenState extends State<Chats_screen> {
                             //                 : date,
                             msg: 'Tap here to view messages',
                             name: chatController.scontacts[index].username,
-                            imgicon: chatController.scontacts[index].profilePic);
+                            imgicon:
+                                chatController.scontacts[index].profilePic);
                       }),
                 ),
               ],

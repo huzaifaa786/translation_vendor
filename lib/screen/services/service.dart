@@ -94,174 +94,441 @@ class _ServiceScreenState extends State<ServiceScreen> {
       backgroundColor: White,
       body: SafeArea(
           child: GetBuilder<ServiceController>(
-        builder: (controller) => Padding(
-          padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                TitleTopbar(
-                  text: 'Service',
-                  ontap: () {
-                    Get.back();
-                  },
-                ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    children: [
-                      Checkbox(
-                        activeColor: mainColor,
-                        value: serviceController.iAudioOrVideo,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            serviceController.iAudioOrVideo = value!;
-                          });
-                        },
-                      ),
-                      Text('Audio / Video Interpretaion')
-                    ],
+        builder: (controller) => SingleChildScrollView(
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  Container(
+                    child: TitleTopbar(
+                      text: 'Service',
+                      ontap: () {
+                        Get.back();
+                      },
+                    ),
                   ),
-                ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    children: [
-                      Checkbox(
-                        activeColor: mainColor,
-                        value: serviceController.isInperson,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            serviceController.isInperson = value!;
-                          });
-                        },
+                ],
+              ),
+              Container(
+                padding: EdgeInsets.all(8.0),
+                margin:
+                    EdgeInsets.only(top: 80, left: 25, right: 25, bottom: 70),
+                decoration: BoxDecoration(
+                    color: Colors.grey.shade100,
+                    borderRadius: BorderRadius.circular(15)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Rates",
+                      style: TextStyle(
+                          color: greenish,
+                          fontFamily: "Poppins",
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    Text(
+                      "Per 30 Minutes",
+                      style: TextStyle(
+                          color: Color(0xFF777070),
+                          fontFamily: "Poppins",
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    Container(
+                      // padding: EdgeInsets.all(5.0),
+                      margin: EdgeInsets.only(
+                        top: 26,
+                        left: 10,
+                        right: 10,
                       ),
-                      Text('Inperson Interpretaion')
-                    ],
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    children: [
-                      Checkbox(
-                        activeColor: mainColor,
-                        value: serviceController.isDocument,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            serviceController.isDocument = value!;
-                          });
-                        },
-                      ),
-                      Text('Document Translation')
-                    ],
-                  ),
-                ),
-                // serviceController.iAudioOrVideo != false
-                //     ? Column(
-                //         children: [
-                //           Padding(
-                //             padding: const EdgeInsets.only(top: 15.0),
-                //             child: Row(
-                //               mainAxisAlignment: MainAxisAlignment.center,
-                //               children: [
-                //                 SvgPicture.asset('assets/images/dart.svg'),
-                //                 Padding(
-                //                   padding: const EdgeInsets.only(left: 6),
-                //                   child: Text(
-                //                     'Online Audio/Video',
-                //                     style: TextStyle(
-                //                       fontFamily: 'Poppins',
-                //                       fontSize: 18,
-                //                       fontWeight: FontWeight.w600,
-                //                     ),
-                //                   ),
-                //                 )
-                //               ],
-                //             ),
-                //           ),
-                //           SizedBox(height: 4),
-                //           InkWell(
-                //             focusColor: White,
-                //             onTap: () {
-                //               serviceController.openOnlineAudioORvideoField();
-                //             },
-                //             child: Row(
-                //               mainAxisAlignment: MainAxisAlignment.center,
-                //               children: [
-                //                 Text(
-                //                   'Rate Per 30 mintus: ',
-                //                   style: TextStyle(
-                //                     color: hintColor,
-                //                     fontFamily: 'Poppins',
-                //                     fontSize: 15,
-                //                     fontWeight: FontWeight.w400,
-                //                   ),
-                //                 ),
-                //                 serviceController
-                //                             .showOnlineAudioORvideoPriceField ==
-                //                         false.obs
-                //                     ? Text(
-                //                         serviceController.onlineAudioORvideo ==
-                //                                 null
-                //                             ? '0' + ' AED'
-                //                             : serviceController
-                //                                     .onlineAudioORvideo! +
-                //                                 " AED",
-                //                         style: TextStyle(
-                //                           color: mainColor,
-                //                           fontFamily: 'Poppins',
-                //                           fontSize: 16,
-                //                           fontWeight: FontWeight.w600,
-                //                         ),
-                //                       )
-                //                     : AutoSizeTextField(
-                //                         controller: serviceController
-                //                             .onlineAudiovideoController,
-                //                         fullwidth: false,
-                //                         keyboardType: TextInputType.number,
-                //                         maxLength: 10,
-                //                         style: TextStyle(fontSize: 18),
-                //                         minWidth:
-                //                             MediaQuery.of(context).size.width *
-                //                                 0.3,
-                //                         decoration: InputDecoration(
-                //                           suffixIcon: InkWell(
-                //                             onTap: () {
-                //                               serviceController
-                //                                   .EditOnlineAudioORvideoPrice();
-                //                             },
-                //                             child: Padding(
-                //                               padding: const EdgeInsets.only(
-                //                                   bottom: 8.0),
-                //                               child: Icon(Icons.check,
-                //                                   color: mainColor, size: 18),
-                //                             ),
-                //                           ),
-                //                         ),
-                //                       ),
-                //               ],
-                //             ),
-                //           ),
-                //         ],
-                //       )
-                //     : Container(),
-                SizedBox(
-                  height: 23,
-                ),
-                serviceController.isDocument != false
-                    ? Column(
+                      decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Row(
+                              children: [
+                                Checkbox(
+                                  activeColor: mainColor,
+                                  value: serviceController.iAudioOrVideo,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      serviceController.iAudioOrVideo = value!;
+                                    });
+                                  },
+                                ),
+                                Text('Audio / Video Interpretaion')
+                              ],
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Row(
+                              children: [
+                                Checkbox(
+                                  activeColor: mainColor,
+                                  value: serviceController.isInperson,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      serviceController.isInperson = value!;
+                                    });
+                                  },
+                                ),
+                                Text('Inperson Interpretaion')
+                              ],
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Row(
+                              children: [
+                                Checkbox(
+                                  activeColor: mainColor,
+                                  value: serviceController.isDocument,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      serviceController.isDocument = value!;
+                                    });
+                                  },
+                                ),
+                                Text('Document Translation')
+                              ],
+                            ),
+                          ),
+                          // serviceController.iAudioOrVideo != false
+                          //     ? Column(
+                          //         children: [
+                          //           Padding(
+                          //             padding: const EdgeInsets.only(top: 15.0),
+                          //             child: Row(
+                          //               mainAxisAlignment: MainAxisAlignment.center,
+                          //               children: [
+                          //                 SvgPicture.asset('assets/images/dart.svg'),
+                          //                 Padding(
+                          //                   padding: const EdgeInsets.only(left: 6),
+                          //                   child: Text(
+                          //                     'Online Audio/Video',
+                          //                     style: TextStyle(
+                          //                       fontFamily: 'Poppins',
+                          //                       fontSize: 18,
+                          //                       fontWeight: FontWeight.w600,
+                          //                     ),
+                          //                   ),
+                          //                 )
+                          //               ],
+                          //             ),
+                          //           ),
+                          //           SizedBox(height: 4),
+                          //           InkWell(
+                          //             focusColor: White,
+                          //             onTap: () {
+                          //               serviceController.openOnlineAudioORvideoField();
+                          //             },
+                          //             child: Row(
+                          //               mainAxisAlignment: MainAxisAlignment.center,
+                          //               children: [
+                          //                 Text(
+                          //                   'Rate Per 30 mintus: ',
+                          //                   style: TextStyle(
+                          //                     color: hintColor,
+                          //                     fontFamily: 'Poppins',
+                          //                     fontSize: 15,
+                          //                     fontWeight: FontWeight.w400,
+                          //                   ),
+                          //                 ),
+                          //                 serviceController
+                          //                             .showOnlineAudioORvideoPriceField ==
+                          //                         false.obs
+                          //                     ? Text(
+                          //                         serviceController.onlineAudioORvideo ==
+                          //                                 null
+                          //                             ? '0' + ' AED'
+                          //                             : serviceController
+                          //                                     .onlineAudioORvideo! +
+                          //                                 " AED",
+                          //                         style: TextStyle(
+                          //                           color: mainColor,
+                          //                           fontFamily: 'Poppins',
+                          //                           fontSize: 16,
+                          //                           fontWeight: FontWeight.w600,
+                          //                         ),
+                          //                       )
+                          //                     : AutoSizeTextField(
+                          //                         controller: serviceController
+                          //                             .onlineAudiovideoController,
+                          //                         fullwidth: false,
+                          //                         keyboardType: TextInputType.number,
+                          //                         maxLength: 10,
+                          //                         style: TextStyle(fontSize: 18),
+                          //                         minWidth:
+                          //                             MediaQuery.of(context).size.width *
+                          //                                 0.3,
+                          //                         decoration: InputDecoration(
+                          //                           suffixIcon: InkWell(
+                          //                             onTap: () {
+                          //                               serviceController
+                          //                                   .EditOnlineAudioORvideoPrice();
+                          //                             },
+                          //                             child: Padding(
+                          //                               padding: const EdgeInsets.only(
+                          //                                   bottom: 8.0),
+                          //                               child: Icon(Icons.check,
+                          //                                   color: mainColor, size: 18),
+                          //                             ),
+                          //                           ),
+                          //                         ),
+                          //                       ),
+                          //               ],
+                          //             ),
+                          //           ),
+                          //         ],
+                          //       )
+                          //     : Container(),
+                          SizedBox(
+                            height: 23,
+                          ),
+                          serviceController.isDocument != false
+                              ? Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SvgPicture.asset(
+                                          'assets/images/pages.svg',
+                                          color: mainColor,
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 8.0),
+                                          child: Text(
+                                            'Document Translation',
+                                            style: TextStyle(
+                                              color: greenish,
+                                              fontFamily: 'Poppins',
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    AddPage(
+                                      title: 'Urgent Doucment :',
+                                      onPressed: () {
+                                        urgentdoc(context);
+                                      },
+                                    ),
+                                    InkWell(
+                                      focusColor: White,
+                                      onTap: () {
+                                        serviceController.openurgentField();
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Text(
+                                            'Rate Per Page: ',
+                                            style: TextStyle(
+                                              fontFamily: 'Poppins',
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                          serviceController
+                                                      .showurgentPriceField ==
+                                                  false.obs
+                                              ? Text(
+                                                  serviceController
+                                                              .urgentPrice ==
+                                                          null
+                                                      ? '0 AED'
+                                                      : serviceController
+                                                              .urgentPrice! +
+                                                          '  AED',
+                                                  style: TextStyle(
+                                                    color: mainColor,
+                                                    fontFamily: 'Poppins',
+                                                    fontSize: 10,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                )
+                                              : AutoSizeTextField(
+                                                  controller: serviceController
+                                                      .urgentController,
+                                                  fullwidth: false,
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                  // maxLines: null,
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  maxLength: 10,
+                                                  minWidth:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          0.3,
+                                                  onSubmitted: (value) {
+                                                    serviceController
+                                                        .EditurgentPrice();
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    suffixIcon: InkWell(
+                                                      onTap: () {
+                                                        serviceController
+                                                            .EditurgentPrice();
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                bottom: 8.0),
+                                                        child: Icon(Icons.check,
+                                                            color: mainColor,
+                                                            size: 18),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                        ],
+                                      ),
+                                    ),
+                                    for (var document
+                                        in serviceController.urgentdocument)
+                                      InkWell(
+                                        onTap: () {
+                                          editurgentdoc(
+                                              context,
+                                              document.minpage,
+                                              document.maxpage,
+                                              document.day);
+                                        },
+                                        child: PagePrice(
+                                          minpage: document.minpage,
+                                          maxpage: document.maxpage,
+                                          days: document.day,
+                                        ),
+                                      ),
+                                    AddPage(
+                                      title: 'Un Urgent Doucment :',
+                                      onPressed: () {
+                                        addpage(context);
+                                      },
+                                    ),
+                                    InkWell(
+                                      focusColor: White,
+                                      onTap: () {
+                                        serviceController.openUnurgentField();
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Text(
+                                            'Rate Per Page: ',
+                                            style: TextStyle(
+                                              fontFamily: 'Poppins',
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                          serviceController
+                                                      .showUnurgentPriceField ==
+                                                  false.obs
+                                              ? Text(
+                                                  serviceController
+                                                              .UnurgentPrice ==
+                                                          null
+                                                      ? '0 AED'
+                                                      : serviceController
+                                                              .UnurgentPrice! +
+                                                          '  AED',
+                                                  style: TextStyle(
+                                                    color: mainColor,
+                                                    fontFamily: 'Poppins',
+                                                    fontSize: 10,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                )
+                                              : AutoSizeTextField(
+                                                  controller: serviceController
+                                                      .UnurgentController,
+                                                  fullwidth: false,
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                  // maxLines: null,
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  maxLength: 10,
+                                                  minWidth:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          0.3,
+                                                  onSubmitted: (value) {
+                                                    serviceController
+                                                        .EditUnurgentPrice();
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    suffixIcon: InkWell(
+                                                      onTap: () {
+                                                        serviceController
+                                                            .EditUnurgentPrice();
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                bottom: 8.0),
+                                                        child: Icon(Icons.check,
+                                                            color: mainColor,
+                                                            size: 18),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                        ],
+                                      ),
+                                    ),
+                                    for (var document
+                                        in serviceController.unurgentdocument)
+                                      InkWell(
+                                        onTap: () {
+                                          editunurgentdoc(
+                                              context,
+                                              document.minpage,
+                                              document.maxpage,
+                                              document.day);
+                                        },
+                                        child: PagePrice(
+                                          minpage: document.minpage,
+                                          maxpage: document.maxpage,
+                                          days: document.day,
+                                        ),
+                                      ),
+                                    SizedBox(height: 20)
+                                  ],
+                                )
+                              : Container(),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              SvgPicture.asset(
-                                'assets/images/document1.svg',
-                                color: mainColor,
+                              Padding(
+                                padding: const EdgeInsets.only(right: 6.0),
+                                child: SvgPicture.asset(
+                                    'assets/images/shedule.svg'),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
+                                padding: const EdgeInsets.only(left: 6.0),
                                 child: Text(
-                                  'Document',
+                                  'Schedule',
                                   style: TextStyle(
                                     fontFamily: 'Poppins',
                                     fontSize: 18,
@@ -269,456 +536,312 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                   ),
                                 ),
                               ),
+                              Text(
+                                '  (Rate Per 30 minutes)',
+                                style: TextStyle(
+                                  color: hintColor,
+                                  fontFamily: 'Poppins',
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
                             ],
                           ),
-                          AddPage(
-                            title: 'Urgent Doucment :',
-                            onPressed: () {
-                              urgentdoc(context);
-                            },
+                          SizedBox(
+                            height: 23,
                           ),
-                          InkWell(
-                            focusColor: White,
-                            onTap: () {
-                              serviceController.openurgentField();
-                            },
+                          serviceController.iAudioOrVideo != false
+                              ? InkWell(
+                                  focusColor: White,
+                                  onTap: () {
+                                    serviceController.openaudioORvideoField();
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Audio/Video',
+                                        style: TextStyle(
+                                          color: hintColor,
+                                          fontFamily: 'Mazzard',
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      serviceController
+                                                  .showaudioORvideoPriceField ==
+                                              false.obs
+                                          ? Text(
+                                              serviceController.audioORvideo ==
+                                                      null
+                                                  ? '0' + ' AED'
+                                                  : serviceController
+                                                          .audioORvideo! +
+                                                      " AED",
+                                              style: TextStyle(
+                                                color: mainColor,
+                                                fontFamily: 'Mazzard',
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            )
+                                          : AutoSizeTextField(
+                                              controller: serviceController
+                                                  .audiovideoController,
+                                              fullwidth: false,
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              maxLength: 10,
+                                              style: TextStyle(fontSize: 18),
+                                              onSubmitted: (value) {
+                                                serviceController
+                                                    .EditaudioORvideoPrice();
+                                              },
+                                              minWidth: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.3,
+                                              decoration: InputDecoration(
+                                                suffixIcon: InkWell(
+                                                  onTap: () {
+                                                    serviceController
+                                                        .EditaudioORvideoPrice();
+                                                  },
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            bottom: 8.0),
+                                                    child: Icon(Icons.check,
+                                                        color: mainColor,
+                                                        size: 18),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                    ],
+                                  ),
+                                )
+                              : Container(),
+                          serviceController.iAudioOrVideo != false
+                              ? SizedBox(
+                                  height: 12,
+                                )
+                              : Container(),
+                          serviceController.isInperson != false
+                              ? InkWell(
+                                  focusColor: White,
+                                  onTap: () {
+                                    serviceController.openInPersonField();
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'In Person',
+                                        style: TextStyle(
+                                          color: hintColor,
+                                          fontFamily: 'Mazzard',
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      serviceController
+                                                  .showInPersonPriceField ==
+                                              false.obs
+                                          ? Text(
+                                              serviceController.InPersonPrice ==
+                                                      null
+                                                  ? '0' + ' AED'
+                                                  : serviceController
+                                                          .InPersonPrice! +
+                                                      " AED",
+                                              style: TextStyle(
+                                                color: mainColor,
+                                                fontFamily: 'Mazzard',
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            )
+                                          : AutoSizeTextField(
+                                              controller: serviceController
+                                                  .inpersionController,
+                                              fullwidth: false,
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              maxLength: 10,
+                                              style: TextStyle(fontSize: 18),
+                                              minWidth: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.3,
+                                              onSubmitted: (value) {
+                                                serviceController
+                                                    .EditInPersonPrice();
+                                              },
+                                              decoration: InputDecoration(
+                                                suffixIcon: InkWell(
+                                                  onTap: () {
+                                                    serviceController
+                                                        .EditInPersonPrice();
+                                                  },
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            bottom: 8.0),
+                                                    child: Icon(Icons.check,
+                                                        color: mainColor,
+                                                        size: 18),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                    ],
+                                  ),
+                                )
+                              : Container(),
+                          serviceController.isInperson != false
+                              ? SizedBox(height: 12)
+                              : Container(),
+                          serviceController.isInperson != false
+                              ? Column(children: [
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                          'assets/images/location.svg'),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 6.0),
+                                        child: Text(
+                                          ' Determine range of service',
+                                          style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(height: 12),
+                                  LocationButton(
+                                      title: 'Choose location',
+                                      icon: Icons.my_location_rounded,
+                                      onPressed: () {
+                                        Get.to(() => VendorMapScreen(
+                                            service: mainController
+                                                .vendor!.service));
+                                      }),
+                                ])
+                              : Container(),
+                          serviceController.isInperson != false
+                              ? SizedBox(
+                                  height: 20,
+                                )
+                              : Container(),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
                             child: Row(
                               children: [
                                 Text(
-                                  'Rate Per Page: ',
+                                  '(' +
+                                      "Gulf Standard Time United Arab Emirates Time"
+                                          .tr +
+                                      ')',
                                   style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w400,
-                                  ),
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold),
                                 ),
-                                serviceController.showurgentPriceField ==
-                                        false.obs
-                                    ? Text(
-                                        serviceController.urgentPrice == null
-                                            ? '0 AED'
-                                            : serviceController.urgentPrice! +
-                                                '  AED',
-                                        style: TextStyle(
-                                          color: mainColor,
-                                          fontFamily: 'Poppins',
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      )
-                                    : AutoSizeTextField(
-                                        controller:
-                                            serviceController.urgentController,
-                                        fullwidth: false,
-                                        style: TextStyle(fontSize: 18),
-                                        // maxLines: null,
-                                        keyboardType: TextInputType.number,
-                                        maxLength: 10,
-                                        minWidth:
-                                            MediaQuery.of(context).size.width *
-                                                0.3,
-                                        onSubmitted: (value) {
-                                          serviceController.EditurgentPrice();
-                                        },
-                                        decoration: InputDecoration(
-                                          suffixIcon: InkWell(
-                                            onTap: () {
-                                              serviceController
-                                                  .EditurgentPrice();
-                                            },
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 8.0),
-                                              child: Icon(Icons.check,
-                                                  color: mainColor, size: 18),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
                               ],
                             ),
                           ),
-                          for (var document in serviceController.urgentdocument)
-                            InkWell(
-                              onTap: () {
-                                editurgentdoc(context, document.minpage,
-                                    document.maxpage, document.day);
-                              },
-                              child: PagePrice(
-                                minpage: document.minpage,
-                                maxpage: document.maxpage,
-                                days: document.day,
-                              ),
-                            ),
-                          AddPage(
-                            title: 'Un Urgent Doucment :',
-                            onPressed: () {
-                              addpage(context);
-                            },
-                          ),
-                          InkWell(
-                            focusColor: White,
-                            onTap: () {
-                              serviceController.openUnurgentField();
-                            },
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Rate Per Page: ',
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                serviceController.showUnurgentPriceField ==
-                                        false.obs
-                                    ? Text(
-                                        serviceController.UnurgentPrice == null
-                                            ? '0 AED'
-                                            : serviceController.UnurgentPrice! +
-                                                '  AED',
-                                        style: TextStyle(
-                                          color: mainColor,
-                                          fontFamily: 'Poppins',
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      )
-                                    : AutoSizeTextField(
-                                        controller: serviceController
-                                            .UnurgentController,
-                                        fullwidth: false,
-                                        style: TextStyle(fontSize: 18),
-                                        // maxLines: null,
-                                        keyboardType: TextInputType.number,
-                                        maxLength: 10,
-                                        minWidth:
-                                            MediaQuery.of(context).size.width *
-                                                0.3,
-                                        onSubmitted: (value) {
-                                          serviceController.EditUnurgentPrice();
-                                        },
-                                        decoration: InputDecoration(
-                                          suffixIcon: InkWell(
-                                            onTap: () {
-                                              serviceController
-                                                  .EditUnurgentPrice();
-                                            },
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 8.0),
-                                              child: Icon(Icons.check,
-                                                  color: mainColor, size: 18),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                              ],
-                            ),
-                          ),
-                          for (var document
-                              in serviceController.unurgentdocument)
-                            InkWell(
-                              onTap: () {
-                                editunurgentdoc(context, document.minpage,
-                                    document.maxpage, document.day);
-                              },
-                              child: PagePrice(
-                                minpage: document.minpage,
-                                maxpage: document.maxpage,
-                                days: document.day,
-                              ),
-                            ),
-                          SizedBox(height: 20)
+                          Schedule(
+                              day: 'Monday',
+                              startTime: mainController.vendor!.service == null
+                                  ? '09:00'
+                                  : mainController
+                                      .vendor!.service!.schedule![0].startTime,
+                              endTime: mainController.vendor!.service == null
+                                  ? '17:00'
+                                  : mainController
+                                      .vendor!.service!.schedule![0].endTime),
+                          Schedule(
+                              day: 'Tuesday',
+                              startTime: mainController.vendor!.service == null
+                                  ? '09:00'
+                                  : mainController
+                                      .vendor!.service!.schedule![1].startTime,
+                              endTime: mainController.vendor!.service == null
+                                  ? '17:00'
+                                  : mainController
+                                      .vendor!.service!.schedule![1].endTime),
+                          Schedule(
+                              day: 'Wednesday',
+                              startTime: mainController.vendor!.service == null
+                                  ? '09:00'
+                                  : mainController
+                                      .vendor!.service!.schedule![2].startTime,
+                              endTime: mainController.vendor!.service == null
+                                  ? '17:00'
+                                  : mainController
+                                      .vendor!.service!.schedule![2].endTime),
+                          Schedule(
+                              day: 'Thursday',
+                              startTime: mainController.vendor!.service == null
+                                  ? '09:00'
+                                  : mainController
+                                      .vendor!.service!.schedule![3].startTime,
+                              endTime: mainController.vendor!.service == null
+                                  ? '17:00'
+                                  : mainController
+                                      .vendor!.service!.schedule![3].endTime),
+                          Schedule(
+                              day: 'Friday',
+                              startTime: mainController.vendor!.service == null
+                                  ? '09:00'
+                                  : mainController
+                                      .vendor!.service!.schedule![4].startTime,
+                              endTime: mainController.vendor!.service == null
+                                  ? '17:00'
+                                  : mainController
+                                      .vendor!.service!.schedule![4].endTime),
+                          Schedule(
+                              day: 'Saturday',
+                              startTime: mainController.vendor!.service == null
+                                  ? '09:00'
+                                  : mainController
+                                      .vendor!.service!.schedule![5].startTime,
+                              endTime: mainController.vendor!.service == null
+                                  ? '17:00'
+                                  : mainController
+                                      .vendor!.service!.schedule![5].endTime),
+                          Schedule(
+                              day: 'Sunday',
+                              startTime: mainController.vendor!.service == null
+                                  ? '09:00'
+                                  : mainController
+                                      .vendor!.service!.schedule![6].startTime,
+                              endTime: mainController.vendor!.service == null
+                                  ? '17:00'
+                                  : mainController
+                                      .vendor!.service!.schedule![6].endTime),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20, bottom: 20),
+                            child: LargeButton(
+                                title: 'Submit',
+                                textcolor: White,
+                                onPressed: () {
+                                  serviceController.addservice();
+                                }),
+                          )
                         ],
-                      )
-                    : Container(),
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 6.0),
-                      child: SvgPicture.asset('assets/images/shedule.svg'),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 6.0),
-                      child: Text(
-                        'Schedule',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      '  (Rate Per 30 minutes)',
-                      style: TextStyle(
-                        color: hintColor,
-                        fontFamily: 'Poppins',
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
                       ),
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 23,
-                ),
-                serviceController.iAudioOrVideo != false
-                    ? InkWell(
-                        focusColor: White,
-                        onTap: () {
-                          serviceController.openaudioORvideoField();
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Audio/Video',
-                              style: TextStyle(
-                                color: hintColor,
-                                fontFamily: 'Mazzard',
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            serviceController.showaudioORvideoPriceField ==
-                                    false.obs
-                                ? Text(
-                                    serviceController.audioORvideo == null
-                                        ? '0' + ' AED'
-                                        : serviceController.audioORvideo! +
-                                            " AED",
-                                    style: TextStyle(
-                                      color: mainColor,
-                                      fontFamily: 'Mazzard',
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  )
-                                : AutoSizeTextField(
-                                    controller:
-                                        serviceController.audiovideoController,
-                                    fullwidth: false,
-                                    keyboardType: TextInputType.number,
-                                    maxLength: 10,
-                                    style: TextStyle(fontSize: 18),
-                                    onSubmitted: (value) {
-                                      serviceController.EditaudioORvideoPrice();
-                                    },
-                                    minWidth:
-                                        MediaQuery.of(context).size.width * 0.3,
-                                    decoration: InputDecoration(
-                                      suffixIcon: InkWell(
-                                        onTap: () {
-                                          serviceController
-                                              .EditaudioORvideoPrice();
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 8.0),
-                                          child: Icon(Icons.check,
-                                              color: mainColor, size: 18),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                          ],
-                        ),
-                      )
-                    : Container(),
-                serviceController.iAudioOrVideo != false
-                    ? SizedBox(
-                        height: 12,
-                      )
-                    : Container(),
-                serviceController.isInperson != false
-                    ? InkWell(
-                        focusColor: White,
-                        onTap: () {
-                          serviceController.openInPersonField();
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'In Person',
-                              style: TextStyle(
-                                color: hintColor,
-                                fontFamily: 'Mazzard',
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            serviceController.showInPersonPriceField ==
-                                    false.obs
-                                ? Text(
-                                    serviceController.InPersonPrice == null
-                                        ? '0' + ' AED'
-                                        : serviceController.InPersonPrice! +
-                                            " AED",
-                                    style: TextStyle(
-                                      color: mainColor,
-                                      fontFamily: 'Mazzard',
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  )
-                                : AutoSizeTextField(
-                                    controller:
-                                        serviceController.inpersionController,
-                                    fullwidth: false,
-                                    keyboardType: TextInputType.number,
-                                    maxLength: 10,
-                                    style: TextStyle(fontSize: 18),
-                                    minWidth:
-                                        MediaQuery.of(context).size.width * 0.3,
-                                    onSubmitted: (value) {
-                                      serviceController.EditInPersonPrice();
-                                    },
-                                    decoration: InputDecoration(
-                                      suffixIcon: InkWell(
-                                        onTap: () {
-                                          serviceController.EditInPersonPrice();
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 8.0),
-                                          child: Icon(Icons.check,
-                                              color: mainColor, size: 18),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                          ],
-                        ),
-                      )
-                    : Container(),
-                serviceController.isInperson != false
-                    ? SizedBox(height: 12)
-                    : Container(),
-                serviceController.isInperson != false
-                    ? Column(children: [
-                        Row(
-                          children: [
-                            SvgPicture.asset('assets/images/location.svg'),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 6.0),
-                              child: Text(
-                                ' Determine range of service',
-                                style: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                        SizedBox(height: 12),
-                        LocationButton(
-                            title: 'Choose location',
-                            icon: Icons.my_location_rounded,
-                            onPressed: () {
-                              Get.to(() => VendorMapScreen(
-                                  service: mainController.vendor!.service));
-                            }),
-                      ])
-                    : Container(),
-                serviceController.isInperson != false
-                    ? SizedBox(
-                        height: 20,
-                      )
-                    : Container(),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Row(
-                    children: [
-                      Text(
-                        '(' +
-                            "Gulf Standard Time United Arab Emirates Time".tr +
-                            ')',
-                        style: TextStyle(
-                            fontSize: 10, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-                Schedule(
-                    day: 'Monday',
-                    startTime: mainController.vendor!.service == null
-                        ? '09:00'
-                        : mainController
-                            .vendor!.service!.schedule![0].startTime,
-                    endTime: mainController.vendor!.service == null
-                        ? '17:00'
-                        : mainController.vendor!.service!.schedule![0].endTime),
-                Schedule(
-                    day: 'Tuesday',
-                    startTime: mainController.vendor!.service == null
-                        ? '09:00'
-                        : mainController
-                            .vendor!.service!.schedule![1].startTime,
-                    endTime: mainController.vendor!.service == null
-                        ? '17:00'
-                        : mainController.vendor!.service!.schedule![1].endTime),
-                Schedule(
-                    day: 'Wednesday',
-                    startTime: mainController.vendor!.service == null
-                        ? '09:00'
-                        : mainController
-                            .vendor!.service!.schedule![2].startTime,
-                    endTime: mainController.vendor!.service == null
-                        ? '17:00'
-                        : mainController.vendor!.service!.schedule![2].endTime),
-                Schedule(
-                    day: 'Thursday',
-                    startTime: mainController.vendor!.service == null
-                        ? '09:00'
-                        : mainController
-                            .vendor!.service!.schedule![3].startTime,
-                    endTime: mainController.vendor!.service == null
-                        ? '17:00'
-                        : mainController.vendor!.service!.schedule![3].endTime),
-                Schedule(
-                    day: 'Friday',
-                    startTime: mainController.vendor!.service == null
-                        ? '09:00'
-                        : mainController
-                            .vendor!.service!.schedule![4].startTime,
-                    endTime: mainController.vendor!.service == null
-                        ? '17:00'
-                        : mainController.vendor!.service!.schedule![4].endTime),
-                Schedule(
-                    day: 'Saturday',
-                    startTime: mainController.vendor!.service == null
-                        ? '09:00'
-                        : mainController
-                            .vendor!.service!.schedule![5].startTime,
-                    endTime: mainController.vendor!.service == null
-                        ? '17:00'
-                        : mainController.vendor!.service!.schedule![5].endTime),
-                Schedule(
-                    day: 'Sunday',
-                    startTime: mainController.vendor!.service == null
-                        ? '09:00'
-                        : mainController
-                            .vendor!.service!.schedule![6].startTime,
-                    endTime: mainController.vendor!.service == null
-                        ? '17:00'
-                        : mainController.vendor!.service!.schedule![6].endTime),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20, bottom: 20),
-                  child: LargeButton(
-                      title: 'Submit',
-                      textcolor: White,
-                      onPressed: () {
-                        serviceController.addservice();
-                      }),
-                )
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       )),

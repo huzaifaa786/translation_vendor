@@ -33,8 +33,8 @@ class IconsButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 30),
       child: SizedBox(
-        width: MediaQuery.of(context).size.width * screenRatio,
-        height: 60,
+        width: MediaQuery.of(context).size.width * 0.8,
+        height: 50,
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
@@ -47,7 +47,7 @@ class IconsButton extends StatelessWidget {
             ),
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 8.0),
@@ -57,6 +57,7 @@ class IconsButton extends StatelessWidget {
                     imgicon,
                     height: 27,
                     width: 27,
+                    color: White,
                   ),
                 ),
               ),
@@ -69,21 +70,21 @@ class IconsButton extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              Container(
-                height: 40,
-                width: 40,
-                decoration: BoxDecoration(
-                  // border: Border.all(
-                  //   color: Colors.black,
-                  // ),
-                  borderRadius: BorderRadius.all(Radius.circular(45)),
-                  color: Colors.white,
-                ),
-                child: Icon(
-                  Icons.keyboard_arrow_right_outlined,
-                  color: Colors.black,
-                ),
-              )
+              // Container(
+              //   height: 40,
+              //   width: 40,
+              //   decoration: BoxDecoration(
+              //     // border: Border.all(
+              //     //   color: Colors.black,
+              //     // ),
+              //     borderRadius: BorderRadius.all(Radius.circular(45)),
+              //     color: Colors.white,
+              //   ),
+              //   child: Icon(
+              //     Icons.keyboard_arrow_right_outlined,
+              //     color: Colors.black,
+              //   ),
+              // )
             ],
           ),
         ),

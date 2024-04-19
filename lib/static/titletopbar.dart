@@ -16,38 +16,62 @@ class TitleTopbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.ltr,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 12, right: 2, left: 2 ,bottom: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.2,
+        decoration: BoxDecoration(
+          color: greenish,
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(23)),
+        ),
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            GestureDetector(
-              onTap: ontap,
-              child: Container(
-                decoration: BoxDecoration(
-                 border: Border.all(
-                      color: Colors.grey,
+            Row(
+              children: [
+                GestureDetector(
+                  onTap: ontap,
+                  child: Container(
+                    margin: EdgeInsets.only(left: 10, top: 14),
+                    decoration: BoxDecoration(
+                      color: White,
+                      border: Border.all(
+                        color: Colors.grey,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(60),
+                      ),
                     ),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(60),
+                    child: Icon(
+                      size: 28,
+                      Icons.keyboard_arrow_left_outlined,
                     ),
+                  ),
                 ),
-                child: Icon(
-                   size: 28,
-                  Icons.keyboard_arrow_left_outlined,
-                  
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Text(
+                    text,
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 21,
+                      fontWeight: FontWeight.w500,
+                      color: White,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            Text(
-              text,
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 21,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            Text('..........',style: TextStyle(color: White),)
+              ],
+            )
+
+            // Text(
+            //   '..........',
+            //   style: TextStyle(color: greenish),
+            // )
           ],
         ),
       ),

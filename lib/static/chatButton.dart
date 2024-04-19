@@ -37,8 +37,8 @@ class ChatButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 30),
       child: SizedBox(
-        width: MediaQuery.of(context).size.width * screenRatio,
-        height: 60,
+        width: MediaQuery.of(context).size.width * 0.8,
+        height: 50,
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
@@ -51,12 +51,15 @@ class ChatButton extends StatelessWidget {
             ),
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               screen == 'Chat'
                   ? Padding(
                       padding: const EdgeInsets.only(right: 8.0),
-                      child: Icon(Icons.chat))
+                      child: SvgPicture.asset(
+                        "assets/images/chat.svg",
+                        color: White,
+                      ))
                   : Padding(
                       padding: const EdgeInsets.only(right: 8.0),
                       child: FittedBox(
@@ -95,21 +98,21 @@ class ChatButton extends StatelessWidget {
                   )
                 ],
               ),
-              Container(
-                height: 40,
-                width: 40,
-                decoration: BoxDecoration(
-                  // border: Border.all(
-                  //   color: Colors.black,
-                  // ),
-                  borderRadius: BorderRadius.all(Radius.circular(45)),
-                  color: Colors.white,
-                ),
-                child: Icon(
-                  Icons.keyboard_arrow_right_outlined,
-                  color: Colors.black,
-                ),
-              )
+              // Container(
+              //   height: 40,
+              //   width: 40,
+              //   decoration: BoxDecoration(
+              //     // border: Border.all(
+              //     //   color: Colors.black,
+              //     // ),
+              //     borderRadius: BorderRadius.all(Radius.circular(45)),
+              //     color: Colors.white,
+              //   ),
+              //   child: Icon(
+              //     Icons.keyboard_arrow_right_outlined,
+              //     color: Colors.black,
+              //   ),
+              // )
             ],
           ),
         ),
