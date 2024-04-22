@@ -27,7 +27,8 @@ class NotificationController extends GetxController {
     if (!response['error']) {
       notifications = [];
       for (var van in response['notifications']) {
-        notifications.add(Notificationn(van));
+        notifications.add(Notificationn(van),
+        );
       }
       print(response);
       LoadingHelper.dismiss();
@@ -40,7 +41,7 @@ class NotificationController extends GetxController {
    readnotifications() async {
     LoadingHelper.show();
     print('object');
-    var url = BASE_URL + 'notification/read';
+    var url = BASE_URL + '';
     GetStorage box = GetStorage();
 
     String api_token = box.read('api_token');

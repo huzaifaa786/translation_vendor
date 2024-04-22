@@ -31,7 +31,7 @@ class StarButton extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-          padding: EdgeInsets.all(8),
+          // padding: EdgeInsets.all(8),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(40),
@@ -39,8 +39,8 @@ class StarButton extends StatelessWidget {
               color: Color.fromARGB(255, 246, 237, 237)),
           child: Image.asset(
             'assets/images/star.png',
-            // height: 34,
-            // width: 34,
+            height: 45,
+            width: 45,
           )),
     );
   }

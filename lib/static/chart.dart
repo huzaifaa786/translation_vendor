@@ -34,24 +34,25 @@ class ChartCards extends StatelessWidget {
             //    fit: BoxFit.cover,
             //       )),
             Container(
-              width: 70,
-              height: 70,
+              width: 80,
+              height: 80,
               margin: EdgeInsets.only(left: 15),
               padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
-                border: Border.all(width: 2, color: Color(0xFF34607B)),
+                // border: Border.all(width: 2, color: Color(0xFF34607),
                 borderRadius: BorderRadius.circular(70),
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(45),
                 child: imgicon == ''
                     ? Image(
-                        image: AssetImage('assets/images/5907.jpg'),
-                        height: 64,
-                        width: 64,
+                        image: AssetImage('assets/images/Male User (1).png'),
+                        // height: 200,
+                        // width: 200,
                       )
                     : CachedNetworkImage(
-                        imageUrl: 'https://translation.klickwash.net/' + imgicon,
+                        imageUrl:
+                            'https://translation.klickwash.net/' + imgicon,
                         height: 64,
                         width: 64,
                       ),

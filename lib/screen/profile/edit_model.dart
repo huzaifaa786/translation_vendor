@@ -45,9 +45,20 @@ class _EditModelState extends State<EditModel> {
       builder: (controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Change Password",
+                style: TextStyle(
+                    color: greenish, fontSize: 20, fontWeight: FontWeight.w700),
+              )
+            ],
+          ),
           SizedBox(height: 10),
           InputFieldPasswordTwo(
-            hint: 'Enter current password',
+            label: "Old password",
+            // hint: 'Enter current password',
             toggle: _toggle,
             obscure: _passwordVisible,
             controller: profileController.currentPassword,
@@ -56,7 +67,8 @@ class _EditModelState extends State<EditModel> {
           ),
           SizedBox(height: 10),
           InputFieldPasswordTwo(
-            hint: 'Enter new password',
+            label: "New password",
+            // hint: 'Enter new password',
             toggle: _toggle1,
             // imageIcon: 'assets/images/lock.svg',
             obscure: _newpasswordVisible,
@@ -66,7 +78,8 @@ class _EditModelState extends State<EditModel> {
           ),
           SizedBox(height: 10),
           InputFieldPasswordTwo(
-            hint: 'Enter confirm new password',
+            label: "Confirm new password",
+            // hint: 'Enter confirm new password',
             toggle: _toggle2,
             // imageIcon: 'assets/images/lock.svg',
             obscure: _cpasswordVisible,
@@ -76,18 +89,27 @@ class _EditModelState extends State<EditModel> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 16),
-            child: LargeButton(
-              title: 'Change',
-              textcolor: White,
-              onPressed: () {
-                print('object');
-                profileController.changepassword((success) {
-                  if (success) {
-                    Get.back();
-                    update(context);
-                  }
-                });
-              },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 40,
+                  width: 120,
+                  child: LargeButton(
+                    title: 'Update',
+                    textcolor: White,
+                    onPressed: () {
+                      print('object');
+                      profileController.changepassword((success) {
+                        if (success) {
+                          Get.back();
+                          update(context);
+                        }
+                      });
+                    },
+                  ),
+                ),
+              ],
             ),
           )
         ],
@@ -98,22 +120,25 @@ class _EditModelState extends State<EditModel> {
   update(context) {
     Alert(
       style: AlertStyle(
-        titleStyle: TextStyle(fontSize: 25),
+        titleStyle: TextStyle(
+            fontSize: 25, color: greenish, fontWeight: FontWeight.w700),
       ),
       context: context,
       title: "Successfully Updated ",
-      image: SvgPicture.asset(
-        "assets/images/tick.svg",
+      image: Image.asset(
+        "assets/images/tick.png",
         height: 90,
+        color: greenish,
       ),
       buttons: [
         DialogButton(
           radius: BorderRadius.all(
-            Radius.circular(12),
+            Radius.circular(30),
           ),
-          height: 60,
+          height: 50,
+          width: 100,
           child: Text(
-            "Ok",
+            "Done",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
           onPressed: () {

@@ -30,27 +30,77 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: greenish,
-        title: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: Text(
-              "Order History",
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: "Poppins",
-                  color: White),
-            ),
-          ),
-        ),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: greenish,
+      //   title: Center(
+      //     child: Padding(
+      //       padding: const EdgeInsets.only(top: 20),
+      //       child: Text(
+      //         "Order History",
+      //         style: TextStyle(
+      //             fontSize: 20,
+      //             fontWeight: FontWeight.w400,
+      //             fontFamily: "Poppins",
+      //             color: White),
+      //       ),
+      //     ),
+      //   ),
+      // ),
       body: SafeArea(
           child: GetBuilder<HistoryController>(
         builder: (controller) => SingleChildScrollView(
           child: Column(
             children: [
+              Container(
+                height: Get.height * 0.1 / 0.8,
+                color: greenish,
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(left: 10, top: 14),
+                            decoration: BoxDecoration(
+                              color: White,
+                              border: Border.all(
+                                color: Colors.grey,
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(60),
+                              ),
+                            ),
+                            child: Icon(
+                              size: 28,
+                              Icons.keyboard_arrow_left_outlined,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 0),
+                          child: Text(
+                            "Order History",
+                            style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontSize: 21,
+                              fontWeight: FontWeight.w500,
+                              color: White,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
               // TitleTopbar(
               //   text: 'History',
               //   ontap: () {

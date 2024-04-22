@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:translation_vendor/values/colors.dart';
 
 class InputFieldPasswordTwo extends StatelessWidget {
   const InputFieldPasswordTwo(
@@ -17,6 +18,7 @@ class InputFieldPasswordTwo extends StatelessWidget {
       this.validator,
       this.validate,
       this.autovalidateMode,
+      this.label,
       this.type = TextInputType.text,
       this.onpressed})
       : super(key: key);
@@ -34,6 +36,7 @@ class InputFieldPasswordTwo extends StatelessWidget {
   final toggle;
   final onChange;
   final onpressed;
+  final label;
 
   @override
   Widget build(BuildContext context) {
@@ -42,18 +45,21 @@ class InputFieldPasswordTwo extends StatelessWidget {
         child: TextFormField(
           controller: controller,
           decoration: InputDecoration(
+            // label: label,
             fillColor: Colors.grey,
-            border: OutlineInputBorder(),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: greenish)),
             hoverColor: Colors.grey,
             focusColor: Colors.grey,
-            labelText: hint,
+            labelText: label,
             hintText: hint,
             suffixIcon: IconButton(
               icon: Icon(
                 obscure
                     ? Icons.visibility_off_outlined
                     : Icons.visibility_outlined,
-                color: Colors.black,
+                color: greenish,
               ),
               onPressed: () {
                 toggle();
@@ -66,9 +72,9 @@ class InputFieldPasswordTwo extends StatelessWidget {
           maxLines: 1,
           validator: validator,
           autovalidateMode: autovalidateMode ??
-                      (validator == true.obs
-                          ? AutovalidateMode.always
-                          : AutovalidateMode.onUserInteraction),
+              (validator == true.obs
+                  ? AutovalidateMode.always
+                  : AutovalidateMode.onUserInteraction),
         ));
   }
 }

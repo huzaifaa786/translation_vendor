@@ -86,8 +86,11 @@ class _SalesScreenState extends State<SalesScreen> {
                                         onRangeSelected:
                                             saleController.onRangeSelected,
                                         calendarStyle: CalendarStyle(
+                                          defaultTextStyle:
+                                              TextStyle(color: greenish),
                                           todayDecoration: BoxDecoration(
                                               color: mainColor.withOpacity(0.5),
+                                              // color: greenish,
                                               shape: BoxShape.circle),
                                           selectedDecoration: BoxDecoration(
                                               color: mainColor,
@@ -112,6 +115,31 @@ class _SalesScreenState extends State<SalesScreen> {
                                           CalendarFormat.month: 'Month',
                                           // CalendarFormat.week: 'Week',
                                         },
+
+                                        headerStyle: HeaderStyle(
+                                          leftChevronIcon: Container(
+                                            decoration: BoxDecoration(
+                                              color: greenish,
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Icon(Icons.chevron_left,
+                                                color: White),
+                                          ),
+                                          rightChevronIcon: Container(
+                                            decoration: BoxDecoration(
+                                              color: greenish,
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Icon(Icons.chevron_right,
+                                                color: White),
+                                          ),
+                                          titleCentered: true,
+                                          // formatButtonVisible: false,
+                                          titleTextStyle: TextStyle(
+                                              color: greenish,
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.w600),
+                                        ),
                                         onPageChanged:
                                             saleController.onFormatChanged,
                                         calendarFormat: saleController.format,

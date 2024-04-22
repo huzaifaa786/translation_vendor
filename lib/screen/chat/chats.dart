@@ -37,7 +37,7 @@ class _Chats_screenState extends State<Chats_screen> {
                   height: 115,
                   decoration: BoxDecoration(
                     color: greenish,
-                    borderRadius: BorderRadius.circular(20),
+                    // borderRadius: BorderRadius.circular(20),
                   ),
                   child: Center(
                     child: Text(
@@ -58,18 +58,18 @@ class _Chats_screenState extends State<Chats_screen> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: Color.fromRGBO(0, 0, 0, 0.49),
-                      width: 1,
-                    ),
+                    // border: Border.all(
+                    //   color: Color.fromRGBO(0, 0, 0, 0.49),
+                    //   width: 1,
+                    // ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: greenish)),
                         child: TextField(
                           onChanged: chatController.searchContact,
                           decoration: InputDecoration(

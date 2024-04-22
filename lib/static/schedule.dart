@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation_vendor/values/colors.dart';
@@ -20,7 +21,7 @@ class Scheduleinput extends StatelessWidget {
       this.validate,
       this.suffix,
       this.type = TextInputType.text,
-      this.fontSize = 14.0,
+      this.fontSize = 8.0,
       this.width = 0.98,
       this.onpressed})
       : super(key: key);
@@ -47,56 +48,45 @@ class Scheduleinput extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.width * 0.2 / 2.3,
-            width: MediaQuery.of(context).size.width * 0.3 / 1.3,
+            height: 36,
+            width: MediaQuery.of(context).size.width * 0.23,
             child: TextFormField(
+              textAlignVertical: TextAlignVertical.center,
               textAlign: TextAlign.center,
               readOnly: true,
               // onTap: onpressed,
               enabled: enabled,
-
               obscureText: obscure,
               controller: controller,
-              style: TextStyle(fontSize: fontSize, color: White),
+              style: TextStyle(fontSize: 12, color: White),
               keyboardType: type,
               validator: validator,
               decoration: InputDecoration(
-                suffix: InkWell(
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 0),
-                    child: Container(
-                      padding: EdgeInsets.only(
-                        right: 10,
-                      ),
-                      child: SvgPicture.asset(
-                        "assets/images/chevron-down.svg",
-                        height: 20,
-                        width: 20,
-                        color: White,
-                      ),
-                    ),
-                  ),
+                suffixIconConstraints: BoxConstraints(
+                    minHeight: 24, maxHeight: 25, minWidth: 24, maxWidth: 25),
+                suffixIcon: InkWell(
                   onTap: onpressed,
+                  child: Icon(Icons.arrow_drop_down_rounded),
                 ),
                 suffixIconColor: White,
                 filled: true,
                 fillColor: greenish,
                 hintText: hint,
                 contentPadding:
-                    EdgeInsets.symmetric(vertical: 2.0, horizontal: 2.0),
+                    EdgeInsets.symmetric(vertical: 3, horizontal: 10),
                 // contentPadding: const EdgeInsets.only(
-                //     left: 12.0, right: 12, top: 12, bottom: 16),
+                //     left: 17, right: 12, top: 12, bottom: 14),
                 hintStyle: TextStyle(color: hintColor),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: greenish),
-                  borderRadius: BorderRadius.all(Radius.circular(70)),
+                  borderSide: BorderSide(width: 1, color: greenish),
+                  borderRadius: BorderRadius.all(Radius.circular(50)),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: greenish),
-                  borderRadius: BorderRadius.all(Radius.circular(70)),
+                  borderSide: BorderSide(width: 1, color: greenish),
+                  borderRadius: BorderRadius.all(Radius.circular(50)),
                 ),
               ),
               cursorColor: Colors.black,

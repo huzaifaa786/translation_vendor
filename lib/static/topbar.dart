@@ -65,12 +65,12 @@ class _TopbarState extends State<Topbar> {
                   ),
                   checkNoti != false
                       ? Positioned(
-                          right: 3,
-                          top: 3,
+                          right: 1,
+                          top: 0.4,
                           child: Container(
                             padding: EdgeInsets.all(5),
                             decoration: BoxDecoration(
-                              color: mainColor,
+                              color: Colors.red,
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),

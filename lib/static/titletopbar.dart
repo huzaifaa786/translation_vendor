@@ -8,21 +8,23 @@ class TitleTopbar extends StatelessWidget {
     super.key,
     this.text,
     this.ontap,
+    this.height = 0.2,
   });
   final text;
   final ontap;
+  final height;
 
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.2,
+        height: MediaQuery.of(context).size.height * height,
         decoration: BoxDecoration(
           color: greenish,
           borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(23)),
+              bottomLeft: Radius.circular(13),
+              bottomRight: Radius.circular(13)),
         ),
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,

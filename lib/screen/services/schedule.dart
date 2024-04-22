@@ -54,10 +54,10 @@ class _ScheduleState extends State<Schedule> {
             Text(
               widget.day! + ' Working Hours',
               style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-              ),
+                  fontFamily: 'Poppins',
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: greenish),
             ),
           ],
         ),
@@ -129,7 +129,7 @@ class _ScheduleState extends State<Schedule> {
               },
               hint: '9:00',
               controller: startTimeController,
-              fontSize: 18.0,
+              fontSize: 14.0,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
@@ -158,7 +158,7 @@ class _ScheduleState extends State<Schedule> {
                 }, currentTime: DateTime.now());
               },
               hint: '17:00',
-              fontSize: 18.0,
+              fontSize: 14.0,
               controller: endTimeController,
             ),
             StarButton(

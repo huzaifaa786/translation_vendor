@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation_vendor/values/colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -11,6 +12,7 @@ class NotificationTile extends StatelessWidget {
     this.price,
     this.ontap,
     this.name,
+    this.scheduletype,
   });
   final name;
   final price;
@@ -18,6 +20,7 @@ class NotificationTile extends StatelessWidget {
   final title;
   final day;
   final ontap;
+  final scheduletype;
 
   @override
   Widget build(BuildContext context) {
@@ -58,13 +61,6 @@ class NotificationTile extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                title,
-                                style: TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.w500),
-                                maxLines: 2,
-                              ),
-                              SizedBox(height: 3),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -76,29 +72,47 @@ class NotificationTile extends StatelessWidget {
                                         color: notiNameCOlor,
                                         fontWeight: FontWeight.w500),
                                   ),
-                                  price != ''
-                                      ? Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 4),
-                                          child: Text(
-                                            'AED ' + price,
-                                            style: TextStyle(
-                                                fontSize: 13,
-                                                color: mainColor,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        )
-                                      : Container(),
+                                  // price != ''
+                                  //     ? Padding(
+                                  //         padding:
+                                  //             const EdgeInsets.only(top: 4),
+                                  //         child: Text(
+                                  //           'AED ' + price,
+                                  //           style: TextStyle(
+                                  //               fontSize: 13,
+                                  //               color: mainColor,
+                                  //               fontWeight: FontWeight.w500),
+                                  //         ),
+                                  //       )
+                                  //     : Container(),
                                 ],
                               ),
+
+                              Text(scheduletype,style: TextStyle(),),
+                              Text(
+                                title,
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: greenish,
+                                ),
+                                maxLines: 2,
+                              ),
+                              SizedBox(height: 3),
                               Padding(
                                 padding: const EdgeInsets.only(top: 4),
-                                child: Text(
-                                  day,
-                                  style: TextStyle(
-                                      fontSize: 13,
-                                      color: hintColor,
-                                      fontWeight: FontWeight.w500),
+                                child: Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                        "assets/images/calendar.svg"),
+                                    Text(
+                                      day,
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: hintColor,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],

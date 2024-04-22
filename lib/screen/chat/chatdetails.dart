@@ -5,6 +5,7 @@ import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
 import 'package:translation_vendor/screen/chat/chatcontroller.dart';
 import 'package:translation_vendor/static/chattopbar.dart';
 import 'package:translation_vendor/static/rplycharcard.dart';
+import 'package:translation_vendor/values/colors.dart';
 import 'package:translation_vendor/values/controllers.dart';
 
 class Chatdetails_screen extends StatefulWidget {
@@ -78,19 +79,20 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                 name: widget.contactname,
                 image: widget.screen == 'order'
                     ? widget.contactPic
-                    : 'https://translation.ezmoveportal.com/' + widget.contactPic!,
+                    : 'https://translation.ezmoveportal.com/' +
+                        widget.contactPic!,
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(8, 8, 8, 4),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      child: Divider(
-                        color: Colors.grey,
-                        height: 1,
-                      ),
-                    ),
+                    // Expanded(
+                    //   // child: Divider(
+                    //   //   color: Colors.grey,
+                    //   //   height: 1,
+                    //   // ),
+                    // ),
                     // Padding(
                     //   padding: EdgeInsets.symmetric(horizontal: 10),
                     //   child: Text(
@@ -101,12 +103,12 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                     //     ),
                     //   ),
                     // ),
-                    Expanded(
-                      child: Divider(
-                        color: Colors.grey,
-                        height: 1,
-                      ),
-                    ),
+                    // Expanded(
+                    //   child: Divider(
+                    //     color: Colors.grey,
+                    //     height: 1,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -154,8 +156,8 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                     width: MediaQuery.of(context).size.width * 0.9,
                     // height: 58,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.circular(24),
+                      border: Border.all(color: greenish),
                       color: Color.fromARGB(255, 255, 255, 255),
                     ),
                     child: TextField(
@@ -172,8 +174,7 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                             onTap: () {
                               controller.picksinglefile();
                             },
-                            child:
-                                Icon(Icons.attach_file, color: Colors.black)),
+                            child: Icon(Icons.attach_file, color: greenish)),
                         hintText: 'You message',
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.only(left: 8, top: 18),

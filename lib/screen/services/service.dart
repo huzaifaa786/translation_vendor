@@ -142,11 +142,12 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     Container(
                       padding: EdgeInsets.only(left: 12, right: 12),
                       margin: EdgeInsets.only(
-                        top: 26,
+                        top: 15,
                         left: 10,
                         right: 10,
                       ),
                       decoration: BoxDecoration(
+                          border: Border.all(color: Color(0xFF7586A9)),
                           color: Colors.grey.shade200,
                           borderRadius: BorderRadius.circular(15)),
                       child: Column(
@@ -165,7 +166,10 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                     });
                                   },
                                 ),
-                                Text('Audio / Video Interpretaion')
+                                Text(
+                                  'Audio / Video Interpretaion',
+                                  // style: TextStyle(fontSize: 12),
+                                )
                               ],
                             ),
                           ),
@@ -293,7 +297,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                           //       )
                           //     : Container(),
                           SizedBox(
-                            height: 23,
+                            height: 14,
                           ),
                           serviceController.isDocument != false
                               ? Column(
@@ -367,7 +371,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                                       .urgentController,
                                                   fullwidth: false,
                                                   style:
-                                                      TextStyle(fontSize: 18),
+                                                      TextStyle(fontSize: 12),
                                                   // maxLines: null,
                                                   keyboardType:
                                                       TextInputType.number,
@@ -520,32 +524,32 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                 )
                               : Container(),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(right: 6.0),
                                 child: SvgPicture.asset(
                                     'assets/images/shedule.svg'),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 6.0),
-                                child: Text(
-                                  'Schedule',
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
+                              Gap(10),
                               Text(
-                                '  (Rate Per 30 minutes)',
+                                'Schedule',
                                 style: TextStyle(
-                                  color: hintColor,
                                   fontFamily: 'Poppins',
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  color: greenish,
                                 ),
                               ),
+                              // Text(
+                              //   '  (Rate Per 30 minutes)',
+                              //   style: TextStyle(
+                              //     color: hintColor,
+                              //     fontFamily: 'Poppins',
+                              //     fontSize: 12,
+                              //     fontWeight: FontWeight.w400,
+                              //   ),
+                              // ),
                             ],
                           ),
                           SizedBox(
@@ -738,7 +742,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                         style: TextStyle(
                                           color: greenish,
                                           fontFamily: 'Poppins',
-                                          fontSize: 12,
+                                          fontSize: 15,
                                           fontWeight: FontWeight.w600,
                                         ),
                                       )
@@ -778,7 +782,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                       style: TextStyle(
                                         color: greenish,
                                         fontWeight: FontWeight.bold,
-                                        // fontSize: 10,
+                                        fontSize: 11,
                                       ),
                                     ),
                                   ],
@@ -788,8 +792,10 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                       "United Arab Emirates Time Zone".tr +
                                       ')',
                                   style: TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.bold),
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                    color: greenish,
+                                  ),
                                 ),
                               ],
                             ),
