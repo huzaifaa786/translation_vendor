@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation_vendor/screen/profile/profilecontroller.dart';
@@ -103,7 +104,53 @@ class _EditModelState extends State<EditModel> {
                       profileController.changepassword((success) {
                         if (success) {
                           Get.back();
-                          update(context);
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Dialog(
+                                  insetAnimationCurve: Curves.bounceOut,
+                                  insetAnimationDuration: Duration(seconds: 2),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
+                                    height: Get.height * 0.5,
+                                    child: Column(
+                                      children: [
+                                        Image.asset(
+                                          "assets/images/tick.png",
+                                          height: 90,
+                                          color: greenish,
+                                        ),
+                                        Gap(15),
+                                        SizedBox(
+                                          height: 140,
+                                          width: 140,
+                                          child: Text(
+                                            "SuccessfullyUpdated",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontSize: 25,
+                                                color: greenish,
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                            height: Get.height * 0.08,
+                                            width: Get.width * 0.4,
+                                            child: LargeButton(
+                                                title: "Done",
+                                                textcolor: White,
+                                                onPressed: () {
+                                                  Get.back();
+                                                }))
+                                      ],
+                                    ),
+                                  ));
+                            },
+                          );
                         }
                       });
                     },
@@ -118,35 +165,42 @@ class _EditModelState extends State<EditModel> {
   }
 
   update(context) {
-    Alert(
-      style: AlertStyle(
-        titleStyle: TextStyle(
-            fontSize: 25, color: greenish, fontWeight: FontWeight.w700),
-      ),
-      context: context,
-      title: "Successfully Updated ",
-      image: Image.asset(
-        "assets/images/tick.png",
-        height: 90,
-        color: greenish,
-      ),
-      buttons: [
-        DialogButton(
-          radius: BorderRadius.all(
-            Radius.circular(30),
-          ),
-          height: 50,
-          width: 100,
-          child: Text(
-            "Done",
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          ),
-          onPressed: () {
-            Get.back();
-          },
-          color: mainColor,
-        ),
-      ],
-    ).show();
+    Dialog(
+      child: Text("Usaa"),
+    );
+
+    //   Alert(
+    //     style: AlertStyle(
+    //       titleStyle: TextStyle(
+    //           ),
+    //     ),
+
+    //     context: context,
+    //     image: Image.asset(
+    //       "assets/images/tick.png",
+    //       height: 90,
+    //       color: greenish,
+    //     ),
+
+    //     title: "Successfully Updated ",
+
+    //     buttons: [
+    //       DialogButton(
+    //         radius: BorderRadius.all(
+    //           Radius.circular(30),
+    //         ),
+    //         height: 50,
+    //         width: 100,
+    //         child: Text(
+    //           "Done",
+    //           style: TextStyle(color: Colors.white, fontSize: 20),
+    //         ),
+    //         onPressed: () {
+    //           Get.back();
+    //         },
+    //         color: mainColor,
+    //       ),
+    //     ],
+    //   ).show();
   }
 }

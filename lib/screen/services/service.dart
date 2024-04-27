@@ -113,7 +113,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
               Container(
                 padding: EdgeInsets.all(8.0),
                 margin:
-                    EdgeInsets.only(top: 80, left: 25, right: 25, bottom: 70),
+                    EdgeInsets.only(top: 100, left: 25, right: 25, bottom: 70),
                 decoration: BoxDecoration(
                     color: Colors.grey.shade100,
                     borderRadius: BorderRadius.circular(15)),
@@ -904,6 +904,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
       style: AlertStyle(
         titleStyle: TextStyle(fontSize: 25),
       ),
+      image: Image.asset("assets/images/star.png"),
       context: context,
       title: "Are you sure to freeze this day",
       buttons: [

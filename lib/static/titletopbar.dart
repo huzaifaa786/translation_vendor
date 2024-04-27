@@ -52,22 +52,18 @@ class TitleTopbar extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: Text(
-                    text,
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 21,
-                      fontWeight: FontWeight.w500,
-                      color: White,
-                    ),
-                  ),
+            Padding(
+              padding: const EdgeInsets.only(top: 0),
+              child: Text(
+                text,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 21,
+                  fontWeight: FontWeight.w500,
+                  color: White,
                 ),
-              ],
+              ),
             )
 
             // Text(

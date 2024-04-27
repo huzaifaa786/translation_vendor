@@ -50,23 +50,23 @@ class InputField1 extends StatelessWidget {
       child: Card(
         color: Color.fromRGBO(255, 255, 255, 1),
         shape: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(30),
             borderSide: BorderSide(
               color: Colors.grey[400]!,
             )),
         child: Row(
           children: [
             SizedBox(
-              width: 10,
-            ),
+                // width: 10,
+                ),
             Container(
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: mainColor,
-                  width: 1,
-                ),
-              ),
+                  // shape: BoxShape.circle,
+                  // border: Border.all(
+                  //   color: mainColor,
+                  //   width: 1,
+                  // ),
+                  ),
               child: Padding(
                 padding: EdgeInsets.all(8.0),
                 child: SvgPicture.asset(icon, height: 20, width: 20),

@@ -78,7 +78,7 @@ class _ProfileState extends State<Profile> {
                   ],
                 ),
                 Positioned(
-                  top: 90,
+                  top: 95,
                   left: 20,
                   right: 20,
                   child: Container(
@@ -98,8 +98,7 @@ class _ProfileState extends State<Profile> {
                                     height: 12,
                                   ),
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       InkWell(
                                         onTap: () {
@@ -160,8 +159,7 @@ class _ProfileState extends State<Profile> {
                                   //   height: 12,
                                   // ),
 
-                                  profileController.showNameField ==
-                                          false.obs
+                                  profileController.showNameField == false.obs
                                       ? Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -176,8 +174,7 @@ class _ProfileState extends State<Profile> {
                                                 style: TextStyle(
                                                   fontFamily: 'Poppins',
                                                   fontSize: 17,
-                                                  fontWeight:
-                                                      FontWeight.w500,
+                                                  fontWeight: FontWeight.w500,
                                                 ),
                                               ),
                                             ),
@@ -188,18 +185,14 @@ class _ProfileState extends State<Profile> {
                                               },
                                               child: Container(
                                                   padding:
-                                                      const EdgeInsets.all(
-                                                          8),
+                                                      const EdgeInsets.all(8),
                                                   decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.all(
                                                         Radius.circular(40),
                                                       ),
                                                       color: Color.fromARGB(
-                                                          255,
-                                                          218,
-                                                          211,
-                                                          211)),
+                                                          255, 218, 211, 211)),
                                                   child: SvgPicture.asset(
                                                       'assets/images/edit.svg')),
                                             )
@@ -218,17 +211,14 @@ class _ProfileState extends State<Profile> {
                                           decoration: InputDecoration(
                                             border: OutlineInputBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(
-                                                        20)),
+                                                    BorderRadius.circular(20)),
                                             suffixIcon: InkWell(
                                               onTap: () {
-                                                profileController
-                                                    .EditText();
+                                                profileController.EditText();
                                               },
                                               child: Padding(
-                                                padding:
-                                                    const EdgeInsets.only(
-                                                        bottom: 8.0),
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 8.0),
                                                 child: Icon(
                                                   Icons.check,
                                                   color: mainColor,
@@ -246,34 +236,27 @@ class _ProfileState extends State<Profile> {
                                   ),
                                   profileController.showEnglishField ==
                                           false.obs
-                                      ? profileController
-                                                  .vendor!.aboutEng ==
-                                              ''
+                                      ? profileController.vendor!.aboutEng == ''
                                           ? Padding(
                                               padding:
-                                                  const EdgeInsets.only(
-                                                      top: 6),
+                                                  const EdgeInsets.only(top: 6),
                                               child: Text(
                                                 'About In english is empty. please write something about yourself in english.',
-                                                textAlign:
-                                                    TextAlign.justify,
+                                                textAlign: TextAlign.justify,
                                                 style: TextStyle(
                                                     fontFamily: 'Poppins',
                                                     fontSize: 12,
-                                                    fontWeight:
-                                                        FontWeight.w500,
-                                                    color:
-                                                        Colors.grey[400]),
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Colors.grey[400]),
                                               ),
                                             )
                                           : Row(
                                               children: [
                                                 Container(
-                                                  width:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          0.8,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.8,
                                                   padding:
                                                       const EdgeInsets.only(
                                                           top: 4),
@@ -286,8 +269,7 @@ class _ProfileState extends State<Profile> {
                                                       fontSize: 15,
                                                       fontWeight:
                                                           FontWeight.w400,
-                                                      color:
-                                                          Colors.grey[600],
+                                                      color: Colors.grey[600],
                                                     ),
                                                   ),
                                                 ),
@@ -302,8 +284,7 @@ class _ProfileState extends State<Profile> {
                                           decoration: InputDecoration(
                                             border: OutlineInputBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(
-                                                        20)),
+                                                    BorderRadius.circular(20)),
                                             label: Text("About (English)"),
                                             suffixIcon: InkWell(
                                               onTap: () {
@@ -311,9 +292,8 @@ class _ProfileState extends State<Profile> {
                                                     .EditEngAbout();
                                               },
                                               child: Padding(
-                                                padding:
-                                                    const EdgeInsets.only(
-                                                        bottom: 8.0),
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 8.0),
                                                 child: Icon(
                                                   Icons.check,
                                                   color: mainColor,
@@ -329,10 +309,8 @@ class _ProfileState extends State<Profile> {
                                       profileController.openArabicField();
                                     },
                                   ),
-                                  profileController.showArabicField ==
-                                          false.obs
-                                      ? profileController
-                                                  .vendor!.aboutArabic ==
+                                  profileController.showArabicField == false.obs
+                                      ? profileController.vendor!.aboutArabic ==
                                               ''
                                           ? Text(
                                               'About In Arabic is empty. please write something about yourself in Arabic.',
@@ -340,8 +318,7 @@ class _ProfileState extends State<Profile> {
                                               style: TextStyle(
                                                   fontFamily: 'Poppins',
                                                   fontSize: 12,
-                                                  fontWeight:
-                                                      FontWeight.w500,
+                                                  fontWeight: FontWeight.w500,
                                                   color: Colors.grey[400]),
                                             )
                                           : Row(
@@ -354,8 +331,7 @@ class _ProfileState extends State<Profile> {
                                                       fontSize: 15,
                                                       fontWeight:
                                                           FontWeight.w400,
-                                                      color:
-                                                          Colors.grey[600]),
+                                                      color: Colors.grey[600]),
                                                 ),
                                               ],
                                             )
@@ -368,8 +344,7 @@ class _ProfileState extends State<Profile> {
                                           decoration: InputDecoration(
                                             border: OutlineInputBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(
-                                                        20)),
+                                                    BorderRadius.circular(20)),
                                             label: Text("About(Arabic)"),
                                             suffixIcon: InkWell(
                                               onTap: () {
@@ -377,9 +352,8 @@ class _ProfileState extends State<Profile> {
                                                     .EditArabicAbout();
                                               },
                                               child: Padding(
-                                                padding:
-                                                    const EdgeInsets.only(
-                                                        bottom: 8.0),
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 8.0),
                                                 child: Icon(
                                                   Icons.check,
                                                   color: mainColor,
@@ -440,92 +414,7 @@ class _ProfileState extends State<Profile> {
                                   //           ),
                                   //         ),
                                   //       ),
-                                  ProfileHeading(
-                                    title: 'Certificate',
-                                    onPressed: () {
-                                      profileController
-                                          .openCertificateField();
-                                    },
-                                  ),
-                                  profileController.vendor!.certificate ==
-                                          ''
-                                      ? Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 6),
-                                          child: Text(
-                                            'No! Certificate Avaliable. Upload your certicate so customer see this before order it may be helpful for you to get more orders.',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontFamily: 'Poppins',
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.grey[400]),
-                                          ),
-                                        )
-                                      : Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            SvgPicture.asset(
-                                              'assets/images/certificate.svg',
-                                              height: 24,
-                                              width: 24,
-                                            ),
-                                            Flexible(
-                                              child: Container(
-                                                padding: EdgeInsets.only(
-                                                    left: 6),
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    Get.to(
-                                                      () =>
-                                                          FullScreenImagePage(
-                                                        imageUrl:
-                                                            profileController
-                                                                .vendor!
-                                                                .certificate!,
-                                                      ),
-                                                    );
-                                                  },
-                                                  child: Text(
-                                                    profileController
-                                                                .vendor!
-                                                                .certificate !=
-                                                            ''
-                                                        ? profileController
-                                                            .vendor!
-                                                            .certifcate_name!
-                                                        : '',
-                                                    overflow: TextOverflow
-                                                        .ellipsis,
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            'Poppins',
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Colors
-                                                            .grey[600]),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                  profileController.showCertificateField ==
-                                          true.obs
-                                      ? Certificateinput(
-                                          controller: profileController
-                                              .certificateName,
-                                          labelText:
-                                              'Certificate (Optional)',
-                                          hint: 'Enter certificate name',
-                                          onpressed: () {
-                                            profileController
-                                                .selectcertificateImage();
-                                          },
-                                        )
-                                      : Container(),
+
                                   Column(
                                     children: [
                                       ProfileHeading(
@@ -576,25 +465,101 @@ class _ProfileState extends State<Profile> {
                                           // crossAxisAlignment:
                                           //     WrapCrossAlignment.center,
                                           runSpacing: 10,
-                                          runAlignment:
-                                              WrapAlignment.center,
+                                          runAlignment: WrapAlignment.center,
                                           children: [
                                             for (var i = 0;
                                                 i <
-                                                    profileController
-                                                        .vendor!
-                                                        .language!
-                                                        .length;
+                                                    profileController.vendor!
+                                                        .language!.length;
                                                 i++)
                                               TextBox(
                                                   title: profileController
-                                                      .vendor!
-                                                      .language![i]),
+                                                      .vendor!.language![i]),
                                           ],
                                         ),
                                       ),
                                     ],
                                   ),
+                                  ProfileHeading(
+                                    title: 'Certificate',
+                                    onPressed: () {
+                                      profileController.openCertificateField();
+                                    },
+                                  ),
+                                  profileController.vendor!.certificate == ''
+                                      ? Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 6),
+                                          child: Text(
+                                            'No! Certificate Avaliable. Upload your certicate so customer see this before order it may be helpful for you to get more orders.',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.grey[400]),
+                                          ),
+                                        )
+                                      : Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            SvgPicture.asset(
+                                              'assets/images/certificate.svg',
+                                              height: 24,
+                                              width: 24,
+                                            ),
+                                            Flexible(
+                                              child: Container(
+                                                padding:
+                                                    EdgeInsets.only(left: 6),
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    Get.to(
+                                                      () => FullScreenImagePage(
+                                                        imageUrl:
+                                                            profileController
+                                                                .vendor!
+                                                                .certificate!,
+                                                      ),
+                                                    );
+                                                  },
+                                                  child: Text(
+                                                    profileController.vendor!
+                                                                .certificate !=
+                                                            ''
+                                                        ? profileController
+                                                            .vendor!
+                                                            .certifcate_name!
+                                                        : '',
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                        fontFamily: 'Poppins',
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color:
+                                                            Colors.grey[600]),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                  profileController.showCertificateField ==
+                                          true.obs
+                                      ? Certificateinput(
+                                          controller:
+                                              profileController.certificateName,
+                                          labelText: 'Certificate (Optional)',
+                                          hint: 'Enter certificate name',
+                                          onpressed: () {
+                                            profileController
+                                                .selectcertificateImage();
+                                          },
+                                        )
+                                      : Container(),
 
                                   ChangePassword(
                                     title: 'Change Password',
@@ -611,7 +576,7 @@ class _ProfileState extends State<Profile> {
                                     ),
                                     child: SizedBox(
                                       height: 40,
-                                      width: 100,
+                                      width: 130,
                                       child: LargeButton(
                                         title: "Update",
                                         onPressed: () {
@@ -621,8 +586,7 @@ class _ProfileState extends State<Profile> {
                                             if (profileController
                                                     .vendor!.aboutArabic !=
                                                 '') {
-                                              profileController
-                                                  .editprofile();
+                                              profileController.editprofile();
                                             } else {
                                               Get.snackbar(
                                                   'Please fill up all the information',

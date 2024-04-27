@@ -168,19 +168,40 @@ class _ScheduleState extends State<Schedule> {
                     .indexWhere((hour) => hour.day == widget.day!);
                 Alert(
                   style: AlertStyle(
-                    titleStyle: TextStyle(fontSize: 25),
+                    titleStyle: TextStyle(
+                        color: greenish,
+                        fontSize: 18,
+                        fontFamily: "Poppins",
+                        fontWeight: FontWeight.w700),
                   ),
                   context: context,
+                  image: Image.asset(
+                    "assets/images/star.png",
+                  ),
                   title: serviceController.workingHours[i].isFrozen
                       ? "Are you sure to unfreeze this day"
                       : "Are you sure to freeze this day",
                   buttons: [
                     DialogButton(
-                      height: 60,
-                      radius: BorderRadius.circular(12),
+                      height: 40,
+                      radius: BorderRadius.circular(30),
                       child: Text(
-                        "yes",
+                        "No",
                         style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      onPressed: () => Get.back(),
+                      color: mainColor,
+                    ),
+                    DialogButton(
+                      height: 40,
+                      width: 100,
+                      radius: BorderRadius.circular(30),
+                      // border: Border.all(
+                      //   color: mainColor,
+                      // ),
+                      child: Text(
+                        "Yes",
+                        style: TextStyle(color: White, fontSize: 20),
                       ),
                       onPressed: () {
                         setState(() {
@@ -190,20 +211,7 @@ class _ScheduleState extends State<Schedule> {
                         });
                         Get.back();
                       },
-                      color: mainColor,
-                    ),
-                    DialogButton(
-                      height: 60,
-                      radius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: mainColor,
-                      ),
-                      child: Text(
-                        "No",
-                        style: TextStyle(color: mainColor, fontSize: 20),
-                      ),
-                      onPressed: () => Get.back(),
-                      color: White,
+                      color: Color(0xFF51596B),
                     ),
                   ],
                 ).show();

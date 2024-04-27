@@ -71,7 +71,7 @@ class Stackinput extends StatelessWidget {
                 fillColor: Colors.grey,
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(30),
                 ),
                 contentPadding: EdgeInsets.only(left: 20, top: 20, bottom: 20),
                 hoverColor: Colors.grey,

@@ -70,7 +70,7 @@ class Imageinput extends StatelessWidget {
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.all(
-                        Radius.circular(12),
+                        Radius.circular(30),
                       ),
                     ),
                     child: Row(

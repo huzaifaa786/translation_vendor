@@ -45,11 +45,11 @@ class InputFieldPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.all(
-          Radius.circular(6),
-        ),
-      ),
+          // border: Border.all(color: Colors.grey),
+          // borderRadius: BorderRadius.all(
+          //   Radius.circular(30),
+          // ),
+          ),
       child: TextFormField(
         style: const TextStyle(fontSize: 14),
         controller: controller,
@@ -90,7 +90,11 @@ class InputFieldPassword extends StatelessWidget {
             hintText: hint,
             hintStyle: TextStyle(color: hintColor),
             contentPadding: const EdgeInsets.only(left: 3.0),
-            border: OutlineInputBorder(borderSide: BorderSide.none)),
+            border: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.grey,
+                ),
+                borderRadius: BorderRadius.circular(30))),
         keyboardType: type,
         cursorColor: Colors.black,
         obscureText: obscure,

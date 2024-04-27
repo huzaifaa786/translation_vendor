@@ -56,11 +56,11 @@ class IconInputFields extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(6),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.all(
-          Radius.circular(6),
-        ),
-      ),
+          // border: Border.all(color: Colors.grey),
+          // borderRadius: BorderRadius.all(
+          //   Radius.circular(6),
+          // ),
+          ),
       child: TextFormField(
         style: const TextStyle(fontSize: 14),
         controller: controller,
@@ -70,32 +70,35 @@ class IconInputFields extends StatelessWidget {
                 ? AutovalidateMode.always
                 : AutovalidateMode.onUserInteraction),
         decoration: InputDecoration(
-            prefixIcon: Padding(
-              padding: const EdgeInsets.all(6),
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                    // border: Border.all(
-                    //   color: borderColor,
-                    // ),
-                    // // borderRadius: BorderRadius.all(
-                    //   Radius.circular(30),
-                    // ),
-                    ),
-                child: SvgPicture.asset(
-                  imageIcon,
-                  height: 17,
-                  width: 17,
-                  color: greenish,
-                ),
+          prefixIcon: Padding(
+            padding: const EdgeInsets.all(6),
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  // border: Border.all(
+                  //   color: borderColor,
+                  // ),
+                  // // borderRadius: BorderRadius.all(
+                  //   Radius.circular(30),
+                  // ),
+                  ),
+              child: SvgPicture.asset(
+                imageIcon,
+                height: 17,
+                width: 17,
+                color: greenish,
               ),
             ),
-            filled: true,
-            fillColor: Colors.white,
-            hintText: hint,
-            hintStyle: TextStyle(color: hintColor),
-            contentPadding: const EdgeInsets.only(left: 3),
-            border: OutlineInputBorder(borderSide: BorderSide.none)),
+          ),
+          filled: true,
+          fillColor: Colors.white,
+          hintText: hint,
+          hintStyle: TextStyle(color: hintColor),
+          contentPadding: EdgeInsets.only(left: 20, top: 20, bottom: 20),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30),
+              borderSide: BorderSide(color: borderColor)),
+        ),
         keyboardType: type,
         cursorColor: Colors.black,
         maxLines: 1,

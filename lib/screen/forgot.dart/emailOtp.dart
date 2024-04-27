@@ -22,12 +22,12 @@ class _EmailOtpVerifyScreenState extends State<EmailOtpVerifyScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 50),
-                    child: Image.asset("assets/images/otplogo.png"),
-                  ),
-                ),
+                // Center(
+                //   child: Padding(
+                //     padding: const EdgeInsets.only(top: 50),
+                //     child: Image.asset("assets/images/otplogo.png"),
+                //   ),
+                // ),
                 SizedBox(
                   height: 30,
                 ),
@@ -36,27 +36,41 @@ class _EmailOtpVerifyScreenState extends State<EmailOtpVerifyScreen> {
                   child: Text(
                     'Verify Your Email',
                     style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontFamily: "Poppins",
+                        fontSize: 25,
+                        fontWeight: FontWeight.w500,
+                        color: greenish),
+                  ),
+                ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Image.asset("assets/images/Email.png"),
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 5,
                 ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  // margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
                   padding: EdgeInsets.all(4),
-                  child: Text(
-                    'Entered the 4 digit code received on your entered email.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 17,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 90, right: 90),
+                    child: Text(
+                      'Entered the 4 digit code received on your entered email.',
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      style: TextStyle(
+                        fontFamily: "Poppins",
+                        color: greenish,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 13,
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: 40,
+                  height: 30,
                 ),
                 OtpTextField(
                   margin: EdgeInsets.only(right: 14),
@@ -75,7 +89,7 @@ class _EmailOtpVerifyScreenState extends State<EmailOtpVerifyScreen> {
                   },
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 30,
                 ),
                 // Center(
                 //   child: Container(
@@ -118,30 +132,34 @@ class _EmailOtpVerifyScreenState extends State<EmailOtpVerifyScreen> {
                 //   ),
                 // ),
                 const SizedBox(
-                  height: 20,
+                  height: 15,
                 ),
                 Center(
-                    child: LargeButton(
-                  title: 'Submit',
-                  buttonWidth: 0.85,
-                  onPressed: () {
-                    if (authController.verify.value == true) {
-                      Get.snackbar('OTP verified successfully!',
-                          'You have successfully completed the verification process.',
-                          snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: mainColor,
-                          colorText: Colors.white);
-                      Get.to(() => ResetPasswordScreen());
-                    } else {
-                      Get.snackbar('ERROR!',
-                          "Entered Otp is incorrect. Please enter correct Otp to proceed Further.",
-                          snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: Colors.red,
-                          colorText: Colors.white);
-                    }
-                  },
-                  color: mainColor,
-                  textcolor: Colors.white,
+                    child: SizedBox(
+                  height: Get.height * 0.08,
+                  width: Get.width * 0.4,
+                  child: LargeButton(
+                    title: 'Submit',
+                    buttonWidth: 0.85,
+                    onPressed: () {
+                      if (authController.verify.value == true) {
+                        Get.snackbar('OTP verified successfully!',
+                            'You have successfully completed the verification process.',
+                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: mainColor,
+                            colorText: Colors.white);
+                        Get.to(() => ResetPasswordScreen());
+                      } else {
+                        Get.snackbar('ERROR!',
+                            "Entered Otp is incorrect. Please enter correct Otp to proceed Further.",
+                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: Colors.red,
+                            colorText: Colors.white);
+                      }
+                    },
+                    color: mainColor,
+                    textcolor: Colors.white,
+                  ),
                 )),
               ],
             ),

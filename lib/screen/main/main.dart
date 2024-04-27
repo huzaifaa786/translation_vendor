@@ -76,26 +76,47 @@ class _MainScreenState extends State<MainScreen> {
                                 mainController.vendor != null
                                     ? Padding(
                                         padding: const EdgeInsets.only(
-                                          top: 0,
-                                        ),
-                                        child: Row(
+                                            top: 0, left: 20, bottom: 25),
+                                        child: Column(
                                           children: [
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.8,
-                                              child: Text(
-                                                'Hello' +
-                                                    ', ' +
+                                            Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.8,
+                                                  child: Text(
+                                                    'Hello' + ', ',
+                                                    style: TextStyle(
+                                                        fontSize: 20,
+                                                        color: White,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily: 'Poppins'),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.8,
+                                                  child: Text(
                                                     mainController
                                                         .vendor!.name!,
-                                                style: TextStyle(
-                                                    fontSize: 30,
-                                                    color: White,
-                                                    fontWeight: FontWeight.w700,
-                                                    fontFamily: 'Poppins'),
-                                              ),
+                                                    style: TextStyle(
+                                                        fontSize: 20,
+                                                        color: White,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily: 'Poppins'),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
@@ -128,7 +149,7 @@ class _MainScreenState extends State<MainScreen> {
                         ],
                       ),
                       Positioned(
-                        top: 110,
+                        top: 150,
                         right: 18,
                         left: 18,
                         child: Container(
@@ -240,32 +261,31 @@ class _MainScreenState extends State<MainScreen> {
                               //     ],
                               //   ),
                               // ),
-                              // Padding(
-                              //   padding:
-                              //       const EdgeInsets.only(top: 20, bottom: 20),
-                              //   child: InkWell(
-                              //     onTap: () async {
-                              //       logout(context);
-                              //     },
-                              //     child: Row(
-                              //       mainAxisAlignment: MainAxisAlignment.center,
-                              //       children: [
-                              //         Text(
-                              //           'Log Out',
-                              //           style: TextStyle(
-                              //             color: Colors.red,
-                              //             fontFamily: 'Poppins',
-                              //             fontSize: 19,
-                              //             fontWeight: FontWeight.w500,
-                              //           ),
-                              //         ),
-                              //         Image(
-                              //             image: AssetImage(
-                              //                 'assets/images/Arrow 1.png')),
-                              //       ],
-                              //     ),
-                              //   ),
-                              // )
+                              Padding(
+                                padding: const EdgeInsets.only(),
+                                child: InkWell(
+                                  onTap: () async {
+                                    logout(context);
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Log Out',
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                          fontFamily: 'Poppins',
+                                          fontSize: 19,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      Image(
+                                          image: AssetImage(
+                                              'assets/images/Arrow 1.png')),
+                                    ],
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:translation_vendor/values/colors.dart';
 
 class Badgee extends StatelessWidget {
   const Badgee({
@@ -11,6 +12,7 @@ class Badgee extends StatelessWidget {
     this.ontap,
     this.icon,
     this.iconcolor,
+    this.prefixicon,
   }) : super(key: key);
   final title;
   final color;
@@ -18,6 +20,7 @@ class Badgee extends StatelessWidget {
   final ontap;
   final icon;
   final iconcolor;
+  final prefixicon;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +31,12 @@ class Badgee extends StatelessWidget {
       child: Center(
         child: Row(
           children: [
+            SvgPicture.asset(
+              "assets/images/loading.svg",
+              height: 18,
+              width: 29,
+              color: greenish,
+            ),
             Text(
               title,
               style: TextStyle(

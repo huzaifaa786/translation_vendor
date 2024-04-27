@@ -148,8 +148,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: ToggleSwitch(
                             initialLabelIndex: index,
                             labels: const [
-                              'New',
                               'Existing',
+                              'New',
                             ],
                             totalSwitches: 2,
                             onToggle: (index) {
@@ -185,21 +185,109 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   index == 0
                       ? Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 40.0),
+                                child: IconInputFields(
+                                  imageIcon: 'assets/images/emailicon.svg',
+                                  hint: 'Email Address',
+                                  controller: authController.email,
+                                  validate: authController.validateSignInForm,
+                                  validator: (field) =>
+                                      Validators.emailValidator(field),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 12.0),
+                                child: InputFieldPassword(
+                                  imageIcon: 'assets/images/lock (2).svg',
+                                  hint: 'Password',
+                                  toggle: _toggle,
+                                  obscure: _obscureText,
+                                  controller: authController.password,
+                                  validate: authController.validateSignInForm,
+                                  validator: (password) =>
+                                      Validators.passwordValidator(password),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 12, bottom: 16),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        Get.to(() => ForgotScreen());
+                                      },
+                                      child: Text(
+                                        "Forgot Password?",
+                                        style: TextStyle(
+                                            decoration:
+                                                TextDecoration.underline,
+                                            decorationColor: greenish,
+                                            fontFamily: "Poppins",
+                                            fontSize: 12,
+                                            color: greenish,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 25.0, bottom: 30),
+                                child: SizedBox(
+                                  height: Get.height * 0.06,
+                                  width: Get.width * 0.4,
+                                  child: LargeButton(
+                                    title: 'Login',
+                                    textcolor: White,
+                                    onPressed: () {
+                                      setState(() {
+                                        showCreate = false;
+                                        print(showCreate);
+                                      });
+                                      authController.login((success) {
+                                        if (success) {
+                                          authController.ClearSignupVariables();
+                                          Get.offAll(MainScreen());
+                                        }
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : Padding(
                           padding: const EdgeInsets.only(
                               top: 13.0, bottom: 13, left: 20, right: 20),
                           child: Column(children: [
                             Image.asset(
                               "assets/images/Male User (1).png",
                             ),
+                            Text(
+                              "Add Photo",
+                              style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xFF7A8495),
+                              ),
+                            ),
                             Stackinput(
                               icon: "assets/images/Male User (1).png",
                               controller: authController.vendorName,
-                              labelText: 'Vendor Name',
+                              labelText: 'Name',
                               hint: '',
                               validate: authController.validateSignUpForm,
                               validator: (field) =>
                                   Validators.emptyStringValidator(
-                                      field, '*Vendor name '),
+                                      field, '* Name '),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(
@@ -232,7 +320,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     left: 2, right: 2, top: 16, bottom: 16),
                                 enabledBorder: const OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(15)),
+                                      BorderRadius.all(Radius.circular(30)),
                                   borderSide: BorderSide(
                                       color: Colors.grey, width: 1.0),
                                 ),
@@ -298,13 +386,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Text(
-                                'select atleast 2 languages',
-                                style: TextStyle(color: Colors.red),
-                              ),
-                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(top: 10),
+                            //   child: Text(
+                            //     'select atleast 2 languages',
+                            //     style: TextStyle(color: Colors.red),
+                            //   ),
+                            // ),
                             Padding(
                                 padding: const EdgeInsets.only(top: 10),
                                 child: LanguageAdd(
@@ -337,6 +425,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     icon: ImageIcon(AssetImage(
                                         'assets/images/drop_arrow.png')),
                                     onChange: switchfromlang)
+
                                 //  InputFields(
                                 //     hint: 'Add language',
                                 //     controller: authController.languageController,
@@ -351,8 +440,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                 //   )
                                 : Container(),
                             Padding(
+                              padding: const EdgeInsets.only(top: 14),
+                              child: Text(
+                                'select atleast 2 languages',
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ),
+                            Padding(
                               padding: const EdgeInsets.only(
-                                top: 25.0,
+                                top: 17.0,
                               ),
                               child: IconInputFields(
                                 imageIcon: 'assets/images/userprofile.svg',
@@ -430,6 +526,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               padding: const EdgeInsets.only(
                                   top: 26.0, bottom: 33, left: 60, right: 60),
                               child: SizedBox(
+                                height: 40,
+                                width: 120,
                                 child: LargeButton(
                                   rounded: 60,
                                   title: 'Submit',
@@ -447,77 +545,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ]),
-                        )
-                      : Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 20),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 40.0),
-                                child: IconInputFields(
-                                  imageIcon: 'assets/images/emailicon.svg',
-                                  hint: 'Email',
-                                  controller: authController.email,
-                                  validate: authController.validateSignInForm,
-                                  validator: (field) =>
-                                      Validators.emailValidator(field),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 12.0),
-                                child: InputFieldPassword(
-                                  imageIcon: 'assets/images/lock (2).svg',
-                                  hint: 'Password',
-                                  toggle: _toggle,
-                                  obscure: _obscureText,
-                                  controller: authController.password,
-                                  // validate: authController.validateSignInForm,
-                                  // validator: (password) =>
-                                  //     Validators.passwordValidator(password),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(top: 12, bottom: 16),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        Get.to(() => ForgotScreen());
-                                      },
-                                      child: Text(
-                                        "Forgot Password?",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.black54,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 25.0, bottom: 30),
-                                child: LargeButton(
-                                  title: 'Login',
-                                  textcolor: White,
-                                  onPressed: () {
-                                    setState(() {
-                                      showCreate = false;
-                                      print(showCreate);
-                                    });
-                                    authController.login((success) {
-                                      if (success) {
-                                        authController.ClearSignupVariables();
-                                        Get.offAll(MainScreen());
-                                      }
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
                         )
                 ],
               ),
