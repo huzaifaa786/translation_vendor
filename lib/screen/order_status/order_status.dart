@@ -145,7 +145,8 @@ class _OrderStatusState extends State<OrderStatus> {
                                       titleimage: "assets/images/money.svg",
                                       title: 'Amount Paid: ',
                                       discription: '' +
-                                          widget.order!.convertedPrice!.toString() +
+                                          widget.order!.convertedPrice!
+                                              .toString() +
                                           ' USD',
                                     ),
                                     widget.order!.servicetype == 'document'
@@ -253,6 +254,7 @@ class _OrderStatusState extends State<OrderStatus> {
                     ),
                   ],
                 ),
+                SizedBox(height: 12,),
                 Padding(
                   padding: const EdgeInsets.only(left: 25, right: 25),
                   child: Column(
@@ -528,6 +530,7 @@ class _OrderStatusState extends State<OrderStatus> {
                                   LargeButton(
                                     title: 'Accept',
                                     textcolor: White,
+                                    height: 0.05,
                                     screenRatio: 0.4,
                                     rounded: true,
                                     onPressed: () {
@@ -537,10 +540,11 @@ class _OrderStatusState extends State<OrderStatus> {
                                   ),
                                   LargeButton(
                                     onPressed: () {
-                                     _showRejectDialog(context,widget.order);
+                                      _showRejectDialog(context, widget.order);
                                     },
                                     title: 'Reject',
                                     textcolor: White,
+                                    height: 0.05,
                                     screenRatio: 0.4,
                                     rounded: true,
                                     color: Colors.red,
@@ -566,6 +570,7 @@ class _OrderStatusState extends State<OrderStatus> {
                                     LargeButton(
                                         title: "Mark as Completed",
                                         textcolor: White,
+                                        height: 0.05,
                                         onPressed: () {
                                           completeorder(context, widget.order);
                                         })
@@ -604,7 +609,7 @@ class _OrderStatusState extends State<OrderStatus> {
     );
   }
 
-  void _showRejectDialog(BuildContext context,order) {
+  void _showRejectDialog(BuildContext context, order) {
     final TextEditingController reasonController = TextEditingController();
 
     showDialog(
@@ -647,8 +652,6 @@ class _OrderStatusState extends State<OrderStatus> {
       },
     );
   }
-
-
 
   completeorder(context, Order) {
     Alert(
@@ -695,5 +698,4 @@ class _OrderStatusState extends State<OrderStatus> {
       ],
     ).show();
   }
-
 }

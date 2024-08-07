@@ -254,7 +254,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     top: 25.0, bottom: 30),
                                 child: SizedBox(
                                   height: Get.height * 0.06,
-                                  width: Get.width * 0.4,
+                                  width: Get.width * 0.9,
                                   child: LargeButton(
                                     title: 'Login',
                                     textcolor: White,
@@ -537,10 +537,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(
-                                  top: 26.0, bottom: 33, left: 60, right: 60),
+                                  top: 26.0, bottom: 33),
                               child: SizedBox(
-                                height: 40,
-                                width: 120,
+                                height: 60,
+                                width: Get.width*0.9,
                                 child: LargeButton(
                                   rounded: 60,
                                   title: 'Submit',

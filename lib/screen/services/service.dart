@@ -877,7 +877,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                             ),
                             child: SizedBox(
                               height: 50,
-                              width: 110,
+                              width: Get.width*0.9,
                               child: LargeButton(
                                   title: 'Submit',
                                   textcolor: White,

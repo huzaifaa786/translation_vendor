@@ -575,8 +575,8 @@ class _ProfileState extends State<Profile> {
                                       bottom: 20.0,
                                     ),
                                     child: SizedBox(
-                                      height: 40,
-                                      width: 130,
+                                      height: 50,
+                                      width: Get.width*0.9,
                                       child: LargeButton(
                                         title: "Update",
                                         onPressed: () {
