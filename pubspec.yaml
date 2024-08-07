@@ -65,6 +65,7 @@ dependencies:
   persistent_bottom_nav_bar: ^5.0.2
   gap: ^3.0.1
   flutter_screenutil: ^5.7.0
+  forex_conversion: ^0.2.5+1
 
  
 

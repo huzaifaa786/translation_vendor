@@ -75,7 +75,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                           top: 20, bottom: 20),
                                       child: InputField1(
                                         hint: 'Email Address ',
-                                        icon: 'assets/images/emailicon.svg',
+                                        icon: 'assets/images/email.svg',
                                         controller: authController.forgotemail,
                                         validator: (user) =>
                                             Validators.emptyStringValidator(

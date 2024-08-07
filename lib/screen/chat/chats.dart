@@ -160,7 +160,7 @@ class _Chats_screenState extends State<Chats_screen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image(image: AssetImage('assets/images/chat 1.png')),
+                  Image(image: AssetImage('chat 1.png')),
                   Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Text(

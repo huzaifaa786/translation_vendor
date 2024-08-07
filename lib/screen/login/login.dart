@@ -31,6 +31,19 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _obscureText = true;
   bool _obscureText1 = true;
   int index = 1;
+  /////////////////
+  @override
+  @override
+  void initState() {
+    super.initState();
+    fetchCountry();
+  }
+
+  void fetchCountry() async {
+    authController.country = await authController.fetchCountryFromIP();
+    print('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
+    print(authController.country);
+  }
 
   switchfromlang(value) {
     setState(() {
@@ -191,7 +204,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Padding(
                                 padding: const EdgeInsets.only(top: 40.0),
                                 child: IconInputFields(
-                                  imageIcon: 'assets/images/emailicon.svg',
+                                  imageIcon: 'assets/images/email.svg',
                                   hint: 'Email Address',
                                   controller: authController.email,
                                   validate: authController.validateSignInForm,
@@ -466,7 +479,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Padding(
                               padding: const EdgeInsets.only(top: 12.0),
                               child: IconInputFields(
-                                imageIcon: 'assets/images/emailicon.svg',
+                                imageIcon: 'assets/images/',
                                 controller: authController.email,
                                 hint: 'Email',
                                 width: 12,

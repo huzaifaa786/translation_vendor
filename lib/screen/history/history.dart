@@ -18,7 +18,7 @@ class HistoryScreen extends StatefulWidget {
 
 class _HistoryScreenState extends State<HistoryScreen> {
   fetchOrder() async {
-    await historyController.getorder();
+    await historyController.getOrder();
     setState(() {});
   }
 
@@ -139,9 +139,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                 : '',
                             name: controller.orders[index].user!.username,
                             image: controller.orders[index].user!.profilePic,
-                            price: controller.orders[index].price,
+                            price: controller.orders[index].convertedPrice,
                             type: controller.orders[index].servicetype,
                             status: controller.orders[index].status,
+                            
                             onmsgtap: () {
                               Navigator.push(
                                   context,

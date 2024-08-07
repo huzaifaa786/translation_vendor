@@ -35,7 +35,7 @@ class ChatButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 30),
+      padding: const EdgeInsets.only(top: 50),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.8,
         height: 50,
@@ -46,8 +46,8 @@ class ChatButton extends StatelessWidget {
             shadowColor: mainColor,
             shape: RoundedRectangleBorder(
               borderRadius: rounded == true
-                  ? BorderRadius.all(Radius.circular(45))
-                  : BorderRadius.all(Radius.circular(15)),
+                  ? BorderRadius.all(Radius.circular(10))
+                  : BorderRadius.all(Radius.circular(10)),
             ),
           ),
           child: Row(

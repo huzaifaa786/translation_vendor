@@ -145,8 +145,8 @@ class _OrderStatusState extends State<OrderStatus> {
                                       titleimage: "assets/images/money.svg",
                                       title: 'Amount Paid: ',
                                       discription: '' +
-                                          widget.order!.price!.toString() +
-                                          ' AED',
+                                          widget.order!.convertedPrice!.toString() +
+                                          ' USD',
                                     ),
                                     widget.order!.servicetype == 'document'
                                         ? Center(
@@ -537,8 +537,7 @@ class _OrderStatusState extends State<OrderStatus> {
                                   ),
                                   LargeButton(
                                     onPressed: () {
-                                      statusController
-                                          .orderreject(widget.order!);
+                                     _showRejectDialog(context,widget.order);
                                     },
                                     title: 'Reject',
                                     textcolor: White,
@@ -605,6 +604,52 @@ class _OrderStatusState extends State<OrderStatus> {
     );
   }
 
+  void _showRejectDialog(BuildContext context,order) {
+    final TextEditingController reasonController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Reject Order'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Cancel Reason'),
+              TextField(
+                controller: reasonController,
+                decoration: InputDecoration(hintText: 'Reason'),
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Submit'),
+              onPressed: () {
+                String reason = reasonController.text.trim();
+                if (reason.isNotEmpty) {
+                  statusController.orderreject(widget.order!, reason);
+                  Navigator.of(context).pop();
+                } else {
+                  // Show error message if the reason is empty
+                  Get.snackbar('Error', 'Please provide a reason');
+                }
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
+
   completeorder(context, Order) {
     Alert(
       style: AlertStyle(
@@ -650,4 +695,5 @@ class _OrderStatusState extends State<OrderStatus> {
       ],
     ).show();
   }
+
 }

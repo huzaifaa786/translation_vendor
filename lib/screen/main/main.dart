@@ -54,7 +54,6 @@ class _MainScreenState extends State<MainScreen> {
         builder: (chatcontroller) => GetBuilder<MainController>(
           builder: (controller) => Container(
             // padding: const EdgeInsets.only(left: 20, right: 20),
-            height: MediaQuery.of(context).size.height,
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -155,8 +154,15 @@ class _MainScreenState extends State<MainScreen> {
                         child: Container(
                           height: Get.height * 0.7,
                           decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.grey.withOpacity(0.4),
+                                    spreadRadius: 2,
+                                    blurRadius: 2,
+                                    offset: const Offset(0, 2))
+                              ],
                               color: Colors.grey.shade100,
-                              borderRadius: BorderRadius.circular(20)),
+                              borderRadius: BorderRadius.circular(14)),
                           child: Column(
                             children: [
                               Padding(
@@ -262,7 +268,7 @@ class _MainScreenState extends State<MainScreen> {
                               //   ),
                               // ),
                               Padding(
-                                padding: const EdgeInsets.only(),
+                                padding: const EdgeInsets.only(top: 30),
                                 child: InkWell(
                                   onTap: () async {
                                     logout(context);

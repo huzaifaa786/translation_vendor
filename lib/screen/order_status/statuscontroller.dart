@@ -30,7 +30,7 @@ class StatusController extends GetxController {
       LoadingHelper.dismiss();
     }
   }
-   orderreject(Order order) async {
+   orderreject(Order order,reason) async {
     LoadingHelper.show();
     var url = BASE_URL + 'order/reject';
     GetStorage box = GetStorage();
@@ -39,6 +39,7 @@ class StatusController extends GetxController {
     var data = {
       'id': order.id,
       'api_token': api_token,
+      'cancel_reason':reason
     };
     print(data);
     var response = await Api.execute(url: url, data: data);

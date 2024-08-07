@@ -273,7 +273,7 @@ class _SalesScreenState extends State<SalesScreen> {
                                           fontWeight: FontWeight.w600)),
                                   Row(
                                     children: [
-                                      Text(' AED',
+                                      Text(' USD',
                                           style: TextStyle(
                                               color: greenish,
                                               fontSize: 29,

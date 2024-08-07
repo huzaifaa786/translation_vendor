@@ -376,6 +376,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  forex_conversion:
+    dependency: "direct main"
+    description:
+      name: forex_conversion
+      sha256: "5a3593dc9b5d544c93a9e96cce0c57c228f8541e8f6db83b374a043cb5f53518"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.5+1"
   full_screen_image:
     dependency: "direct main"
     description:

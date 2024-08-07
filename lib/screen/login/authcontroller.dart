@@ -36,6 +36,7 @@ class AuthController extends GetxController {
   String year = '';
   String month = '';
   String day = '';
+  String? country = '';
   List? languege = [];
   XFile? passportImage = XFile('');
   XFile? certificateImage = XFile('');
@@ -125,7 +126,7 @@ class AuthController extends GetxController {
   }
 
   // deleteLang() {
-   
+
   // }
 
 //////////////////////////  Register Functions   ///////////////////////////////////
@@ -133,187 +134,162 @@ class AuthController extends GetxController {
   void SignUp(void Function(bool) callback) async {
     LoadingHelper.show();
     final bool isFormValid = Validators.languageValidator(languege) == null &&
-        Validators.emptyStringValidator(vendorName.text, '') == null &&
-        Validators.emptyStringValidator(userName.text, '') == null &&
-        Validators.emptyStringValidator(password.text, '') == null &&
-        Validators.emptyStringValidator(confirmPassword.text, '') == null &&
-        Validators.emailValidator(email.text) == null;
+        Validators.emptyStringValidator(vendorName.text, 'Vendor Name') ==
+            null &&
+        Validators.emptyStringValidator(userName.text, 'User Name') == null &&
+        Validators.emptyStringValidator(password.text, 'Password') == null &&
+        Validators.emptyStringValidator(
+                confirmPassword.text, 'Confirm Password') ==
+            null &&
+        Validators.emailValidator(email.text) == null &&
+        Validators.emptyStringValidator(phone.text, 'Phone Number') == null &&
+        year.isNotEmpty &&
+        month.isNotEmpty &&
+        day.isNotEmpty;
+
     if (isFormValid) {
-      if (year == '') {
+      if (password.text != confirmPassword.text) {
         LoadingHelper.dismiss();
-        Get.snackbar('Invalid Date Format.', 'Select complete Date of Birth.',
+        Get.snackbar("Invalid Password.",
+            'Password and Confirm Password must be the same.',
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.red,
             colorText: Colors.white);
-        print('object');
+        return callback(false);
+      }
+
+      DateTime date =
+          DateTime(int.parse(year), int.parse(month), int.parse(day));
+      if (certificateImage!.path.isEmpty) {
+        LoadingHelper.dismiss();
+        Get.snackbar("certificateImage can't be empty.",
+            'Please select all required images.',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red,
+            colorText: Colors.white);
+        return callback(false);
+      }
+      if (certificateName.text == '') {
+        LoadingHelper.dismiss();
+        Get.snackbar("certificateName can't be empty.",
+            'Please select all required images.',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red,
+            colorText: Colors.white);
+        return callback(false);
+      }
+      if (CVImage!.path.isEmpty) {
+        LoadingHelper.dismiss();
+        Get.snackbar(
+            "CVImage can't be empty.", 'Please select all required images.',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red,
+            colorText: Colors.white);
+        return callback(false);
+      }
+      if (passportImage!.path.isEmpty) {
+        LoadingHelper.dismiss();
+        Get.snackbar("passportImage can't be empty.",
+            'Please select all required images.',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red,
+            colorText: Colors.white);
+        return callback(false);
+      }
+
+      if (languege!.length < 2) {
+        LoadingHelper.dismiss();
+        Get.snackbar(
+            "Language Field Invalid.", 'Select at least two languages.',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red,
+            colorText: Colors.white);
+        return callback(false);
+      }
+
+      var token = await FirebaseMessaging.instance.getToken();
+      var lang = jsonEncode(languege);
+      var passport = base64Encode(File(passportImage!.path).readAsBytesSync());
+      var cv = base64Encode(File(CVImage!.path).readAsBytesSync());
+      var url = BASE_URL + 'vendor/register';
+      var data = {
+        'name': vendorName.text,
+        'username': userName.text,
+        'email': email.text,
+        'DOB': date.toString(),
+        'password': password.text,
+        'passport': passport,
+        'language': lang,
+        'number': phone.text,
+        'firebase_token': token,
+        'cvImage': cv,
+        'country': country,
+      };
+
+      if (certificateImage!.path.isNotEmpty) {
+        var certificate =
+            base64Encode(File(certificateImage!.path).readAsBytesSync());
+        data['certificate'] = certificate;
+        data['certifcate_name'] = certificateName.text;
+      }
+
+      var response = await Api.execute(url: url, data: data);
+
+      if (!response['error']) {
+        LoadingHelper.dismiss();
+        Get.offAll(() => LoginScreen());
+        Vendor vendor = Vendor(response['Vendor']);
+        ClearSignupVariables();
+        validateSignUpForm = false.obs;
+        update();
+        return callback(true);
       } else {
-        if (month != '') {
-          if (day != '') {
-            DateTime date = DateTime(int.parse(year.toString()),
-                int.parse(month.toString()), int.parse(day.toString()));
-            print(date);
-            if (CVImage!.path != '') {
-              if (passportImage!.path != '') {
-                final passport =
-                    base64Encode(File(passportImage!.path).readAsBytesSync());
-                final cv = base64Encode(File(CVImage!.path).readAsBytesSync());
-
-                if (languege!.length >= 2) {
-                  if (certificateImage!.path == '') {
-                    if (password.text == confirmPassword.text) {
-                      var token = await FirebaseMessaging.instance.getToken();
-                      var lang = jsonEncode(languege);
-                      var url = BASE_URL + 'vendor/register';
-                      var data;
-                      data = {
-                        'name': vendorName.text.toString(),
-                        'username': userName.text.toString(),
-                        'email': email.text.toString(),
-                        'DOB': date.toString(),
-                        'password': password.text.toString(),
-                        'passport': passport,
-                        'language': lang,
-                        'number': phone.text.toString(),
-                        'firebase_token': token,
-                        'cvImage': cv,
-                      };
-
-                      var response = await Api.execute(
-                        url: url,
-                        data: data,
-                      );
-                      print((response['Vendor']));
-
-                      if (!response['error']) {
-                        LoadingHelper.dismiss();
-                        Get.offAll(() => LoginScreen());
-                        Vendor vendor = Vendor(response['Vendor']);
-                        print(vendor);
-                        ClearSignupVariables();
-                        validateSignUpForm = false.obs;
-                        update();
-                        return callback(true);
-                      } else {
-                        LoadingHelper.dismiss();
-                        Get.snackbar("Error!", response['error_data'],
-                            snackPosition: SnackPosition.BOTTOM,
-                            backgroundColor: Colors.red,
-                            colorText: Colors.white);
-                        return callback(false);
-                      }
-                    } else {
-                      LoadingHelper.dismiss();
-                      Get.snackbar("Invalid Password.",
-                          'Passowrd And Confirm passsword must be same.',
-                          snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: Colors.red,
-                          colorText: Colors.white);
-                    }
-                  } else {
-                    final certificate = base64Encode(
-                        File(certificateImage!.path).readAsBytesSync());
-                    final cv =
-                        base64Encode(File(CVImage!.path).readAsBytesSync());
-
-                    final bool isFormValid = Validators.emptyStringValidator(
-                            certificateName.text, '') ==
-                        null;
-                    if (isFormValid) {
-                      if (password.text == confirmPassword.text) {
-                        var token = await FirebaseMessaging.instance.getToken();
-                        var lang = jsonEncode(languege);
-                        var url = BASE_URL + 'vendor/register';
-                        var data;
-                        data = {
-                          'name': vendorName.text.toString(),
-                          'username': userName.text.toString(),
-                          'email': email.text.toString(),
-                          'DOB': date.toString(),
-                          'password': password.text.toString(),
-                          'passport': passport,
-                          'certificate': certificate,
-                          'certifcate_name': certificateName.text.toString(),
-                          'language': lang,
-                          'cvImage': cv,
-                          'number': phone.text.toString(),
-                          'firebase_token': token
-                        };
-                        var response = await Api.execute(url: url, data: data);
-                        if (!response['error']) {
-                          Get.offAll(() => LoginScreen());
-                          Vendor vendor = Vendor(response['Vendor']);
-                          print(vendor);
-                          ClearSignupVariables();
-                          validateSignUpForm = false.obs;
-                          update();
-                          LoadingHelper.dismiss();
-                          return callback(true);
-                        } else {
-                          LoadingHelper.dismiss();
-                          Get.snackbar("Error!", response['error_data'],
-                              snackPosition: SnackPosition.BOTTOM,
-                              backgroundColor: Colors.red,
-                              colorText: Colors.white);
-                          return callback(false);
-                        }
-                      } else {
-                        LoadingHelper.dismiss();
-                        Get.snackbar("Invalid Password.",
-                            'Passowrd And Confirm passsword must be same.',
-                            snackPosition: SnackPosition.BOTTOM,
-                            backgroundColor: Colors.red,
-                            colorText: Colors.white);
-                      }
-                    } else {
-                      LoadingHelper.dismiss();
-                      Get.snackbar('Please enter certificate name', '',
-                          snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: Colors.red,
-                          colorText: Colors.white);
-                    }
-                  }
-                } else {
-                  LoadingHelper.dismiss();
-                  Get.snackbar(
-                      "Language Field Invalid.", 'Select atleast two Language.',
-                      snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: Colors.red,
-                      colorText: Colors.white);
-                }
-              } else {
-                LoadingHelper.dismiss();
-                Get.snackbar("Passport Image can't be empty.", '',
-                    snackPosition: SnackPosition.BOTTOM,
-                    backgroundColor: Colors.red,
-                    colorText: Colors.white);
-              }
-            } else {
-              LoadingHelper.dismiss();
-              Get.snackbar("Cv Image can't be empty.", '',
-                  snackPosition: SnackPosition.BOTTOM,
-                  backgroundColor: Colors.red,
-                  colorText: Colors.white);
-            }
-          } else {
-            LoadingHelper.dismiss();
-            Get.snackbar(
-                'Invalid Date Format.', 'Select complete Date of Birth.',
-                snackPosition: SnackPosition.BOTTOM,
-                backgroundColor: Colors.red,
-                colorText: Colors.white);
-          }
-        } else {
-          LoadingHelper.dismiss();
-          Get.snackbar('Invalid Date Format.', 'Select complete Date of Birth.',
-              snackPosition: SnackPosition.BOTTOM,
-              backgroundColor: Colors.red,
-              colorText: Colors.white);
-        }
+        LoadingHelper.dismiss();
+        Get.snackbar("Error!", response['error_data'],
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red,
+            colorText: Colors.white);
+        return callback(false);
       }
     } else {
       LoadingHelper.dismiss();
       showErrors();
       update();
+    }
+  }
+
+  /////////////////////////////
+  Future<String?> fetchCountryFromIP() async {
+    const url = 'http://ip-api.com/json';
+
+    try {
+      var response = await Api.execute(url: url, data: {});
+
+      if (response != null && response['status'] == 'success') {
+        return response['country'];
+      } else {
+        return 'Failed to get country';
+      }
+    } catch (e) {
+      return 'Error: $e';
+    }
+  }
+
+  storeCountryToGetTimeZone(country) async {
+    const url = BASE_URL + 'user/country/store';
+
+    try {
+      GetStorage box = GetStorage();
+      var api_token = await box.read('api_token');
+      var response = await Api.execute(url: url, data: {
+        'api_token': api_token,
+        'country': country,
+      });
+
+      if (!response['error']) {
+      } else {}
+    } catch (e) {
+      return 'Error: $e';
     }
   }
 

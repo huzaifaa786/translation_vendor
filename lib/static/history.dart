@@ -20,10 +20,12 @@ class HistoryCard extends StatelessWidget {
       this.time,
       this.name,
       this.price,
+      this.currency,
       this.status,
       this.onmsgtap});
   final type;
   final onmsgtap;
+  final currency;
   final name;
   final image;
   final servicetype;
@@ -165,7 +167,7 @@ class HistoryCard extends StatelessWidget {
                           children: [
                             SvgPicture.asset(""),
                             Text(
-                              'AED ' + price.toString(),
+                              "USD " + price.toString(),
                               style: TextStyle(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600,

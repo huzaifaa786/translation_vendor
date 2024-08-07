@@ -1,3 +1,4 @@
+import 'package:forex_conversion/forex_conversion.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:translation_vendor/api/api.dart';
@@ -14,7 +15,7 @@ class SaleController extends GetxController {
   DateTime today = DateTime.now();
   DateTime? rangeStart;
   DateTime? rangeEnd;
-  int price = 0;
+  double price = 0.0;
   List<SaleModal> orders = [];
   List<SaleModal> searchedorders = [];
 
@@ -25,7 +26,7 @@ class SaleController extends GetxController {
     update();
   }
 
-  void onDaySelected(DateTime day, DateTime foucsedDay) async {
+  void onDaySelected(DateTime day, DateTime focusedDay) async {
     today = day;
     Ourdate = day;
     rangeStart = null;
@@ -42,27 +43,10 @@ class SaleController extends GetxController {
     if (end == null) {
       daySale(today);
     } else {
-      SaleByselctingRange(start, end);
+      SaleBySelectingRange(start, end);
     }
     update();
   }
-
-  // getSlaes() async {
-  //   GetStorage box = GetStorage();
-  //   String api_token = box.read('api_token');
-  //   print(api_token);
-  //   LoadingHelper.show();
-  //   var url = BASE_URL + 'vendor/sale';
-  //   var data;
-  //   data = {api_token};
-  //   (data);
-  //   var response = await Api.execute(
-  //     url: url,
-  //     data: data,
-  //   );
-  //   LoadingHelper.dismiss();
-  //   return response;
-  // }
 
   getcompleteorder() async {
     LoadingHelper.show();
@@ -81,10 +65,9 @@ class SaleController extends GetxController {
     searchedorders = orders;
     print(orders);
     update();
-    // return orders;
   }
 
-  daySale(DateTime day) {
+  daySale(DateTime day) async {
     List<SaleModal> orderlist = searchedorders
         .where((i) =>
             i.date!.toLocal().toString().split(' ')[0] ==
@@ -92,17 +75,19 @@ class SaleController extends GetxController {
         .toList();
     searchedorders = orders;
     print(orderlist);
-    price = 0;
+    price = 0.0;
     for (var i = 0; i < orderlist.length; i++) {
       print(orderlist[i].price!);
-      price += orderlist[i].price!;
+      String convertedPrice = await changePrice(
+          orderlist[i].price!.toString(), orderlist[i].currency!);
+      price += double.parse(convertedPrice);
     }
     orderlist = [];
     print(orderlist);
     update();
   }
 
-  SaleByselctingRange(DateTime startDate, DateTime endDate) {
+  SaleBySelectingRange(DateTime startDate, DateTime endDate) async {
     List<SaleModal> orderlist = searchedorders
         .where((i) =>
             i.date!.toLocal().isAfter(startDate.subtract(Duration(days: 1))) &&
@@ -112,13 +97,14 @@ class SaleController extends GetxController {
     searchedorders = orders;
     print(orderlist.length);
     print(orderlist[0].price);
-    price = 0;
+    price = 0.0;
     for (var i = 0; i < orderlist.length; i++) {
       print(orderlist[i].price!);
-      price += orderlist[i].price!;
+      String convertedPrice = await changePrice(
+          orderlist[i].price!.toString(), orderlist[i].currency!);
+      price += double.parse(convertedPrice);
     }
     orderlist = [];
-
     print(orderlist);
     update();
   }
@@ -131,5 +117,20 @@ class SaleController extends GetxController {
     orders = [];
     searchedorders = [];
     update();
+  }
+
+  Future<String> changePrice(String price, String currency) async {
+    final fx = Forex();
+    double priceConverted = 0;
+    await fx
+        .getCurrencyConverted(
+      sourceCurrency: currency,
+      destinationCurrency: "USD",
+      sourceAmount: double.parse(price),
+    )
+        .then((value) {
+      priceConverted = value;
+    });
+    return priceConverted.toStringAsFixed(2);
   }
 }
