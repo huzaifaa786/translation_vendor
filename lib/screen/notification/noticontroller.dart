@@ -41,7 +41,7 @@ class NotificationController extends GetxController {
    readnotifications() async {
     LoadingHelper.show();
     print('object');
-    var url = BASE_URL + '';
+    var url = BASE_URL + 'notification/read';
     GetStorage box = GetStorage();
 
     String api_token = box.read('api_token');
