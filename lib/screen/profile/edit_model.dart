@@ -116,29 +116,26 @@ class _EditModelState extends State<EditModel> {
                                     decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(30)),
-                                    height: Get.height * 0.5,
+                                    height: Get.height * 0.3,
                                     child: Column(
                                       children: [
+                                        Gap(15),
+                                        Text(
+                                          "Successfully \n Updated",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: 23,
+                                              color: greenish,
+                                              fontWeight: FontWeight.w700),
+                                        ),
                                         Image.asset(
                                           "assets/images/tick.png",
-                                          height: 90,
+                                          height: 80,
                                           color: greenish,
                                         ),
-                                        Gap(15),
+                                        Gap(5),
                                         SizedBox(
-                                          height: 140,
-                                          width: 140,
-                                          child: Text(
-                                            "SuccessfullyUpdated",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 25,
-                                                color: greenish,
-                                                fontWeight: FontWeight.w700),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                            height: Get.height * 0.08,
+                                            height: Get.height * 0.06,
                                             width: Get.width * 0.4,
                                             child: LargeButton(
                                                 title: "Done",

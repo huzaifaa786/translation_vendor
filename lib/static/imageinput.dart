@@ -80,7 +80,7 @@ class Imageinput extends StatelessWidget {
                           padding: const EdgeInsets.all(8),
                           child: FittedBox(
                             fit: BoxFit.scaleDown,
-                            child: SvgPicture.asset(
+                            child: Image.asset(
                               imageIcon,
                               height: 17,
                               width: 17,
@@ -94,7 +94,7 @@ class Imageinput extends StatelessWidget {
                           padding: const EdgeInsets.all(8),
                           child: FittedBox(
                             fit: BoxFit.scaleDown,
-                            child: SvgPicture.asset(
+                            child: Image.asset(
                               simageIcon,
                               height: 17,
                               width: 17,

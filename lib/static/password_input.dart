@@ -66,7 +66,7 @@ class InputFieldPassword extends StatelessWidget {
                     //   Radius.circular(30),
                     // ),
                     ),
-                child: SvgPicture.asset(
+                child: Image.asset(
                   imageIcon,
                   // height: 17,
                   // width: 17,

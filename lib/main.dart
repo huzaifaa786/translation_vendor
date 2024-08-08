@@ -1,11 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:translation_vendor/screen/chat/chatcontroller.dart';
-import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:translation_vendor/helper/loading.dart';
+import 'package:translation_vendor/screen/chat/chatcontroller.dart';
 import 'package:translation_vendor/screen/services/map.dart';
 import 'package:translation_vendor/screen/history/history.dart';
 import 'package:translation_vendor/screen/history/historycontroller.dart';
@@ -24,13 +23,16 @@ import 'package:translation_vendor/screen/services/service.dart';
 import 'package:translation_vendor/screen/services/servicecontroller.dart';
 import 'package:translation_vendor/screen/splash/splash.dart';
 import 'package:translation_vendor/values/styles.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await GetStorage.init();
   await LoadingHelper.init();
+
   Get.put(AuthController());
   Get.put(MainController());
   Get.put(ServiceController());
@@ -40,7 +42,7 @@ void main() async {
   Get.put(SaleController());
   Get.put(ChatController());
   Get.put(NotificationController());
-  await GetStorage.init();
+
   runApp(const MyApp());
 }
 
@@ -65,12 +67,11 @@ class _MyAppState extends State<MyApp> {
         'login': (context) => const LoginScreen(),
         'splash': (context) => const SplashScreen(),
         'notification': (context) => const NotificationScreen(),
-        // 'Sale': (context) => const SalesScreen(),
         'history': (context) => const HistoryScreen(),
         'main': (context) => const MainScreen(),
         'orderstatus': (context) => const OrderStatus(),
         'service': (context) => const ServiceScreen(),
-        'profile': (context) => const Profile()
+        'profile': (context) => const Profile(),
       },
     );
   }

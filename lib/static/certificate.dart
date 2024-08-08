@@ -66,8 +66,8 @@ class Certificateinput extends StatelessWidget {
                     color: Colors.black),
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: SvgPicture.asset(
-                    "assets/images/certificate.svg",
+                  child: Image.asset(
+                    "assets/images/Certificate.png",
                   ),
                 ),
                 hintText: hint,

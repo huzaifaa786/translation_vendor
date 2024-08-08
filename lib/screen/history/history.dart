@@ -113,8 +113,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 // margin: EdgeInsets.only(top:90,left: 12,right: 12),
                 child: controller.orders.isNotEmpty
                     ? ListView.builder(
-                        // shrinkWrap: true,
-                        // physics: BouncingScrollPhysics(),
+                       shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
                         itemCount: controller.orders.length,
                         itemBuilder: (context, index) {
                           String stimeStr = controller.orders[index].starttime!;

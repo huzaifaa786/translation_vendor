@@ -26,7 +26,7 @@ class LanguageAdd extends StatelessWidget {
       this.height,
       this.type = TextInputType.text,
       this.fontSize = 14.0,
-      this.width = 0.98,
+      this.width = 0.95,
       this.onpressed,
       this.ondeltap,
       this.svgimage})
@@ -64,8 +64,7 @@ class LanguageAdd extends StatelessWidget {
               padding: const EdgeInsets.only(top: 4.0),
               child: Container(
                 height: 60,
-                // width: MediaQuery.of(context).size.width * 10,
-
+                width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.all(
@@ -77,7 +76,7 @@ class LanguageAdd extends StatelessWidget {
                   children: [
                     Container(
                       padding: const EdgeInsets.all(8),
-                      child: SvgPicture.asset(
+                      child: Image.asset(
                         svgimage,
                       ),
                     ),
@@ -108,7 +107,7 @@ class LanguageAdd extends StatelessWidget {
                                       Border.all(color: Colors.red, width: 2)),
                               child: Icon(
                                 Icons.remove,
-                                size: 23,
+                                size: 18,
                                 color: Colors.red,
                               ),
                             ),
@@ -122,8 +121,8 @@ class LanguageAdd extends StatelessWidget {
                               fit: BoxFit.scaleDown,
                               child: SvgPicture.asset(
                                 imageIcon,
-                                height: 29,
-                                width: 29,
+                                height: 25,
+                                width: 25,
                               ),
                             ),
                           ),

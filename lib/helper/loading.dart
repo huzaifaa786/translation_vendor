@@ -8,15 +8,15 @@ class LoadingHelper {
 
   static show() {
     absorbClick = true;
-    EasyLoading.show();
+    // EasyLoading.show();
   }
 
   static dismiss() {
     absorbClick = false;
-    EasyLoading.dismiss();
+    // EasyLoading.dismiss();
   }
 
-  static init() {
+  static Future<void> init() async {
     EasyLoading.instance
       ..displayDuration = const Duration(milliseconds: 2000)
       ..indicatorType = EasyLoadingIndicatorType.circle
@@ -25,9 +25,9 @@ class LoadingHelper {
       ..radius = 10.0
       ..progressColor = Colors.white
       ..backgroundColor = Colors.transparent
-      ..indicatorColor = mainColor
-      ..textColor = mainColor
-      ..maskColor = mainColor.withOpacity(0.5)
+      ..indicatorColor = greenish
+      ..textColor = greenish
+      ..maskColor = greenish.withOpacity(0.5)
       ..userInteractions = false
       ..dismissOnTap = false
       ..boxShadow = <BoxShadow>[];

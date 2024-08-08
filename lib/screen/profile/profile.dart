@@ -115,8 +115,8 @@ class _ProfileState extends State<Profile> {
                                               // ),
                                               ),
                                           child: ClipRRect(
-                                            // borderRadius:
-                                            //     BorderRadius.circular(45),
+                                            borderRadius:
+                                                BorderRadius.circular(45),
                                             child: profileController
                                                         .profileimg!.path ==
                                                     ''
@@ -576,7 +576,7 @@ class _ProfileState extends State<Profile> {
                                     ),
                                     child: SizedBox(
                                       height: 50,
-                                      width: Get.width*0.9,
+                                      width: Get.width * 0.9,
                                       child: LargeButton(
                                         title: "Update",
                                         onPressed: () {
@@ -601,7 +601,12 @@ class _ProfileState extends State<Profile> {
                                         textcolor: White,
                                       ),
                                     ),
-                                  )
+                                  ),
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        ChangePasswords(context);
+                                      },
+                                      child: Text("rrrrr"))
                                 ],
                               )
                       ],

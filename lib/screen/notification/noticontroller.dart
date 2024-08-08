@@ -27,18 +27,19 @@ class NotificationController extends GetxController {
     if (!response['error']) {
       notifications = [];
       for (var van in response['notifications']) {
-        notifications.add(Notificationn(van),
+        notifications.add(
+          Notificationn(van),
         );
       }
       print(response);
-      LoadingHelper.dismiss();
+       LoadingHelper.dismiss();
     } else {
       print(response['error']);
-      LoadingHelper.dismiss();
+     LoadingHelper.dismiss();
     }
   }
 
-   readnotifications() async {
+  readnotifications() async {
     LoadingHelper.show();
     print('object');
     var url = BASE_URL + '';

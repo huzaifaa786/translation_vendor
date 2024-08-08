@@ -165,7 +165,7 @@ class HistoryCard extends StatelessWidget {
                             : Text(""),
                         Row(
                           children: [
-                            SvgPicture.asset(""),
+                            // SvgPicture.asset(""),
                             Text(
                               "USD " + price.toString(),
                               style: TextStyle(

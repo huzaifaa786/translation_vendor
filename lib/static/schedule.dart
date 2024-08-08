@@ -50,47 +50,47 @@ class Scheduleinput extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(
-            height: 36,
-            width: MediaQuery.of(context).size.width * 0.23,
-            child: TextFormField(
-              textAlignVertical: TextAlignVertical.center,
-              textAlign: TextAlign.center,
-              readOnly: true,
-              // onTap: onpressed,
-              enabled: enabled,
-              obscureText: obscure,
-              controller: controller,
-              style: TextStyle(fontSize: 12, color: White),
-              keyboardType: type,
-              validator: validator,
-              decoration: InputDecoration(
-                suffixIconConstraints: BoxConstraints(
-                    minHeight: 24, maxHeight: 25, minWidth: 24, maxWidth: 25),
-                suffixIcon: InkWell(
-                  onTap: onpressed,
-                  child: Icon(Icons.arrow_drop_down_rounded),
+          GestureDetector(
+            onTap: onpressed,
+            child: SizedBox(
+              height: 36,
+              width: MediaQuery.of(context).size.width * 0.23,
+              child: TextFormField(
+                textAlignVertical: TextAlignVertical.center,
+                textAlign: TextAlign.center,
+                readOnly: true,
+                 onTap: onpressed,
+                enabled: enabled,
+                obscureText: obscure,
+                controller: controller,
+                style: TextStyle(fontSize: 12, color: White),
+                keyboardType: type,
+                validator: validator,
+                decoration: InputDecoration(
+                  suffixIconConstraints: BoxConstraints(
+                      minHeight: 24, maxHeight: 25, minWidth: 24, maxWidth: 25),
+                  suffixIcon: Icon(Icons.arrow_drop_down_rounded),
+                  suffixIconColor: White,
+                  filled: true,
+                  fillColor: greenish,
+                  hintText: hint,
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 3, horizontal: 10),
+                  // contentPadding: const EdgeInsets.only(
+                  //     left: 17, right: 12, top: 12, bottom: 14),
+                  hintStyle: TextStyle(color: hintColor),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 1, color: greenish),
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 1, color: greenish),
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
                 ),
-                suffixIconColor: White,
-                filled: true,
-                fillColor: greenish,
-                hintText: hint,
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 3, horizontal: 10),
-                // contentPadding: const EdgeInsets.only(
-                //     left: 17, right: 12, top: 12, bottom: 14),
-                hintStyle: TextStyle(color: hintColor),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 1, color: greenish),
-                  borderRadius: BorderRadius.all(Radius.circular(50)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 1, color: greenish),
-                  borderRadius: BorderRadius.all(Radius.circular(50)),
-                ),
+                cursorColor: Colors.black,
+                maxLines: maxlines == true ? null : 1,
               ),
-              cursorColor: Colors.black,
-              maxLines: maxlines == true ? null : 1,
             ),
           ),
         ],

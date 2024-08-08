@@ -204,7 +204,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Padding(
                                 padding: const EdgeInsets.only(top: 40.0),
                                 child: IconInputFields(
-                                  imageIcon: 'assets/images/email.svg',
+                                  imageIcon: 'assets/images/Letter.png',
                                   hint: 'Email Address',
                                   controller: authController.email,
                                   validate: authController.validateSignInForm,
@@ -215,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Padding(
                                 padding: const EdgeInsets.only(top: 12.0),
                                 child: InputFieldPassword(
-                                  imageIcon: 'assets/images/lock (2).svg',
+                                  imageIcon: 'assets/images/Lock.png',
                                   hint: 'Password',
                                   toggle: _toggle,
                                   obscure: _obscureText,
@@ -302,6 +302,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Validators.emptyStringValidator(
                                       field, '* Name '),
                             ),
+                            Stackinput(
+                              icon: "assets/images/Male User (1).png",
+                              controller: authController.bioController,
+                              labelText: 'Bio',
+                              hint: '',
+                              // validate: authController.validateSignUpForm,
+                              // validator: (field) =>
+                              //     Validators.emptyStringValidator(
+                              //         field, '* Name '),
+                            ),
                             Padding(
                               padding: const EdgeInsets.only(
                                   top: 18, left: 4, bottom: 8),
@@ -368,8 +378,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               padding: const EdgeInsets.only(top: 15),
                               child: Imageinput(
                                 labelText: ' Passport ',
-                                imageIcon: 'assets/images/passport.svg',
-                                simageIcon: 'assets/images/upload.svg',
+                                imageIcon: 'assets/images/Passport.png',
+                                simageIcon: 'assets/images/Upload.png',
                                 text: authController.passportImage!.name,
                                 onpressed: () {
                                   authController.selectPassportImage();
@@ -380,8 +390,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               padding: const EdgeInsets.only(top: 15),
                               child: Imageinput(
                                 labelText: ' CV ',
-                                imageIcon: 'assets/images/cv.svg',
-                                simageIcon: 'assets/images/upload.svg',
+                                imageIcon: 'assets/images/CV.png',
+                                simageIcon: 'assets/images/Upload.png',
                                 text: authController.CVImage!.name,
                                 onpressed: () {
                                   authController.selectCVImage();
@@ -409,7 +419,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Padding(
                                 padding: const EdgeInsets.only(top: 10),
                                 child: LanguageAdd(
-                                  svgimage: "assets/images/earth.svg",
+                                  svgimage: "assets/images/Globe.png",
                                   labelText: ' Language',
                                   text: authController.languege!.join(',  '),
                                   validate: authController.validateSignUpForm,
@@ -464,7 +474,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 top: 17.0,
                               ),
                               child: IconInputFields(
-                                imageIcon: 'assets/images/userprofile.svg',
+                                imageIcon: 'assets/images/Male User.png',
                                 controller: authController.userName,
                                 hint: 'Username',
                                 width: 12,
@@ -479,7 +489,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Padding(
                               padding: const EdgeInsets.only(top: 12.0),
                               child: IconInputFields(
-                                imageIcon: 'assets/images/',
+                                imageIcon: 'assets/images/Letter.png',
                                 controller: authController.email,
                                 hint: 'Email',
                                 width: 12,
@@ -493,7 +503,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Padding(
                               padding: const EdgeInsets.only(top: 12.0),
                               child: IconInputFields(
-                                imageIcon: 'assets/images/phone (2).svg',
+                                imageIcon: 'assets/images/Phone.png',
                                 controller: authController.phone,
                                 hint: 'Phone',
                                 width: 12,
@@ -509,7 +519,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               padding: const EdgeInsets.only(top: 12.0),
                               child: InputFieldPassword(
                                 controller: authController.password,
-                                imageIcon: 'assets/images/lock (2).svg',
+                                imageIcon: 'assets/images/Lock.png',
                                 hint: 'Password',
                                 borderColor: Colors.black,
                                 imageColor: Colors.black,
@@ -524,7 +534,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               padding: const EdgeInsets.only(top: 12.0),
                               child: InputFieldPassword(
                                 controller: authController.confirmPassword,
-                                imageIcon: 'assets/images/lock (2).svg',
+                                imageIcon: 'assets/images/Lock.png',
                                 hint: 'Confirm Password',
                                 borderColor: Colors.black,
                                 imageColor: Colors.black,
@@ -536,11 +546,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 26.0, bottom: 33),
+                              padding:
+                                  const EdgeInsets.only(top: 26.0, bottom: 33),
                               child: SizedBox(
                                 height: 60,
-                                width: Get.width*0.9,
+                                width: Get.width * 0.9,
                                 child: LargeButton(
                                   rounded: 60,
                                   title: 'Submit',
@@ -574,20 +584,19 @@ class _LoginScreenState extends State<LoginScreen> {
         titleStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
       ),
       context: context,
-      image: SvgPicture.asset(
-        'assets/images/tick.svg',
+      title: "Your Form Has Been Submitted Successfully And Is Under Review",
+      content: Column(
+        children: [Image.asset("assets/images/Ok.png")],
       ),
-      title:
-          "You have Successfully Submitted  your application and you will notified within 24 hours.",
       buttons: [
         DialogButton(
           color: mainColor,
           height: 60,
           radius: BorderRadius.all(
-            Radius.circular(15),
+            Radius.circular(30),
           ),
           child: Text(
-            "ok",
+            "Done",
             style: TextStyle(color: White, fontSize: 25),
           ),
           onPressed: () => Get.back(),

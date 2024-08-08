@@ -140,7 +140,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                           fontWeight: FontWeight.w400),
                     ),
                     Container(
-                      padding: EdgeInsets.only(left: 12, right: 12),
+                      padding: EdgeInsets.only(left: 10, right: 10),
                       margin: EdgeInsets.only(
                         top: 15,
                         left: 10,
@@ -877,7 +877,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                             ),
                             child: SizedBox(
                               height: 50,
-                              width: Get.width*0.9,
+                              width: Get.width * 0.9,
                               child: LargeButton(
                                   title: 'Submit',
                                   textcolor: White,

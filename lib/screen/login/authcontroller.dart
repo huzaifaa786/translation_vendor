@@ -26,6 +26,7 @@ class AuthController extends GetxController {
   RxBool validateSignInForm = false.obs;
   RxBool success = new RxBool(true);
   TextEditingController vendorName = TextEditingController();
+  TextEditingController bioController = TextEditingController();
   TextEditingController certificateName = TextEditingController();
   TextEditingController userName = TextEditingController();
   TextEditingController email = TextEditingController();
@@ -58,6 +59,7 @@ class AuthController extends GetxController {
 
   ClearSignupVariables() {
     vendorName.clear();
+    bioController.clear();
     userName.clear();
     email.clear();
     password.clear();
@@ -68,6 +70,7 @@ class AuthController extends GetxController {
     year = '';
     month = '';
     day = '';
+
     languege = [];
     passportImage = XFile('');
     CVImage = XFile('');
@@ -224,6 +227,7 @@ class AuthController extends GetxController {
         'firebase_token': token,
         'cvImage': cv,
         'country': country,
+        'bio':bioController.text
       };
 
       if (certificateImage!.path.isNotEmpty) {
