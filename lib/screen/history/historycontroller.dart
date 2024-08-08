@@ -11,11 +11,11 @@ class HistoryController extends GetxController {
 
   List<Order> orders = [];
   
-  @override
-  void onInit() {
-    super.onInit();
-    getOrder();
-  }
+  // @override
+  // void onInit() {
+  //   super.onInit();
+    
+  // }
 
   getOrder() async {
     LoadingHelper.show();

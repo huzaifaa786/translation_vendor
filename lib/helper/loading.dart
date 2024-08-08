@@ -4,7 +4,6 @@ import 'package:translation_vendor/values/colors.dart';
 
 class LoadingHelper {
   static bool absorbClick = false;
-  static var onChangeAbsorbClick;
 
   static show() {
     absorbClick = true;
