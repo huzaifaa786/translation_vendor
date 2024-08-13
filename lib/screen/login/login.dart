@@ -276,274 +276,283 @@ class _LoginScreenState extends State<LoginScreen> {
                             ],
                           ),
                         )
-                      : Padding(
-                          padding: const EdgeInsets.only(
-                              top: 13.0, bottom: 13, left: 20, right: 20),
-                          child: Column(children: [
-                            Image.asset(
-                              "assets/images/Male User (1).png",
-                            ),
-                            Text(
-                              "Add Photo",
-                              style: TextStyle(
-                                fontFamily: "Poppins",
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xFF7A8495),
-                              ),
-                            ),
-                            Stackinput(
-                              icon: "assets/images/Male User (1).png",
-                              controller: authController.vendorName,
-                              labelText: 'Name',
-                              hint: '',
-                              validate: authController.validateSignUpForm,
-                              validator: (field) =>
-                                  Validators.emptyStringValidator(
-                                      field, '* Name '),
-                            ),
-                            Stackinput(
-                              icon: "assets/images/Male User (1).png",
-                              controller: authController.bioController,
-                              labelText: 'Bio',
-                              hint: '',
-                              // validate: authController.validateSignUpForm,
-                              // validator: (field) =>
-                              //     Validators.emptyStringValidator(
-                              //         field, '* Name '),
-                            ),
+                      : Column(
+                          children: [
                             Padding(
                               padding: const EdgeInsets.only(
-                                  top: 18, left: 4, bottom: 8),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'Date Of Birth',
-                                    style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 13,
-                                        color: Colors.black),
+                                  top: 13.0, bottom: 13, left: 20, right: 20),
+                              child: Column(children: [
+                                Image.asset(
+                                  "assets/images/Male User (1).png",
+                                ),
+                                Text(
+                                  "Add Photo",
+                                  style: TextStyle(
+                                    fontFamily: "Poppins",
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color(0xFF7A8495),
                                   ),
-                                ],
-                              ),
-                            ),
-                            DropdownDatePicker(
-                              inputDecoration: InputDecoration(
-                                // label: Text(
-                                //   'Date Of Birth',
-                                //   style: TextStyle(
-                                //       fontFamily: 'Montserrat',
-                                //       fontWeight: FontWeight.w600,
-                                //       fontSize: 13,
-                                //       color: Colors.black),
-                                // ),
-
-                                contentPadding: EdgeInsets.only(
-                                    left: 2, right: 2, top: 16, bottom: 16),
-                                enabledBorder: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30)),
-                                  borderSide: BorderSide(
-                                      color: Colors.grey, width: 1.0),
                                 ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                // labelText: "Date Of Birth",
-                                // labelStyle: TextStyle(
-                                //     fontFamily: 'Montserrat',
-                                //     fontWeight: FontWeight.w600,
-                                //     fontSize: 13,
-                                //     color: Colors.black),
-                              ),
-                              isDropdownHideUnderline: true,
-                              isFormValidator: true,
-                              startYear: startYear,
-                              endYear: endYear,
-                              width: 10,
-                              onChangedDay: (value) =>
-                                  authController.day = value!,
-                              onChangedMonth: (value) =>
-                                  authController.month = value!,
-                              onChangedYear: (value) =>
-                                  authController.year = value!,
-                              dayFlex: 2,
-                              textStyle: TextStyle(fontSize: 12),
-                              hintTextStyle:
-                                  TextStyle(color: Colors.grey, fontSize: 12),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 15),
-                              child: Imageinput(
-                                labelText: ' Passport ',
-                                imageIcon: 'assets/images/Passport.png',
-                                simageIcon: 'assets/images/Upload.png',
-                                text: authController.passportImage!.name,
-                                onpressed: () {
-                                  authController.selectPassportImage();
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 15),
-                              child: Imageinput(
-                                labelText: ' CV ',
-                                imageIcon: 'assets/images/CV.png',
-                                simageIcon: 'assets/images/Upload.png',
-                                text: authController.CVImage!.name,
-                                onpressed: () {
-                                  authController.selectCVImage();
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 15),
-                              child: Certificateinput(
-                                controller: authController.certificateName,
-                                labelText: 'Certificate',
-                                hint: 'Enter certificate name',
-                                onpressed: () {
-                                  authController.selectCertificateImage();
-                                },
-                              ),
-                            ),
-                            // Padding(
-                            //   padding: const EdgeInsets.only(top: 10),
-                            //   child: Text(
-                            //     'select atleast 2 languages',
-                            //     style: TextStyle(color: Colors.red),
-                            //   ),
-                            // ),
-                            Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: LanguageAdd(
-                                  svgimage: "assets/images/Globe.png",
-                                  labelText: ' Language',
-                                  text: authController.languege!.join(',  '),
+                                Stackinput(
+                                  icon: "assets/images/Male User (1).png",
+                                  controller: authController.vendorName,
+                                  labelText: 'Name',
+                                  hint: '',
                                   validate: authController.validateSignUpForm,
-                                  validator: (language) =>
-                                      Validators.languageValidator(language),
-                                  imageIcon: 'assets/images/add.svg',
-                                  onpressed: () {
-                                    setState(() {
-                                      showCreate = !showCreate;
-                                      print(showCreate);
-                                    });
-                                  },
-                                  ondeltap: () {
-                                    if (authController.languege!.isNotEmpty) {
-                                      authController.languege!.removeLast();
-                                      setState(() {});
-                                    }
-                                  },
-                                )),
-                            showCreate == true
-                                ? DropdownField(
-                                    items: Languages(),
-                                    text: 'Add Language',
-                                    selectedvalue:
-                                        authController.selectedLanguage,
-                                    icon: ImageIcon(AssetImage(
-                                        'assets/images/drop_arrow.png')),
-                                    onChange: switchfromlang)
+                                  validator: (field) =>
+                                      Validators.emptyStringValidator(
+                                          field, '* Name '),
+                                ),
+                                Stackinput(
+                                  icon: "assets/images/Male User (1).png",
+                                  controller: authController.bioController,
+                                  labelText: 'Bio',
+                                  hint: '',
+                                  // validate: authController.validateSignUpForm,
+                                  // validator: (field) =>
+                                  //     Validators.emptyStringValidator(
+                                  //         field, '* Name '),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 18, left: 4, bottom: 8),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Date Of Birth',
+                                        style: TextStyle(
+                                            fontFamily: 'Montserrat',
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 13,
+                                            color: Colors.black),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                DropdownDatePicker(
+                                  inputDecoration: InputDecoration(
+                                    // label: Text(
+                                    //   'Date Of Birth',
+                                    //   style: TextStyle(
+                                    //       fontFamily: 'Montserrat',
+                                    //       fontWeight: FontWeight.w600,
+                                    //       fontSize: 13,
+                                    //       color: Colors.black),
+                                    // ),
 
-                                //  InputFields(
-                                //     hint: 'Add language',
-                                //     controller: authController.languageController,
-                                //     showSuffix: true,
-                                //     suffix: 'ADD',
-                                //     onpressed: () {
-                                //       if (authController
-                                //           .languageController.text.isNotEmpty) {
-                                //         authController.storeLanguageList();
-                                //       }
-                                //     },
-                                //   )
-                                : Container(),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 14),
-                              child: Text(
-                                'select atleast 2 languages',
-                                style: TextStyle(color: Colors.red),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                top: 17.0,
-                              ),
-                              child: IconInputFields(
-                                imageIcon: 'assets/images/Male User.png',
-                                controller: authController.userName,
-                                hint: 'Username',
-                                width: 12,
-                                borderColor: Colors.black,
-                                imageColor: Colors.black,
-                                validate: authController.validateSignUpForm,
-                                validator: (field) =>
-                                    Validators.emptyStringValidator(
-                                        field, '*userame'),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 12.0),
-                              child: IconInputFields(
-                                imageIcon: 'assets/images/Letter.png',
-                                controller: authController.email,
-                                hint: 'Email',
-                                width: 12,
-                                borderColor: Colors.black,
-                                imageColor: Colors.black,
-                                validate: authController.validateSignUpForm,
-                                validator: (field) =>
-                                    Validators.emailValidator(field),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 12.0),
-                              child: IconInputFields(
-                                imageIcon: 'assets/images/Phone.png',
-                                controller: authController.phone,
-                                hint: 'Phone',
-                                width: 12,
-                                borderColor: Colors.black,
-                                imageColor: Colors.black,
-                                validate: authController.validateSignUpForm,
-                                validator: (field) =>
-                                    Validators.emptyStringValidator(
-                                        field, '*phone'),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 12.0),
-                              child: InputFieldPassword(
-                                controller: authController.password,
-                                imageIcon: 'assets/images/Lock.png',
-                                hint: 'Password',
-                                borderColor: Colors.black,
-                                imageColor: Colors.black,
-                                toggle: _toggle,
-                                obscure: _obscureText,
-                                validate: authController.validateSignUpForm,
-                                validator: (password) =>
-                                    Validators.passwordValidator(password),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 12.0),
-                              child: InputFieldPassword(
-                                controller: authController.confirmPassword,
-                                imageIcon: 'assets/images/Lock.png',
-                                hint: 'Confirm Password',
-                                borderColor: Colors.black,
-                                imageColor: Colors.black,
-                                toggle: _toggle1,
-                                obscure: _obscureText1,
-                                validate: authController.validateSignUpForm,
-                                validator: (password) =>
-                                    Validators.passwordValidator(password),
-                              ),
+                                    contentPadding: EdgeInsets.only(
+                                        left: 2, right: 2, top: 16, bottom: 16),
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(30)),
+                                      borderSide: BorderSide(
+                                          color: Colors.grey, width: 1.0),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.grey),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    // labelText: "Date Of Birth",
+                                    // labelStyle: TextStyle(
+                                    //     fontFamily: 'Montserrat',
+                                    //     fontWeight: FontWeight.w600,
+                                    //     fontSize: 13,
+                                    //     color: Colors.black),
+                                  ),
+                                  isDropdownHideUnderline: true,
+                                  isFormValidator: true,
+                                  startYear: startYear,
+                                  endYear: endYear,
+                                  width: 10,
+                                  onChangedDay: (value) =>
+                                      authController.day = value!,
+                                  onChangedMonth: (value) =>
+                                      authController.month = value!,
+                                  onChangedYear: (value) =>
+                                      authController.year = value!,
+                                  dayFlex: 2,
+                                  textStyle: TextStyle(fontSize: 12),
+                                  hintTextStyle: TextStyle(
+                                      color: Colors.grey, fontSize: 12),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 15),
+                                  child: Imageinput(
+                                    labelText: ' Passport ',
+                                    imageIcon: 'assets/images/Passport.png',
+                                    simageIcon: 'assets/images/Upload.png',
+                                    text: authController.passportImage!.name,
+                                    onpressed: () {
+                                      authController.selectPassportImage();
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 15),
+                                  child: Imageinput(
+                                    labelText: ' CV ',
+                                    imageIcon: 'assets/images/CV.png',
+                                    simageIcon: 'assets/images/Upload.png',
+                                    text: authController.CVImage!.name,
+                                    onpressed: () {
+                                      authController.selectCVImage();
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 15),
+                                  child: Certificateinput(
+                                    controller: authController.certificateName,
+                                    labelText: 'Certificate',
+                                    hint: 'Enter certificate name',
+                                    onpressed: () {
+                                      authController.selectCertificateImage();
+                                    },
+                                  ),
+                                ),
+                                // Padding(
+                                //   padding: const EdgeInsets.only(top: 10),
+                                //   child: Text(
+                                //     'select atleast 2 languages',
+                                //     style: TextStyle(color: Colors.red),
+                                //   ),
+                                // ),
+                                Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: LanguageAdd(
+                                      svgimage: "assets/images/Globe.png",
+                                      labelText: ' Language',
+                                      text:
+                                          authController.languege!.join(',  '),
+                                      validate:
+                                          authController.validateSignUpForm,
+                                      validator: (language) =>
+                                          Validators.languageValidator(
+                                              language),
+                                      imageIcon: 'assets/images/add.svg',
+                                      onpressed: () {
+                                        setState(() {
+                                          showCreate = !showCreate;
+                                          print(showCreate);
+                                        });
+                                      },
+                                      ondeltap: () {
+                                        if (authController
+                                            .languege!.isNotEmpty) {
+                                          authController.languege!.removeLast();
+                                          setState(() {});
+                                        }
+                                      },
+                                    )),
+                                showCreate == true
+                                    ? DropdownField(
+                                        items: Languages(),
+                                        text: 'Add Language',
+                                        selectedvalue:
+                                            authController.selectedLanguage,
+                                        icon: ImageIcon(AssetImage(
+                                            'assets/images/drop_arrow.png')),
+                                        onChange: switchfromlang)
+
+                                    //  InputFields(
+                                    //     hint: 'Add language',
+                                    //     controller: authController.languageController,
+                                    //     showSuffix: true,
+                                    //     suffix: 'ADD',
+                                    //     onpressed: () {
+                                    //       if (authController
+                                    //           .languageController.text.isNotEmpty) {
+                                    //         authController.storeLanguageList();
+                                    //       }
+                                    //     },
+                                    //   )
+                                    : Container(),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 14),
+                                  child: Text(
+                                    'select atleast 2 languages',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    top: 17.0,
+                                  ),
+                                  child: IconInputFields(
+                                    imageIcon: 'assets/images/Male User.png',
+                                    controller: authController.userName,
+                                    hint: 'Username',
+                                    width: 12,
+                                    borderColor: Colors.black,
+                                    imageColor: Colors.black,
+                                    validate: authController.validateSignUpForm,
+                                    validator: (field) =>
+                                        Validators.emptyStringValidator(
+                                            field, '*userame'),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 12.0),
+                                  child: IconInputFields(
+                                    imageIcon: 'assets/images/Letter.png',
+                                    controller: authController.email,
+                                    hint: 'Email',
+                                    width: 12,
+                                    borderColor: Colors.black,
+                                    imageColor: Colors.black,
+                                    validate: authController.validateSignUpForm,
+                                    validator: (field) =>
+                                        Validators.emailValidator(field),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 12.0),
+                                  child: IconInputFields(
+                                    imageIcon: 'assets/images/Phone.png',
+                                    controller: authController.phone,
+                                    hint: 'Phone',
+                                    width: 12,
+                                    borderColor: Colors.black,
+                                    imageColor: Colors.black,
+                                    validate: authController.validateSignUpForm,
+                                    validator: (field) =>
+                                        Validators.emptyStringValidator(
+                                            field, '*phone'),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 12.0),
+                                  child: InputFieldPassword(
+                                    controller: authController.password,
+                                    imageIcon: 'assets/images/Lock.png',
+                                    hint: 'Password',
+                                    borderColor: Colors.black,
+                                    imageColor: Colors.black,
+                                    toggle: _toggle,
+                                    obscure: _obscureText,
+                                    validate: authController.validateSignUpForm,
+                                    validator: (password) =>
+                                        Validators.passwordValidator(password),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 12.0),
+                                  child: InputFieldPassword(
+                                    controller: authController.confirmPassword,
+                                    imageIcon: 'assets/images/Lock.png',
+                                    hint: 'Confirm Password',
+                                    borderColor: Colors.black,
+                                    imageColor: Colors.black,
+                                    toggle: _toggle1,
+                                    obscure: _obscureText1,
+                                    validate: authController.validateSignUpForm,
+                                    validator: (password) =>
+                                        Validators.passwordValidator(password),
+                                  ),
+                                ),
+                              ]),
                             ),
                             Padding(
                               padding:
@@ -559,7 +568,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                     setState(() {});
                                     authController.SignUp((success) async {
                                       if (success) {
-                                        // await
                                         vendorrequest(context);
                                       }
                                     });
@@ -567,7 +575,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                             ),
-                          ]),
+                          ],
                         )
                 ],
               ),
@@ -592,6 +600,7 @@ class _LoginScreenState extends State<LoginScreen> {
         DialogButton(
           color: mainColor,
           height: 60,
+          width: Get.width * 0.4,
           radius: BorderRadius.all(
             Radius.circular(30),
           ),

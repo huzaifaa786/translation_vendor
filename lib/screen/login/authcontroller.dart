@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -227,7 +228,7 @@ class AuthController extends GetxController {
         'firebase_token': token,
         'cvImage': cv,
         'country': country,
-        'bio':bioController.text
+        'bio': bioController.text
       };
 
       if (certificateImage!.path.isNotEmpty) {
@@ -238,6 +239,7 @@ class AuthController extends GetxController {
       }
 
       var response = await Api.execute(url: url, data: data);
+      print(response);
 
       if (!response['error']) {
         LoadingHelper.dismiss();
@@ -245,6 +247,7 @@ class AuthController extends GetxController {
         Vendor vendor = Vendor(response['Vendor']);
         ClearSignupVariables();
         validateSignUpForm = false.obs;
+        print('jhhhhhhhhhhhhhhhhhhjjjjjjjjjjjjjjjjjjjjjjjjj');
         update();
         return callback(true);
       } else {

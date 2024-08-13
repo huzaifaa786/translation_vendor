@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -10,7 +8,7 @@ import 'package:translation_vendor/values/controllers.dart';
 
 class Topbar extends StatefulWidget {
   const Topbar({super.key, this.image});
-  final image;
+  final String? image; // Explicitly typed as String
 
   @override
   State<Topbar> createState() => _TopbarState();
