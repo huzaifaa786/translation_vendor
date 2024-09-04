@@ -602,11 +602,6 @@ class _ProfileState extends State<Profile> {
                                       ),
                                     ),
                                   ),
-                                  ElevatedButton(
-                                      onPressed: () {
-                                        ChangePasswords(context);
-                                      },
-                                      child: Text("rrrrr"))
                                 ],
                               )
                       ],
