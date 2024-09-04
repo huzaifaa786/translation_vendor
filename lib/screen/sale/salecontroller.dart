@@ -63,6 +63,7 @@ class SaleController extends GetxController {
       orders.add(SaleModal(order));
     }
     searchedorders = orders;
+    print('dfdfdfdfdf3333');
     print(orders);
     update();
   }
@@ -96,7 +97,7 @@ class SaleController extends GetxController {
 
     searchedorders = orders;
     print(orderlist.length);
-    print(orderlist[0].price);
+
     price = 0.0;
     for (var i = 0; i < orderlist.length; i++) {
       print(orderlist[i].price!);

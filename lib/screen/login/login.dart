@@ -1,4 +1,5 @@
 import 'package:datepicker_dropdown/datepicker_dropdown.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -280,9 +281,27 @@ class _LoginScreenState extends State<LoginScreen> {
                           padding: const EdgeInsets.only(
                               top: 13.0, bottom: 13, left: 20, right: 20),
                           child: Column(children: [
-                            Image.asset(
-                              "assets/images/Male User (1).png",
+                            GestureDetector(
+                              onTap: () {
+                                authController.selectProfileImage();
+                              },
+                              child: authController.profileImage != null &&
+                                      authController
+                                          .profileImage!.path.isNotEmpty
+                                  ? ClipRRect(
+                                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                                    child: Image.file(
+                                        File(authController.profileImage!.path),
+                                        height: 96,
+                                        width: 96,
+                                        fit: BoxFit.cover,
+                                      ),
+                                  )
+                                  : Image.asset(
+                                      "assets/images/Male User (1).png",
+                                    ),
                             ),
+
                             Text(
                               "Add Photo",
                               style: TextStyle(

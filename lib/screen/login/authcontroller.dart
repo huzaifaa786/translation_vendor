@@ -41,6 +41,8 @@ class AuthController extends GetxController {
   List? languege = [];
   XFile? passportImage = XFile('');
   XFile? certificateImage = XFile('');
+  XFile? profileImage = XFile('');
+
   XFile? CVImage = XFile('');
 
 //////////////////////////  Error Show Functions   ///////////////////////////////////
@@ -114,6 +116,19 @@ class AuthController extends GetxController {
       update();
     } else {
       certificateImage = XFile('');
+      update();
+    }
+  }
+
+  ////////////////////profile image////////////////////////
+  Future<void> selectProfileImage() async {
+    final ImagePicker _picker = ImagePicker();
+    var image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      profileImage = image;
+      update();
+    } else {
+      profileImage = XFile('');
       update();
     }
   }
@@ -214,6 +229,8 @@ class AuthController extends GetxController {
       var lang = jsonEncode(languege);
       var passport = base64Encode(File(passportImage!.path).readAsBytesSync());
       var cv = base64Encode(File(CVImage!.path).readAsBytesSync());
+      var profile = base64Encode(File(profileImage!.path).readAsBytesSync());
+
       var url = BASE_URL + 'vendor/register';
       var data = {
         'name': vendorName.text,
@@ -227,9 +244,11 @@ class AuthController extends GetxController {
         'firebase_token': token,
         'cvImage': cv,
         'country': country,
-        'bio':bioController.text
+        'bio': bioController.text,
+        'profilepic': profile
       };
-
+      print('ddddddddddddddddddddddddddddffffffff');
+      print(data);
       if (certificateImage!.path.isNotEmpty) {
         var certificate =
             base64Encode(File(certificateImage!.path).readAsBytesSync());

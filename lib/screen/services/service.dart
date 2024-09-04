@@ -355,10 +355,10 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                                   serviceController
                                                               .urgentPrice ==
                                                           null
-                                                      ? '0 AED'
+                                                      ? '0 USD'
                                                       : serviceController
                                                               .urgentPrice! +
-                                                          '  AED',
+                                                          '  USD',
                                                   style: TextStyle(
                                                     color: mainColor,
                                                     fontFamily: 'Poppins',
@@ -452,10 +452,10 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                                   serviceController
                                                               .UnurgentPrice ==
                                                           null
-                                                      ? '0 AED'
+                                                      ? '0 USD'
                                                       : serviceController
                                                               .UnurgentPrice! +
-                                                          '  AED',
+                                                          '  USD',
                                                   style: TextStyle(
                                                     color: mainColor,
                                                     fontFamily: 'Poppins',
@@ -590,10 +590,10 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                           ? Text(
                                               serviceController.audioORvideo ==
                                                       null
-                                                  ? '0' + ' AED'
+                                                  ? '0' + ' USD'
                                                   : serviceController
                                                           .audioORvideo! +
-                                                      " AED",
+                                                      " USD",
                                               style: TextStyle(
                                                 color: mainColor,
                                                 fontFamily: 'Mazzard',
@@ -679,10 +679,10 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                           ? Text(
                                               serviceController.InPersonPrice ==
                                                       null
-                                                  ? '0' + ' AED'
+                                                  ? '0' + ' USD'
                                                   : serviceController
                                                           .InPersonPrice! +
-                                                      " AED",
+                                                      " USD",
                                               style: TextStyle(
                                                 color: mainColor,
                                                 fontFamily: 'Mazzard',

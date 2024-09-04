@@ -38,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future route() async {
     GetStorage box = GetStorage();
-    final String? authCheck = box.read('api_token');
+    final String? authCheck = await box.read('api_token');
     print(authCheck);
     if (authCheck == null) {
       Get.off(() => LoginScreen());
