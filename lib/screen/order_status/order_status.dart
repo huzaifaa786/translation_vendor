@@ -165,14 +165,9 @@ class _OrderStatusState extends State<OrderStatus> {
                                           )
                                         : Container(),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                     mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.5,
                                           child: CheckOutTile(
                                             titleimage:
                                                 "assets/images/calendar.svg",
@@ -180,29 +175,32 @@ class _OrderStatusState extends State<OrderStatus> {
                                             discription: widget.order!.date,
                                           ),
                                         ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.3,
-                                          child: CheckOutTile(
-                                            titleimage:
-                                                "assets/images/time.svg",
-                                            title: 'Time:',
-                                            discription: widget
-                                                        .order!.servicetype! ==
-                                                    'instant'
-                                                ? widget.order!.duration
-                                                        .toString() +
-                                                    ' min'
-                                                : widget.order!.servicetype ==
-                                                        'document'
-                                                    ? docformattedTime
-                                                    : sformattedTime! +
-                                                        ' - ' +
-                                                        eformattedTime!,
-                                          ),
-                                        ),
+                                        widget.order!.servicetype! == "document"
+                                            ? Text('')
+                                            : Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.3,
+                                                child: CheckOutTile(
+                                                  titleimage:
+                                                      "assets/images/time.svg",
+                                                  title: 'Time:',
+                                                  discription: widget.order!
+                                                              .servicetype! ==
+                                                          'instant'
+                                                      ? widget.order!.duration
+                                                              .toString() +
+                                                          ' min'
+                                                      : widget.order!
+                                                                  .servicetype ==
+                                                              'document'
+                                                          ? docformattedTime
+                                                          : sformattedTime! +
+                                                              ' - ' +
+                                                              eformattedTime!,
+                                                ),
+                                              ),
                                       ],
                                     ),
                                     widget.order!.status! == "1"
@@ -254,272 +252,71 @@ class _OrderStatusState extends State<OrderStatus> {
                     ),
                   ],
                 ),
-                SizedBox(height: 12,),
+                SizedBox(
+                  height: 12,
+                ),
                 Padding(
                   padding: const EdgeInsets.only(left: 25, right: 25),
                   child: Column(
                     children: [
-                      widget.order!.servicetype! == "document"
+                      service == 'In person meeting'
                           ? Column(
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 12),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        'Document',
-                                        style: TextStyle(
-                                            fontFamily: 'Poppins',
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 14),
-                                      )
-                                    ],
-                                  ),
-                                ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 12),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                              color: mainColor.withOpacity(0.1),
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(45),
-                                              ),
-                                            ),
-                                            child: SvgPicture.asset(
-                                              'assets/images/page.svg',
-                                              color: mainColor,
-                                              height: 12,
-                                              width: 12,
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 5),
-                                            child: Text(
-                                              'Document',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14),
-                                            ),
-                                          ),
-                                        ],
+                                      Text(
+                                        'Location',
+                                        style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 14),
                                       ),
                                       InkWell(
-                                        onTap: () {
-                                          FileDownloader.downloadFile(
-                                            url: widget.order!.document!.file!,
-                                            name: 'File',
-                                            onProgress: (fileName, progress) {
-                                              Get.snackbar(
-                                                  'Downloading ' + fileName!,
-                                                  'Downloaded ' +
-                                                      progress.toString() +
-                                                      '%',
-                                                  snackPosition:
-                                                      SnackPosition.BOTTOM,
-                                                  backgroundColor: Colors.green,
-                                                  colorText: Colors.white);
-                                            },
-                                            onDownloadCompleted: (path) async {
-                                              Get.snackbar(
-                                                  'File downloaded successfully.',
-                                                  '',
-                                                  snackPosition:
-                                                      SnackPosition.BOTTOM,
-                                                  backgroundColor: Colors.green,
-                                                  colorText: Colors.white);
-                                            },
-                                            onDownloadError: (errorMessage) {
-                                              Get.snackbar(
-                                                  'Error!', errorMessage,
-                                                  snackPosition:
-                                                      SnackPosition.BOTTOM,
-                                                  backgroundColor: Colors.red,
-                                                  colorText: Colors.white);
-                                            },
-                                          );
+                                        onTap: () async {
+                                          var i = await serviceController
+                                              .getlocation();
+                                          if (i != null) {
+                                            Get.to(() =>
+                                                InPersonMeetingLocationScreen(
+                                                  latitude: double.parse(widget
+                                                      .order!.lat
+                                                      .toString()),
+                                                  longitude: double.parse(widget
+                                                      .order!.lng
+                                                      .toString()),
+                                                ));
+                                            // serviceController.clearServiceScreen();
+                                            // Get.to(() => ServiceScreen());
+                                          } else {
+                                            Get.snackbar(
+                                                "Please Enable Location Permissions To Proceed",
+                                                '',
+                                                snackPosition:
+                                                    SnackPosition.BOTTOM,
+                                                backgroundColor: Colors.red,
+                                                colorText: Colors.white);
+                                            LoadingHelper.dismiss();
+                                          }
                                         },
                                         child: Text(
-                                          "Download Document",
+                                          "Show Location",
                                           style: TextStyle(
                                               color: mainColor,
                                               decoration:
                                                   TextDecoration.underline,
                                               fontSize: 14),
                                         ),
-                                      ),
+                                      )
                                     ],
                                   ),
                                 ),
-                                widget.order!.status! == "0"
-                                    ? Container()
-                                    : widget.order!.status! == "2"
-                                        ? Container()
-                                        : Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 8.0),
-                                            child: Column(
-                                              children: [
-                                                Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Message',
-                                                      style: TextStyle(
-                                                          fontFamily: 'Poppins',
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 14),
-                                                    ),
-                                                    Text(widget.order!.document!
-                                                        .discription!),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          )
                               ],
                             )
-                          : service == 'In person meeting'
-                              ? Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 12),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'Location',
-                                            style: TextStyle(
-                                                fontFamily: 'Poppins',
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 14),
-                                          ),
-                                          InkWell(
-                                            onTap: () async {
-                                              var i = await serviceController
-                                                  .getlocation();
-                                              if (i != null) {
-                                                Get.to(() =>
-                                                    InPersonMeetingLocationScreen(
-                                                      latitude: double.parse(
-                                                          widget.order!.lat
-                                                              .toString()),
-                                                      longitude: double.parse(
-                                                          widget.order!.lng
-                                                              .toString()),
-                                                    ));
-                                                // serviceController.clearServiceScreen();
-                                                // Get.to(() => ServiceScreen());
-                                              } else {
-                                                Get.snackbar(
-                                                    "Please Enable Location Permissions To Proceed",
-                                                    '',
-                                                    snackPosition:
-                                                        SnackPosition.BOTTOM,
-                                                    backgroundColor: Colors.red,
-                                                    colorText: Colors.white);
-                                                LoadingHelper.dismiss();
-                                              }
-                                            },
-                                            child: Text(
-                                              "Show Location",
-                                              style: TextStyle(
-                                                  color: mainColor,
-                                                  decoration:
-                                                      TextDecoration.underline,
-                                                  fontSize: 14),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    // Padding(
-                                    //   padding: const EdgeInsets.only(top: 12),
-                                    //   child: Row(
-                                    //     mainAxisAlignment:
-                                    //         MainAxisAlignment.spaceBetween,
-                                    //     children: [
-                                    // Row(
-                                    //   children: [
-                                    //     Container(
-                                    //       padding: EdgeInsets.all(8),
-                                    //       decoration: BoxDecoration(
-                                    //         color: mainColor.withOpacity(0.1),
-                                    //         borderRadius: BorderRadius.all(
-                                    //           Radius.circular(45),
-                                    //         ),
-                                    //       ),
-                                    //       child: SvgPicture.asset(
-                                    //         'assets/images/page.svg',
-                                    //         color: mainColor,
-                                    //         height: 12,
-                                    //         width: 12,
-                                    //       ),
-                                    //     ),
-                                    //     Padding(
-                                    //       padding:
-                                    //           const EdgeInsets.only(left: 5),
-                                    //       child: Text(
-                                    //         'Document',
-                                    //         style: TextStyle(
-                                    //             color: Colors.black,
-                                    //             fontSize: 14),
-                                    //       ),
-                                    //     ),
-                                    //   ],
-                                    // ),
-                                    // InkWell(
-                                    //   onTap: () async {
-                                    //     var i = await serviceController
-                                    //         .getlocation();
-                                    //     if (i != null) {
-                                    //       Get.to(() =>
-                                    //           InPersonMeetingLocationScreen(
-                                    //             latitude: double.parse(widget
-                                    //                 .order!.lat
-                                    //                 .toString()),
-                                    //             longitude: double.parse(widget
-                                    //                 .order!.lng
-                                    //                 .toString()),
-                                    //           ));
-                                    //       // serviceController.clearServiceScreen();
-                                    //       // Get.to(() => ServiceScreen());
-                                    //     } else {
-                                    //       Get.snackbar(
-                                    //           "Please Enable Location Permissions To Proceed",
-                                    //           '',
-                                    //           snackPosition:
-                                    //               SnackPosition.BOTTOM,
-                                    //           backgroundColor: Colors.red,
-                                    //           colorText: Colors.white);
-                                    //       LoadingHelper.dismiss();
-                                    //     }
-                                    //   },
-                                    //   child: Text(
-                                    //     "Show Location",
-                                    //     style: TextStyle(
-                                    //         color: mainColor,
-                                    //         decoration:
-                                    //             TextDecoration.underline,
-                                    //         fontSize: 14),
-                                    //   ),
-                                    // ),
-                                    //     ],
-                                    //   ),
-                                    // ),
-                                  ],
-                                )
-                              : Container(),
+                          : Container(),
                       widget.order!.status! == "0"
                           ? Padding(
                               padding: const EdgeInsets.only(top: 40),
@@ -555,18 +352,6 @@ class _OrderStatusState extends State<OrderStatus> {
                           : widget.order!.status! == "1"
                               ? Column(
                                   children: [
-                                    // Padding(
-                                    //   padding: const EdgeInsets.only(
-                                    //       top: 40, bottom: 20),
-                                    //   child: Text(
-                                    //     'Order In Progress',
-                                    //     style: TextStyle(
-                                    //         color: Colors.green,
-                                    //         fontSize: 21,
-                                    //         fontWeight: FontWeight.w500,
-                                    //         fontFamily: 'Poppins'),
-                                    //   ),
-                                    // ),
                                     LargeButton(
                                         title: "Mark as Completed",
                                         textcolor: White,
@@ -577,30 +362,139 @@ class _OrderStatusState extends State<OrderStatus> {
                                   ],
                                 )
                               : Text(""),
-                      // : widget.order!.status! == "2"
-                      //     ? Padding(
-                      //         padding: const EdgeInsets.only(top: 60),
-                      //         child: Text('Rejected',
-                      //             style: TextStyle(
-                      //                 color: Colors.red,
-                      //                 fontSize: 21,
-                      //                 fontWeight: FontWeight.w500,
-                      //                 fontFamily: 'Poppins')),
-                      //       )
-                      //     : Padding(
-                      //         padding: const EdgeInsets.only(top: 60),
-                      //         child: Text(
-                      //           'Completed',
-                      //           style: TextStyle(
-                      //               color: Colors.green,
-                      //               fontSize: 21,
-                      //               fontWeight: FontWeight.w500,
-                      //               fontFamily: 'Poppins'),
-                      //         ),
-                      //       ),
                     ],
                   ),
-                )
+                ),
+                widget.order!.servicetype! == "document"
+                    ? Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 12),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Document',
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 14),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 12),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.all(8),
+                                        decoration: BoxDecoration(
+                                          color: mainColor.withOpacity(0.1),
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(45),
+                                          ),
+                                        ),
+                                        child: SvgPicture.asset(
+                                          'assets/images/page.svg',
+                                          color: mainColor,
+                                          height: 12,
+                                          width: 12,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 5),
+                                        child: Text(
+                                          'Document',
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 14),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      FileDownloader.downloadFile(
+                                        url: widget.order!.document!.file!,
+                                        name: 'File',
+                                        onProgress: (fileName, progress) {
+                                          Get.snackbar(
+                                              'Downloading ' + fileName!,
+                                              'Downloaded ' +
+                                                  progress.toString() +
+                                                  '%',
+                                              snackPosition:
+                                                  SnackPosition.BOTTOM,
+                                              backgroundColor: Colors.green,
+                                              colorText: Colors.white);
+                                        },
+                                        onDownloadCompleted: (path) async {
+                                          Get.snackbar(
+                                              'File downloaded successfully.',
+                                              '',
+                                              snackPosition:
+                                                  SnackPosition.BOTTOM,
+                                              backgroundColor: Colors.green,
+                                              colorText: Colors.white);
+                                        },
+                                        onDownloadError: (errorMessage) {
+                                          Get.snackbar('Error!', errorMessage,
+                                              snackPosition:
+                                                  SnackPosition.BOTTOM,
+                                              backgroundColor: Colors.red,
+                                              colorText: Colors.white);
+                                        },
+                                      );
+                                    },
+                                    child: Text(
+                                      "Download Document",
+                                      style: TextStyle(
+                                          color: mainColor,
+                                          decoration: TextDecoration.underline,
+                                          fontSize: 14),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            widget.order!.status! == "0"
+                                ? Container()
+                                : widget.order!.status! == "2"
+                                    ? Container()
+                                    : Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 8.0),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Message',
+                                                  style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 14),
+                                                ),
+                                                Text(widget.order!.document!
+                                                    .discription!),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                          ],
+                        ),
+                      )
+                    : Text('')
               ],
             ),
           ),
@@ -656,23 +550,24 @@ class _OrderStatusState extends State<OrderStatus> {
   completeorder(context, Order) {
     Alert(
       style: AlertStyle(
-        titleStyle: TextStyle(fontSize: 27),
+        titleStyle: TextStyle(fontSize: 20),
       ),
       context: context,
       image: SvgPicture.asset(
-        'assets/images/tick.svg',
+        'assets/images/logo.svg',
       ),
       title: "Mark As Completed",
+      
       buttons: [
         DialogButton(
           radius: BorderRadius.all(
             Radius.circular(15),
           ),
-          height: 60,
+          height: 40,
           width: 60,
           child: Text(
             "yes",
-            style: TextStyle(color: Colors.white, fontSize: 25),
+            style: TextStyle(color: Colors.white, fontSize: 16),
           ),
           onPressed: () {
             setState(() {
@@ -681,16 +576,16 @@ class _OrderStatusState extends State<OrderStatus> {
             statusController.ordercomplete(widget.order!);
             Get.back();
           },
-          color: Colors.green,
+          color: greenish,
         ),
         DialogButton(
-          height: 60,
+          height: 40,
           radius: BorderRadius.all(
             Radius.circular(15),
           ),
           child: Text(
             "No",
-            style: TextStyle(color: White, fontSize: 25),
+            style: TextStyle(color: White, fontSize: 16),
           ),
           onPressed: () => Get.back(),
           color: Colors.red,

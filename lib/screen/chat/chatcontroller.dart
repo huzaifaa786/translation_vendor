@@ -131,14 +131,19 @@ class ChatController extends GetxController {
     print("onSubscriptionError: $message Exception: $e");
   }
 
-  void onEvent(PusherEvent event) {
+ void onEvent(PusherEvent event) {
+  if (event.data != null && event.data.isNotEmpty) {
     var response = jsonDecode(event.data);
-    response['message']['body'] = response['message']['message'];
-    response['message']['created_at'] = response['message']['created_at'];
+    
+    if (response['message'] != null && response['message']['message'] != null) {
+      response['message']['body'] = response['message']['message'];
+      response['message']['created_at'] = response['message']['created_at'];
 
-    massages.add(Msg(response['message']));
-    update();
+      massages.add(Msg(response['message']));
+      update();
+    }
   }
+}
 
   void onDecryptionFailure(String event, String reason) {
     print("onDecryptionFailure: $event reason: $reason");

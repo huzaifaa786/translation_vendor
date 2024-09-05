@@ -335,38 +335,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               padding: const EdgeInsets.only(
                                   top: 13.0, bottom: 13, left: 20, right: 20),
                               child: Column(children: [
-                                Image.asset(
-                                  "assets/images/Male User (1).png",
-                                ),
-                                Text(
-                                  "Add Photo",
-                                  style: TextStyle(
-                                    fontFamily: "Poppins",
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0xFF7A8495),
-                                  ),
-                                ),
-                                Stackinput(
-                                  icon: "assets/images/Male User (1).png",
-                                  controller: authController.vendorName,
-                                  labelText: 'Name',
-                                  hint: '',
-                                  validate: authController.validateSignUpForm,
-                                  validator: (field) =>
-                                      Validators.emptyStringValidator(
-                                          field, '* Name '),
-                                ),
-                                Stackinput(
-                                  icon: "assets/images/Male User (1).png",
-                                  controller: authController.bioController,
-                                  labelText: 'Bio',
-                                  hint: '',
-                                  // validate: authController.validateSignUpForm,
-                                  // validator: (field) =>
-                                  //     Validators.emptyStringValidator(
-                                  //         field, '* Name '),
-                                ),
+                               
+                              
+                            
+                             
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       top: 18, left: 4, bottom: 8),

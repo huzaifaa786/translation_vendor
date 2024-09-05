@@ -154,7 +154,6 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width * 0.9,
-                    // height: 58,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(24),
                       border: Border.all(color: greenish),
@@ -163,19 +162,40 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                     child: TextField(
                       onSubmitted: (value) {
                         if (value.trim().isNotEmpty) {
-                          // Check if the value is not empty or only contains whitespace
+                          // Send the message when 'Enter' is pressed and the input is not empty
                           chatController.sendMassage();
                         }
                         setState(() {});
                       },
                       controller: chatController.massagecontroller,
                       decoration: InputDecoration(
-                        suffixIcon: InkWell(
-                            onTap: () {
-                              controller.picksinglefile();
-                            },
-                            child: Icon(Icons.attach_file, color: greenish)),
-                        hintText: 'You message',
+                        suffixIcon: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+
+                             InkWell(
+                              onTap: () {
+                                if (chatController.massagecontroller.text
+                                    .trim()
+                                    .isNotEmpty) {
+                                  chatController.sendMassage();
+                                }
+                              },
+                              child: Icon(Icons.send,
+                                  color: greenish), 
+                            ),
+                            SizedBox(width: 3,),
+                            InkWell(
+                              onTap: () {
+                                controller.picksinglefile();
+                              },
+                              child: Icon(Icons.attach_file, color: greenish),
+                            ),
+                            SizedBox(width: 8), // Spacing between icons
+                           
+                          ],
+                        ),
+                        hintText: 'Your message',
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.only(left: 8, top: 18),
                       ),
