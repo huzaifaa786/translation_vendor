@@ -463,34 +463,34 @@ class _OrderStatusState extends State<OrderStatus> {
                                 ],
                               ),
                             ),
-                            widget.order!.status! == "0"
-                                ? Container()
-                                : widget.order!.status! == "2"
-                                    ? Container()
-                                    : Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 8.0),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Message',
-                                                  style: TextStyle(
-                                                      fontFamily: 'Poppins',
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 14),
-                                                ),
-                                                Text(widget.order!.document!
-                                                    .discription!),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      )
+                            // widget.order!.status! == "0"
+                            //     ? Container()
+                            //     : widget.order!.status! == "2"
+                            //         ? Container()
+                            //         : Padding(
+                            //             padding:
+                            //                 const EdgeInsets.only(top: 8.0),
+                            //             child: Column(
+                            //               children: [
+                            //                 Row(
+                            //                   crossAxisAlignment:
+                            //                       CrossAxisAlignment.start,
+                            //                   children: [
+                            //                     Text(
+                            //                       'Message',
+                            //                       style: TextStyle(
+                            //                           fontFamily: 'Poppins',
+                            //                           fontWeight:
+                            //                               FontWeight.w500,
+                            //                           fontSize: 14),
+                            //                     ),
+                            //                     Text(widget.order!.document!
+                            //                         .discription!),
+                            //                   ],
+                            //                 ),
+                            //               ],
+                            //             ),
+                            //           )
                           ],
                         ),
                       )
